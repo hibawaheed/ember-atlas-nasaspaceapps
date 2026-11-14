@@ -2,6 +2,10 @@
 
 Verification date: November 13, 2026. Current handoff release: v1.3.0.
 
+## November 14, 2026 — repository move
+
+- The project now lives in `hibawaheed/ember-atlas-nasaspaceapps`, imported as a single snapshot commit identical to the last deployed code of `hibawaheed/ember-atlas` (tree diff empty; only `.env.example`, no secrets). The owner reconnected the Vercel project `ember-atlas` to the new repository; domains, environment variables and the AI Gateway budget belong to the project and carried over.
+
 ## November 14, 2026 — custom domain, smarter AI context, build stamp
 
 - `emberatlas.tech` (Hostinger DNS: A record to Vercel) serves the production deployment over HTTPS; `www.emberatlas.tech` 308-redirects to it. Vercel reports the domain configured, not misconfigured. Response headers are `cache-control: public, max-age=0, must-revalidate`, so new deployments replace old pages immediately; no service worker exists. The footer and `/api/health` now show the deployed commit so viewers can confirm which release they see.
