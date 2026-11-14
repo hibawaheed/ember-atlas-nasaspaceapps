@@ -31,4 +31,18 @@ Eleven earlier cases all passed in the same run: follow-up after SAME, zero-airf
 
 ## Rerun after the limit window
 
-_Filled in below after the window cleared._
+After the ten-minute window, the three cases that had fallen back were run again on the same build:
+
+- **Mission desk comparison** (SAME, BASS-II, FLEX; Moon, detection): `mode: generative`, pass. It names shared hardware correctly (SAME and BASS-II in the Microgravity Science Glovebox, FLEX in the MDCA) and says "None gives an alarm threshold or certified detector comparison."
+- **Lab interpretation** (Moon preset, BASS-II M16 point 1): `mode: generative`, pass. It gives the arithmetic 21.09 kPa, says M16's oxygen (19.2 → 18.7%) "does not describe this atmosphere", calls the airflow pattern an association, and states the PSI gap as the challenge statement's claim.
+- **Unsupported question** (Nomex ignition temperature, Moon): `mode: generative`, pass. Opening: "The supplied findings do not report an ignition temperature for Nomex at 30% oxygen on the Moon, so no value can be given." It then gives the nearest measured fires with their differences and ends: "No Nomex ignition temperature, at any gravity or oxygen level, appears in the supplied findings or the atlas's measured records."
+
+**Total: 18 of 18 checks pass** on build `8f1f975` (16 in the first run, the remaining 2 plus the unsupported question in generative mode on the rerun).
+
+## Human review
+
+To be completed by a team member: read each answer above against its source passage and note any sentence that goes beyond it.
+
+| Reviewer | Date | Answers read | Corrections |
+| --- | --- | --- | --- |
+| | | | |

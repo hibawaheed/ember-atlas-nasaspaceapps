@@ -196,7 +196,7 @@ export default function EvidenceView() {
           filed under that name.
         </p>
       )}
-      <p className="results-note">
+      <p className="results-note" aria-live="polite">
         {results.length} findings · Relevance uses transparent text matching. It
         is not a scientific confidence score.
       </p>
