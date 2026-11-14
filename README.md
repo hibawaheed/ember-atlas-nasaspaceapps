@@ -4,7 +4,7 @@
 
 **Fire, beyond Earth.** An independent NASA Space Apps demo for _Flame in Freefall_: explore microgravity combustion evidence, compare published measurements, and investigate fire behavior in an interactive 3D lab.
 
-**Built by ISL Team A.**
+**Built by ISL Team A:** Hiba Waheed Ch, Zaafir Abbas Haidrie, Muhammad Ashar Hassan and Amin Adnan Mahmood.
 
 ## Continuing with Claude — start here
 
