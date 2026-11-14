@@ -51,7 +51,7 @@ EMBER Atlas is a web dashboard that helps researchers, engineers and students fi
 
 **Why it matters.** The evidence already points to concrete lessons for habitat designers: measured fires near lunar oxygen levels exist only at different pressure, airflow and gravity; inert-gas suppressants leave less safety margin in reduced gravity than Earth standards assume; shutting off ventilation does not reliably put out a spacecraft fire; and cool flames can keep burning after the visible flame disappears. EMBER Atlas makes these findings, and their limits, easy to reach and check.
 
-**Limits.** EMBER Atlas is a research and teaching tool, not a safety certification. The 3D flame and its Moon and Mars shapes are illustrative, not simulations. AI answers passed a small live test set (13 of 13 checks) but have not been reviewed by a combustion scientist; checked citations mean the cited finding was supplied, not that every sentence is proven.
+**Limits.** EMBER Atlas is a research and teaching tool, not a safety certification. The 3D flame and its Moon and Mars shapes are illustrative, not simulations. AI answers passed a small live test set (18 of 18 checks, including questions about what the evidence does and does not cover) but have not been reviewed by a combustion scientist; checked citations mean the cited finding was supplied, not that every sentence is proven.
 
 ---
 
@@ -87,7 +87,10 @@ EMBER Atlas is a web dashboard that helps researchers, engineers and students fi
 - Solid Fuel Ignition and Extinction – Growth and Extinction Limit (SoFIE-GEL): https://science.nasa.gov/biological-physical/investigations/sofie-gel/
 - FLEX — Combustion Integrated Rack Operations: https://gipoc.grc.nasa.gov/wp/fcf-cir/flex/
 - Smoke Aerosol Measurement Experiment: objectives and diagnostics: https://www1.grc.nasa.gov/wp-content/uploads/SAME_Quad.pdf
-- Preliminary Results from the Saffire VI Experiment: https://ntrs.nasa.gov/citations/20240007488
+- Preliminary Results from the Saffire VI Experiment, ICES-2024-365 conference paper (Tables 1–2 and Figure 7: test conditions, heat release, gases and detector timing used in the lunar comparison): https://ntrs.nasa.gov/citations/20240002981
+- Preliminary Results from the Saffire VI Experiment, ICES 2024 presentation slides: https://ntrs.nasa.gov/citations/20240007488
+- Evaluating Material Flammability in Microgravity and Martian Gravity Compared to the NASA Standard Normal Gravity Test (Olson & Ferkul): https://ntrs.nasa.gov/citations/20130010991
+- Characterizing the Flammability of Nomex Fabric for the Preparation of FM2 (2025 poster): https://ntrs.nasa.gov/citations/20250010975
 - Saffire Ignites New Discoveries in Space: https://www.nasa.gov/humans-in-space/saffire-ignites-new-discoveries-in-space/
 - Flame Burns Out on NASA’s Long-Running Spacecraft Fire Experiment: https://www.nasa.gov/humans-in-space/flame-burns-out-on-nasas-long-running-spacecraft-fire-experiment/
 - Space Station’s Quest for the Secrets of Fire: https://www.nasa.gov/humans-in-space/space-stations-quest-for-the-secrets-of-fire/
