@@ -48,6 +48,9 @@ type Analysis = {
   evidence: ReturnType<typeof rankForScenario>;
   scenario: Scenario;
 };
+function intensityWord(a: number) {
+  return a < 0.3 ? "Low" : a < 0.55 ? "Moderate" : a < 0.8 ? "High" : "Very high";
+}
 // Replay encodes spread rate as visual activity, scaled to the fastest
 // published BASS-II rate. A display encoding, not a reconstructed flame.
 const MAX_RATE = Math.max(
@@ -318,14 +321,14 @@ export default function Lab({
                 <div className="scene-caption">
                   <b>
                     {replay
-                      ? `${series.testId} / step ${step + 1}`
+                      ? `${series.testId} · ${point.spreadRateMms.toFixed(3)} mm/s`
                       : scenario.gravity === "micro"
                         ? "μg"
                         : `${model.gravity}g`}
                   </b>
                   <span>
                     {replay
-                      ? "Measured spread-rate encoding"
+                      ? <>Observation {step + 1} of {series.points.length}.<span className="long-caption"> Flame size encodes this measured spread rate, scaled to the fastest BASS-II rate. Not video.</span></>
                       : scenario.gravity === "micro"
                         ? "Microgravity"
                         : `${scenario.gravity[0].toUpperCase() + scenario.gravity.slice(1)} gravity`}
@@ -363,20 +366,30 @@ export default function Lab({
             </div>
             <div className="viewer-data">
               <div>
-                <span>{replay ? "MEASURED SPREAD" : "VISUAL ACTIVITY"}</span>
+                <span>
+                  {replay ? `MEASURED SPREAD · ${series.testId}` : "ANIMATION INTENSITY"}
+                </span>
                 <strong>
-                  {replay
-                    ? point.spreadRateMms.toFixed(3)
-                    : model.activity.toFixed(2)}
-                  <small>{replay ? " mm/s" : " / 1"}</small>
+                  {replay ? point.spreadRateMms.toFixed(3) : intensityWord(model.activity)}
+                  <small>{replay ? " mm/s" : ""}</small>
                 </strong>
+                <em className="readout-note">
+                  {replay
+                    ? `BASS-II Table 5.1, observation ${step + 1}`
+                    : "Authored for the picture, not measured"}
+                </em>
               </div>
               <div>
                 <span>{replay ? "AIRFLOW" : "O₂ PARTIAL PRESSURE"}</span>
                 <strong>
-                  {replay ? point.airflowCms : model.partialPressure}
+                  {replay ? point.airflowCms : model.partialPressure.toFixed(2)}
                   <small>{replay ? " cm/s" : " kPa"}</small>
                 </strong>
+                <em className="readout-note">
+                  {replay
+                    ? "Imposed flow at this observation"
+                    : `${(scenario.oxygen / 100).toFixed(2)} × ${scenario.pressure} kPa = ${model.partialPressure.toFixed(2)} kPa`}
+                </em>
               </div>
               <div className="viewer-spark">
                 <svg viewBox="0 0 110 35" aria-hidden="true">
@@ -533,6 +546,31 @@ export default function Lab({
                 >
                   NASA report, Table 5.1 <MoveUpRight size={14} />
                 </a>
+                <details className="replay-table">
+                  <summary>Read run {series.testId} as a table</summary>
+                  <table>
+                    <caption>
+                      BASS-II run {series.testId}, published observations in
+                      recorded order (Table 5.1)
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th>Obs.</th>
+                        <th>Airflow (cm/s)</th>
+                        <th>Spread (mm/s)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {series.points.map((pt, i) => (
+                        <tr key={i} aria-current={i === step ? "true" : undefined}>
+                          <td>{i + 1}</td>
+                          <td>{pt.airflowCms}</td>
+                          <td>{pt.spreadRateMms.toFixed(3)}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </details>
               </>
             ) : (
               <>
