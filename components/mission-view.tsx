@@ -26,6 +26,7 @@ import { sourceFor, findings } from "@/lib/evidence";
 const findingTitle = (id: string) => findings.find((f) => f.id === id)?.title ?? id;
 import OxygenCoverage from "./oxygen-coverage";
 import TestComparison from "./test-comparison";
+import MeasuredExample from "./measured-example";
 import { baseline, presets, type Scenario } from "@/lib/scenario";
 import { nasaLinks } from "@/lib/links";
 
@@ -226,6 +227,7 @@ export default function MissionView({
           </button>
         ))}
       </div>
+      <MeasuredExample priority={query.priority} />
       <div className="panel-heading mission-results-heading">
         <div>
           <span className="eyebrow">RANKED FOR YOUR QUESTION</span>

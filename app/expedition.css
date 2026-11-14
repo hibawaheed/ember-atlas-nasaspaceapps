@@ -1397,3 +1397,10 @@ summary {
 .replay-table caption { text-align: left; color: var(--muted); font-family: inherit; font-size: 10.5px; padding-bottom: 6px; }
 .replay-table th, .replay-table td { text-align: left; padding: 4px 6px; border-bottom: 1px solid var(--line); }
 .replay-table tr[aria-current] td { color: var(--orange); }
+.measured-example { margin: 18px 0; border-color: #ffb48a3a; }
+.measured-example h2 { margin: 8px 0 8px; font-size: 1.25rem; }
+.mx-lead { color: var(--ink); max-width: 72ch; }
+.mx-facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 16px 0; }
+.mx-facts dt { font-size: 0.72rem; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.mx-facts dd { margin: 0; font-size: 0.9rem; line-height: 1.55; }
+@media (max-width: 900px) { .mx-facts { grid-template-columns: 1fr; } }
