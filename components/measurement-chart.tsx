@@ -49,7 +49,7 @@ export default function MeasurementChart({
   const selectedPoint = selectedRun?.points[selected!.index];
   const csv =
     "testId,pointOrder,airflowCms,spreadRateMms,thicknessMm,widthCm,sidesBurning,initialOxygenVolPct,finalOxygenVolPct,burnTimeMin,sourceUrl\n" +
-    data.series
+    runs
       .flatMap((s) =>
         s.points.map(
           (p, i) =>
@@ -67,9 +67,18 @@ export default function MeasurementChart({
         </div>
         <button
           className="icon-button"
-          title="Download measured data"
-          aria-label="Download measured data CSV"
-          onClick={() => download("bass-ii-measurements.csv", csv, "text/csv")}
+          title={`Download the ${runs.reduce((n, r) => n + r.points.length, 0)} observations from the ${runs.length} runs shown (CSV, with run IDs)`}
+          aria-label={`Download ${runs.reduce((n, r) => n + r.points.length, 0)} observations from ${runs.length} shown runs as CSV`}
+          disabled={!runs.length}
+          onClick={() =>
+            download(
+              runs.length === data.series.length
+                ? "bass-ii-all-runs.csv"
+                : `bass-ii-${runs.length}-runs.csv`,
+              csv,
+              "text/csv",
+            )
+          }
         >
           <Download size={17} />
         </button>

@@ -13,6 +13,7 @@ import {
   retrieve,
   answerFromEvidence,
 } from "../lib/evidence";
+import { briefHtml, scenarioUrl } from "../lib/export";
 import { parseCSV, importSchema } from "../lib/import";
 import measurements from "../data/measurements.json";
 import { POST as analyze } from "../app/api/analyze/route";
@@ -412,4 +413,17 @@ test("ranking explains each result, labels ties and keeps ACME as background", (
   assert.equal(rankInvestigations({ destination: "moon", priority: "detection" })[0].id, "saffire");
   assert.ok(rankInvestigations({ destination: "orbit", priority: "suppression" }).slice(0, 3).some((i) => i.id === "flex"));
   assert.deepEqual(programBackground()[0].children.sort(), ["BRE", "CFI-G", "E-FIELD Flames"]);
+});
+
+test("scenario brief is one page with inputs, closest test, source, limitation and a rebuild link", () => {
+  const html = briefHtml(presets.lunar.scenario, { commit: "abc1234", date: "2026-11-14" }, new Date("2026-11-14T10:00:00Z"));
+  assert.match(html, /Moon base atmosphere/);
+  assert.match(html, /0\.30 × 70\.3 kPa = 21\.09 kPa/);
+  assert.match(html, /Closest measured test: Saffire VI-3/);
+  assert.match(html, /Table 1, PDF p\. 3/);
+  assert.match(html, /No measured lunar-gravity fire test/);
+  assert.match(html, /build abc1234/);
+  const link = new URL(scenarioUrl(presets.lunar.scenario, "https://emberatlas.tech"));
+  assert.deepEqual(JSON.parse(link.searchParams.get("scenario")!), presets.lunar.scenario);
+  assert.equal(link.searchParams.get("view"), "lab");
 });

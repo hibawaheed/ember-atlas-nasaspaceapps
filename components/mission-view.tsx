@@ -238,11 +238,12 @@ export default function MissionView({
           disabled={loading || !!error}
           onClick={() =>
             download(
-              "ember-mission-evidence.json",
+              `ember-shortlist-${query.destination}-${query.priority}.json`,
               JSON.stringify(
                 {
                   query,
-                  checkedAt: "2026-11-13",
+                  exportedAt: new Date().toISOString(),
+                  rankingCheckedAt: "2026-11-14",
                   ranking: "Authored relevance rubric, not a risk score",
                   results,
                 },
@@ -252,7 +253,7 @@ export default function MissionView({
             )
           }
         >
-          <Download size={15} /> Export shortlist
+          <Download size={15} /> Download {results.length} ranked experiments (JSON)
         </button>
       </div>
       <details className="ranking-explainer">

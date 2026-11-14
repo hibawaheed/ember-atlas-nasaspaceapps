@@ -28,7 +28,8 @@ import { findings, sources } from "@/lib/evidence";
 import { investigations } from "@/lib/investigations";
 import measurements from "@/data/measurements.json";
 const measurementCount = measurements.series.reduce((n, s) => n + s.points.length, 0);
-import { exportBrief } from "@/lib/export";
+import { exportBrief, scenarioUrl } from "@/lib/export";
+const build = { commit: process.env.BUILD_COMMIT ?? "local", date: process.env.BUILD_DATE ?? "" };
 import Lab from "./lab";
 import MeasurementChart from "./measurement-chart";
 import EvidenceView, { EvidenceCard } from "./evidence-view";
@@ -107,9 +108,7 @@ export default function Dashboard() {
     );
   }
   async function share(s: Scenario = scenario) {
-    const url = new URL(window.location.href);
-    url.searchParams.set("view", "lab");
-    url.searchParams.set("scenario", JSON.stringify(s));
+    const url = new URL(scenarioUrl(s));
     try {
       await navigator.clipboard.writeText(url.toString());
       setNotice("Scenario link copied.");
@@ -245,10 +244,11 @@ export default function Dashboard() {
               </button>
               <button
                 className="button secondary"
-                onClick={() => exportBrief(scenario)}
+                onClick={() => exportBrief(scenario, build)}
+                title="One-page brief for the scenario now in the lab: inputs, closest measured test, sources, limitation"
               >
                 <Download size={15} />
-                Export brief
+                Scenario brief (HTML)
               </button>
             </div>
           </div>
@@ -287,7 +287,7 @@ export default function Dashboard() {
               </section>
               <HomeResult
                 onCompare={compareLunar}
-                onBrief={() => exportBrief(presets.lunar.scenario)}
+                onBrief={() => exportBrief(presets.lunar.scenario, build)}
                 onShare={() => share(presets.lunar.scenario)}
               />
               <div className="galaxy-paths" aria-label="Explore the research">
