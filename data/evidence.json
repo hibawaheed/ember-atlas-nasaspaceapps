@@ -10,11 +10,12 @@
   },
   "sources": [
     {
-      "id": "flex-discovery",
-      "title": "Cool Flames on the International Space Station — An Anatomy of Discovery",
-      "url": "https://blogs.nasa.gov/ISS_Science_Blog/2013/11/25/cool-flames-on-the-international-space-station-an-anatomy-of-discovery/",
-      "publishedDate": "2013-11-25",
-      "type": "NASA scientist account"
+      "id": "cool-flames-2013",
+      "title": "“Cool Flames” in Space, a Hot Prospect on Earth! Anomalous combustion of alkane fuel droplets in space (V. Nayagam, NASA Glenn / NCSER, ISS R&D Conference 2013)",
+      "url": "https://www.nasa.gov/wp-content/uploads/2013/10/issrdc_2013-07-16-0945_nayagam2013.pdf",
+      "publishedDate": "2013-07-16",
+      "type": "NASA-hosted conference presentation",
+      "sha256": "805693ccb96c8a16e5c995cb6c1eff2a0369dadbd3c626900a57f59292ea1071"
     },
     {
       "id": "flex-2021",
@@ -195,11 +196,11 @@
       "id": "flex-spherical",
       "title": "A flame without an upward direction",
       "experiment": "FLEX",
-      "date": "2013-11-25",
+      "date": null,
       "sourceIds": [
-        "flex-discovery"
+        "researchers-guide"
       ],
-      "claim": "In quiescent microgravity, ignited liquid fuel droplets can develop nearly spherical flames around the droplet.",
+      "claim": "NASA's 2015 guide describes microgravity droplet combustion as the textbook case of a spherical droplet surrounded by a spherical flame in a quiescent atmosphere (p. 11); the droplet apparatus used by FLEX handles droplets of 1 to 5 mm (p. 12).",
       "safetyImplication": "Treat geometry and ventilation as inputs when translating laboratory observations into spacecraft scenarios.",
       "implicationType": "inference",
       "limitations": "Droplet geometry does not represent every solid-material fire or forced-flow condition.",
@@ -209,14 +210,14 @@
         "flame shape",
         "liquid fuel"
       ],
-      "strength": "observed",
+      "strength": "review",
       "quantities": [
         {
-          "name": "Studied droplet diameter range",
+          "name": "MDCA droplet size range",
           "minimum": 1.0,
-          "maximum": 6.0,
+          "maximum": 5.0,
           "unit": "mm",
-          "sourceId": "flex-discovery"
+          "sourceId": "researchers-guide"
         }
       ]
     },
@@ -245,21 +246,23 @@
       "id": "flex-reignition",
       "title": "An apparent extinction can be temporary",
       "experiment": "FLEX",
-      "date": "2013-11-25",
+      "date": "2013-07-16",
       "sourceIds": [
-        "flex-discovery"
+        "cool-flames-2013"
       ],
-      "claim": "In some FLEX tests, droplets kept shrinking after visible flames disappeared; modest pressure increases sometimes produced brief flame reappearance.",
+      "claim": "A NASA Glenn FLEX presentation reports that in space a cool flame can persist after hot-flame extinction and generate combustible vapor that can reignite, that recent results showed re-ignition with decane, and that cool flames could re-ignite to hot flames, posing fire-safety concerns in spacecraft (slide 22 and concluding remarks).",
       "safetyImplication": "Post-extinction monitoring should distinguish visual disappearance from demonstrated combustion termination.",
       "implicationType": "inference",
-      "limitations": "A qualitative experimental observation, not a probability of reignition in a crew vehicle.",
-      "qualifier": "Liquid droplets · qualitative observation",
+      "limitations": "Slide-level statements about droplet tests (decane named); no re-ignition rate, conditions or probability for a crew vehicle are given.",
+      "qualifier": "Alkane droplets · presentation summary",
       "tags": [
         "reignition",
-        "pressure",
-        "detection"
+        "cool flames",
+        "extinction",
+        "detection",
+        "liquid fuel"
       ],
-      "strength": "observed",
+      "strength": "review",
       "quantities": []
     },
     {

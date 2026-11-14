@@ -26,8 +26,8 @@ export const tourSteps = [
     science:
       "Gravity changes transport around a flame. These shapes illustrate the concept; actual geometry also depends on fuel and airflow.",
     source:
-      "https://blogs.nasa.gov/ISS_Science_Blog/2013/11/25/cool-flames-on-the-international-space-station-an-anatomy-of-discovery/",
-    label: "NASA · FLEX",
+      "https://www.nasa.gov/wp-content/uploads/2016/05/np-2015-10-034-jsc_combustion_in_reduced_gravity-iss-mini-book-011116-508.pdf#page=11",
+    label: "NASA · ISS combustion guide, p. 11",
   },
   {
     title: "Turn down the flow.",

@@ -95,7 +95,7 @@ EMBER Atlas is a web dashboard that helps researchers, engineers and students fi
 - Flame Burns Out on NASA’s Long-Running Spacecraft Fire Experiment: https://www.nasa.gov/humans-in-space/flame-burns-out-on-nasas-long-running-spacecraft-fire-experiment/
 - Space Station’s Quest for the Secrets of Fire: https://www.nasa.gov/humans-in-space/space-stations-quest-for-the-secrets-of-fire/
 - Cool Flames Created During a First for International Space Station Research: https://www.nasa.gov/missions/station/cool-flames-created-during-a-first-for-international-space-station-research/
-- Cool Flames on the International Space Station — An Anatomy of Discovery: https://blogs.nasa.gov/ISS_Science_Blog/2013/11/25/cool-flames-on-the-international-space-station-an-anatomy-of-discovery/
+- “Cool Flames” in Space, a Hot Prospect on Earth! (V. Nayagam, NASA Glenn, ISS R&D Conference 2013): https://www.nasa.gov/wp-content/uploads/2013/10/issrdc_2013-07-16-0945_nayagam2013.pdf
 - NASA Studies Fire in Microgravity (Scientific Visualization Studio): https://svs.gsfc.nasa.gov/31394/
 
 NASA PSI records used here identify CC0 dataset licenses. No NASA insignia is used; EMBER Atlas is an independent project with no NASA endorsement.

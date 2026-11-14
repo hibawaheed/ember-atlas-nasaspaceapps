@@ -109,7 +109,7 @@ export const investigations = [
       "Source-backed findings and PSI archive link. No raw droplet time series imported.",
     priorities: ["suppression", "detection"] as Priority[],
     atmosphere: true,
-    sources: ["flex-operations", "psi-flex", "flex-discovery", "researchers-guide"],
+    sources: ["flex-operations", "psi-flex", "researchers-guide"],
     findings: ["flex-cool", "flex-suppression", "flex-inert-margin", "flex2-scope", "cool-flame-persistence"],
     limitation:
       "Droplet chemistry is not interchangeable with a fabric or polymer fire.",

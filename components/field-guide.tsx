@@ -19,7 +19,7 @@ const concepts = [
     title: "Fire loses its up.",
     term: "BUOYANCY → DIFFUSION",
     text: "On Earth, buoyancy carries hot gases upward. In quiet microgravity, oxygen can reach a small flame by diffusion, producing a more spherical envelope. Airflow and fuel shape can change that picture.",
-    source: "flex-discovery",
+    source: "researchers-guide",
     className: "gravity-sketch",
   },
   {
