@@ -828,14 +828,14 @@ export default function Lab({
               <h2>What we know between orbit and Earth</h2>
             </div>
           </div>
-          <div className="gravity-scale" role="img" aria-label="Gravity scale: measured combustion data exist at microgravity (ISS) and at Earth gravity; no partial-gravity combustion data exist in PSI for the Moon at 0.166 g or Mars at 0.38 g.">
+          <div className="gravity-scale" role="img" aria-label="Gravity scale: this atlas holds measured combustion data at microgravity (ISS) and Earth gravity, but no measured records at Moon (0.166 g) or Mars (0.38 g) gravity. NASA's PSI archive has none either, per the challenge statement; published partial-gravity studies exist outside it.">
             <div className="gravity-track">
               <span className="gravity-gap-band" />
             </div>
             {[
               { g: 0, label: "Microgravity", sub: "ISS data", measured: true },
-              { g: 0.166, label: "Moon", sub: "0.166 g · no data", measured: false },
-              { g: 0.38, label: "Mars", sub: "0.38 g · no data", measured: false },
+              { g: 0.166, label: "Moon", sub: "0.166 g · none in PSI", measured: false },
+              { g: 0.38, label: "Mars", sub: "0.38 g · none in PSI", measured: false },
               { g: 1, label: "Earth", sub: "ground data", measured: true },
             ].map((m) => (
               <div
@@ -856,10 +856,22 @@ export default function Lab({
           </div>
           <ul className="atmosphere-notes">
             <li>
-              <b>No partial-gravity data yet.</b> The challenge statement says
-              PSI currently holds no partial-gravity combustion data. The
-              lab&apos;s Moon and Mars settings only interpolate the flame&apos;s
-              shape for illustration.
+              <b>A gap in NASA&apos;s archive.</b> The challenge statement
+              (checked November 13, 2026) reports that NASA&apos;s Physical
+              Sciences Informatics (PSI) archive holds no partial-gravity
+              combustion data. This atlas has no measured lunar or Martian
+              record either. The lab&apos;s Moon and Mars settings only
+              interpolate the flame&apos;s shape for illustration.
+            </li>
+            <li>
+              <b>Published work outside PSI.</b> Partial-gravity flame tests
+              exist in the wider literature: NASA researchers have burned
+              materials at lunar and Martian gravity in drop towers and on
+              parabolic flights, and report that some burned at lower oxygen
+              levels than on Earth.{" "}
+              <a className="text-link" href={sourceFor("olson-ferkul-2012")!.url} target="_blank" rel="noreferrer">
+                Olson &amp; Ferkul, NASA, 2012
+              </a>
             </li>
             <li>
               <b>Bracketing.</b> Microgravity and normal-gravity results could
@@ -887,6 +899,10 @@ export default function Lab({
             ·{" "}
             <a className="text-link" href={sourceFor("efield-page")!.url} target="_blank" rel="noreferrer">
               E-FIELD Flames (NASA)
+            </a>{" "}
+            ·{" "}
+            <a className="text-link" href={sourceFor("fm2-poster-2025")!.url} target="_blank" rel="noreferrer">
+              FM2 (NASA, 2025)
             </a>
           </p>
         </section>

@@ -22,7 +22,7 @@ const prompts = [
   "Do suppressants that work on Earth work as well in space?",
   "Why must spacecraft smoke detectors differ from Earth ones?",
   "What did FLEX discover about cool flames?",
-  "Is there any partial-gravity combustion data?",
+  "Has anyone studied flame spread in simulated lunar gravity?",
 ];
 export default function AssistantView() {
   const [question, setQuestion] = useState("");

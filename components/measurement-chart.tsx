@@ -62,8 +62,8 @@ export default function MeasurementChart({
     <section className={"panel measurement " + (expanded ? "expanded" : "")}>
       <div className="panel-heading">
         <div>
-          <span className="eyebrow">FROM THE EXPERIMENTS</span>
-          <h3>The speed of a spreading flame</h3>
+          <span className="eyebrow">BASS-II MEASUREMENTS</span>
+          <h3>Flame spread varied as airflow and oxygen changed</h3>
         </div>
         <button
           className="icon-button"
@@ -72,6 +72,33 @@ export default function MeasurementChart({
           onClick={() => download("bass-ii-measurements.csv", csv, "text/csv")}
         >
           <Download size={17} />
+        </button>
+      </div>
+      <div className="run-examples" role="group" aria-label="Example runs">
+        <span>Example runs:</span>
+        <button
+          className={selected?.test === "M3" ? "active" : ""}
+          aria-pressed={selected?.test === "M3"}
+          onClick={() => {
+            setShown(thicknesses);
+            setWidth("all");
+            setSides("all");
+            pick("M3", 0);
+          }}
+        >
+          M3 · airflow rose, spread fell
+        </button>
+        <button
+          className={selected?.test === "M7" ? "active" : ""}
+          aria-pressed={selected?.test === "M7"}
+          onClick={() => {
+            setShown(thicknesses);
+            setWidth("all");
+            setSides("all");
+            pick("M7", 0);
+          }}
+        >
+          M7 · airflow and spread fell together
         </button>
       </div>
       <div className="chart-legends" aria-label="Sample thickness">
@@ -223,10 +250,15 @@ export default function MeasurementChart({
               {selectedPoint.airflowCms} cm/s airflow ·{" "}
               {selectedRun.thicknessMm} mm × {selectedRun.widthCm} cm ·{" "}
               {selectedRun.sidesBurning === 1 ? "one side" : "two sides"} · O₂{" "}
-              {selectedRun.initialOxygenVolPct} → {selectedRun.finalOxygenVolPct}
-              % over {selectedRun.burnTimeMin} min
+              {selectedRun.initialOxygenVolPct} → {selectedRun.finalOxygenVolPct}%
+              (run start → end, not per point) over {selectedRun.burnTimeMin} min
             </span>
             <strong>{selectedPoint.spreadRateMms} mm/s spread</strong>
+            <span className="run-sequence">
+              Recorded order: airflow{" "}
+              {selectedRun.points.map((p) => p.airflowCms).join(" → ")} cm/s; spread{" "}
+              {selectedRun.points.map((p) => p.spreadRateMms).join(" → ")} mm/s.
+            </span>
           </>
         ) : (
           <span>Hover or focus a point to inspect a run.</span>

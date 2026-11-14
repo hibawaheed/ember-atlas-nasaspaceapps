@@ -11,8 +11,8 @@ export async function POST(request: Request) {
       evidenceGap:
         query.destination === "orbit"
           ? "Vehicle-specific validation required."
-          : "Official challenge states no partial-gravity combustion data currently in PSI.",
-      checkedAt: "2026-11-09",
+          : "The challenge statement (checked November 13, 2026) reports no partial-gravity combustion data in NASA's Physical Sciences Informatics (PSI) archive. Published partial-gravity experiments exist outside that archive.",
+      checkedAt: "2026-11-14",
     });
   } catch (error) {
     return badRequest(error);

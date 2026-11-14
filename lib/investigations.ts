@@ -18,7 +18,7 @@ export const destinations = {
     gravity: "~0.166 g",
     symbol: "☾",
     question: "Which evidence can inform a new atmosphere?",
-    note: "The challenge statement expects 30% oxygen or more at 10.2 psi or less in a Moon base and rovers. It also says PSI has no partial-gravity combustion data yet; LUCI and FM2 are expected to add some.",
+    note: "The challenge statement expects 30% oxygen or more at 10.2 psi or less in a Moon base and rovers. It also reports that NASA's PSI archive has no partial-gravity combustion data yet (published studies exist outside it); LUCI and FM2 are expected to add some.",
   },
   mars: {
     name: "Mars habitat",

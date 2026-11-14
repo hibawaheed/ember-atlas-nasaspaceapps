@@ -122,8 +122,8 @@ export function scenarioNotes(s: Scenario) {
     });
   if (s.gravity === "moon" || s.gravity === "mars")
     notes.push({
-      title: "Partial gravity is an evidence gap",
-      body: "Lunar and Martian settings here interpolate visual shape only. ISS microgravity results cannot simply be relabeled as validated Moon or Mars predictions.",
+      title: "Partial gravity is an evidence gap here",
+      body: "Lunar and Martian settings here interpolate visual shape only. NASA's PSI archive has no partial-gravity combustion data (per the challenge statement), and this atlas holds no measured lunar record; published drop-tower and parabolic-flight studies exist outside PSI. ISS microgravity results cannot simply be relabeled as Moon or Mars predictions.",
       tags: ["partial gravity", "limitations"],
     });
   return notes;

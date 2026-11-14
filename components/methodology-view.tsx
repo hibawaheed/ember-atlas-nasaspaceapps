@@ -85,9 +85,11 @@ export default function MethodologyView() {
               <tr>
                 <td>Inform Moon and Mars research</td>
                 <td>
-                  The mission desk identifies transfer gaps. The challenge
-                  states that PSI currently has no partial-gravity combustion
-                  dataset.
+                  The Mission desk identifies transfer gaps. The challenge
+                  statement reports that NASA&apos;s Physical Sciences
+                  Informatics (PSI) archive has no partial-gravity combustion
+                  data; published partial-gravity studies outside PSI are
+                  cited in the evidence library.
                 </td>
               </tr>
             </tbody>
