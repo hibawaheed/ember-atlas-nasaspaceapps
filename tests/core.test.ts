@@ -28,6 +28,7 @@ import { bassVariation } from "../lib/variation";
 import { allowAiCall, aiLimits } from "../lib/rate-limit";
 import { lookupReplay } from "../lib/replay";
 import { nasaLinks } from "../lib/links";
+import { saffireTests, closestTests, tableLink } from "../lib/saffire";
 import { stripIds } from "../lib/synthesis";
 import { buildAskContext } from "../lib/context";
 const request = (path: string, body: unknown) =>
@@ -305,9 +306,15 @@ test("crew atmosphere table follows the challenge figures and arithmetic", () =>
   assert.ok(by.lunar.oxygenPct / by.earth.oxygenPct > 1.4);
 });
 test("coverage and variation summaries are derived from sourced data", () => {
-  const bass = oxygenCoverage.find((c) => c.kind === "tested")!;
+  const bass = oxygenCoverage.find((c) => c.name.startsWith("BASS-II"))!;
+  assert.equal(bass.kind, "measured");
   assert.equal(bass.min, 16.8);
   assert.equal(bass.max, 22.2);
+  const saffire = oxygenCoverage.find((c) => c.name.startsWith("Saffire"))!;
+  assert.deepEqual(saffire.points!.map((p) => p.pct).sort(), [22, 26.2, 28.8, 30.3, 31]);
+  // Apparatus limits are never presented as measured tests.
+  for (const c of oxygenCoverage.filter((c) => c.name.includes("apparatus") || c.name.includes("burner")))
+    assert.equal(c.kind, "limit");
   for (const c of oxygenCoverage) assert.ok(sources.some((s) => s.id === c.source));
   const v = Object.fromEntries(bassVariation.varied.map((x) => [x.label, x.value]));
   assert.equal(v["Sample thickness"], "1, 2, 3, 4, 5 mm");
@@ -382,4 +389,14 @@ test("challenge resource links are NASA pages and every reference resolves", () 
     assert.ok(u.hostname.endsWith("nasa.gov"), l.url);
   }
   for (const a of earthApplications) for (const k of a.links ?? []) assert.ok(k in nasaLinks, k);
+});
+test("Saffire VI records match the verified tables and VI-3 is closest to the lunar scenario", () => {
+  const vi3 = saffireTests.find((t) => t.id === "VI-3")!;
+  assert.deepEqual([vi3.oxygenPct, vi3.pressureKpa, vi3.airflowCms, vi3.peakHeatReleaseW], [30.3, 54.6, 20, 3080]);
+  const vi2 = saffireTests.find((t) => t.id === "VI-2")!;
+  assert.deepEqual([vi2.material, vi2.oxygenPct, vi2.pressureKpa], ["SIBAL cloth", 31.0, 54.1]);
+  const best = closestTests(presets.lunar.scenario)[0];
+  assert.equal(best.test.id, "VI-3");
+  assert.equal(best.reason, "Same material and an oxygen fraction within 0.3 percentage points. Pressure, airflow and gravity differ.");
+  assert.match(tableLink(3), /ntrs\.nasa\.gov.*#page=3$/);
 });

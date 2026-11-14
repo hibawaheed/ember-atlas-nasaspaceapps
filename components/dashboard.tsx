@@ -424,7 +424,13 @@ export default function Dashboard() {
             </div>
           )}
           {page === "missions" && (
-            <MissionView onExplore={() => navigate("lab")} />
+            <MissionView
+              onExplore={() => navigate("lab")}
+              onOpenScenario={(s) => {
+                setScenario(s);
+                navigate("lab");
+              }}
+            />
           )}
           {page === "guide" && (
             <FieldGuide navigate={navigate} startTour={startTour} />

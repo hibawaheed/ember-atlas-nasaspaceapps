@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "retrievedAt": "2026-11-13",
+  "retrievedAt": "2026-11-14",
   "publisher": "EMBER Atlas curated demo",
   "scope": "Curated NASA evidence, not an exhaustive literature review or a spacecraft safety certification.",
   "challenge": {
@@ -163,6 +163,31 @@
       "type": "NASA ISS researcher's guide",
       "reportNumber": "NP-2015-10-034-JSC",
       "sha256": "5fe046efe4e35e506023e27a9784d041e893026f19c9987591483614aea5d6b6"
+    },
+    {
+      "id": "saffire6-paper",
+      "title": "Preliminary Results from the Saffire VI Experiment (ICES-2024-365)",
+      "url": "https://ntrs.nasa.gov/citations/20240002981",
+      "downloadUrl": "https://ntrs.nasa.gov/api/citations/20240002981/downloads/Saffire-ICES-2024-ICES-365-accepted%20final.pdf",
+      "publishedDate": null,
+      "dateLabel": "ICES 2024, July 21–25",
+      "type": "NASA conference paper",
+      "reportNumber": "ICES-2024-365",
+      "sha256": "7f875da1d6abeeeeac64aeba67d3f160074cf98430e714fe7606b34b37e0aa59"
+    },
+    {
+      "id": "olson-ferkul-2012",
+      "title": "Evaluating Material Flammability in Microgravity and Martian Gravity Compared to the NASA Standard Normal Gravity Test",
+      "url": "https://ntrs.nasa.gov/citations/20130010991",
+      "publishedDate": "2012-07-15",
+      "type": "NASA conference paper (ICES 2012)"
+    },
+    {
+      "id": "fm2-poster-2025",
+      "title": "Characterizing the Flammability of Nomex Fabric for the Preparation of FM2",
+      "url": "https://ntrs.nasa.gov/citations/20250010975",
+      "publishedDate": "2025-12-03",
+      "type": "NASA poster"
     }
   ],
   "findings": [
@@ -236,16 +261,16 @@
     },
     {
       "id": "bass-flow",
-      "title": "Airflow changes the measured spread rate",
+      "title": "Flame spread varied as airflow and oxygen changed",
       "experiment": "BASS-II",
       "date": "2021-10-01",
       "sourceIds": [
         "bass-report"
       ],
-      "claim": "Published BASS-II PMMA tests report different flame-spread rates across successive ventilation settings.",
-      "safetyImplication": "Compare conditions within each run before interpreting spread-rate differences.",
+      "claim": "In the published BASS-II PMMA runs, flame-spread rate changed between successive airflow settings while oxygen also fell. In run M3, airflow rose from 10 to 20 cm/s while spread fell from 0.029 to 0.024 mm/s; in run M7, airflow and spread fell together (10 → 3 cm/s, 0.106 → 0.070 mm/s).",
+      "safetyImplication": "Read airflow and oxygen together: these runs show an association, not an isolated airflow effect.",
       "implicationType": "inference",
-      "limitations": "Oxygen changed during runs; the measurements do not isolate airflow as the sole cause.",
+      "limitations": "Oxygen changed during every run and is reported only as run start and end values; samples also differ in thickness, width and sides burning.",
       "tags": [
         "ventilation",
         "flame spread",
@@ -547,23 +572,25 @@
     },
     {
       "id": "partial-gravity-gap",
-      "title": "No partial-gravity combustion data in PSI yet",
+      "title": "NASA’s PSI archive has no partial-gravity combustion data yet",
       "experiment": "LUCI / FM2",
       "date": null,
       "sourceIds": [
         "challenge-2026"
       ],
-      "claim": "The challenge statement says PSI currently holds no partial-gravity combustion data. It expects future data from the Lunar-g Combustion Investigation (LUCI) and the Flammability of Materials on the Moon (FM2) experiment, and notes that microgravity and normal-gravity results could bound intermediate gravity levels.",
-      "safetyImplication": "Moon and Mars fire questions currently rest on microgravity and Earth-gravity results; treat any lunar or Martian estimate as bounded, not measured.",
+      "claim": "The challenge statement (checked November 13, 2026) reports that NASA’s Physical Sciences Informatics (PSI) archive currently holds no partial-gravity combustion data. It expects future data from the Lunar-g Combustion Investigation (LUCI) and the Flammability of Materials on the Moon (FM2) experiment, and notes that microgravity and normal-gravity results could bound intermediate gravity levels.",
+      "safetyImplication": "Within PSI, Moon and Mars questions rest on microgravity and Earth-gravity results. Published partial-gravity experiments exist outside that archive and should be consulted alongside it.",
       "implicationType": "inference",
-      "limitations": "Bounding is a research approach named in the statement, not a validated method for a particular material or habitat.",
+      "limitations": "This describes one archive’s holdings as reported in the challenge statement, not the whole research literature.",
       "tags": [
         "partial gravity",
         "moon",
         "mars",
         "lunar",
-        "exploration",
-        "data gap"
+        "PSI",
+        "archive",
+        "data gap",
+        "exploration"
       ],
       "strength": "review",
       "quantities": []
@@ -640,7 +667,7 @@
         "challenge-2026"
       ],
       "claim": "E-FIELD Flames applied up to 10,000 volts between a burner and a mesh electrode. The ion wind this produces changes flame shape, soot and stability limits. The challenge statement notes that this mimicked partial gravity through the field's effect on ions in the flame.",
-      "safetyImplication": "One of the few ways existing ISS data touches partial-gravity questions; useful for asking how flame shape changes with an imposed body force.",
+      "safetyImplication": "One way existing ISS data touches partial-gravity questions; useful for asking how flame shape changes with an imposed body force.",
       "implicationType": "inference",
       "limitations": "An ion-driven force is not buoyancy; NASA states the experiment does not serve space applications directly.",
       "tags": [
@@ -925,6 +952,128 @@
         "invisible"
       ],
       "strength": "review",
+      "quantities": []
+    },
+    {
+      "id": "partial-gravity-tests",
+      "title": "Partial-gravity flame tests exist outside PSI",
+      "experiment": "Drop tower and parabolic flight",
+      "date": "2012-07-15",
+      "sourceIds": [
+        "olson-ferkul-2012",
+        "fm2-poster-2025"
+      ],
+      "claim": "NASA researchers have run material flammability tests at Martian gravity in a drop tower and, earlier, at lunar gravity; they report that some materials burned to lower oxygen concentrations in reduced gravity than in normal gravity, suggesting a gravity level below Earth’s at which materials burn more readily. NASA’s FM2 team notes that drop towers, parabolic flights and space facilities show gravity level significantly affects burning, but cannot fully reproduce lunar conditions.",
+      "safetyImplication": "Earth-gravity flammability screening may not be conservative for the Moon or Mars; partial-gravity evidence exists but is limited in test time and conditions.",
+      "implicationType": "inference",
+      "limitations": "Short-duration drop-tower and aircraft tests; extinction criteria differ from 1-g tests, and these records are not in the atlas’s measured dataset.",
+      "tags": [
+        "partial gravity",
+        "lunar",
+        "martian",
+        "moon",
+        "mars",
+        "flammability",
+        "drop tower",
+        "parabolic flight",
+        "simulated lunar gravity",
+        "prevention"
+      ],
+      "strength": "observed",
+      "quantities": []
+    },
+    {
+      "id": "saffire-vi-conditions",
+      "title": "Large fires measured near exploration-cabin oxygen levels",
+      "experiment": "Saffire VI",
+      "date": null,
+      "sourceIds": [
+        "saffire6-paper"
+      ],
+      "claim": "Saffire VI burned SIBAL cloth at 31.0% oxygen and 54.1 kPa (VI-2), two-sided acrylic (PMMA) at 30.3% and 54.6 kPa (VI-3), and one-sided PMMA at 28.8% and 55.2 kPa (VI-4), all in 20 cm/s concurrent flow in microgravity (Table 1). Peak heat release was 3217 W, 3080 W and 1507 W (Table 2).",
+      "safetyImplication": "These are the closest measured solid-material fires in the atlas to a lunar-habitat atmosphere, but at lower pressure, forced flow and microgravity.",
+      "implicationType": "inference",
+      "limitations": "Microgravity spacecraft tests at one flow speed; not lunar gravity and not a material qualification.",
+      "tags": [
+        "oxygen",
+        "atmosphere",
+        "pressure",
+        "PMMA",
+        "acrylic",
+        "cotton",
+        "fabric",
+        "exploration",
+        "moon",
+        "prevention",
+        "flammability"
+      ],
+      "strength": "observed",
+      "quantities": [
+        {
+          "name": "VI-3 oxygen",
+          "minimum": 30.3,
+          "maximum": 30.3,
+          "unit": "mol %",
+          "sourceId": "saffire6-paper"
+        },
+        {
+          "name": "VI-3 pressure",
+          "minimum": 54.6,
+          "maximum": 54.6,
+          "unit": "kPa",
+          "sourceId": "saffire6-paper"
+        }
+      ]
+    },
+    {
+      "id": "saffire-vi-detection",
+      "title": "A typical smoke alarm level came late in a real spacecraft fire",
+      "experiment": "Saffire VI-3",
+      "date": null,
+      "sourceIds": [
+        "saffire6-paper"
+      ],
+      "claim": "During the VI-3 acrylic fire, an ionization smoke detector and a particulate monitor at the far-field unit both responded. Using 1 mg/m³ of particulate as a relatively tight alarm threshold, the authors report that level was reached at 981 s on the Figure 7 time axis, by which point much of the hazardous gas release had occurred.",
+      "safetyImplication": "Smoke-based alarms may trigger after toxic gases have already spread; detection strategies should consider gas sensing and detector placement.",
+      "implicationType": "inference",
+      "limitations": "One test, one detector location; the 1 mg/m³ threshold is the authors’ chosen level, not the ionization detector’s electrical signal.",
+      "tags": [
+        "detection",
+        "smoke",
+        "alarm",
+        "detector",
+        "sensor",
+        "particles",
+        "PMMA",
+        "acrylic",
+        "false alarm"
+      ],
+      "strength": "observed",
+      "quantities": []
+    },
+    {
+      "id": "saffire-vi-gases",
+      "title": "Gas limits were exceeded while temperatures stayed near normal",
+      "experiment": "Saffire VI",
+      "date": null,
+      "sourceIds": [
+        "saffire6-paper"
+      ],
+      "claim": "In Saffire VI, temperature rose significantly only near the fire, but carbon dioxide and carbon monoxide rose across the spacecraft: both PMMA tests exceeded the 1-hour CO₂ limit and the 24-hour CO limit (VI-3: +8539 ppm CO₂, +308 ppm CO at the far-field unit, Table 2).",
+      "safetyImplication": "As in terrestrial fires, smoke and gases rather than heat are the main crew hazard; response plans should prioritize gas exposure.",
+      "implicationType": "inference",
+      "limitations": "Concentration increases in a 16.7 m³ free volume; different cabin sizes and ventilation would change exposure.",
+      "tags": [
+        "gas",
+        "carbon monoxide",
+        "carbon dioxide",
+        "toxicity",
+        "detection",
+        "suppression",
+        "exposure",
+        "PMMA"
+      ],
+      "strength": "observed",
       "quantities": []
     }
   ]

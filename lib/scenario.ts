@@ -37,7 +37,7 @@ export const presets: Record<
     },
   },
   lunar: {
-    label: "Lunar habitat (challenge figures)",
+    label: "Lunar habitat (challenge scenario)",
     description:
       "The challenge statement expects a Moon base atmosphere of 30% oxygen or more at 10.2 psi (70.3 kPa) or less. Lunar flame shape remains illustrative.",
     scenario: {

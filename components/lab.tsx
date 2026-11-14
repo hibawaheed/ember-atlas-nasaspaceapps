@@ -25,6 +25,7 @@ import {
 } from "@/lib/scenario";
 import measurements from "@/data/measurements.json";
 import { atmospheres } from "@/lib/atmospheres";
+import TestComparison from "./test-comparison";
 import { sourceFor } from "@/lib/evidence";
 import { EvidenceCard } from "./evidence-view";
 import { rankForScenario } from "@/lib/evidence";
@@ -764,6 +765,7 @@ export default function Lab({
           </div>
         </section>
       )}
+      {full && <TestComparison scenario={scenario} />}
       {full && (
         <section className="panel atmosphere-compare">
           <div className="panel-heading">
@@ -812,7 +814,7 @@ export default function Lab({
           <p className="fine-print">
             The lab&apos;s controls cover 15–40% oxygen and 50–110 kPa, so the
             spacesuit case is shown here only. Use the &ldquo;Lunar habitat
-            (challenge figures)&rdquo; preset to explore the Moon base case.
+            (challenge scenario)&rdquo; preset to explore the Moon base case.
             Flammability depends on oxygen fraction, pressure, airflow, gravity
             and material together.
           </p>

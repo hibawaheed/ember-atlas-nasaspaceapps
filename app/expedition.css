@@ -1341,3 +1341,29 @@ summary {
 .reading-sources { margin: 0.6rem 0 0; padding-left: 1.1rem; display: grid; gap: 0.25rem; font-size: 0.88rem; color: var(--muted); }
 .loading-answer:has(.reading-sources) { flex-wrap: wrap; }
 .loading-answer .reading-sources { flex-basis: 100%; }
+
+/* Closest measured test comparison */
+.test-compare .tc-tabs { display: flex; gap: 6px; }
+.test-compare .tc-tabs button { border: 1px solid var(--line); border-radius: 8px; padding: 6px 12px; color: var(--muted); background: var(--surface-raised); font-size: 0.85rem; }
+.test-compare .tc-tabs button.active { color: #18120e; background: var(--orange); border-color: var(--orange); }
+.tc-reason { color: var(--ink); line-height: 1.5; margin: 0.5rem 0; }
+.tc-result { color: var(--ink); line-height: 1.55; margin: 0.75rem 0 0.25rem; font-size: 1.02rem; }
+.small-note { color: var(--muted); font-size: 0.88rem; line-height: 1.5; }
+.tc-status { display: inline-block; padding: 2px 8px; border-radius: 6px; font-size: 0.78rem; font-weight: 600; }
+.tc-status.same { background: rgba(127, 224, 196, 0.16); color: #8ff0d2; }
+.tc-status.close { background: rgba(255, 196, 120, 0.16); color: #ffcf8f; }
+.tc-status.differs { background: rgba(255, 140, 140, 0.14); color: #ffb0b0; }
+.tc-actions { display: flex; flex-wrap: wrap; gap: 0.6rem 1rem; align-items: center; margin: 0.75rem 0; }
+.tc-actions .button { display: inline-flex; align-items: center; gap: 0.35rem; }
+.test-compare.compact { display: grid; gap: 0.35rem; }
+.test-compare.compact h3 { margin: 0; font-size: 1.15rem; }
+.tc-values { color: var(--orange); font-variant-numeric: tabular-nums; margin: 0; }
+.coverage-legend { list-style: none; display: flex; flex-wrap: wrap; gap: 0.4rem 1.2rem; padding: 0; margin: 0.5rem 0 0; color: var(--muted); font-size: 0.85rem; }
+.coverage-legend .lg { display: inline-block; width: 22px; height: 10px; margin-right: 6px; border-radius: 3px; vertical-align: middle; }
+.coverage-legend .lg.measured { background: var(--orange); }
+.coverage-legend .lg.limit { border: 1.5px dashed var(--orange); }
+.coverage-legend .lg.habitat { width: 3px; background: var(--green); }
+.coverage-svg .row-fuel { fill: var(--muted); font-size: 9.5px; }
+.coverage-svg .pt-label { fill: var(--ink); font-size: 8.5px; }
+.coverage-lists { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 0.5rem 1.5rem; }
+.coverage-lists h3 { font-size: 0.95rem; margin: 0.9rem 0 0.2rem; }

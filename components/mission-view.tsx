@@ -24,6 +24,8 @@ import {
 import { sourceFor, findings } from "@/lib/evidence";
 const findingTitle = (id: string) => findings.find((f) => f.id === id)?.title ?? id;
 import OxygenCoverage from "./oxygen-coverage";
+import TestComparison from "./test-comparison";
+import { baseline, presets, type Scenario } from "@/lib/scenario";
 import { nasaLinks } from "@/lib/links";
 
 function profilesCsv() {
@@ -67,7 +69,13 @@ const priorities = [
     text: "Suppression, flow, and combustion limits",
   },
 ] as const;
-export default function MissionView({ onExplore }: { onExplore: () => void }) {
+export default function MissionView({
+  onExplore,
+  onOpenScenario,
+}: {
+  onExplore: () => void;
+  onOpenScenario?: (s: Scenario) => void;
+}) {
   const [query, setQuery] = useState<MissionQuery>({
     destination: "orbit",
     priority: "prevention",
@@ -460,6 +468,14 @@ export default function MissionView({ onExplore }: { onExplore: () => void }) {
           </button>
         </div>
       </section>
+      <TestComparison
+        scenario={query.destination === "orbit" ? baseline : presets.lunar.scenario}
+        onOpenLab={() =>
+          onOpenScenario
+            ? onOpenScenario(query.destination === "orbit" ? baseline : presets.lunar.scenario)
+            : onExplore()
+        }
+      />
       <OxygenCoverage />
       <section className="panel controls-groups">
         <div className="panel-heading">

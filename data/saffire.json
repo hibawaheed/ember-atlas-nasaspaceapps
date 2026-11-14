@@ -1,0 +1,135 @@
+{
+  "schemaVersion": "1.0.0",
+  "dataset": "Saffire IV–VI sample test conditions and results (published tables)",
+  "source": {
+    "title": "Preliminary Results from the Saffire VI Experiment (ICES-2024-365)",
+    "authors": "Urban, D. L., Ruff, G. A., Ferkul, P., et al.",
+    "venue": "53rd International Conference on Environmental Systems, Louisville, Kentucky, 21–25 July 2024",
+    "ntrsId": "20240002981",
+    "citationUrl": "https://ntrs.nasa.gov/citations/20240002981",
+    "pdfUrl": "https://ntrs.nasa.gov/api/citations/20240002981/downloads/Saffire-ICES-2024-ICES-365-accepted%20final.pdf",
+    "filename": "Saffire-ICES-2024-ICES-365-accepted final.pdf",
+    "sha256": "7f875da1d6abeeeeac64aeba67d3f160074cf98430e714fe7606b34b37e0aa59",
+    "pages": 7,
+    "tables": {
+      "conditions": "Table 1, PDF page 3",
+      "results": "Table 2, PDF page 6",
+      "detection": "Figure 7 and text, PDF page 5"
+    }
+  },
+  "verifiedAt": "2026-11-14",
+  "verification": "Table 1 and Table 2 values were read from the original NASA PDF and checked by eye against the rendered pages on November 14, 2026.",
+  "conditions": {
+    "gravity": "microgravity (uncrewed Cygnus spacecraft after leaving the ISS)",
+    "flowDirection": "concurrent",
+    "flowTunnel": "30 cm high × 45 cm wide × 109 cm long flow tunnel (Saffire Flow Unit)",
+    "atmosphere": "Spacecraft vented to a target pressure, then oxygen added (Table 1 values are the test conditions)"
+  },
+  "tests": [
+    {
+      "id": "IV-1",
+      "flight": "Saffire IV",
+      "material": "SIBAL cloth",
+      "materialDetail": "75% cotton, 25% fiberglass fabric",
+      "fuelClass": "thin fabric",
+      "lengthCm": 50,
+      "airflowCms": 20,
+      "pressureKpa": 100.0,
+      "oxygenPct": 22.0,
+      "freeVolumeM3": 17.9,
+      "burnDurationS": 130,
+      "peakHeatReleaseW": null,
+      "averageHeatReleaseW": 3150,
+      "co2IncreasePpm": 1390,
+      "coIncreasePpm": 80
+    },
+    {
+      "id": "V-2",
+      "flight": "Saffire V",
+      "material": "Cotton jersey",
+      "materialDetail": "cotton jersey fabric",
+      "fuelClass": "thin fabric",
+      "lengthCm": 50,
+      "airflowCms": 20,
+      "pressureKpa": 70.7,
+      "oxygenPct": 26.2,
+      "freeVolumeM3": 19.0,
+      "burnDurationS": 200,
+      "peakHeatReleaseW": null,
+      "averageHeatReleaseW": 2800,
+      "co2IncreasePpm": 2360,
+      "coIncreasePpm": 83
+    },
+    {
+      "id": "VI-2",
+      "flight": "Saffire VI",
+      "material": "SIBAL cloth",
+      "materialDetail": "75% cotton, 25% fiberglass fabric",
+      "fuelClass": "thin fabric",
+      "lengthCm": 50,
+      "airflowCms": 20,
+      "pressureKpa": 54.1,
+      "oxygenPct": 31.0,
+      "freeVolumeM3": 16.7,
+      "burnDurationS": 112,
+      "peakHeatReleaseW": 3217,
+      "averageHeatReleaseW": 3650,
+      "co2IncreasePpm": 2800,
+      "coIncreasePpm": 120
+    },
+    {
+      "id": "VI-3",
+      "flight": "Saffire VI",
+      "material": "PMMA (acrylic)",
+      "materialDetail": "two-sided cast PMMA, 10 mm thick",
+      "fuelClass": "thick solid",
+      "lengthCm": 18,
+      "airflowCms": 20,
+      "pressureKpa": 54.6,
+      "oxygenPct": 30.3,
+      "freeVolumeM3": 16.7,
+      "burnDurationS": 780,
+      "peakHeatReleaseW": 3080,
+      "averageHeatReleaseW": null,
+      "co2IncreasePpm": 8539,
+      "coIncreasePpm": 308,
+      "note": "Duct flow reduced from 20 to 5 cm/s at 1120 s and stopped at 1420 s (Figures 4–6)."
+    },
+    {
+      "id": "VI-4",
+      "flight": "Saffire VI",
+      "material": "PMMA (acrylic)",
+      "materialDetail": "one-sided cast PMMA, 5 mm thick",
+      "fuelClass": "thick solid",
+      "lengthCm": 18,
+      "airflowCms": 20,
+      "pressureKpa": 55.2,
+      "oxygenPct": 28.8,
+      "freeVolumeM3": 16.7,
+      "burnDurationS": 1200,
+      "peakHeatReleaseW": 1507,
+      "averageHeatReleaseW": null,
+      "co2IncreasePpm": 8117,
+      "coIncreasePpm": 320
+    }
+  ],
+  "notTested": [
+    { "id": "VI-1", "material": "Nomex fabric", "note": "Did not ignite; excluded from the paper's analysis." }
+  ],
+  "detection": {
+    "test": "VI-3",
+    "figure": "Figure 7, PDF page 5",
+    "instruments": "Far-field ionization smoke detector (raw signal, VDC) and DustTrak DRX particulate monitor (PM2.5 and PM10, mg/m³) at the far-field diagnostics unit in the hatch area",
+    "authorThresholdMgM3": 1,
+    "thresholdReachedS": 981,
+    "timeBase": "elapsed time on the Figure 7 axis",
+    "statement": "Selecting 1 mg/m³ as a relatively tight alarm threshold, the far-field detector reached that threshold at 981 seconds. By this point, much of the hazardous gas release had occurred.",
+    "note": "The 1 mg/m³ threshold is the authors' chosen particle-concentration level, not the ionization detector's electrical signal."
+  },
+  "limitations": [
+    "Microgravity tests in a spacecraft, not lunar or Martian gravity.",
+    "One flow speed (20 cm/s, concurrent) for the tabulated conditions; VI-3's flow was later reduced.",
+    "Oxygen concentrations are test conditions reported in mol %; no per-test uncertainty is tabulated.",
+    "Heat release is calculated from oxygen consumption (and, for thin fuels, fuel consumption); empty table cells mean data were not available."
+  ]
+}
