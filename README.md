@@ -1,127 +1,136 @@
 # EMBER Atlas
 
-[Open the live demo](https://emberatlas.tech) (also at [ember-atlas-sigma.vercel.app](https://ember-atlas-sigma.vercel.app)) · [GitHub repository](https://github.com/hibawaheed/ember-atlas-nasaspaceapps)
+**Fire, beyond Earth.** A research dashboard that summarizes, ranks and interprets NASA’s microgravity combustion investigations for fire safety in spacecraft, space stations, Moon and Mars bases, and pressurized rovers.
 
-**Fire, beyond Earth.** An independent NASA Space Apps demo for _Flame in Freefall_: explore microgravity combustion evidence, compare published measurements, and investigate fire behavior in an interactive 3D lab.
+[**Live site: emberatlas.tech**](https://emberatlas.tech) · [Slides (PDF)](submission/EMBER-Atlas-Space-Apps-2026.pdf) · [Submission text](submission/SUBMISSION.md)
 
-**Built by ISL Team A:** Hiba Waheed Ch, Zaafir Abbas Haidrie, Muhammad Ashar Hassan and Amin Adnan Mahmood.
+Built by **ISL Team A** (Hiba Waheed Ch, Zaafir Abbas Haidrie, Muhammad Ashar Hassan, Amin Adnan Mahmood) for the NASA Space Apps Challenge 2026 challenge **[Flame in Freefall: SI-Powered Fire Safety Insights from Microgravity Combustion Data](https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/)**.
 
-## Continuing with Claude — start here
+---
 
-**Handoff snapshot: November 9, 2026 · v1.3.0 · galaxy edition.** This repository is the working project, already connected to its Vercel production deployment. Continue it; do not create a replacement repository or hosting project.
+## The problem
 
-1. Read **[CLAUDE.md](CLAUDE.md)** for the short operating context.
-2. Read **[the complete continuation handoff](docs/HANDOFF.md)** for the architecture, file map, exact data limitations, known gaps, deployment/recovery instructions, and ordered work beginning November 13.
-3. Use **[challenge alignment](docs/CHALLENGE-ALIGNMENT.md)** and **[verification record](docs/VALIDATION.md)** to distinguish implemented work from proposed work.
+NASA publishes the results of its ISS combustion experiments through the Physical Sciences Informatics (PSI) system, but, as the challenge puts it, the data is hard to find, harder to compare and harder yet to interpret. Meanwhile, future habitats will burn differently from Earth: a Moon base or pressurized rover is expected to run at **30% oxygen or more and 10.2 psi or less**, and **PSI holds no partial-gravity combustion data yet**.
 
-Copy this into Claude when resuming:
+EMBER Atlas brings that evidence into one place, keeps every number traceable to its NASA source, and uses AI only where it can be grounded in that evidence.
 
-> Continue the existing `hibawaheed/ember-atlas-nasaspaceapps` project. Read README.md, CLAUDE.md, docs/HANDOFF.md, and AGENTS.md before editing. Begin with the November 13 resource-reconciliation checklist in the handoff. Check the official Flame in Freefall Details and Resources tabs as they exist now; do not assume the scheduled resource release happened. Keep the dark design and animated lab. Integrate verified NASA data with provenance and experimental context, preserve the distinction between measurements and illustrative graphics, run the checks, and update the existing GitHub-connected Vercel project. First report which resources are available and the concrete next change. Ask me only for access or decisions you actually need.
+## What you can do
 
-The next priority is **official resource integration and scientific verification**, followed by stronger retrieval and, if configured, evaluated generative answers. The public demo currently uses deterministic evidence retrieval. No raw NASA archive or official resource pack has been ingested, and no validated fire-risk model exists.
+| Area | What it does |
+| --- | --- |
+| **Combustion lab** | An animated 3D flame that responds to gravity (orbit, Moon, Mars, Earth), oxygen, airflow, cabin pressure and fuel. Compare side by side with Earth, replay the 18 real BASS-II runs, and ask Claude to interpret the setup. Panels compare Earth air, a Moon base and a spacesuit, and explain the partial-gravity data gap. |
+| **Mission desk** | Pick a habitat and a safety question (prevention, detection, suppression). Ten investigation profiles are ranked with a visible score, compared side by side, grouped by shared hardware, and explained by Claude on request. Includes an oxygen-coverage chart and a “Back on Earth” applications panel. |
+| **Evidence library** | 32 curated findings from 20 NASA sources, searchable and filterable, each with its source, what it means and its limits, labeled Observed, Review or Research aim. |
+| **Measured data** | 39 flame-spread measurements from 18 BASS-II runs, with run conditions, a “what varied / what stayed the same” summary, and CSV export. All investigation profiles can be exported too. |
+| **Research companion** | Ask a question in plain language. Claude answers from the retrieved NASA findings and investigation profiles, cites every source, handles follow-ups, and declines what the evidence cannot support. |
+| **Field guide** | A guided tour, key concepts, the history of spaceflight fires (Apollo 1, Apollo 13, Mir, Artemis II), a glossary and a short quiz. |
 
-## What works
+## How it works
 
-- **Galaxy research workspace:** midnight-blue surfaces, a subtle starfield, an original orbital illustration, lavender accents, warm flame controls, readable chart axes, and responsive layouts. Decorative space imagery is separate from scientific visualizations. Dark is the default and only in-app theme; exported HTML briefs keep a print-friendly light presentation.
-- **3D combustion lab:** procedural volumetric flame with an interactive CPU 3D fallback, orbit/zoom, visible play/pause, animation speed, moving wisps and rising plumes, chamber outline, Earth comparison, atmosphere/airflow/fuel controls, and saved/shareable scenarios.
-- **Measured replay:** 39 BASS-II observations from 18 runs drive visual radius and brightness, scaled to the fastest published rate. The encoding represents flame-spread rate, **not heat output or reconstructed flame shape**.
-- **Evidence library:** 32 findings from 20 sources (NASA pages and reports, plus NASA's Space Apps challenge statement), filterable by research program and evidence type. Each keeps its source, implication, and limitations.
-- **Mission desk:** ten investigation profiles (including BRE, E-FIELD Flames, CFI-G and SPICE/SLICE, added November 13), grouped by shared hardware, with an "on Earth" applications panel, ranked for orbital, lunar, Martian, and rover research questions; prevention/detection/suppression priorities, explicit ranking reasons, and a three-way comparison.
-- **Guided lab & field guide:** five interactive chapters, plain-language science explainers, glossary, and a three-question knowledge check.
-- **Measured data:** interactive scatter plot, original run conditions, accessible table, and CSV export.
-- **Research companion:** BM25 retrieval with explicit synonym expansion, citation-linked answers, and abstention for unsupported topics. Works without an API key.
-- **AI answers and lab interpretation (live):** Claude Haiku 5.5 via Vercel AI Gateway, schema-validated output limited to retrieved citation IDs, per-visitor rate limit, timeout, and retrieval fallback.
-- **Data ingestion:** validated CSV/JSON, explicit units, source URLs, 1,000-row cap, and separation of unverified uploads from curated evidence.
-- **Research briefs:** export an independently readable HTML report with scenario, implications, limits, and bibliography; print to PDF.
+```text
+Browser (Next.js + React)
+  ├─ Combustion lab ── Three.js volumetric flame (CPU particle fallback)
+  ├─ Charts ────────── SVG, drawn from data/measurements.json
+  └─ Questions, lab interpretation, comparisons
+        │
+        ▼
+Next.js route handlers (app/api/*)
+  ├─ Validate input (Zod, byte limits)
+  ├─ Search findings (BM25 + synonyms, relevance cutoff)
+  ├─ Build context: top findings + named investigation profiles + previous turn
+  ├─ Rate limit per visitor
+  └─ Claude Haiku 5.5 via Vercel AI SDK → Vercel AI Gateway
+        │  structured output with the IDs it relied on
+        ▼
+  Check citations → label as AI → or fall back to the search results
+```
 
-## Run independently
+### Frontend
 
-Node.js 20.9+ and npm are required. The current Vercel project runs Node 26; core tests and builds also pass locally on Node 20.20.2. All main features work without accounts, database provisioning, API keys, or live NASA access.
+- **Next.js 16 (App Router) and React 19.** One client dashboard (`components/dashboard.tsx`) holds the views; the URL keeps the current view and scenario (`?view=lab&scenario=…`) so any state can be shared.
+- **3D flame.** `components/flame-scene.tsx` renders a ray-marched volumetric flame with Three.js when WebGL2 is available; `components/canvas-flame.tsx` is a CPU 3D particle fallback. Motion comes from `lib/flame-motion.ts`. Gravity changes the flame from a sphere (microgravity) to a rising teardrop (Earth). The flame is an authored illustration, not a simulation.
+- **Design.** A dark galaxy theme with a starfield and an original orbital illustration (`app/globals.css`, `expedition.css`, `instrument.css`, `galaxy.css`). Fonts are bundled from npm; no external font or image services are needed.
+- **Charts and panels.** SVG charts for measurements and oxygen coverage, accessible tables, and CSV/JSON/HTML exports (`lib/export.ts`). Layouts are checked on desktop and on a 390 px phone screen.
+
+### Backend and API
+
+All server code runs as Next.js route handlers on Vercel. There is no database and no login; data lives in versioned JSON files, so every change is reviewable in Git.
+
+| Endpoint | Purpose |
+| --- | --- |
+| `GET /api/health` | Version, deployed build, counts and AI mode |
+| `GET /api/evidence?q=airflow` | Curated findings, optionally ranked by search |
+| `POST /api/ask` | `{ question, history? }` → AI answer with citations, or search results |
+| `POST /api/analyze` | Lab scenario (+ optional replay point) → notes, related findings, AI interpretation |
+| `POST /api/investigations` | `{ destination, priority }` → ranked profiles with the scoring rubric |
+| `POST /api/compare` | `{ destination, priority, ids }` → AI explanation of 2–3 selected profiles |
+| `POST /api/import` | Validated CSV/JSON upload, returned to the browser and marked unverified |
+
+Key modules: `lib/evidence.ts` (BM25 search and relevance cutoff), `lib/context.ts` (per-question evidence for the AI), `lib/synthesis.ts` (Claude calls, citation checks, fallbacks), `lib/rate-limit.ts`, `lib/investigations.ts` (profiles and ranking rubric), `lib/scenario.ts` (lab controls and oxygen arithmetic).
+
+### The AI: Claude, kept honest
+
+- **Model:** Anthropic **Claude Haiku 5.5** (`anthropic/claude-haiku-5.5`), called with the Vercel AI SDK through Vercel AI Gateway. The deployment authenticates with Vercel OIDC, so no API key is stored anywhere.
+- **Where it runs:** research-companion answers, lab interpretations, and Mission-desk comparison explanations.
+- **Grounding:** search runs first and decides what the model may see: a few NASA findings and investigation profiles, never the open web. Off-topic questions fall below the relevance cutoff and are declined without calling the model.
+- **Checking:** the model returns structured output listing the IDs it used; any answer citing an item it was not given is rejected. It is instructed never to give risk scores or certifications and never to read the flame animation as data.
+- **Cost controls:** 10 AI calls per visitor per 10 minutes, a $5/month AI Gateway budget, and a search-only fallback when the model is slow, down or over budget. Measured cost is about $0.0005 per answer.
+- **Evaluation:** `scripts/ai-eval.mjs` runs 13 live checks (grounded answers, a Moon-atmosphere question, a risk-score request, a prompt injection, off-topic questions, a comparison, a follow-up, lab and Mission-desk explanations). Current result: **13/13**. Checked citations show the AI stayed within its evidence; they are not a scientific review of every sentence.
+
+## The data
+
+| Layer | What it is | What it is not |
+| --- | --- | --- |
+| BASS-II measurements | 39 published flame-spread values from 18 runs, NASA/TM-20210011385 Table 5.1, checked by eye against the original PDF (SHA-256 recorded) | Raw telemetry or independent experiments; oxygen fell during every run |
+| Research findings | 32 curated summaries of NASA sources, each with source, meaning and limits | An exhaustive review or a safety certification |
+| Investigation profiles | 10 profiles: objectives, fuels and sample sizes, conditions, variables, sensors, shared hardware | A complete PSI catalog |
+| 3D flame | An authored visual model; only the oxygen partial-pressure arithmetic is physical | CFD, a temperature map or a fire-risk score |
+| Moon/Mars flame shapes | A conceptual interpolation | A partial-gravity prediction (PSI has no such data yet) |
+| Rankings | Disclosed reading-priority rubric | Hazard, confidence or suitability scores |
+
+While verifying the BASS-II table we found that the report’s Figure 5.2 gives a different M8 slope at 10 cm/s (0.0637 mm/s) than Table 5.1 (0.057 mm/s). The app uses the table and records the difference. Full source list: [submission/SUBMISSION.md](submission/SUBMISSION.md#nasa-data-and-resources-used) and `data/evidence.json`.
+
+## Development process
+
+1. **Foundation (November 9).** Built the dashboard, the animated 3D lab with a CPU fallback, the evidence library with provenance fields, the Mission desk ranking, the field guide, and the dark galaxy design. Deployed on Vercel from GitHub.
+2. **Challenge resources (November 13).** Reviewed the official Details and Resources tabs, recorded a dated inventory (`docs/RESOURCES-2026-11-13.md`), downloaded the 49 MB BASS-II report, verified Table 5.1 page by page and expanded the data from 2 runs to all 18 tracked runs.
+3. **Challenge coverage (November 13–14).** Added the investigations the challenge names (BRE, E-FIELD Flames, CFI-G, SPICE & SLICE, SAME-R/DAFT), shared-hardware groupings, crew atmospheres including spacesuits, the oxygen-coverage chart, the partial-gravity panel, Earth applications, fire history, and findings from NASA’s 2015 ISS combustion guide.
+4. **AI (November 14).** Connected Claude Haiku 5.5 through Vercel AI Gateway, added the context builder, citation checks, rate limits, follow-up support and a live evaluation script, and iterated until all 13 checks passed.
+5. **Launch.** Custom domain emberatlas.tech, a build stamp in the footer, and this repository as a clean snapshot of the project.
+
+Every change was tested with strict TypeScript and 23 automated tests (`npm run check`), a production build, browser checks on desktop and phone, and a review of Vercel runtime logs after each release. The verification log is in `docs/VALIDATION.md`; the requirement mapping is in `docs/CHALLENGE-ALIGNMENT.md`. Development was assisted by AI coding tools (Claude Code); NASA values were checked by hand against the original sources.
+
+## Run it locally
+
+Requires Node.js 20.9+ and npm. Everything except AI answers works offline, with no accounts or keys.
 
 ```sh
 npm ci
-npm run dev
-# http://localhost:3000
-npm run check
-npm run build
-npm start
+npm run dev          # http://localhost:3000
+npm run check        # strict TypeScript + 23 tests
+npm run build && npm start
 ```
 
-Set `NEXT_TELEMETRY_DISABLED=1` if your environment restricts writes to user configuration directories.
+To try AI answers locally, copy `.env.example` to `.env.local` and set `ENABLE_GENERATIVE_AI=true`, `AI_MODEL=anthropic/claude-haiku-5.5` and an `AI_GATEWAY_API_KEY`. Never commit `.env.local`. Without these, the app shows search-based answers.
 
-## Data honesty
+Run the live AI checks against any deployment:
 
-| Layer                | What it is                                                                  | What it is not                                                             |
-| -------------------- | --------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| BASS-II measurements | Published summary values from NASA/TM-20210011385, Table 5.1, printed p. 57 | Raw telemetry, controlled single-variable trials, or uncertainty estimates |
-| Research findings    | Curated paraphrases of primary NASA sources                                 | An exhaustive review or a spacecraft safety certification                  |
-| Scenario flame       | Authored, dimensionless educational response model                          | CFD, temperature estimation, or a fire-risk score                          |
-| Measured replay      | Visual encoding of observed spread rates                                    | A scientific reconstruction of flame geometry or heat release              |
-| Moon/Mars comparison | Conceptual gravity-dependent shape                                          | Validated partial-gravity combustion prediction                            |
-| Assistant ranking    | BM25 text relevance                                                         | A scientific confidence or hazard probability                              |
-
-Oxygen changed within the BASS-II runs. Points are successive observations, not independent experiments. Do not infer isolated airflow causality. No per-point error bars were tabulated. On November 13, 2026 every value was checked by eye against Table 5.1 in the original NASA PDF (printed page 57, SHA-256 `5ffa911f…5f770`, recorded in full in `data/measurements.json`). Figure 5.2 of the same report shows a slightly different fitted M8 slope at 10 cm/s (0.0637 vs. 0.057 mm/s); the fixture uses the table value and notes the difference. The caveat is preserved in `data/measurements.json` and the UI.
-
-The data snapshot is **November 13, 2026**. The official Details and Resources tabs were rechecked that day; see `docs/RESOURCES-2026-11-13.md` for the (partial) resource inventory. The visible resources contained no dataset, so the numeric data still comes from the BASS-II technical report. See `docs/CHALLENGE-ALIGNMENT.md` for the requirement mapping, project benchmarks, and remaining gaps.
-
-## Optional generative answers
-
-Copy `.env.example` to `.env.local`. Choose an available model ID from the live [AI Gateway catalog](https://ai-gateway.vercel.sh/v1/models), then set:
-
-```dotenv
-ENABLE_GENERATIVE_AI=true
-AI_MODEL=provider/model-from-the-live-catalog
-AI_GATEWAY_API_KEY=your-key-for-local-or-non-vercel-hosting
+```sh
+node scripts/ai-eval.mjs https://emberatlas.tech
 ```
-
-**Live since November 14, 2026:** the deployed site uses `anthropic/claude-haiku-5.5` through Vercel AI Gateway for research-companion answers and lab interpretations, authenticated with Vercel OIDC (no key stored). Answers may cite only the retrieved findings, are labeled as AI, are rate limited per visitor, and fall back to retrieval on any failure. Measured cost is about $0.0005 per call; test results are in [the verification record](docs/VALIDATION.md).
-
-Vercel deployments can authenticate through their OIDC token instead. Secrets stay server-side. Generation is off by default for local runs. A $5/month team AI Gateway budget is set in the Vercel dashboard and is the hard spending cap; the in-app rate limit is per server instance, not global. Never commit `.env.local` or API keys. Model-generated facts still require scientific review; validating citation IDs does not prove entailment.
-
-## Architecture
-
-```text
-React dashboard → Next.js route handlers → validated scenario / curated evidence
-       │                      ├─ BM25 retrieval → source-linked response
-       │                      └─ optional AI Gateway → validated citation IDs
-       ├─ Three.js → procedural volumetric flame
-       ├─ SVG chart → measured BASS-II data
-       └─ localStorage → saved scenarios (device-local)
-```
-
-Source files are the versioned data store. This makes the demo deterministic and easy to audit. Import requests are validated on the server, then returned to the browser; uploads are not persisted. Saved scenarios remain in that browser. No login is needed and no server-side user profile is created.
-
-### API
-
-| Endpoint                      | Contract                                                                                                              |
-| ----------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| `GET /api/health`             | Version, evidence counts, assistant mode                                                                              |
-| `GET /api/evidence?q=airflow` | Curated evidence with optional ranked search                                                                          |
-| `POST /api/analyze`           | Validated scenario → synthetic visual parameters, interpretation, related evidence                                    |
-| `POST /api/investigations`    | `{ "destination": "moon", "priority": "detection" }` → ranked investigation metadata, disclosed rubric, transfer gaps |
-| `POST /api/ask`               | `{ "question": "What did FLEX discover?" }` → answer, mode, citations, limits                                         |
-| `POST /api/import`            | `{ "label": "Experiment", "csv": "..." }` or `{ "label": "...", "rows": [...] }`                                      |
-
-Scenario fields: `oxygen` (15–40 vol%), `pressure` (50–110 kPa), `airflow` (0–20 cm/s), `gravity` (`micro`, `moon`, `mars`, `earth`), `fuel` (`pmma`, `cellulose`, `droplet`). These bounds define demo controls, not validated physical limits.
-
-CSV columns: `testId,airflowCms,spreadRateMms,sourceUrl,material`. JSON import has the same typed fields. Use HTTPS provenance links. The downloadable template contains **synthetic example data** and must be replaced.
 
 ## Deployment
 
-Import this repository into Vercel with the **Next.js** framework preset and root directory `.`. Production branch: `main`. Build command: `npm run build`. Install command: `npm ci`. Vercel provides a free `.vercel.app` hostname; no purchased domain is required. Keep the GitHub integration connected for deployments on pushes.
+Vercel project `ember-atlas`, connected to this repository; every push to `main` deploys to [emberatlas.tech](https://emberatlas.tech) (also [ember-atlas-sigma.vercel.app](https://ember-atlas-sigma.vercel.app)). Framework preset Next.js, install `npm ci`, build `npm run build`. Other Node hosts can run `npm ci && npm run build && npm start`.
 
-Other Node hosts can run `npm ci && npm run build && npm start`. No Vercel-only service is required for core features.
+## Limits and next steps
 
-## Research extension plan
+EMBER Atlas is a research and teaching tool, not a fire-safety certification. Next steps: add partial-gravity data from LUCI and FM2 when NASA releases it, ingest more PSI datasets (starting with FLEX droplet series) with the same verification, and have a combustion scientist review the findings and rankings.
 
-1. Ingest original files and metadata from [BASS-II / PSI-25](https://psi.nasa.gov/physci/repo/data/investigations/PSI-25) and [FLEX / PSI-69](https://psi.nasa.gov/physci/repo/data/investigations/PSI-69).
-2. Preserve flow orientation, frame timing, geometry, instrument calibration, and measurement uncertainty.
-3. Add a reviewed extraction pipeline and immutable file hashes before enlarging the evidence corpus.
-4. Explore [PSI-62 two-color tomography](https://psi.nasa.gov/physci/repo/data/investigations/PSI-62) for reconstruction of measured soot/temperature fields.
-5. Validate any predictive model on held-out experiments and involve a combustion scientist before assigning safety meaning.
+## For maintainers
 
-See `docs/research-notes.txt`, `docs/DEMO.md`, and `docs/VALIDATION.md`.
+Start with [CLAUDE.md](CLAUDE.md) and [docs/HANDOFF.md](docs/HANDOFF.md) for the full engineering context, scientific boundaries and release checklist.
 
 ## License and attribution
 
-Original application code: MIT, © 2026 Hiba Waheed. Research material remains attributed to its original sources; the code license does not relicense third-party material. NASA PSI records used here identify CC0 dataset licenses. No NASA insignia is used. Independent project; no NASA endorsement or affiliation.
+Original application code: MIT, © 2026 Hiba Waheed and ISL Team A. Research material remains attributed to its original NASA sources; NASA PSI records used here identify CC0 dataset licenses. No NASA insignia is used. Independent project; no NASA endorsement or affiliation.

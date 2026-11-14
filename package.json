@@ -37,6 +37,6 @@
   "description": "NASA microgravity combustion evidence, measured data, and an interactive 3D research lab.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/hibawaheed/ember-atlas.git"
+    "url": "https://github.com/hibawaheed/ember-atlas-nasaspaceapps.git"
   }
 }
