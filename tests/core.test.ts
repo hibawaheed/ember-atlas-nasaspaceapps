@@ -27,6 +27,7 @@ import { oxygenCoverage } from "../lib/coverage";
 import { bassVariation } from "../lib/variation";
 import { allowAiCall, aiLimits } from "../lib/rate-limit";
 import { lookupReplay } from "../lib/replay";
+import { nasaLinks } from "../lib/links";
 import { stripIds } from "../lib/synthesis";
 import { buildAskContext } from "../lib/context";
 const request = (path: string, body: unknown) =>
@@ -373,4 +374,12 @@ test("lab notes stage answers without AI and ask can stream its result", async (
   // Off-topic questions are declined with plain JSON, before any AI call.
   const off = await ask(request("/api/ask", { question: "Best pizza topping?", stream: true }));
   assert.equal((await off.json()).findings.length, 0);
+});
+test("challenge resource links are NASA pages and every reference resolves", () => {
+  for (const l of Object.values(nasaLinks)) {
+    const u = new URL(l.url);
+    assert.equal(u.protocol, "https:");
+    assert.ok(u.hostname.endsWith("nasa.gov"), l.url);
+  }
+  for (const a of earthApplications) for (const k of a.links ?? []) assert.ok(k in nasaLinks, k);
 });

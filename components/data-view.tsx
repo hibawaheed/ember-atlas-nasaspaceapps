@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import MeasurementChart from "./measurement-chart";
 import { bassVariation } from "@/lib/variation";
+import { nasaLinks } from "@/lib/links";
 import { download } from "@/lib/export";
 import type { ImportedDataset } from "@/lib/import";
 export default function DataView() {
@@ -140,6 +141,22 @@ export default function DataView() {
             rel="noreferrer"
           >
             FLEX · PSI-69 <ArrowUpRight size={17} />
+          </a>
+          <a
+            className="archive-link"
+            href={nasaLinks.psiCombustion.url}
+            target="_blank"
+            rel="noreferrer"
+          >
+            All PSI combustion investigations <ArrowUpRight size={17} />
+          </a>
+          <a
+            className="archive-link"
+            href={nasaLinks.glennCombustion.url}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Combustion science at NASA Glenn <ArrowUpRight size={17} />
           </a>
         </section>
       </div>

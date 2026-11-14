@@ -12,6 +12,7 @@ import {
   Download,
 } from "lucide-react";
 import { sourceFor } from "@/lib/evidence";
+import { nasaLinks, type LinkKey } from "@/lib/links";
 const concepts = [
   {
     n: "01",
@@ -39,24 +40,27 @@ const concepts = [
     className: "sensor-sketch",
   },
 ];
-const history = [
+const history: { year: string; name: string; text: string; source: string; link?: LinkKey }[] = [
   {
     year: "1967",
     name: "Apollo 1",
     text: "Three astronauts died when fire broke out in their oxygen-filled spacecraft during a pre-launch test.",
     source: "researchers-guide",
+    link: "apollo1",
   },
   {
     year: "1970",
     name: "Apollo 13",
     text: "An oxygen tank exploded on the way to the Moon. The crew survived a life-threatening return.",
     source: "researchers-guide",
+    link: "apollo13",
   },
   {
     year: "1997",
     name: "Mir",
-    text: "An oxygen generator failure started a fire aboard the Russian space station; the multinational crew survived.",
+    text: "On Feb. 24, 1997, a solid-fuel oxygen generator caught fire aboard the Russian space station, with six crew members on board; all survived.",
     source: "challenge-2026",
+    link: "mir",
   },
   {
     year: "2026",
@@ -239,11 +243,12 @@ export default function FieldGuide({
                 <p>{h.text}</p>
                 <a
                   className="text-link"
-                  href={sourceFor(h.source)!.url}
+                  href={h.link ? nasaLinks[h.link].url : sourceFor(h.source)!.url}
                   target="_blank"
                   rel="noreferrer"
                 >
-                  {sourceFor(h.source)!.type} <ArrowUpRight size={13} />
+                  {h.link ? nasaLinks[h.link].label : sourceFor(h.source)!.type}{" "}
+                  <ArrowUpRight size={13} />
                 </a>
               </div>
             </li>

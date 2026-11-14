@@ -321,8 +321,9 @@ export function hardwareGroups() {
   return [...groups].map(([hardware, g]) => ({ hardware, ...g }));
 }
 
+import type { LinkKey } from "./links";
 // Earth applications named in the challenge statement and NASA investigation pages.
-export const earthApplications = [
+export const earthApplications: { title: string; text: string; source: string; links?: LinkKey[] }[] = [
   {
     title: "Fine-water-mist extinguishers",
     text: "Developed for use on the ISS, with practical uses on Earth.",
@@ -330,13 +331,15 @@ export const earthApplications = [
   },
   {
     title: "Smoke detection",
-    text: "NASA technology has improved terrestrial smoke detectors; SAME studied smoke particles and detectors in orbit.",
+    text: "A shuttle-era NASA fire detector that tells combustion particles from dust became an early-warning system for places like mines; SAME later studied smoke and detectors in orbit.",
     source: "challenge-2026",
+    links: ["spinoffFireDetector"] as LinkKey[],
   },
   {
     title: "Firefighter clothing and air tanks",
-    text: "Spacesuit materials and breathing technology were adapted for firefighter gear.",
+    text: "Spacesuit materials and breathing technology were adapted for firefighter clothing and lighter air tanks.",
     source: "challenge-2026",
+    links: ["spinoffAirTanks", "spinoffFireAttire"] as LinkKey[],
   },
   {
     title: "Faster material screening",

@@ -24,6 +24,7 @@ import {
 import { sourceFor, findings } from "@/lib/evidence";
 const findingTitle = (id: string) => findings.find((f) => f.id === id)?.title ?? id;
 import OxygenCoverage from "./oxygen-coverage";
+import { nasaLinks } from "@/lib/links";
 
 function profilesCsv() {
   const cols = ["id", "name", "subtitle", "phase", "facility", "hardware", "geometry", "objective", "variables", "measurements", "output", "priorities", "limitation", "sourceUrls"] as const;
@@ -538,6 +539,11 @@ export default function MissionView({ onExplore }: { onExplore: () => void }) {
                 <a href={s.url} target="_blank" rel="noreferrer">
                   {s.type} <ArrowUpRight size={13} />
                 </a>
+                {a.links?.map((k) => (
+                  <a key={k} href={nasaLinks[k].url} target="_blank" rel="noreferrer">
+                    {nasaLinks[k].label}: {nasaLinks[k].title} <ArrowUpRight size={13} />
+                  </a>
+                ))}
               </li>
             );
           })}

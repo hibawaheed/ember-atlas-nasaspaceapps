@@ -70,6 +70,14 @@ EMBER Atlas is a web dashboard that helps researchers, engineers and students fi
 - Flame in Freefall challenge statement: https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/
 - A Researcher’s Guide to: International Space Station Combustion Science (NP-2015-10-034-JSC): https://www.nasa.gov/sites/default/files/atoms/files/np-2015-10-034-jsc_combustion_in_reduced_gravity-iss-mini-book-011116-508.pdf
 - NASA ScienceCasts: The Power of Studying Combustion on the ISS: https://www.youtube.com/watch?v=AVuEiKxOpc0
+- Combustion Science at NASA Glenn: https://www.nasa.gov/glenn/glenn-expertise-space-exploration/physical-sciences-program/combustion-science/
+- PSI combustion investigations (search): https://psi.nasa.gov/physci/repo/search?q=combustion
+- Apollo 1 (NASA Safety and Mission Assurance): https://sma.nasa.gov/sma-disciplines/accllp/apollo-1
+- Apollo 13 (NASA Safety and Mission Assurance): https://sma.nasa.gov/sma-disciplines/accllp/apollo-13
+- 25 Years Ago: Fire Aboard Space Station Mir (NASA History): https://www.nasa.gov/history/25-years-ago-fire-aboard-space-station-mir/
+- NASA Spinoff, Fireman’s Air Tanks: https://spinoff.nasa.gov/node/9582
+- NASA Spinoff, Fire Detector: https://spinoff.nasa.gov/node/9407
+- NASA Spinoff, New Technology for the Fire Attire: https://spinoff.nasa.gov/node/9918
 
 **NASA investigation pages and reports**
 
