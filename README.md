@@ -10,7 +10,7 @@ Built by **ISL Team A** (Hiba Waheed Ch, Zaafir Abbas Haidrie, Muhammad Ashar Ha
 
 ## The problem
 
-NASA publishes the results of its ISS combustion experiments through the Physical Sciences Informatics (PSI) system, but, as the challenge puts it, the data is hard to find, harder to compare and harder yet to interpret. Meanwhile, future habitats will burn differently from Earth: a Moon base or pressurized rover is expected to run at **30% oxygen or more and 10.2 psi or less**, and **PSI holds no partial-gravity combustion data yet**.
+NASA publishes the results of its ISS combustion experiments through the Physical Sciences Informatics (PSI) system, but, as the challenge puts it, the data is hard to find, harder to compare and harder yet to interpret. Meanwhile, future habitats will burn differently from Earth: a Moon base or pressurized rover is expected to run at **30% oxygen or more and 10.2 psi or less**, and, per the challenge statement, **NASA's PSI archive holds no partial-gravity combustion data yet** (short drop-tower and parabolic-flight studies exist outside PSI). The closest measured fires to a Moon base atmosphere are NASA's Saffire VI tests at 28.8–31% oxygen, but at lower pressure, with forced airflow and in microgravity.
 
 EMBER Atlas brings that evidence into one place, keeps every number traceable to its NASA source, and uses AI only where it can be grounded in that evidence.
 
@@ -18,9 +18,10 @@ EMBER Atlas brings that evidence into one place, keeps every number traceable to
 
 | Area | What it does |
 | --- | --- |
-| **Combustion lab** | An animated 3D flame that responds to gravity (orbit, Moon, Mars, Earth), oxygen, airflow, cabin pressure and fuel. Compare side by side with Earth, replay the 18 real BASS-II runs, and ask Claude to interpret the setup. Panels compare Earth air, a Moon base and a spacesuit, and explain the partial-gravity data gap. |
-| **Mission desk** | Pick a habitat and a safety question (prevention, detection, suppression). Ten investigation profiles are ranked with a visible score, compared side by side, grouped by shared hardware, and explained by Claude on request. Includes an oxygen-coverage chart and a “Back on Earth” applications panel. |
-| **Evidence library** | 32 curated findings from 20 NASA sources, searchable and filterable, each with its source, what it means and its limits, labeled Observed, Review or Research aim. |
+| **Homepage** | Opens on the challenge's Moon base question (30% oxygen at 70.3 kPa) and its closest measured NASA test, Saffire VI-3, with links to the source table, a one-page brief and a shareable link. |
+| **Combustion lab** | An animated 3D flame that responds to gravity (orbit, Moon, Mars, Earth), oxygen, airflow, cabin pressure and fuel. Compare side by side with Earth, replay the 18 real BASS-II runs (also readable as a table), compare the scenario condition by condition with the closest Saffire test, and ask Claude to interpret the setup. Panels compare Earth air, a Moon base and a spacesuit, and explain the partial-gravity data gap. |
+| **Mission desk** | Pick a habitat and a safety question (prevention, detection, suppression). Ten investigation profiles are ranked with a visible score, compared side by side, grouped by shared hardware, and explained by Claude on request. Each ranked experiment has a one-sentence reason. Measured examples for each question: the closest NASA test to a Moon base (Saffire VI-3), a smoke-alarm timing result and a cool-flame extinction result. Includes an oxygen-coverage chart and a “Back on Earth” applications panel. |
+| **Evidence library** | 36 curated findings from 23 NASA sources, searchable and filterable (search understands everyday names such as *acrylic* for PMMA), each with its source, what it means and its limits, labeled Observed, Review or Research aim. |
 | **Measured data** | 39 flame-spread measurements from 18 BASS-II runs, with run conditions, a “what varied / what stayed the same” summary, and CSV export. All investigation profiles can be exported too. |
 | **Research companion** | Ask a question in plain language. Claude answers from the retrieved NASA findings and investigation profiles, cites every source, handles follow-ups, and declines what the evidence cannot support. |
 | **Field guide** | A guided tour, key concepts, the history of spaceflight fires (Apollo 1, Apollo 13, Mir, Artemis II), a glossary and a short quiz. |
@@ -82,10 +83,10 @@ Key modules: `lib/evidence.ts` (BM25 search and relevance cutoff), `lib/context.
 | Layer | What it is | What it is not |
 | --- | --- | --- |
 | BASS-II measurements | 39 published flame-spread values from 18 runs, NASA/TM-20210011385 Table 5.1, checked by eye against the original PDF (SHA-256 recorded) | Raw telemetry or independent experiments; oxygen fell during every run |
-| Research findings | 32 curated summaries of NASA sources, each with source, meaning and limits | An exhaustive review or a safety certification |
+| Research findings | 36 curated summaries of NASA sources, each with source, meaning and limits | An exhaustive review or a safety certification |
 | Investigation profiles | 10 profiles: objectives, fuels and sample sizes, conditions, variables, sensors, shared hardware | A complete PSI catalog |
 | 3D flame | An authored visual model; only the oxygen partial-pressure arithmetic is physical | CFD, a temperature map or a fire-risk score |
-| Moon/Mars flame shapes | A conceptual interpolation | A partial-gravity prediction (PSI has no such data yet) |
+| Moon/Mars flame shapes | A conceptual interpolation | A partial-gravity prediction (no measured lunar-gravity fire is in the atlas; PSI has no partial-gravity data) |
 | Rankings | Disclosed reading-priority rubric | Hazard, confidence or suitability scores |
 
 While verifying the BASS-II table we found that the report’s Figure 5.2 gives a different M8 slope at 10 cm/s (0.0637 mm/s) than Table 5.1 (0.057 mm/s). The app uses the table and records the difference. Full source list: [submission/SUBMISSION.md](submission/SUBMISSION.md#nasa-data-and-resources-used) and `data/evidence.json`.
@@ -95,10 +96,11 @@ While verifying the BASS-II table we found that the report’s Figure 5.2 gives 
 1. **Foundation (November 9).** Built the dashboard, the animated 3D lab with a CPU fallback, the evidence library with provenance fields, the Mission desk ranking, the field guide, and the dark galaxy design. Deployed on Vercel from GitHub.
 2. **Challenge resources (November 13).** Reviewed the official Details and Resources tabs, recorded a dated inventory (`docs/RESOURCES-2026-11-13.md`), downloaded the 49 MB BASS-II report, verified Table 5.1 page by page and expanded the data from 2 runs to all 18 tracked runs.
 3. **Challenge coverage (November 13–14).** Added the investigations the challenge names (BRE, E-FIELD Flames, CFI-G, SPICE & SLICE, SAME-R/DAFT), shared-hardware groupings, crew atmospheres including spacesuits, the oxygen-coverage chart, the partial-gravity panel, Earth applications, fire history, and findings from NASA’s 2015 ISS combustion guide.
-4. **AI (November 14).** Connected Claude Haiku 5.5 through Vercel AI Gateway, added the context builder, citation checks, rate limits, follow-up support and a live evaluation script, and iterated until all 13 checks passed.
+4. **AI (November 14).** Connected Claude Haiku 5.5 through Vercel AI Gateway, added the context builder, citation checks, rate limits, follow-up support and a live evaluation script, and iterated until all 13 checks passed (18 since the review's scope questions were added).
 5. **Launch.** Custom domain emberatlas.tech, a build stamp in the footer, and this repository as a clean snapshot of the project.
+6. **External review (November 14).** Acted on a written review of the site: added the verified Saffire IV–VI test records (ICES-2024-365, checksummed) and a condition-by-condition comparison with a Moon base, led the homepage and guided tour with that measured result, corrected the airflow headline, scoped the partial-gravity claim to the PSI archive, gave every ranked experiment a reason, added detection and extinction examples, qualifiers on every finding, material synonyms, scoped downloads, a one-page brief, and a published answer check.
 
-Every change was tested with strict TypeScript and 23 automated tests (`npm run check`), a production build, browser checks on desktop and phone, and a review of Vercel runtime logs after each release. The verification log is in `docs/VALIDATION.md`; the requirement mapping is in `docs/CHALLENGE-ALIGNMENT.md`. Development was assisted by AI coding tools (Claude Code); NASA values were checked by hand against the original sources.
+Every change was tested with strict TypeScript and 28 automated tests (`npm run check`), a production build, browser checks on desktop and phone, and a review of Vercel runtime logs after each release. The verification log is in `docs/VALIDATION.md`; the requirement mapping is in `docs/CHALLENGE-ALIGNMENT.md`. Development was assisted by AI coding tools (Claude Code); NASA values were checked by hand against the original sources.
 
 ## Run it locally
 
@@ -107,7 +109,7 @@ Requires Node.js 20.9+ and npm. Everything except AI answers works offline, with
 ```sh
 npm ci
 npm run dev          # http://localhost:3000
-npm run check        # strict TypeScript + 23 tests
+npm run check        # strict TypeScript + 28 tests
 npm run build && npm start
 ```
 
@@ -132,7 +134,10 @@ EMBER Atlas is a research and teaching tool, not a fire-safety certification. Ne
 - [docs/VALIDATION.md](docs/VALIDATION.md): dated record of what was tested and verified, including the live AI checks.
 - [docs/CHALLENGE-ALIGNMENT.md](docs/CHALLENGE-ALIGNMENT.md): how each challenge objective maps to a feature.
 - [docs/RESOURCES-2026-11-13.md](docs/RESOURCES-2026-11-13.md): inventory of the official challenge resources.
-- [docs/DEMO.md](docs/DEMO.md): demo walkthrough script.
+- [docs/DEMO.md](docs/DEMO.md): three-minute demo script, starting on the Moon base question.
+- [docs/ANSWER-CHECK.md](docs/ANSWER-CHECK.md): research-companion answers checked against their retrieved findings and source passages.
+- [docs/USER-TRIAL.md](docs/USER-TRIAL.md): task-based user-trial protocol and recording sheet.
+- [docs/REVIEW-CHECKLIST.md](docs/REVIEW-CHECKLIST.md): each item of the November 14 review and what was done.
 
 ## License and attribution
 

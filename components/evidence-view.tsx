@@ -20,9 +20,11 @@ import { relatedTerm, expansionsIn } from "@/lib/terms";
 export function EvidenceCard({
   finding,
   compact = false,
+  matched,
 }: {
   finding: Finding;
   compact?: boolean;
+  matched?: string[];
 }) {
   const [open, setOpen] = useState(false);
   return (
@@ -41,6 +43,11 @@ export function EvidenceCard({
       </div>
       <h3>{finding.title}</h3>
       <p className="qualifier-chip">{finding.qualifier}</p>
+      {matched && matched.length > 0 && (
+        <p className="why-shown">
+          Shown because it mentions: {[...new Set(matched)].slice(0, 4).join(", ")}
+        </p>
+      )}
       <p>{finding.claim}</p>
       {!compact && expansionsIn(`${finding.title} ${finding.claim}`).length > 0 && (
         <p className="term-expansions">
@@ -195,7 +202,11 @@ export default function EvidenceView() {
       </p>
       <div className="evidence-grid">
         {results.map((f) => (
-          <EvidenceCard key={f.id} finding={f} />
+          <EvidenceCard
+            key={f.id}
+            finding={f}
+            matched={query ? (f as Finding & { matched?: string[] }).matched : undefined}
+          />
         ))}
       </div>
       {!results.length && (

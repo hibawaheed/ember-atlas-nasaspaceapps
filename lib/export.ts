@@ -45,7 +45,9 @@ export function briefHtml(s: Scenario, build = { commit: "local", date: "" }, no
   const evidence = rankForScenario(s).slice(0, 3);
   const psi = (s.pressure / 6.894757).toFixed(1);
   const pressureDiff = best.rows.find((r) => r.condition === "Total pressure");
-  const next = pressureDiff && pressureDiff.status === "differs"
+  const next = s.gravity === "moon" || s.gravity === "mars"
+    ? `Would Saffire ${t.id}'s result hold at ${s.gravity === "moon" ? "lunar" : "Martian"} gravity? No measured fire at that gravity is in this atlas, and NASA's PSI archive has none (per the challenge statement); short drop-tower tests exist outside PSI, and LUCI and FM2 are planned to test it.`
+    : pressureDiff && pressureDiff.status === "differs"
     ? `What changes if total pressure matched Saffire ${t.id} (${t.pressureKpa} kPa)?`
     : "Which test conditions would a lunar-gravity experiment need to repeat?";
   const row = (r: (typeof best.rows)[number]) =>

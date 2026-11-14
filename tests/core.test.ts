@@ -423,6 +423,7 @@ test("scenario brief is one page with inputs, closest test, source, limitation a
   assert.match(html, /Table 1, PDF p\. 3/);
   assert.match(html, /No measured lunar-gravity fire test/);
   assert.match(html, /build abc1234/);
+  assert.match(html, /hold at lunar gravity/);
   const link = new URL(scenarioUrl(presets.lunar.scenario, "https://emberatlas.tech"));
   assert.deepEqual(JSON.parse(link.searchParams.get("scenario")!), presets.lunar.scenario);
   assert.equal(link.searchParams.get("view"), "lab");

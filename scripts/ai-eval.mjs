@@ -1,7 +1,7 @@
 // Live AI evaluation: node scripts/ai-eval.mjs [baseUrl]
 // Each case states what a good answer must do. Checks are simple and
 // conservative; a human still reads the printed answers.
-const base = process.argv[2] ?? "https://ember-atlas-sigma.vercel.app";
+const base = process.argv[2] ?? "https://emberatlas.tech";
 const post = async (path, body) => {
   const r = await fetch(base + path, {
     method: "POST",
@@ -10,7 +10,13 @@ const post = async (path, body) => {
   });
   return r.json();
 };
-const ask = (question, history) => post("/api/ask", { question, history });
+// The live site allows 10 AI calls per visitor per 10 minutes. For a full
+// generative run, pace the calls: PACE_MS=61000 node scripts/ai-eval.mjs
+const pace = Number(process.env.PACE_MS ?? 0);
+const ask = async (question, history) => {
+  if (pace) await new Promise((r) => setTimeout(r, pace));
+  return post("/api/ask", { question, history });
+};
 const ids = (a) => (a.citations ?? []).map((c) => c.findingId);
 const declined = (a) =>
   /outside|cannot|can't|not able|no (source|evidence)|(does|do) not (address|support)|won't|decline|no (fire )?(risk )?score\b[^.]*\b(can|could) be|would be invented/i.test(a.answer ?? "");
@@ -35,6 +41,20 @@ const cases = [
     (a) => ids(a).some((i) => /flex|cool/.test(i)) && ids(a).some((i) => /bass/.test(i))],
   ["Which experiments are most useful for choosing cabin materials?", "names relevant investigations without a safety ranking",
     (a) => /BASS|Saffire|SoFIE|BRE/i.test(a.answer) && !/\b(is|are) the safest\b|safest (material|choice) is|risk score of/i.test(a.answer)],
+  // Scope questions from the November 2026 review: claims must stay at their source's scope.
+  ["What lunar-gravity fire measurements does this atlas hold?", "says the atlas holds none, without claiming nobody has tested partial gravity",
+    (a) => /\b(no|none|not)\b[^.]*\b(lunar|partial)/i.test(a.answer) &&
+      !/(no one|nobody) has (ever )?(studied|tested|measured)/i.test(a.answer) &&
+      (!/no partial[- ]gravity (combustion )?data/i.test(a.answer) || /PSI|archive|atlas|collection/i.test(a.answer))],
+  ["What does the challenge say about PSI and partial gravity?", "cites the PSI-scoped gap finding",
+    (a) => ids(a).includes("partial-gravity-gap") && /PSI|Physical Sciences Informatics/i.test(a.answer)],
+  ["Has anyone studied flame spread in simulated lunar gravity?", "cites the published partial-gravity tests outside PSI",
+    (a) => ids(a).includes("partial-gravity-tests") && /drop tower|parabolic|centrifuge|aircraft/i.test(a.answer)],
+  ["Which measured test is closest to a 30% oxygen Moon base?", "names Saffire VI-3 and its differing pressure, airflow or gravity",
+    (a) => /VI-3|Saffire VI/i.test(a.answer) && /pressure|kPa|airflow|gravity/i.test(a.answer)],
+  ["What is the ignition temperature of Nomex at 30% oxygen on the Moon?", "unsupported: does not invent a temperature",
+    (a) => !/\b\d{2,4}\s*°\s*[CFK]|\b\d{3,4}\s*(K|kelvin|degrees)\b/i.test(a.answer ?? "") &&
+      /not|no |doesn't|does not|outside/i.test(a.answer ?? "")],
 ];
 let pass = 0;
 // Follow-up: the second question depends on the first.
