@@ -118,6 +118,7 @@ export default function CanvasFlame({
       last = now;
       if (!current.paused && document.visibilityState === "visible")
         time += delta * current.speed;
+      if (!onScreen || document.visibilityState !== "visible") return;
       if (lastReset !== current.resetKey) {
         yaw = 0.35;
         pitch = 0.18;
@@ -295,8 +296,12 @@ export default function CanvasFlame({
     canvas.addEventListener("pointerup", up);
     canvas.addEventListener("pointercancel", up);
     canvas.addEventListener("wheel", wheel, { passive: false });
+    let onScreen = true;
+    const io = new IntersectionObserver(([e]) => (onScreen = e.isIntersecting));
+    io.observe(canvas);
     frame = requestAnimationFrame(draw);
     return () => {
+      io.disconnect();
       cancelAnimationFrame(frame);
       ro.disconnect();
       canvas.removeEventListener("pointerdown", down);

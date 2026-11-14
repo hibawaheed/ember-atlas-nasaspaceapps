@@ -98,6 +98,14 @@ export default function FlameScene({
         setFailed(true);
         return;
       }
+      // Software WebGL (no GPU) renders the ray-marched flame at about one
+      // frame per second and freezes the page; use the CPU particle flame.
+      const info = context.getExtension("WEBGL_debug_renderer_info");
+      const gpu = info ? String(context.getParameter(info.UNMASKED_RENDERER_WEBGL)) : "";
+      if (/swiftshader|llvmpipe|softpipe|software/i.test(gpu)) {
+        setFailed(true);
+        return;
+      }
       renderer = new THREE.WebGLRenderer({
         canvas,
         context,
@@ -219,17 +227,42 @@ export default function FlameScene({
     resize();
     let frame = 0,
       last = performance.now(),
-      time = 0;
+      time = 0,
+      lastPaint = 0,
+      onScreen = true,
+      ratio = Math.min(window.devicePixelRatio, 1.6),
+      slowFrames = 0,
+      sampled = 0;
+    // Draw only while the viewer is on screen; when paused, redraw only for
+    // camera moves or occasional updates; lower resolution on slow devices.
+    const io = new IntersectionObserver(([e]) => (onScreen = e.isIntersecting));
+    io.observe(el);
     const animate = (now: number) => {
       frame = requestAnimationFrame(animate);
       const dt = Math.min((now - last) / 1000, 0.05);
+      const rawDt = now - last;
       last = now;
-      if (!pausedRef.current && document.visibilityState === "visible")
-        time += dt * speedRef.current;
+      if (!onScreen || document.visibilityState !== "visible") return;
+      const playing = !pausedRef.current;
+      if (playing) time += dt * speedRef.current;
+      const moved = controls.update();
+      if (!playing && !moved && now - lastPaint < 250) return;
+      lastPaint = now;
       uniforms.uTime.value = time;
-      controls.update();
       uniforms.uCamera.value = camera.position;
       renderer.render(scene, camera);
+      if (playing && ratio > 0.5) {
+        sampled++;
+        if (rawDt > 34) slowFrames++;
+        if (sampled >= 20) {
+          if (slowFrames > 12) {
+            ratio = Math.max(0.5, ratio * 0.7);
+            renderer.setPixelRatio(ratio);
+            resize();
+          }
+          sampled = slowFrames = 0;
+        }
+      }
     };
     frame = requestAnimationFrame(animate);
     const lost = (e: Event) => {
@@ -238,6 +271,7 @@ export default function FlameScene({
     };
     renderer.domElement.addEventListener("webglcontextlost", lost);
     return () => {
+      io.disconnect();
       cancelAnimationFrame(frame);
       ro.disconnect();
       controls.dispose();
