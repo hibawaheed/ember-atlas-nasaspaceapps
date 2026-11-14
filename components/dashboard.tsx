@@ -22,7 +22,8 @@ import {
   Layers,
   MoveUpRight,
 } from "lucide-react";
-import { baseline, scenarioSchema, type Scenario } from "@/lib/scenario";
+import { baseline, presets, scenarioSchema, type Scenario } from "@/lib/scenario";
+import HomeResult from "./home-result";
 import { findings, sources } from "@/lib/evidence";
 import { investigations } from "@/lib/investigations";
 import measurements from "@/data/measurements.json";
@@ -97,10 +98,18 @@ export default function Dashboard() {
     setGuided(true);
     navigate("lab");
   }
-  async function share() {
+  function compareLunar() {
+    setScenario(presets.lunar.scenario);
+    navigate("lab");
+    setTimeout(
+      () => document.getElementById("tc-title")?.scrollIntoView({ block: "start" }),
+      350,
+    );
+  }
+  async function share(s: Scenario = scenario) {
     const url = new URL(window.location.href);
     url.searchParams.set("view", "lab");
-    url.searchParams.set("scenario", JSON.stringify(scenario));
+    url.searchParams.set("scenario", JSON.stringify(s));
     try {
       await navigator.clipboard.writeText(url.toString());
       setNotice("Scenario link copied.");
@@ -230,7 +239,7 @@ export default function Dashboard() {
               <span className="status-dot" /> MICROGRAVITY COMBUSTION RESEARCH
             </div>
             <div>
-              <button className="button subtle" onClick={share}>
+              <button className="button subtle" onClick={() => share()}>
                 <Share2 size={15} />
                 Share scenario
               </button>
@@ -256,17 +265,14 @@ export default function Dashboard() {
                     <span>beyond Earth.</span>
                   </h1>
                   <p>
-                    Small flames. Far-reaching questions.
-                    <br />
-                    Explore how fire behaves in space—and what NASA’s
-                    experiments can tell us.
+                    For mission planners, students and fire-safety
+                    researchers: compare a habitat atmosphere with measured
+                    NASA fire tests, and follow every claim to its source.
                   </p>
                   <div className="galaxy-hero-actions">
-                    <button
-                      className="button primary"
-                      onClick={() => navigate("lab")}
-                    >
-                      Enter the combustion lab <ArrowUpRight size={17} />
+                    <button className="button primary" onClick={compareLunar}>
+                      Compare a lunar habitat with a NASA test{" "}
+                      <ArrowUpRight size={17} />
                     </button>
                     <button className="galaxy-tour" onClick={startTour}>
                       <Play size={14} /> Take a guided tour
@@ -279,6 +285,11 @@ export default function Dashboard() {
                 </div>
                 <OrbitalScene />
               </section>
+              <HomeResult
+                onCompare={compareLunar}
+                onBrief={() => exportBrief(presets.lunar.scenario)}
+                onShare={() => share(presets.lunar.scenario)}
+              />
               <div className="galaxy-paths" aria-label="Explore the research">
                 <button onClick={() => navigate("missions")}>
                   <Telescope size={18} />

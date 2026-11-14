@@ -133,16 +133,16 @@ export default function Lab({
   }, [replay, replayPlaying, series.points.length]);
   useEffect(() => {
     if (!guided) return;
-    setCompare(tourStep === 0);
-    setReplay(tourStep === 3);
+    setCompare(tourStep === 2);
+    setReplay(tourStep === 0);
     setReplayPlaying(false);
     setRun(DEFAULT_RUN);
     setStep(0);
     const next =
       tourStep === 1
-        ? presets.still.scenario
-        : tourStep === 2
-          ? presets.exploration.scenario
+        ? presets.lunar.scenario
+        : tourStep === 3
+          ? presets.still.scenario
           : baseline;
     setScenario({ ...next });
     setAnalysis(null);

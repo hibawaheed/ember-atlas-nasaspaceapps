@@ -2,7 +2,25 @@
 import { ArrowLeft, ArrowRight, X, ArrowUpRight } from "lucide-react";
 export const tourSteps = [
   {
-    title: "First, take away the up.",
+    title: "Start with a measurement.",
+    instruction:
+      "You’re replaying BASS-II run M7: four published flame-spread rates on a PMMA strip aboard the ISS. Step through them with the observation buttons.",
+    science:
+      "Values come from Table 5.1 of the BASS-II report. Limitation: oxygen fell during the run, so each rate mixes airflow and oxygen changes. Flame size encodes the rate; it is not video.",
+    source: "https://ntrs.nasa.gov/citations/20210011385",
+    label: "NASA · BASS-II Table 5.1",
+  },
+  {
+    title: "Compare a Moon base with a real test.",
+    instruction:
+      "The lab now holds the challenge’s lunar habitat: 30% oxygen at 70.3 kPa. Scroll to the comparison below the lab to see the closest measured fire, Saffire VI-3.",
+    science:
+      "VI-3 burned acrylic (PMMA) at 30.3% oxygen in a Cygnus spacecraft. Limitation: its pressure (54.6 kPa), forced airflow and microgravity differ from a lunar habitat.",
+    source: "https://ntrs.nasa.gov/citations/20240002981",
+    label: "NASA · Saffire VI, Table 1",
+  },
+  {
+    title: "Then take away the up.",
     instruction:
       "Drag either flame. Compare the round microgravity envelope with Earth’s rising plume.",
     science:
@@ -12,7 +30,7 @@ export const tourSteps = [
     label: "NASA · FLEX",
   },
   {
-    title: "Now, turn down the flow.",
+    title: "Turn down the flow.",
     instruction:
       "Airflow is set to zero. Raise it with the slider and watch the envelope respond.",
     science:
@@ -22,30 +40,11 @@ export const tourSteps = [
     label: "NASA · ACME",
   },
   {
-    title: "Explore a different atmosphere.",
-    instruction:
-      "This hypothetical preset uses 34% oxygen at 56.5 kPa. Compare its oxygen partial pressure with the Earth-like baseline.",
-    science:
-      "Oxygen percentage and total pressure are different variables. Similar oxygen partial pressures do not establish equal material flammability.",
-    source:
-      "https://www.nasa.gov/humans-in-space/saffire-ignites-new-discoveries-in-space/",
-    label: "NASA · Saffire",
-  },
-  {
-    title: "Trade the illustration for an observation.",
-    instruction:
-      "You’re replaying M7. Use the observation buttons to inspect four published spread rates. Play observations to move through them.",
-    science:
-      "The numbers come from BASS-II Table 5.1. Flame size encodes spread rate; the animation is not experimental video. Oxygen changed within this run.",
-    source: "https://ntrs.nasa.gov/citations/20210011385",
-    label: "NASA · BASS-II",
-  },
-  {
     title: "Follow the evidence, not just the glow.",
     instruction:
-      "Choose Interpret scenario below. Read the explanation, expand a source card, then export your brief.",
+      "Choose Interpret scenario below. Read the explanation, expand a source card, then save your brief.",
     science:
-      "A useful research tool preserves the chain from conditions to measurement, interpretation, and limitations. Try the Mission desk next to compare entire investigations.",
+      "A useful research tool keeps the chain from conditions to measurement, interpretation and limitations. Try the Mission desk next to compare whole investigations.",
     source:
       "https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/",
     label: "Space Apps · The challenge",
