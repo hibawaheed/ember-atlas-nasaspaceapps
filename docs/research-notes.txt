@@ -1,5 +1,5 @@
 EMBER Atlas early research notes — accessed 2026-11-09
-Current continuation instructions: docs/HANDOFF.md and CLAUDE.md. Some proposals below were implemented in v1.1; consult current source code.
+Early research notes. The current implementation is described in README.md; some proposals below were implemented later.
 
 Use evidence.json for source-grounded finding cards and retrieval. Every claim is <=45 words. Safety implications are explicitly inference, and each item includes a limitation. A source date of null is intentional: display “Undated source” or the source dateLabel; do not fabricate publication dates.
 

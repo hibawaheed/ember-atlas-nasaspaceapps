@@ -127,9 +127,12 @@ Vercel project `ember-atlas`, connected to this repository; every push to `main`
 
 EMBER Atlas is a research and teaching tool, not a fire-safety certification. Next steps: add partial-gravity data from LUCI and FM2 when NASA releases it, ingest more PSI datasets (starting with FLEX droplet series) with the same verification, and have a combustion scientist review the findings and rankings.
 
-## For maintainers
+## Project docs
 
-Start with [CLAUDE.md](CLAUDE.md) and [docs/HANDOFF.md](docs/HANDOFF.md) for the full engineering context, scientific boundaries and release checklist.
+- [docs/VALIDATION.md](docs/VALIDATION.md): dated record of what was tested and verified, including the live AI checks.
+- [docs/CHALLENGE-ALIGNMENT.md](docs/CHALLENGE-ALIGNMENT.md): how each challenge objective maps to a feature.
+- [docs/RESOURCES-2026-11-13.md](docs/RESOURCES-2026-11-13.md): inventory of the official challenge resources.
+- [docs/DEMO.md](docs/DEMO.md): demo walkthrough script.
 
 ## License and attribution
 

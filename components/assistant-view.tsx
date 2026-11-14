@@ -29,7 +29,7 @@ export default function AssistantView() {
   const [history, setHistory] = useState<Answer[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [draft, setDraft] = useState<{ question: string; text: string } | null>(null);
+  const [draft, setDraft] = useState<{ question: string; text: string; sources?: string[] } | null>(null);
   const bottom = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (history.length === 0 && !draft) return;
@@ -76,7 +76,8 @@ export default function AssistantView() {
           buffer = buffer.slice(cut + 1);
           if (!line) continue;
           const msg = JSON.parse(line);
-          if (msg.type === "partial") setDraft({ question: q, text: msg.text });
+          if (msg.type === "sources") setDraft((d) => ({ question: q, text: d?.text ?? "", sources: msg.items }));
+          else if (msg.type === "partial") setDraft((d) => ({ question: q, text: msg.text, sources: d?.sources }));
           else if (msg.type === "final") final = msg.data;
         }
       }
@@ -173,6 +174,13 @@ export default function AssistantView() {
                 <div className="loading-answer" role="status">
                   <LoaderCircle size={18} className="spin" /> Reading the
                   matching NASA findings…
+                  {draft.sources?.length ? (
+                    <ul className="reading-sources">
+                      {draft.sources.map((t) => (
+                        <li key={t}>{t}</li>
+                      ))}
+                    </ul>
+                  ) : null}
                 </div>
               )}
             </div>

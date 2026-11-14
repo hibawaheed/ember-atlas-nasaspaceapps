@@ -157,6 +157,14 @@ export function streamSynthesis(
         } else if (!allowed) {
           send({ type: "final", data: { ...fallback, notice: RATE_LIMIT_NOTICE } });
         } else {
+          // Tell the reader at once which NASA items the answer will draw on.
+          send({
+            type: "sources",
+            items: [
+              ...prep.profiles.map((p) => `${p.name} investigation profile`),
+              ...prep.evidence.map((f) => `${f.experiment}: ${f.title}`),
+            ].slice(0, 6),
+          });
           const result = streamText({ ...prep.request, abortSignal: AbortSignal.timeout(25000) });
           let last = "";
           for await (const partial of result.partialOutputStream) {

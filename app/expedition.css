@@ -1338,3 +1338,6 @@ summary {
 .compare-explain { display: grid; gap: 0.75rem; margin-top: 1rem; }
 .compare-explain > .button { justify-self: start; display: inline-flex; align-items: center; gap: 0.4rem; }
 .investigation-list .show-all { justify-self: center; margin-top: 0.5rem; }
+.reading-sources { margin: 0.6rem 0 0; padding-left: 1.1rem; display: grid; gap: 0.25rem; font-size: 0.88rem; color: var(--muted); }
+.loading-answer:has(.reading-sources) { flex-wrap: wrap; }
+.loading-answer .reading-sources { flex-basis: 100%; }
