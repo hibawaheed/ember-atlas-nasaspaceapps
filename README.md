@@ -100,7 +100,7 @@ While verifying the BASS-II table we found that the report’s Figure 5.2 gives 
 5. **Launch.** Custom domain emberatlas.tech, a build stamp in the footer, and this repository as a clean snapshot of the project.
 6. **External review (November 14).** Acted on a written review of the site: added the verified Saffire IV–VI test records (ICES-2024-365, checksummed) and a condition-by-condition comparison with a Moon base, led the homepage and guided tour with that measured result, corrected the airflow headline, scoped the partial-gravity claim to the PSI archive, gave every ranked experiment a reason, added detection and extinction examples, qualifiers on every finding, material synonyms, scoped downloads, a one-page brief, and a published answer check.
 
-Every change was tested with strict TypeScript and 28 automated tests (`npm run check`), a production build, browser checks on desktop and phone, and a review of Vercel runtime logs after each release. The verification log is in `docs/VALIDATION.md`; the requirement mapping is in `docs/CHALLENGE-ALIGNMENT.md`. Development was assisted by AI coding tools (Claude Code); NASA values were checked by hand against the original sources.
+Every change was tested with strict TypeScript and 29 automated tests (`npm run check`), a production build, browser checks on desktop and phone, and a review of Vercel runtime logs after each release. The verification log is in `docs/VALIDATION.md`; the requirement mapping is in `docs/CHALLENGE-ALIGNMENT.md`. Development was assisted by AI coding tools (Claude Code); NASA values were checked by hand against the original sources.
 
 ## Run it locally
 
@@ -109,7 +109,7 @@ Requires Node.js 20.9+ and npm. Everything except AI answers works offline, with
 ```sh
 npm ci
 npm run dev          # http://localhost:3000
-npm run check        # strict TypeScript + 28 tests
+npm run check        # strict TypeScript + 29 tests
 npm run build && npm start
 ```
 
