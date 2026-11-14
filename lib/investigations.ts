@@ -284,31 +284,98 @@ export const investigations = [
   },
 ];
 
+// Ranking metadata: what measured data the atlas holds, which oxygen levels are
+// known, and parent programs (shown as background, not ranked against their
+// own experiments).
+const rankMeta: Record<string, { measured?: string; oxygen?: string; nearLunarO2?: boolean; parent?: string; program?: boolean }> = {
+  bass: { measured: "39 measured flame-spread values in this atlas", oxygen: "16.8–22.2% O₂ (run start and end values)" },
+  saffire: { measured: "5 measured Saffire IV–VI tests in this atlas", oxygen: "22.0–31.0% O₂ at 54–100 kPa", nearLunarO2: true },
+  flex: { oxygen: "apparatus allows up to 40% O₂; tested values not yet extracted" },
+  cfig: { oxygen: "burner supply up to 85% O₂", parent: "acme" },
+  bre: { parent: "acme" },
+  efield: { parent: "acme" },
+  acme: { program: true },
+};
+const priorityPhrase = {
+  prevention: "material flammability and fire growth",
+  detection: "smoke and fire detection",
+  suppression: "extinction and suppression",
+};
+
 // Authored, disclosed research-priority rubric. Never a hazard/confidence score.
 export function rankInvestigations(query: MissionQuery) {
   const surface = query.destination !== "orbit";
-  return investigations
+  const ranked = investigations
+    .filter((item) => !rankMeta[item.id]?.program)
     .map((item) => {
+      const meta = rankMeta[item.id] ?? {};
+      const matches = item.priorities.includes(query.priority);
       const reasons = [{ label: "Microgravity research context", points: 1 }];
-      if (item.priorities.includes(query.priority))
-        reasons.push({ label: `Addresses ${query.priority}`, points: 4 });
-      if (surface && item.atmosphere)
-        reasons.push({
-          label: "Atmosphere variables for exploration questions",
-          points: 2,
-        });
+      if (matches) reasons.push({ label: `Addresses ${query.priority}`, points: 4 });
+      if (meta.measured)
+        reasons.push(
+          matches
+            ? { label: "Measured data in this atlas", points: 3 }
+            : { label: "Measured data in this atlas (background for this question)", points: 1 },
+        );
+      if (surface && meta.nearLunarO2 && matches)
+        reasons.push({ label: "Measured near the Moon base oxygen scenario", points: 2 });
+      if (surface && item.atmosphere && query.priority !== "detection")
+        reasons.push({ label: "Atmosphere variables for exploration questions", points: 2 });
       if (surface && item.gravityProbe)
         reasons.push({ label: "Probes gravity dependence", points: 1 });
+      const reason = [
+        matches
+          ? `Addresses ${priorityPhrase[query.priority]}.`
+          : `Background only: does not directly address ${priorityPhrase[query.priority]}.`,
+        meta.measured ? `${meta.measured[0].toUpperCase()}${meta.measured.slice(1)}.` : `${item.findings.length} cited finding${item.findings.length === 1 ? "" : "s"}; no measured values in this atlas.`,
+        surface && meta.nearLunarO2 && matches ? "Includes tests within about 1 percentage point of the 30% Moon base scenario." : "",
+        meta.oxygen ? `Oxygen: ${meta.oxygen}.` : "Tested oxygen and pressure not recorded here.",
+        surface ? "Microgravity only; lunar gravity untested." : "",
+      ]
+        .filter(Boolean)
+        .join(" ");
       return {
         ...item,
+        parent: meta.parent ?? null,
+        measuredInAtlas: !!meta.measured,
         score: reasons.reduce((s, r) => s + r.points, 0),
         reasons,
+        reason,
+        tieNote: "",
         transfer: surface
           ? "Partial-gravity validation missing"
           : "Microgravity context; vehicle validation missing",
       };
     })
-    .sort((a, b) => b.score - a.score || a.name.localeCompare(b.name));
+    .sort(
+      (a, b) =>
+        b.score - a.score ||
+        Number(b.priorities[0] === query.priority) - Number(a.priorities[0] === query.priority) ||
+        Number(b.measuredInAtlas) - Number(a.measuredInAtlas) ||
+        b.findings.length - a.findings.length ||
+        a.name.localeCompare(b.name),
+    );
+  for (const r of ranked) {
+    const tied = ranked.filter((o) => o !== r && o.score === r.score).map((o) => o.name);
+    if (tied.length)
+      r.tieNote = `Tied at ${r.score} points with ${tied.join(", ")}; ordered by primary focus, then measured data, then number of cited findings.`;
+  }
+  return ranked;
+}
+
+/** Parent programs shown as background navigation beside the ranked experiments. */
+export function programBackground() {
+  return investigations
+    .filter((i) => rankMeta[i.id]?.program)
+    .map((p) => ({
+      id: p.id,
+      name: p.name,
+      subtitle: p.subtitle,
+      objective: p.objective,
+      children: investigations.filter((c) => rankMeta[c.id]?.parent === p.id).map((c) => c.name),
+      sources: p.sources,
+    }));
 }
 
 export function hardwareGroups() {

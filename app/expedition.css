@@ -1372,3 +1372,11 @@ summary {
 .run-examples button.active { border-color: var(--orange); color: var(--orange); }
 .chart-detail .run-sequence { flex-basis: 100%; color: var(--muted); }
 .chart-detail { flex-wrap: wrap; }
+.reason-line { color: var(--ink); line-height: 1.5; margin: 0.35rem 0; }
+.tie-note { color: var(--muted); font-size: 0.85rem; margin: 0.2rem 0; }
+.parent-tag { margin-left: 0.5rem; font-size: 0.72rem; padding: 2px 8px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); vertical-align: middle; }
+.score-details summary { font-size: 0.85rem; color: var(--muted); cursor: pointer; }
+.program-background { border: 1px dashed var(--line); border-radius: 14px; padding: 14px 18px; background: rgba(17, 26, 46, 0.6); }
+.program-background h3 { margin: 4px 0; }
+.program-background h3 span { color: var(--muted); font-weight: 400; font-size: 0.9em; margin-left: 6px; }
+.program-background p { color: var(--muted); margin: 0; line-height: 1.5; }

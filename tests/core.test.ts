@@ -20,7 +20,7 @@ import { POST as ask } from "../app/api/ask/route";
 import { POST as ingest } from "../app/api/import/route";
 import { POST as investigationAPI } from "../app/api/investigations/route";
 import { POST as compare } from "../app/api/compare/route";
-import { investigations, rankInvestigations, hardwareGroups, earthApplications } from "../lib/investigations";
+import { investigations, rankInvestigations, hardwareGroups, earthApplications, programBackground } from "../lib/investigations";
 import { flameParticle } from "../lib/flame-motion";
 import { atmospheres } from "../lib/atmospheres";
 import { oxygenCoverage } from "../lib/coverage";
@@ -399,4 +399,17 @@ test("Saffire VI records match the verified tables and VI-3 is closest to the lu
   assert.equal(best.test.id, "VI-3");
   assert.equal(best.reason, "Same material and an oxygen fraction within 0.3 percentage points. Pressure, airflow and gravity differ.");
   assert.match(tableLink(3), /ntrs\.nasa\.gov.*#page=3$/);
+});
+test("ranking explains each result, labels ties and keeps ACME as background", () => {
+  for (const priority of ["prevention", "detection", "suppression"] as const) {
+    const r = rankInvestigations({ destination: "moon", priority });
+    assert.ok(!r.some((i) => i.id === "acme"));
+    assert.ok(r.every((i) => i.reason.length > 30));
+    const top = r[0];
+    assert.ok(top.priorities.includes(priority), `${priority} top result addresses it`);
+    for (const i of r) if (r.some((o) => o !== i && o.score === i.score)) assert.match(i.tieNote, /^Tied at/);
+  }
+  assert.equal(rankInvestigations({ destination: "moon", priority: "detection" })[0].id, "saffire");
+  assert.ok(rankInvestigations({ destination: "orbit", priority: "suppression" }).slice(0, 3).some((i) => i.id === "flex"));
+  assert.deepEqual(programBackground()[0].children.sort(), ["BRE", "CFI-G", "E-FIELD Flames"]);
 });

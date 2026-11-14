@@ -16,6 +16,7 @@ import {
   destinations,
   investigations,
   hardwareGroups,
+  programBackground,
   earthApplications,
   rankInvestigations,
   type MissionQuery,
@@ -164,7 +165,7 @@ export default function MissionView({
           <span className="eyebrow">THE MISSION DESK</span>
           <h1>Mission research</h1>
           <p>
-            Ten investigation profiles. Three safety questions. A traceable path through
+            Nine experiments ranked, one program for context. Three safety questions. A traceable path through
             the research.
           </p>
         </div>
@@ -255,14 +256,19 @@ export default function MissionView({
       <details className="ranking-explainer">
         <summary>How is this ranked?</summary>
         <p>
-          Each investigation receives 1 point for microgravity context, 4 for
-          addressing the selected safety question, and 2 for atmosphere
-          variables when a surface habitat is selected, plus 1 for
-          investigations that probe gravity dependence (BRE, E-FIELD Flames)
-          when a surface habitat is selected. These authored metadata
-          weights organize reading; they are not AI predictions, safety scores,
-          or confidence estimates. The research companion separately retrieves
-          findings using BM25.
+          Each experiment receives 1 point for microgravity context, 4 for
+          addressing the selected safety question, 3 when this atlas holds its
+          measured data (1 if the data are only background for the question), 2
+          for measured tests near the 30% Moon base oxygen scenario on a
+          surface habitat, 2 for atmosphere variables on a surface habitat
+          (prevention and suppression), and 1 for probing gravity dependence
+          (BRE, E-FIELD Flames). Ties are ordered by whether the question is the
+          experiment&apos;s primary focus, then measured data, then the number of
+          cited findings, and are labeled. Parent programs such as
+          ACME are shown as background instead of competing with their own
+          experiments; individual measured tests are compared in the panel
+          below. These authored weights organize reading; they are not AI
+          predictions, safety scores or confidence estimates.
         </p>
       </details>
       {loading ? (
@@ -296,15 +302,23 @@ export default function MissionView({
                 </div>
                 <h3>
                   {i.name} <span>{i.subtitle}</span>
+                  {i.parent && <small className="parent-tag">Part of ACME</small>}
                 </h3>
+                <p className="reason-line">
+                  <b>Why it ranks here:</b> {i.reason}
+                </p>
                 <p>{i.objective}</p>
-                <div className="reason-chips">
-                  {i.reasons.map((r) => (
-                    <span key={r.label}>
-                      +{r.points} {r.label}
-                    </span>
-                  ))}
-                </div>
+                {i.tieNote && <p className="tie-note">{i.tieNote}</p>}
+                <details className="score-details">
+                  <summary>Scoring details ({i.score} points)</summary>
+                  <div className="reason-chips">
+                    {i.reasons.map((r) => (
+                      <span key={r.label}>
+                        +{r.points} {r.label}
+                      </span>
+                    ))}
+                  </div>
+                </details>
                 <details>
                   <summary>Conditions, measurements & limits</summary>
                   <dl>
@@ -356,6 +370,18 @@ export default function MissionView({
                 {selected.includes(i.id) ? "Selected" : "Compare"}
               </button>
             </article>
+          ))}
+          {programBackground().map((p) => (
+            <aside className="program-background" key={p.id}>
+              <span className="eyebrow">PROGRAM BACKGROUND</span>
+              <h3>
+                {p.name} <span>{p.subtitle}</span>
+              </h3>
+              <p>
+                {p.objective} Its experiments are ranked individually above:{" "}
+                {p.children.join(", ")}.
+              </p>
+            </aside>
           ))}
           {results.length > 5 && (
             <button
