@@ -27,6 +27,16 @@ const synonyms: Record<string, string[]> = {
   detector: ["detection", "sensor", "smoke"],
   extinguish: ["extinction", "suppression"],
   astronaut: ["spacecraft", "safety"],
+  acrylic: ["pmma"],
+  plexiglass: ["pmma"],
+  perspex: ["pmma"],
+  fabric: ["cotton", "sibal", "fabric"],
+  cloth: ["cotton", "sibal", "fabric"],
+  textile: ["cotton", "fabric"],
+  extinguisher: ["suppression", "suppressant"],
+  lunar: ["moon", "partial"],
+  sensor: ["detection", "detector"],
+  toxic: ["gas", "carbon", "monoxide"],
 };
 export function tokens(text: string) {
   return text

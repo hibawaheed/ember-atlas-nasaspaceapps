@@ -16,6 +16,7 @@ import {
   sourceFor,
 } from "@/lib/evidence";
 import { download } from "@/lib/export";
+import { relatedTerm, expansionsIn } from "@/lib/terms";
 export function EvidenceCard({
   finding,
   compact = false,
@@ -39,7 +40,15 @@ export function EvidenceCard({
         </span>
       </div>
       <h3>{finding.title}</h3>
+      <p className="qualifier-chip">{finding.qualifier}</p>
       <p>{finding.claim}</p>
+      {!compact && expansionsIn(`${finding.title} ${finding.claim}`).length > 0 && (
+        <p className="term-expansions">
+          {expansionsIn(`${finding.title} ${finding.claim}`)
+            .map(([a, full]) => `${a}: ${full}`)
+            .join(" · ")}
+        </p>
+      )}
       <div className="inference">
         <span>WHAT THIS MEANS</span>
         <p>{finding.safetyImplication}</p>
@@ -76,6 +85,7 @@ export default function EvidenceView() {
   const [program, setProgram] = useState("All programs");
   const [strength, setStrength] = useState("all");
   const [sort, setSort] = useState("relevance");
+  const related = query ? relatedTerm(query) : null;
   const results = useMemo(() => {
     let list = query ? retrieve(query, 50) : [...findings];
     list = list.filter(
@@ -99,14 +109,25 @@ export default function EvidenceView() {
         </div>
         <button
           className="button secondary"
+          disabled={!results.length}
+          title={`Downloads the ${results.length} findings currently shown, with their sources and the active search and filters`}
           onClick={() =>
             download(
-              "ember-evidence.json",
-              JSON.stringify({ findings: results, sources }, null, 2),
+              `ember-findings-${results.length}.json`,
+              JSON.stringify(
+                {
+                  exportedAt: new Date().toISOString(),
+                  selection: { query: query || null, program, evidenceType: strength, count: results.length },
+                  findings: results.map(({ score: _s, matched: _m, ...f }: Finding & { score?: number; matched?: string[] }) => f),
+                  sources: sources.filter((s) => results.some((f) => f.sourceIds.includes(s.id))),
+                },
+                null,
+                2,
+              ),
             )
           }
         >
-          <Download size={16} /> Export evidence
+          <Download size={16} /> Download {results.length} {results.length === findings.length && !query ? "" : "filtered "}finding{results.length === 1 ? "" : "s"} (JSON)
         </button>
       </div>
       <div className="search-bar">
@@ -162,6 +183,12 @@ export default function EvidenceView() {
           <option value="newest">Newest</option>
         </select>
       </div>
+      {related && (
+        <p className="related-note">
+          Related material: <b>{related.label}</b>. Results include records
+          filed under that name.
+        </p>
+      )}
       <p className="results-note">
         {results.length} findings · Relevance uses transparent text matching. It
         is not a scientific confidence score.
@@ -174,10 +201,12 @@ export default function EvidenceView() {
       {!results.length && (
         <div className="empty-state">
           <BookOpen />
-          <h3>No matching evidence yet</h3>
+          <h3>No findings match{query ? ` “${query}”` : ""}</h3>
           <p>
-            Try a broader term or another program. This is a curated subset of
-            NASA’s research.
+            {program !== "All programs" || strength !== "all"
+              ? `Filters are active: ${program}${strength !== "all" ? `, ${strength === "program-goal" ? "research aims" : strength + "s"}` : ""}. Try all programs and evidence types, or a broader term. `
+              : "Try a broader term. "}
+            This is a curated subset of NASA’s research, not a complete archive.
           </p>
           <button
             className="button secondary"
@@ -187,7 +216,7 @@ export default function EvidenceView() {
               setStrength("all");
             }}
           >
-            Reset filters
+            Clear search and filters
           </button>
         </div>
       )}

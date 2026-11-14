@@ -203,6 +203,7 @@
       "safetyImplication": "Treat geometry and ventilation as inputs when translating laboratory observations into spacecraft scenarios.",
       "implicationType": "inference",
       "limitations": "Droplet geometry does not represent every solid-material fire or forced-flow condition.",
+      "qualifier": "Liquid droplets · microgravity only",
       "tags": [
         "microgravity",
         "flame shape",
@@ -231,6 +232,7 @@
       "safetyImplication": "Visible-light appearance alone is an incomplete indicator of combustion state.",
       "implicationType": "inference",
       "limitations": "This finding is specific to tested fuels and environments; it does not establish a universal detection threshold.",
+      "qualifier": "Liquid droplets · tested fuels only",
       "tags": [
         "cool flames",
         "detection",
@@ -251,6 +253,7 @@
       "safetyImplication": "Post-extinction monitoring should distinguish visual disappearance from demonstrated combustion termination.",
       "implicationType": "inference",
       "limitations": "A qualitative experimental observation, not a probability of reignition in a crew vehicle.",
+      "qualifier": "Liquid droplets · qualitative observation",
       "tags": [
         "reignition",
         "pressure",
@@ -271,6 +274,7 @@
       "safetyImplication": "Read airflow and oxygen together: these runs show an association, not an isolated airflow effect.",
       "implicationType": "inference",
       "limitations": "Oxygen changed during every run and is reported only as run start and end values; samples also differ in thickness, width and sides burning.",
+      "qualifier": "Oxygen changed during each run",
       "tags": [
         "ventilation",
         "flame spread",
@@ -292,6 +296,7 @@
       "safetyImplication": "Include gas measurements alongside heat release when reviewing experimental hazards.",
       "implicationType": "inference",
       "limitations": "Small glovebox tests do not represent full-cabin fire consequences.",
+      "qualifier": "Small glovebox tests, not cabin scale",
       "tags": [
         "heat release",
         "oxygen consumption",
@@ -320,6 +325,7 @@
       "safetyImplication": "Do not interpret a zero-ventilation setting as proof of extinction.",
       "implicationType": "inference",
       "limitations": "Results concern the tested burner and atmospheres, not every material or cabin.",
+      "qualifier": "Gas burner emulating solids · tested atmospheres only",
       "tags": [
         "ventilation",
         "extinction",
@@ -340,6 +346,7 @@
       "safetyImplication": "A visualization should allow extinction; flame size cannot imply monotonically increasing hazard.",
       "implicationType": "inference",
       "limitations": "A gaseous-fuel experiment, not a calibrated spacecraft fire model.",
+      "qualifier": "Gaseous fuel, not a cabin fire model",
       "tags": [
         "radiation",
         "extinction",
@@ -360,6 +367,7 @@
       "safetyImplication": "Use experiment identity and diagnostic method to select comparable evidence.",
       "implicationType": "inference",
       "limitations": "A program-wide count is not a count of interchangeable or independently replicated measurements.",
+      "qualifier": "Program-wide count, not replicated measurements",
       "tags": [
         "benchmark data",
         "provenance",
@@ -388,6 +396,7 @@
       "safetyImplication": "Retain pressure and sample-temperature context when comparing material flammability.",
       "implicationType": "inference",
       "limitations": "This record describes investigation objectives, not a reported quantitative outcome.",
+      "qualifier": "Research objective, not a result",
       "tags": [
         "preheating",
         "pressure",
@@ -409,6 +418,7 @@
       "safetyImplication": "A no-fan scenario can still contain fuel-driven transport and changing flame brightness.",
       "implicationType": "inference",
       "limitations": "The image sequence does not provide a calibrated temperature or heat-release time series.",
+      "qualifier": "Imagery, not calibrated measurements",
       "tags": [
         "ventilation",
         "oscillation",
@@ -437,6 +447,7 @@
       "safetyImplication": "Compare oxygen fraction together with pressure when reviewing exploration-cabin evidence.",
       "implicationType": "inference",
       "limitations": "The campaign is not a qualification of a particular future cabin or material.",
+      "qualifier": "Microgravity only · not a cabin qualification",
       "tags": [
         "oxygen",
         "pressure",
@@ -464,6 +475,7 @@
       "safetyImplication": "Present gas exposure and detection timing separately from flame intensity.",
       "implicationType": "inference",
       "limitations": "Preliminary test-specific findings; published exposure comparisons are not a universal cabin risk threshold.",
+      "qualifier": "Preliminary results · microgravity only",
       "tags": [
         "carbon monoxide",
         "carbon dioxide",
@@ -494,6 +506,7 @@
       "safetyImplication": "Evaluate atmospheric composition and material geometry together when selecting relevant fire tests.",
       "implicationType": "inference",
       "limitations": "Qualitative results from specific Saffire-V conditions do not supply a universal hazard threshold or calibrated intensity function.",
+      "qualifier": "Qualitative · specific Saffire-V conditions",
       "tags": [
         "oxygen",
         "pressure",
@@ -516,6 +529,7 @@
       "safetyImplication": "Detector research should consider the particles produced by relevant materials, as well as flame visibility.",
       "implicationType": "inference",
       "limitations": "An investigation objective is not a detector sensitivity result or an alarm threshold.",
+      "qualifier": "Research objective, not a detector result",
       "tags": [
         "smoke",
         "detection",
@@ -538,6 +552,7 @@
       "safetyImplication": "Use detector-specific evidence when comparing detection concepts for crew habitats.",
       "implicationType": "inference",
       "limitations": "This overview does not establish a winning sensor design, response time, or operational alarm setting.",
+      "qualifier": "Research objective, not a detector result",
       "tags": [
         "sensor",
         "detection",
@@ -560,6 +575,7 @@
       "safetyImplication": "Extinction evidence needs the fuel, atmosphere, and suppressant context; one limit is not universal.",
       "implicationType": "inference",
       "limitations": "A research objective, not an instruction for dosing a suppressant or certifying a crew atmosphere.",
+      "qualifier": "Research objective · liquid droplets",
       "tags": [
         "suppression",
         "extinction",
@@ -582,6 +598,7 @@
       "safetyImplication": "Within PSI, Moon and Mars questions rest on microgravity and Earth-gravity results. Published partial-gravity experiments exist outside that archive and should be consulted alongside it.",
       "implicationType": "inference",
       "limitations": "This describes one archive’s holdings as reported in the challenge statement, not the whole research literature.",
+      "qualifier": "PSI archive only, per the challenge statement",
       "tags": [
         "partial gravity",
         "moon",
@@ -607,6 +624,7 @@
       "safetyImplication": "Material flammability evidence gathered near 21% oxygen may not carry over to an exploration habitat; look for tests at elevated oxygen and reduced pressure.",
       "implicationType": "inference",
       "limitations": "These are expected design figures quoted in the statement, not a mission specification.",
+      "qualifier": "Expected design figures, not a specification",
       "tags": [
         "oxygen",
         "atmosphere",
@@ -646,6 +664,7 @@
       "safetyImplication": "Emulation could make screening spacecraft materials faster, if emulated and real materials are shown to behave alike.",
       "implicationType": "inference",
       "limitations": "An emulator is a stand-in; this demo has not compared BRE results with tests on real materials.",
+      "qualifier": "Research objective · emulator not yet validated",
       "tags": [
         "prevention",
         "flammability",
@@ -670,6 +689,7 @@
       "safetyImplication": "One way existing ISS data touches partial-gravity questions; useful for asking how flame shape changes with an imposed body force.",
       "implicationType": "inference",
       "limitations": "An ion-driven force is not buoyancy; NASA states the experiment does not serve space applications directly.",
+      "qualifier": "Ion-driven force, not buoyancy",
       "tags": [
         "partial gravity",
         "flame shape",
@@ -692,6 +712,7 @@
       "safetyImplication": "Data near spacesuit and pre-breathe oxygen levels exist only for specific gaseous-flame setups.",
       "implicationType": "inference",
       "limitations": "Inside-out gaseous flames do not represent fabrics or plastics burning in a cabin.",
+      "qualifier": "Gaseous inside-out flames, not cabin materials",
       "tags": [
         "oxygen",
         "cool flames",
@@ -713,6 +734,7 @@
       "safetyImplication": "Telling smoke from dust is central to avoiding false alarms, especially on dusty lunar surfaces.",
       "implicationType": "inference",
       "limitations": "This records instrument reuse; it gives no detector thresholds or false-alarm rates.",
+      "qualifier": "Instrument reuse only · no thresholds",
       "tags": [
         "detection",
         "smoke",
@@ -736,6 +758,7 @@
       "safetyImplication": "Suppressant concentrations proven on Earth should not be assumed sufficient in a spacecraft.",
       "implicationType": "inference",
       "limitations": "Based on heptane and methanol droplets; other fuels and fire geometries need their own tests.",
+      "qualifier": "Heptane and methanol droplets only",
       "tags": [
         "suppression",
         "suppressant",
@@ -759,6 +782,7 @@
       "safetyImplication": "Extinguisher placement and spray characteristics matter more in microgravity than Earth practice suggests.",
       "implicationType": "inference",
       "limitations": "Early, qualitative results from specific BASS tests; no extinguisher design rule follows directly.",
+      "qualifier": "Early, qualitative results",
       "tags": [
         "suppression",
         "suppressant",
@@ -782,6 +806,7 @@
       "safetyImplication": "Turning off ventilation is not a guaranteed way to put out a spacecraft fire, and Earth-based flammability tests are not automatically conservative.",
       "implicationType": "inference",
       "limitations": "A summary of a research program; specific conditions and materials are in the cited studies.",
+      "qualifier": "Program summary · details in cited studies",
       "tags": [
         "prevention",
         "ventilation",
@@ -805,6 +830,7 @@
       "safetyImplication": "Spacecraft detectors need to be designed for microgravity smoke and should combine particle and gas sensing.",
       "implicationType": "inference",
       "limitations": "Test results are summarized, not reported in detail; no thresholds are given here.",
+      "qualifier": "Summarized results · no thresholds given",
       "tags": [
         "detection",
         "smoke",
@@ -828,6 +854,7 @@
       "safetyImplication": "Normal-gravity flammability ratings may not bound microgravity behavior when air is moving.",
       "implicationType": "inference",
       "limitations": "Stated as a hypothesis; results depend on material, thickness, oxygen and flow.",
+      "qualifier": "Hypothesis, not a result",
       "tags": [
         "prevention",
         "ventilation",
@@ -851,6 +878,7 @@
       "safetyImplication": "Moves droplet results closer to practical liquid fuels and to fires involving many droplets, such as sprays or leaks.",
       "implicationType": "inference",
       "limitations": "Describes research scope; this demo has not imported FLEX-2 results.",
+      "qualifier": "Research scope · results not imported",
       "tags": [
         "liquid fuel",
         "droplet",
@@ -874,6 +902,7 @@
       "safetyImplication": "Soot and smoke production drive what fire detectors can sense; microgravity soot behavior matters for detection design.",
       "implicationType": "inference",
       "limitations": "Gas-jet flames, not burning cabin materials; no SPICE values are imported here.",
+      "qualifier": "Gas-jet flames, not cabin materials",
       "tags": [
         "smoke",
         "soot",
@@ -897,6 +926,7 @@
       "safetyImplication": "Shows how airflow changes where and whether a flame anchors, which matters for leaks and ventilated compartments.",
       "implicationType": "inference",
       "limitations": "Aimed mainly at cleaner, more efficient burners; fire-safety relevance is indirect.",
+      "qualifier": "Burner research · indirect fire-safety link",
       "tags": [
         "flame stability",
         "liftoff",
@@ -920,6 +950,7 @@
       "safetyImplication": "A weakening flame in a spacecraft may persist and fluctuate rather than go out at once; detection and post-fire monitoring should allow for this.",
       "implicationType": "inference",
       "limitations": "Candle and droplet observations; durations depend strongly on fuel and conditions.",
+      "qualifier": "Candle and droplet flames · microgravity only",
       "tags": [
         "extinction",
         "flame stability",
@@ -943,6 +974,7 @@
       "safetyImplication": "Absence of a visible flame does not mean combustion has stopped; detectors and crews should not rely on sight alone.",
       "implicationType": "inference",
       "limitations": "Observed for specific alkane droplets in quiescent microgravity.",
+      "qualifier": "Alkane droplets in still air only",
       "tags": [
         "cool flames",
         "extinction",
@@ -967,6 +999,7 @@
       "safetyImplication": "Earth-gravity flammability screening may not be conservative for the Moon or Mars; partial-gravity evidence exists but is limited in test time and conditions.",
       "implicationType": "inference",
       "limitations": "Short-duration drop-tower and aircraft tests; extinction criteria differ from 1-g tests, and these records are not in the atlas’s measured dataset.",
+      "qualifier": "Short drop-tower and aircraft tests",
       "tags": [
         "partial gravity",
         "lunar",
@@ -994,6 +1027,7 @@
       "safetyImplication": "These are the closest measured solid-material fires in the atlas to a lunar-habitat atmosphere, but at lower pressure, forced flow and microgravity.",
       "implicationType": "inference",
       "limitations": "Microgravity spacecraft tests at one flow speed; not lunar gravity and not a material qualification.",
+      "qualifier": "Microgravity · one flow speed",
       "tags": [
         "oxygen",
         "atmosphere",
@@ -1037,6 +1071,7 @@
       "safetyImplication": "Smoke-based alarms may trigger after toxic gases have already spread; detection strategies should consider gas sensing and detector placement.",
       "implicationType": "inference",
       "limitations": "One test, one detector location; the 1 mg/m³ threshold is the authors’ chosen level, not the ionization detector’s electrical signal.",
+      "qualifier": "One test · authors’ chosen threshold",
       "tags": [
         "detection",
         "smoke",
@@ -1063,6 +1098,7 @@
       "safetyImplication": "As in terrestrial fires, smoke and gases rather than heat are the main crew hazard; response plans should prioritize gas exposure.",
       "implicationType": "inference",
       "limitations": "Concentration increases in a 16.7 m³ free volume; different cabin sizes and ventilation would change exposure.",
+      "qualifier": "One spacecraft volume (16.7 m³)",
       "tags": [
         "gas",
         "carbon monoxide",

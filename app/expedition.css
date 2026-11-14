@@ -1380,3 +1380,6 @@ summary {
 .program-background h3 { margin: 4px 0; }
 .program-background h3 span { color: var(--muted); font-weight: 400; font-size: 0.9em; margin-left: 6px; }
 .program-background p { color: var(--muted); margin: 0; line-height: 1.5; }
+.qualifier-chip { display: inline-block; justify-self: start; margin: 2px 0 6px; padding: 3px 9px; border-radius: 999px; font-size: 0.78rem; color: #ffd8b8; background: rgba(255, 172, 120, 0.12); border: 1px solid rgba(255, 172, 120, 0.35); }
+.term-expansions { font-size: 0.8rem; color: var(--muted); line-height: 1.45; margin: 4px 0 0; }
+.related-note { color: var(--ink); font-size: 0.9rem; margin: 0.4rem 0; }
