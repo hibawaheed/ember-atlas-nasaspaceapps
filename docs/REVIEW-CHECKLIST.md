@@ -33,4 +33,4 @@ The team's written review, *EMBER Atlas website review and fixes* (based on publ
 
 ## Release verification
 
-- [ ] The review's nine tests on the submitted build, with build ID and evidence: see `docs/VALIDATION.md` (release entry) and `docs/release-evidence/`.
+- [x] The review's nine tests passed on production build `26304df` (`scripts/verify-release.cjs`); results table in `docs/VALIDATION.md`, files and screenshots in `docs/release-evidence/`. Still manual: a session with a real screen-reader user, and the user trial.

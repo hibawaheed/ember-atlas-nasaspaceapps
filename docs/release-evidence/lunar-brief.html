@@ -1,0 +1,33 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>EMBER Atlas scenario brief</title><style>
+body{font:14px/1.5 system-ui,sans-serif;max-width:780px;margin:32px auto;padding:0 20px;color:#1d2230}
+h1{font-size:22px;margin:4px 0 2px}h2{font-size:15px;margin:18px 0 6px;border-bottom:1px solid #ddd;padding-bottom:3px}
+small,.meta{color:#5d6475;font-size:12px}table{border-collapse:collapse;width:100%;font-size:12.5px}
+th,td{text-align:left;padding:4px 6px;border-bottom:1px solid #e5e5e5;vertical-align:top}thead th{background:#f4f1ee}
+a{color:#a4371f}ul{padding-left:18px;margin:4px 0}li{margin:3px 0}.q{font-size:16px;font-weight:600}
+@media print{body{margin:0;max-width:none}a{color:#1d2230}}
+</style>
+<small>EMBER ATLAS · SCENARIO BRIEF · ISL TEAM A</small>
+<p class="q">Has NASA measured a fire in 30% oxygen at 70.3 kPa (the challenge&#39;s Moon base atmosphere)?</p>
+<p class="meta">Exported 2026-11-14 19:01 UTC · build 26304df (2026-11-14) · <a href="https://emberatlas.tech/?view=lab&amp;scenario=%7B%22oxygen%22%3A30%2C%22pressure%22%3A70.3%2C%22airflow%22%3A5%2C%22gravity%22%3A%22moon%22%2C%22fuel%22%3A%22pmma%22%7D">reopen this scenario</a></p>
+<h2>Inputs</h2>
+<table><tbody>
+<tr><th>Oxygen</th><td>30% by volume</td></tr>
+<tr><th>Total pressure</th><td>70.3 kPa (10.2 psi)</td></tr>
+<tr><th>O₂ partial pressure</th><td>0.30 × 70.3 kPa = 21.09 kPa (arithmetic, not a safety threshold)</td></tr>
+<tr><th>Airflow</th><td>5 cm/s</td></tr>
+<tr><th>Gravity</th><td>Lunar (0.166 g)</td></tr>
+<tr><th>Fuel</th><td>PMMA (acrylic) solid</td></tr>
+</tbody></table>
+<p class=meta>These are the challenge statement's Moon base conditions (30% O₂ or more at 10.2 psi or less), a scenario rather than a measured test.</p>
+<h2>Closest measured test: Saffire VI-3 (Saffire VI)</h2>
+<p>Same material and an oxygen fraction within 0.3 percentage points. Pressure, airflow and gravity differ.</p>
+<table><thead><tr><th>Condition</th><th>Scenario</th><th>Saffire VI-3</th><th>Comparison</th></tr></thead><tbody><tr><th>Material</th><td>PMMA (acrylic)</td><td>two-sided cast PMMA, 10 mm thick</td><td>Matches · Same material</td></tr><tr><th>Oxygen fraction</th><td>30%</td><td>30.3%</td><td>Matches · 0.3 percentage points apart</td></tr><tr><th>Total pressure</th><td>70.3 kPa</td><td>54.6 kPa</td><td>Differs · 15.7 kPa apart</td></tr><tr><th>Airflow</th><td>5 cm/s</td><td>20 cm/s, concurrent</td><td>Differs · 15 cm/s apart</td></tr><tr><th>Gravity</th><td>Lunar, about 0.166 g</td><td>Spacecraft microgravity</td><td>Differs · No measured test at this gravity in the atlas</td></tr></tbody></table>
+<p>Measured in VI-3 (Table 2): burn 780 s, peak heat release 3080 W; CO₂ +8539 ppm and CO +308 ppm at the far-field unit.</p>
+<p class="meta">Source: Urban, D. L., Ruff, G. A., Ferkul, P., et al. Preliminary Results from the Saffire VI Experiment (ICES-2024-365). <a href="https://ntrs.nasa.gov/api/citations/20240002981/downloads/Saffire-ICES-2024-ICES-365-accepted%20final.pdf#page=3">Table 1, PDF p. 3</a> · <a href="https://ntrs.nasa.gov/api/citations/20240002981/downloads/Saffire-ICES-2024-ICES-365-accepted%20final.pdf#page=6">Table 2, p. 6</a> · <a href="https://ntrs.nasa.gov/citations/20240002981">NTRS 20240002981</a> · SHA-256 7f875da1d6abeeee…</p>
+<h2>Limitation</h2>
+<p>Saffire tests were microgravity fires with forced airflow inside an uncrewed Cygnus spacecraft. No measured lunar-gravity fire test is in this atlas, and NASA's PSI archive holds no partial-gravity combustion data (per the challenge statement). The lab's flame picture is an authored illustration. An artistic response model, not CFD, a temperature estimate, an extinction boundary, or a fire-risk score. Model coefficients are authored for the demo, not fitted to NASA measurements.</p>
+<h2>Supporting findings</h2>
+<ul><li><b>Flame spread varied as airflow and oxygen changed</b> (BASS-II; Oxygen changed during each run). In the published BASS-II PMMA runs, flame-spread rate changed between successive airflow settings while oxygen also fell. In run M3, airflow rose from 10 to 20 cm/s while spread fell from 0.029 to 0.024 mm/s; in run M7, airflow and spread fell together (10 → 3 cm/s, 0.106 → 0.070 mm/s). <a href="https://ntrs.nasa.gov/citations/20210011385">Burning and Suppression of Solids–II (BASS-II) Summary Report</a></li><li><b>An enriched atmosphere changes the flame</b> (Saffire-V; Qualitative · specific Saffire-V conditions). Saffire-V lowered spacecraft pressure and increased oxygen concentration. NASA reported more energetic flames at elevated oxygen levels and faster burning on thinner PMMA ribs. <a href="https://www.nasa.gov/humans-in-space/saffire-ignites-new-discoveries-in-space/">Saffire Ignites New Discoveries in Space</a></li><li><b>Large fires measured near exploration-cabin oxygen levels</b> (Saffire VI; Microgravity · one flow speed). Saffire VI burned SIBAL cloth at 31.0% oxygen and 54.1 kPa (VI-2), two-sided acrylic (PMMA) at 30.3% and 54.6 kPa (VI-3), and one-sided PMMA at 28.8% and 55.2 kPa (VI-4), all in 20 cm/s concurrent flow in microgravity (Table 1). Peak heat release was 3217 W, 3080 W and 1507 W (Table 2). <a href="https://ntrs.nasa.gov/citations/20240002981">Preliminary Results from the Saffire VI Experiment (ICES-2024-365)</a></li></ul>
+<h2>Next question</h2>
+<p>Would Saffire VI-3&#39;s result hold at lunar gravity? No measured fire at that gravity is in this atlas, and NASA&#39;s PSI archive has none (per the challenge statement); short drop-tower tests exist outside PSI, and LUCI and FM2 are planned to test it.</p>
+<hr><p class="meta">Independent educational demo built from NASA sources; no NASA endorsement. Not a spacecraft fire predictor. Print this page to save a PDF.</p></html>

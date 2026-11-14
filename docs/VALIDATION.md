@@ -1,6 +1,30 @@
 # Verification record
 
-Verification date: November 13, 2026. Current handoff release: v1.3.0.
+Latest verification: November 14, 2026, build 26304df (v1.5.0).
+
+## November 14, 2026 — external review fixes, release verification (v1.5.0)
+
+Acted on the team's written review (*EMBER Atlas website review and fixes*); item-by-item status in `docs/REVIEW-CHECKLIST.md`.
+
+- **Data.** Saffire IV–VI test conditions and results entered from ICES-2024-365 Tables 1 and 2 (PDF SHA-256 `7f875da1d6abeeeeac64aeba67d3f160074cf98430e714fe7606b34b37e0aa59`), checked by rendering the PDF pages. Detection values from Figure 7 and its text (p. 5). FLEX cool-flame and inert-suppressant wording checked against the 2015 guide, pp. 12 and 33–34. Now 36 findings from 23 sources.
+- **Tests.** `npm run check`: 28 pass (new: Saffire records and closest test, coverage evidence types, ranking reasons and parent grouping, one-page brief and rebuild link). `npm run build` passes.
+- **Live AI check** (`scripts/ai-eval.mjs`, build `8f1f975`): 18/18 after a rerun of the cases that hit the visitor rate limit; details in `docs/ANSWER-CHECK.md`.
+- **Release verification** (`scripts/verify-release.cjs`) on `https://emberatlas.tech`, build **`26304df`**, all nine review tests **pass**, 0 browser console errors. Evidence (screenshots, a downloaded lunar brief, a filtered findings export, a BASS-II CSV, `results.json`) in `docs/release-evidence/`.
+
+| Review test | Result on `26304df` |
+| --- | --- |
+| Lunar comparison | VI-3 shows 30.3% O₂, 54.6 kPa, 20 cm/s; material "two-sided cast PMMA, 10 mm thick", gravity "spacecraft microgravity"; Table 1 link opens PDF p. 3 |
+| Claims and chart labels | PSI spelled out and attributed to the challenge statement; BASS-II heading names both co-varying conditions; coverage chart explains empty regions |
+| Research answers | 18/18 live checks; rate-limited requests visibly returned retrieved findings |
+| Ranking and search | Moon: top reason changes from flammability (prevention) to detection; ACME children tagged and program shown as background; "acrylic" returns 7 findings with the PMMA note |
+| Lab and replay | Readouts read "Animation intensity: Moderate — authored, not measured" and "0.30 × 70.3 kPa = 21.09 kPa"; replay caption gives run, rate and units; pause works; table route present |
+| First visit and tour | In a fresh session the result is on the first screen and the primary button reaches the cited comparison; tour step 1 is the BASS-II measurement with source and limitation |
+| Files and shared state | "Download 6 filtered findings (JSON)" contained exactly 6 Saffire findings, the filter and 4 sources; brief contains VI-3, the Table 1 link, 21.09 kPa, the build and the next question; CSV 39 rows with run IDs; the shared link rebuilt all five inputs in a separate browser session |
+| Phone and keyboard | 390 px phone and 640 px (1280 px at 200% zoom): no page overflow, comparison table scrolls in its own box, units visible. Tab reaches search, filters, chart points and downloads; every stop shows focus (the search field through its container border) |
+| Screen reader and motion | One h1 and an ordered heading outline; chart has a text summary; comparison table has a caption and four column headers; selected tab exposed; result count is a polite live region; with reduced motion the flame starts paused ("Motion paused · press Play to animate") |
+
+- **Logs and cost.** Vercel runtime errors, last 6 h: none. AI Gateway, last 24 h: 162 calls, $0.13.
+- **Limits.** Automated checks of structure and labels, not a session with a real screen reader user; the user trial (`docs/USER-TRIAL.md`) has not been run yet; AI answers reviewed by Claude, not a combustion scientist; a human review row is open in `docs/ANSWER-CHECK.md`.
 
 ## November 14, 2026 — speed
 

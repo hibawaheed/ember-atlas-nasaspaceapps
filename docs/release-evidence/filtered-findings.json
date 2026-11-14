@@ -1,0 +1,227 @@
+{
+  "exportedAt": "2026-11-14T19:01:48.468Z",
+  "selection": {
+    "query": null,
+    "program": "Saffire",
+    "evidenceType": "all",
+    "count": 6
+  },
+  "findings": [
+    {
+      "id": "saffire-atmospheres",
+      "title": "Exploration atmospheres change the test context",
+      "experiment": "Saffire-VI",
+      "date": "2024-02-14",
+      "sourceIds": [
+        "saffire-overview"
+      ],
+      "claim": "Saffire-VI tested fires in an uncrewed Cygnus spacecraft with elevated oxygen and reduced pressure, using 19 experiment runs.",
+      "safetyImplication": "Compare oxygen fraction together with pressure when reviewing exploration-cabin evidence.",
+      "implicationType": "inference",
+      "limitations": "The campaign is not a qualification of a particular future cabin or material.",
+      "qualifier": "Microgravity only · not a cabin qualification",
+      "tags": [
+        "oxygen",
+        "pressure",
+        "large-scale fire"
+      ],
+      "strength": "observed",
+      "quantities": [
+        {
+          "name": "Saffire-VI experiment runs",
+          "value": 19,
+          "unit": "runs",
+          "sourceId": "saffire-overview"
+        }
+      ]
+    },
+    {
+      "id": "saffire-gas-hazard",
+      "title": "The hazard extends beyond the hot zone",
+      "experiment": "Saffire-IV–VI",
+      "date": null,
+      "sourceIds": [
+        "saffire-results"
+      ],
+      "claim": "Preliminary Saffire results describe substantial combustion-gas hazards despite limited temperature increases away from the fire.",
+      "safetyImplication": "Present gas exposure and detection timing separately from flame intensity.",
+      "implicationType": "inference",
+      "limitations": "Preliminary test-specific findings; published exposure comparisons are not a universal cabin risk threshold.",
+      "qualifier": "Preliminary results · microgravity only",
+      "tags": [
+        "carbon monoxide",
+        "carbon dioxide",
+        "detection",
+        "heat release"
+      ],
+      "strength": "observed",
+      "quantities": [
+        {
+          "name": "Tested practical fire power range",
+          "minimum": 1.5,
+          "maximum": 3.2,
+          "unit": "kW",
+          "sourceId": "saffire-results",
+          "locator": "Slide 21"
+        }
+      ]
+    },
+    {
+      "id": "saffire-oxygen",
+      "title": "An enriched atmosphere changes the flame",
+      "experiment": "Saffire-V",
+      "date": "2021-01-19",
+      "sourceIds": [
+        "saffire-v"
+      ],
+      "claim": "Saffire-V lowered spacecraft pressure and increased oxygen concentration. NASA reported more energetic flames at elevated oxygen levels and faster burning on thinner PMMA ribs.",
+      "safetyImplication": "Evaluate atmospheric composition and material geometry together when selecting relevant fire tests.",
+      "implicationType": "inference",
+      "limitations": "Qualitative results from specific Saffire-V conditions do not supply a universal hazard threshold or calibrated intensity function.",
+      "qualifier": "Qualitative · specific Saffire-V conditions",
+      "tags": [
+        "oxygen",
+        "pressure",
+        "PMMA",
+        "exploration atmospheres",
+        "geometry"
+      ],
+      "strength": "observed",
+      "quantities": []
+    },
+    {
+      "id": "saffire-vi-conditions",
+      "title": "Large fires measured near exploration-cabin oxygen levels",
+      "experiment": "Saffire VI",
+      "date": null,
+      "sourceIds": [
+        "saffire6-paper"
+      ],
+      "claim": "Saffire VI burned SIBAL cloth at 31.0% oxygen and 54.1 kPa (VI-2), two-sided acrylic (PMMA) at 30.3% and 54.6 kPa (VI-3), and one-sided PMMA at 28.8% and 55.2 kPa (VI-4), all in 20 cm/s concurrent flow in microgravity (Table 1). Peak heat release was 3217 W, 3080 W and 1507 W (Table 2).",
+      "safetyImplication": "These are the closest measured solid-material fires in the atlas to a lunar-habitat atmosphere, but at lower pressure, forced flow and microgravity.",
+      "implicationType": "inference",
+      "limitations": "Microgravity spacecraft tests at one flow speed; not lunar gravity and not a material qualification.",
+      "qualifier": "Microgravity · one flow speed",
+      "tags": [
+        "oxygen",
+        "atmosphere",
+        "pressure",
+        "PMMA",
+        "acrylic",
+        "cotton",
+        "fabric",
+        "exploration",
+        "moon",
+        "prevention",
+        "flammability"
+      ],
+      "strength": "observed",
+      "quantities": [
+        {
+          "name": "VI-3 oxygen",
+          "minimum": 30.3,
+          "maximum": 30.3,
+          "unit": "mol %",
+          "sourceId": "saffire6-paper"
+        },
+        {
+          "name": "VI-3 pressure",
+          "minimum": 54.6,
+          "maximum": 54.6,
+          "unit": "kPa",
+          "sourceId": "saffire6-paper"
+        }
+      ]
+    },
+    {
+      "id": "saffire-vi-detection",
+      "title": "A typical smoke alarm level came late in a real spacecraft fire",
+      "experiment": "Saffire VI-3",
+      "date": null,
+      "sourceIds": [
+        "saffire6-paper"
+      ],
+      "claim": "During the VI-3 acrylic fire, an ionization smoke detector and a particulate monitor at the far-field unit both responded. Using 1 mg/m³ of particulate as a relatively tight alarm threshold, the authors report that level was reached at 981 s on the Figure 7 time axis, by which point much of the hazardous gas release had occurred.",
+      "safetyImplication": "Smoke-based alarms may trigger after toxic gases have already spread; detection strategies should consider gas sensing and detector placement.",
+      "implicationType": "inference",
+      "limitations": "One test, one detector location; the 1 mg/m³ threshold is the authors’ chosen level, not the ionization detector’s electrical signal.",
+      "qualifier": "One test · authors’ chosen threshold",
+      "tags": [
+        "detection",
+        "smoke",
+        "alarm",
+        "detector",
+        "sensor",
+        "particles",
+        "PMMA",
+        "acrylic",
+        "false alarm"
+      ],
+      "strength": "observed",
+      "quantities": []
+    },
+    {
+      "id": "saffire-vi-gases",
+      "title": "Gas limits were exceeded while temperatures stayed near normal",
+      "experiment": "Saffire VI",
+      "date": null,
+      "sourceIds": [
+        "saffire6-paper"
+      ],
+      "claim": "In Saffire VI, temperature rose significantly only near the fire, but carbon dioxide and carbon monoxide rose across the spacecraft: both PMMA tests exceeded the 1-hour CO₂ limit and the 24-hour CO limit (VI-3: +8539 ppm CO₂, +308 ppm CO at the far-field unit, Table 2).",
+      "safetyImplication": "As in terrestrial fires, smoke and gases rather than heat are the main crew hazard; response plans should prioritize gas exposure.",
+      "implicationType": "inference",
+      "limitations": "Concentration increases in a 16.7 m³ free volume; different cabin sizes and ventilation would change exposure.",
+      "qualifier": "One spacecraft volume (16.7 m³)",
+      "tags": [
+        "gas",
+        "carbon monoxide",
+        "carbon dioxide",
+        "toxicity",
+        "detection",
+        "suppression",
+        "exposure",
+        "PMMA"
+      ],
+      "strength": "observed",
+      "quantities": []
+    }
+  ],
+  "sources": [
+    {
+      "id": "saffire-overview",
+      "title": "Flame Burns Out on NASA’s Long-Running Spacecraft Fire Experiment",
+      "url": "https://www.nasa.gov/humans-in-space/flame-burns-out-on-nasas-long-running-spacecraft-fire-experiment/",
+      "publishedDate": "2024-02-14",
+      "type": "NASA research summary"
+    },
+    {
+      "id": "saffire-results",
+      "title": "Preliminary Results from the Saffire VI Experiment",
+      "url": "https://ntrs.nasa.gov/citations/20240007488",
+      "downloadUrl": "https://ntrs.nasa.gov/api/citations/20240007488/downloads/Saffire%20ICES%202024%20Saffire%20presentation072124small.pdf?attachment=true",
+      "publishedDate": null,
+      "dateLabel": "ICES 2024, July 21–25",
+      "type": "NASA conference presentation",
+      "reportNumber": "NTRS 20240007488"
+    },
+    {
+      "id": "saffire-v",
+      "title": "Saffire Ignites New Discoveries in Space",
+      "url": "https://www.nasa.gov/humans-in-space/saffire-ignites-new-discoveries-in-space/",
+      "publishedDate": "2021-01-19",
+      "type": "NASA research summary"
+    },
+    {
+      "id": "saffire6-paper",
+      "title": "Preliminary Results from the Saffire VI Experiment (ICES-2024-365)",
+      "url": "https://ntrs.nasa.gov/citations/20240002981",
+      "downloadUrl": "https://ntrs.nasa.gov/api/citations/20240002981/downloads/Saffire-ICES-2024-ICES-365-accepted%20final.pdf",
+      "publishedDate": null,
+      "dateLabel": "ICES 2024, July 21–25",
+      "type": "NASA conference paper",
+      "reportNumber": "ICES-2024-365",
+      "sha256": "7f875da1d6abeeeeac64aeba67d3f160074cf98430e714fe7606b34b37e0aa59"
+    }
+  ]
+}

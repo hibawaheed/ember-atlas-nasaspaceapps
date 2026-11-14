@@ -1,0 +1,57 @@
+{
+  "base": "https://emberatlas.tech",
+  "at": "2026-11-14T19:02:10.972Z",
+  "results": [
+    {
+      "test": "1 Lunar comparison",
+      "ok": true,
+      "detail": "Lunar habitat (challenge scenario) vs Saffire VI-3; O2 30.3%, P 54.6 kPa, flow 20 cm/s, concurrent, material \"two-sided cast PMMA, 10 mm thick\", gravity \"Spacecraft microgravity\"; Table 1 link https://ntrs.nasa.gov/api/citations/20240002981/downloads/Saffire-ICES-2024-ICES-365-accepted%20final.pdf#page=3"
+    },
+    {
+      "test": "6 First visit and tour",
+      "ok": true,
+      "detail": "result on first screen: true; primary button reached \"Lunar habitat (challenge scenario) vs Saffire VI-3\"; tour step 1 measured with source and limitation: true"
+    },
+    {
+      "test": "2 Claims and chart labels",
+      "ok": true,
+      "detail": "PSI spelled out and attributed in lab gravity panel; BASS-II heading reflects co-varying conditions; coverage chart explains empty regions"
+    },
+    {
+      "test": "4 Ranking and search",
+      "ok": true,
+      "detail": "Moon prevention top: Saffire Spacecraft-scale fire research — \"Why it ranks here: Addresses material flammability and fire growth. 5 measured Saffire IV–VI tests in this atlas. Includes tests within about 1 percentage point of the 30% Moon base scenario. Oxygen: 22.0–31.0% O₂ at 54–100 kPa. Microgravity only; lunar gravity untested.\"; detection top: Saffire Spacecraft-scale fire research — \"Why it ranks here: Addresses smoke and fire detection. 5 measured Saffire IV–VI tests in this atlas. Includes tests within about 1 percentage point of the 30% Moon base scenario. Oxygen: 22.0–31.0% O₂ at 54–100 kPa. Microgravity only; lunar gravity untested.\"; ACME children tagged: 1; program background shown: true; \"acrylic\" → 7 findings with note \"Related material: PMMA (acrylic). Results include records filed under that name.\""
+    },
+    {
+      "test": "5 Lab and replay",
+      "ok": true,
+      "detail": "explore: \"ANIMATION INTENSITYModerateAuthored for the picture, not measured | O₂ PARTIAL PRESSURE21.09 kPa0.30 × 70.3 kPa = 21.09 kPa | ILLUSTRATIVE MODEL\"; replay caption \"M8 · 0.057 mm/sObservation 1 of 3. Flame size encodes this m…\"; status \"Fire animation pausedPublished value → illustrative flame\"; table route: true"
+    },
+    {
+      "test": "7 Files and shared state",
+      "ok": true,
+      "detail": "\"Download 6 filtered findings (JSON)\" → 6 findings, filter Saffire, 4 sources; brief has VI-3, Table 1 link, 21.09 kPa, build, next question; CSV 39 rows with run IDs; shared link in fresh session: 30%, 5 cm/s, 70.3 kPa · 10.2 psi, gravity ☾Moon, fuel pmma"
+    },
+    {
+      "test": "8 Phone and keyboard (phone)",
+      "ok": true,
+      "detail": "horizontal page overflow 0px; comparison table scrolls inside its box (auto); units visible"
+    },
+    {
+      "test": "8 Phone and keyboard (zoom200)",
+      "ok": true,
+      "detail": "horizontal page overflow 0px; comparison table scrolls inside its box (auto); units visible"
+    },
+    {
+      "test": "8 Keyboard",
+      "ok": true,
+      "detail": "tab reached search, program filters, download: true, true, true; chart point focusable: true; visible focus on all 40 stops: true"
+    },
+    {
+      "test": "9 Screen reader and motion",
+      "ok": true,
+      "detail": "one h1; headings H1:Fire,beyond Earth. / H2:Has NASA measured a fire in 30 / H3:Saffire VI-3 · PMMA (acrylic) / H2:The combustion lab / H3:Flame spread varied as airflow / H3:Combustion beyond the visible  / H2:Selected findings / H3:Flame spread varied as airflow; chart summary present; comparison table has caption and 4 headers; selected tab VI-3; reduced motion: \"Motion paused · press Play to animateBuoyancy-influenced plu\"; result count aria-live=polite"
+    }
+  ],
+  "consoleErrors": []
+}
