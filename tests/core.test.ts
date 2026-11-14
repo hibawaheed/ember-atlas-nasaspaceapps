@@ -360,3 +360,17 @@ test("AI context includes named investigations, ranking profiles and follow-ups"
   assert.ok(ranking.profiles.some((p) => p.id === "profile:same"));
   assert.equal(buildAskContext("Best pizza topping?").profiles.length, 0);
 });
+test("lab notes stage answers without AI and ask can stream its result", async () => {
+  const notes = await (await analyze(request("/api/analyze", { ...baseline, stage: "notes" }))).json();
+  assert.ok(notes.insights.length > 0);
+  assert.equal(notes.ai.mode, "authored"); // AI is off in tests; "pending" when on
+  const res = await ask(request("/api/ask", { question: "What did FLEX find about cool flames?", stream: true }));
+  assert.match(res.headers.get("content-type") ?? "", /ndjson/);
+  const lines = (await res.text()).trim().split("\n").map((l) => JSON.parse(l));
+  const final = lines.at(-1);
+  assert.equal(final.type, "final");
+  assert.ok(final.data.citations.length > 0);
+  // Off-topic questions are declined with plain JSON, before any AI call.
+  const off = await ask(request("/api/ask", { question: "Best pizza topping?", stream: true }));
+  assert.equal((await off.json()).findings.length, 0);
+});

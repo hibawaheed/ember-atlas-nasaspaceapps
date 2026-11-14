@@ -38,7 +38,7 @@ const FlameScene = dynamic(() => import("./flame-scene"), {
 });
 type Analysis = {
   ai?: {
-    mode: "generative" | "authored";
+    mode: "generative" | "authored" | "pending";
     paragraphs?: { text: string; findingIds: string[] }[];
     limitation?: string;
     notice?: string;
@@ -151,19 +151,38 @@ export default function Lab({
     setLoading(true);
     setError("");
     try {
-      const response = await fetch("/api/analyze", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(
-          replay
-            ? { ...scenario, replay: { testId: series.testId, index: step } }
-            : scenario,
-        ),
-        signal: AbortSignal.timeout(25000),
-      });
+      const payload = replay
+        ? { ...scenario, replay: { testId: series.testId, index: step } }
+        : scenario;
+      const call = (stage: "notes" | "ai", ms: number) =>
+        fetch("/api/analyze", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ...payload, stage }),
+          signal: AbortSignal.timeout(ms),
+        });
+      // Notes and findings show at once; Claude's interpretation follows.
+      const response = await call("notes", 10000);
       const data = await response.json();
       if (!response.ok) throw new Error(data.error);
       setAnalysis(data);
+      setLoading(false);
+      if (data.ai?.mode === "pending") {
+        call("ai", 28000)
+          .then((r) => r.json())
+          .then((d) =>
+            setAnalysis((a) =>
+              a && JSON.stringify(a.scenario) === JSON.stringify(data.scenario)
+                ? { ...a, ai: d.ai ?? { mode: "authored" } }
+                : a,
+            ),
+          )
+          .catch(() =>
+            setAnalysis((a) =>
+              a ? { ...a, ai: { mode: "authored", notice: "AI interpretation was unavailable; showing the authored notes." } } : a,
+            ),
+          );
+      }
     } catch (e) {
       setError(e instanceof Error ? e.message : "Analysis unavailable.");
     } finally {
@@ -716,6 +735,15 @@ export default function Lab({
             </div>
           )}
           {analysis.ai?.notice && <p className="fine-print">{analysis.ai.notice}</p>}
+          {analysis.ai?.mode === "pending" && (
+            <div className="ai-interpretation" role="status">
+              <span className="tag">AI interpretation</span>
+              <p>
+                <LoaderCircle size={16} className="spin" /> Claude is
+                interpreting this setup from the NASA findings below…
+              </p>
+            </div>
+          )}
           <div className="analysis-notes">
             {analysis.insights.map((n) => (
               <article key={n.title}>

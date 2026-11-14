@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { answerFromEvidence } from "@/lib/evidence";
-import { synthesize, aiEnabled } from "@/lib/synthesis";
+import { synthesize, streamSynthesis, aiEnabled } from "@/lib/synthesis";
 import { buildAskContext } from "@/lib/context";
 import { allowAiCall, visitorKey } from "@/lib/rate-limit";
 import { readBody, badRequest } from "@/lib/http";
@@ -11,15 +11,20 @@ const schema = z.object({
     .array(z.object({ question: z.string().max(800), answer: z.string().max(4000) }))
     .max(2)
     .optional(),
+  stream: z.boolean().optional(),
 });
 export async function POST(request: Request) {
   try {
-    const { question, history = [] } = schema.parse(await readBody(request));
+    const { question, history = [], stream = false } = schema.parse(await readBody(request));
     const ctx = buildAskContext(question, history.at(-1)?.question);
     const answer = answerFromEvidence(ctx.query);
     const hasEvidence = answer.findings.length > 0 || ctx.profiles.length > 0;
     if (!hasEvidence) return Response.json(answer);
     const allowed = aiEnabled() ? allowAiCall(visitorKey(request)) : true;
+    if (stream)
+      return new Response(streamSynthesis(question, answer, allowed, ctx, history), {
+        headers: { "Content-Type": "application/x-ndjson; charset=utf-8", "Cache-Control": "no-store" },
+      });
     return Response.json(await synthesize(question, answer, allowed, ctx, history));
   } catch (e) {
     return badRequest(e);

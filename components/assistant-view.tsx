@@ -29,11 +29,12 @@ export default function AssistantView() {
   const [history, setHistory] = useState<Answer[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [draft, setDraft] = useState<{ question: string; text: string } | null>(null);
   const bottom = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    if (history.length === 0) return;
+    if (history.length === 0 && !draft) return;
     bottom.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
-  }, [history.length]);
+  }, [history.length, draft?.question]);
   async function ask(q: string) {
     if (q.trim().length < 3 || loading) return;
     setQuestion("");
@@ -48,15 +49,44 @@ export default function AssistantView() {
           history: history
             .slice(-2)
             .map((h) => ({ question: h.question.slice(0, 800), answer: h.answer.slice(0, 4000) })),
+          stream: true,
         }),
-        signal: AbortSignal.timeout(35000),
+        signal: AbortSignal.timeout(40000),
       });
-      const data = await response.json();
-      if (!response.ok)
-        throw new Error(data.error || "Unable to retrieve evidence.");
-      setHistory((h) => [...h, { ...data, question: q }]);
+      const streamed = (response.headers.get("content-type") ?? "").includes("ndjson");
+      if (!response.ok || !streamed || !response.body) {
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || "Unable to retrieve evidence.");
+        setHistory((h) => [...h, { ...data, question: q }]);
+        return;
+      }
+      // Show the answer while Claude writes it; the final line is the checked version.
+      setDraft({ question: q, text: "" });
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = "";
+      let final: Omit<Answer, "question"> | null = null;
+      for (;;) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        buffer += decoder.decode(value, { stream: true });
+        let cut;
+        while ((cut = buffer.indexOf("\n")) >= 0) {
+          const line = buffer.slice(0, cut).trim();
+          buffer = buffer.slice(cut + 1);
+          if (!line) continue;
+          const msg = JSON.parse(line);
+          if (msg.type === "partial") setDraft({ question: q, text: msg.text });
+          else if (msg.type === "final") final = msg.data;
+        }
+      }
+      setDraft(null);
+      if (!final) throw new Error("The answer stream ended early. Please try again.");
+      const done = final;
+      setHistory((h) => [...h, { ...done, question: q }]);
     } catch (e) {
       setError(e instanceof Error ? e.message : "Unable to retrieve evidence.");
+      setDraft(null);
       setQuestion(q);
     } finally {
       setLoading(false);
@@ -129,7 +159,25 @@ export default function AssistantView() {
               </p>
             </div>
           ))}
-          {loading && (
+          {draft && (
+            <div className="conversation-turn" aria-live="polite">
+              <div className="question-bubble">{draft.question}</div>
+              <div className="answer-label">
+                <Orbit size={19} />
+                <b>EMBER</b>
+                <span>Claude is writing from NASA findings…</span>
+              </div>
+              {draft.text ? (
+                <div className="answer-text">{draft.text}</div>
+              ) : (
+                <div className="loading-answer" role="status">
+                  <LoaderCircle size={18} className="spin" /> Reading the
+                  matching NASA findings…
+                </div>
+              )}
+            </div>
+          )}
+          {loading && !draft && (
             <div className="loading-answer" role="status">
               <LoaderCircle size={18} className="spin" /> Finding relevant NASA
               evidence…
