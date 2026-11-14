@@ -2,6 +2,14 @@
 
 Verification date: November 13, 2026. Current handoff release: v1.3.0.
 
+## November 14, 2026 — speed
+
+- Research companion streams its answer: the NASA findings being read appear in about 0.4–0.9 s, the answer starts in about 1.2–1.7 s and completes in about 3 s (previously 5–8 s with nothing shown). The final, citation-checked answer replaces the streamed draft.
+- Lab: authored notes and findings appear immediately (0.27 s server time); Claude's interpretation loads separately with a visible placeholder.
+- 3D flame: stops drawing off screen, redraws only for camera moves when paused, lowers resolution on slow GPUs, and uses the CPU particle flame on software WebGL (SwiftShader rendered about 860 ms per frame and froze the page; the CPU flame runs at about 20 ms per frame). Click-to-results in the lab fell from about 6 s to under 0.4 s in a GPU-less browser.
+- Page load (unchanged, already good): largest content painted at about 0.9 s on a phone viewport and 1.4 s on desktop, 469 KB transferred.
+- Live AI evaluation after these changes: 13/13. No error-level runtime logs.
+
 ## November 14, 2026 — repository move
 
 - The project now lives in `hibawaheed/ember-atlas-nasaspaceapps`, imported as a single snapshot commit identical to the last deployed code of `hibawaheed/ember-atlas` (tree diff empty; only `.env.example`, no secrets). The owner reconnected the Vercel project `ember-atlas` to the new repository; domains, environment variables and the AI Gateway budget belong to the project and carried over.
