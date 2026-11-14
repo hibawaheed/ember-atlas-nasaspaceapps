@@ -13,7 +13,7 @@ const post = async (path, body) => {
 const ask = (question, history) => post("/api/ask", { question, history });
 const ids = (a) => (a.citations ?? []).map((c) => c.findingId);
 const declined = (a) =>
-  /outside|cannot|can't|not able|no (source|evidence)|does not (address|support)|won't|decline|no (fire )?(risk )?score\b[^.]*\b(can|could) be|would be invented/i.test(a.answer ?? "");
+  /outside|cannot|can't|not able|no (source|evidence)|(does|do) not (address|support)|won't|decline|no (fire )?(risk )?score\b[^.]*\b(can|could) be|would be invented/i.test(a.answer ?? "");
 const cases = [
   ["Why can a flame survive without airflow?", "cites the Burning Rate Emulator finding",
     (a) => ids(a).includes("acme-zero-flow")],
