@@ -10,7 +10,11 @@ export function stripIds(text: string, ids: string[]) {
   let out = text;
   for (const id of ids)
     out = out.replace(new RegExp(`\\s*\\(?\\b${id.replace(/[-]/g, "\\-")}\\b\\)?`, "g"), "");
-  return out.replace(/\s+([.,;:])/g, "$1").trim();
+  return out
+    .replace(/\s*[[(]\s*(?:[,;]\s*)*[\])]/g, "") // brackets left empty by removed IDs
+    .replace(/ {2,}/g, " ")
+    .replace(/\s+([.,;:])/g, "$1")
+    .trim();
 }
 // Logs only the error type and message, never prompts or answers.
 function logAiFailure(route: string, e: unknown) {
