@@ -1,0 +1,42 @@
+{
+  "name": "ember-atlas",
+  "version": "1.4.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --hostname 0.0.0.0",
+    "build": "next build --webpack",
+    "start": "next start --hostname 0.0.0.0",
+    "typecheck": "tsc --noEmit",
+    "test": "node --require tsx/cjs tests/run.cjs",
+    "check": "npm run typecheck && npm test"
+  },
+  "engines": {
+    "node": ">=20.9"
+  },
+  "dependencies": {
+    "@fontsource-variable/inter": "^5.3.0",
+    "@fontsource/space-grotesk": "^5.3.0",
+    "ai": "^6.0.326",
+    "lucide-react": "^1.70.0",
+    "next": "^16.4.5",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "three": "^0.187.0",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@types/three": "^0.187.0",
+    "prettier": "^3.9.10",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  },
+  "license": "MIT",
+  "description": "NASA microgravity combustion evidence, measured data, and an interactive 3D research lab.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hibawaheed/ember-atlas.git"
+  }
+}

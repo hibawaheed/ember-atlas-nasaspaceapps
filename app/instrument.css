@@ -1,0 +1,661 @@
+/* Dark workspace hierarchy. Palette tokens live in globals.css.
+   Keep this layer for visual hierarchy, not duplicate component layouts. */
+html {
+  background: var(--paper);
+}
+::selection {
+  background: #f28b5640;
+  color: var(--ink);
+}
+:focus-visible {
+  outline-color: var(--orange);
+}
+button,
+a,
+summary {
+  touch-action: manipulation;
+}
+button:disabled {
+  opacity: 0.48;
+}
+.sidebar {
+  border-right: 1px solid var(--line);
+}
+.brand-icon {
+  border-radius: 7px;
+  transform: none;
+  color: #17120f;
+}
+.brand > span:last-child {
+  letter-spacing: 2px;
+}
+.brand small {
+  letter-spacing: 5px;
+}
+.workspace-label {
+  border: 0;
+  padding-left: 3px;
+  justify-content: flex-start;
+  font-family: var(--mono);
+  letter-spacing: 0.5px;
+}
+.sidebar nav button {
+  border-radius: 9px;
+  color: var(--muted);
+}
+.sidebar nav button:hover {
+  background: var(--surface);
+  color: var(--ink);
+}
+.sidebar nav button.active {
+  background: #24233e;
+  color: var(--ink);
+}
+.sidebar nav button.active svg,
+.sidebar-guide svg {
+  color: var(--orange);
+}
+.sidebar nav button.active:before {
+  background: var(--orange);
+  border-radius: 0;
+}
+.nav-dot {
+  background: var(--orange);
+}
+.sidebar-guide {
+  border-color: var(--line);
+}
+.sidebar-guide span {
+  font: 8px/1.8 var(--mono);
+  letter-spacing: 0.2px;
+}
+.sidebar-guide b {
+  margin-top: 4px;
+  font: 12px var(--display);
+  color: var(--ink);
+}
+.topbar {
+  background: var(--paper);
+}
+.breadcrumbs b,
+.challenge-link {
+  color: var(--ink);
+}
+.snapshot,
+.eyebrow,
+.mini-breadcrumb,
+.nav-caption,
+.section-number {
+  font-family: var(--mono);
+}
+.snapshot {
+  color: var(--muted);
+}
+.mini-breadcrumb {
+  letter-spacing: 1px;
+}
+.status-dot {
+  background: var(--green);
+  box-shadow: none;
+}
+.page-actions {
+  margin-bottom: 27px;
+}
+.overview-hero {
+  padding-bottom: 26px;
+  align-items: center;
+  gap: 24px;
+}
+.overview-hero h1 {
+  font-size: clamp(34px, 3.4vw, 56px);
+  font-weight: 500;
+  letter-spacing: -2px;
+  margin: 12px 0;
+}
+.overview-hero p,
+.section-intro p {
+  color: var(--muted);
+  font-size: 13px;
+}
+.overview-hero h1 em,
+.section-intro h1 em {
+  font: inherit;
+  color: inherit;
+}
+.hero-coordinates,
+.outline-mark,
+.insight-star {
+  display: none;
+}
+.hero-link {
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-left: 2px solid var(--orange);
+  border-radius: 2px;
+  padding: 17px 42px 17px 18px;
+  font-size: 13px;
+  min-width: 210px;
+  background: var(--surface);
+}
+.hero-link svg {
+  right: 14px;
+  bottom: 17px;
+  color: var(--orange);
+}
+.hero-link span {
+  font: 8px var(--mono);
+  color: var(--muted);
+}
+.quick-launch {
+  border-top: 0;
+  margin-bottom: 18px;
+  padding-top: 0;
+}
+.quick-launch b,
+.quick-launch button {
+  color: var(--ink);
+}
+.quick-launch button:first-of-type {
+  color: var(--orange);
+}
+.stats-grid {
+  gap: 0;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  overflow: hidden;
+}
+.stats-grid article,
+.stats-grid .stat-accent {
+  background: var(--surface);
+  border: 0;
+  border-right: 1px solid var(--line);
+  border-radius: 0;
+  padding: 16px 20px;
+}
+.stats-grid article:last-child {
+  border-right: 0;
+}
+.stats-grid article > span {
+  font: 8px var(--mono);
+  letter-spacing: 0.7px;
+}
+.stats-grid strong {
+  font: 400 30px var(--mono);
+  color: var(--ink);
+}
+.stats-grid svg {
+  display: none;
+}
+.stats-grid p {
+  font-size: 10px;
+}
+.section-intro {
+  margin-bottom: 26px;
+  align-items: center;
+}
+.section-intro h1,
+.lab-page .section-intro h1,
+.guided-page .section-intro h1 {
+  font: 500 clamp(30px, 3vw, 42px)/1.15 var(--display);
+  letter-spacing: -1.4px;
+  margin: 12px 0;
+}
+.section-intro > svg {
+  display: none;
+}
+.button,
+select,
+.search-bar,
+.ask-form,
+.filter-pills button {
+  border-radius: 9px;
+}
+.button.primary,
+.analyze-button,
+.ask-form button,
+.answer-label > span {
+  background: var(--orange);
+  color: #18120e;
+  border-color: var(--orange);
+}
+.button.primary:hover,
+.analyze-button:hover {
+  background: #ffa371;
+  color: #18120e;
+}
+.button.secondary {
+  background: var(--surface);
+  color: var(--ink);
+  border-color: var(--line);
+}
+.button.secondary:hover {
+  background: var(--surface-raised);
+}
+.button:hover {
+  transform: none;
+}
+.text-link,
+.source-row > svg,
+.evidence-expanded a,
+.investigation-sources a {
+  color: var(--orange);
+}
+.lab-shell,
+.panel,
+.evidence-card,
+.insight-panel,
+.method-cards > article,
+.assistant-workspace,
+.guide-start,
+.lab-tour,
+.concept-grid article,
+.investigation-card {
+  border-radius: 14px;
+  box-shadow: none;
+}
+.lab-title {
+  background: var(--surface);
+}
+.lab-title h2 {
+  font-size: 16px;
+}
+.lab-controls {
+  background: var(--surface);
+  border-left: 1px solid var(--line);
+}
+.visualizer {
+  background: #090d11;
+}
+.scene-caption {
+  color: var(--ink);
+}
+.scene-caption span,
+.viewer-top > span,
+.viewer-data > div > span,
+.viewer-bottom,
+.animation-status {
+  color: #a5b4bc;
+}
+.viewer-top button,
+.viewer-top .animation-speed {
+  background: #1a2229;
+  color: #d5dce1;
+  border-color: #394650;
+}
+.viewer-top button:hover {
+  background: #29333c;
+}
+.viewer-data strong {
+  color: #edf3f5;
+  font-family: var(--mono);
+  font-weight: 400;
+}
+.animation-status > span {
+  color: #9dacb5;
+}
+.animation-status i {
+  background: var(--green);
+}
+.range-control b {
+  color: var(--ink);
+  font-family: var(--mono);
+  font-weight: 400;
+}
+.range-control small {
+  color: var(--muted);
+}
+.lab-mode,
+.gravity-select {
+  background: var(--well);
+}
+.lab-mode button.active,
+.gravity-select button.active {
+  background: #29324b;
+  color: var(--ink);
+  box-shadow: none;
+}
+.gravity-select button.active svg {
+  color: var(--orange);
+}
+.lab-footer {
+  background: var(--surface);
+}
+.viewer-bottom,
+.viewer-data {
+  border-color: #29343d;
+}
+.tag,
+.tag.green,
+.tag.orange {
+  background: var(--well);
+  border-color: var(--line);
+  color: var(--muted);
+  font: 9px var(--mono);
+}
+.tag.green {
+  color: #a0c8b6;
+  border-color: #364e44;
+}
+.tag.orange {
+  color: var(--orange);
+  border-color: #674732;
+}
+.inference {
+  background: var(--well);
+  border-left: 2px solid #4d6259;
+}
+.evidence-card h3,
+.source-row h4 {
+  color: var(--ink);
+}
+.evidence-expanded {
+  background: var(--well);
+}
+.filter-pills button.active {
+  color: var(--orange);
+  background: #28233a;
+  border-color: #75503a;
+}
+.insight-panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-top: 2px solid #8bb7a6;
+}
+.insight-lead {
+  color: var(--ink);
+  font-style: normal;
+  font-size: 18px;
+}
+.measurement-svg text {
+  fill: var(--muted);
+}
+.measurement-svg .axis-label {
+  fill: var(--muted);
+}
+.chart-detail {
+  background: var(--well);
+}
+.chart-legends i {
+  box-shadow: none;
+}
+table th {
+  color: var(--ink);
+  background: var(--well);
+  font-weight: 500;
+}
+table td {
+  color: var(--muted);
+}
+.table-wrap {
+  border-color: var(--line);
+}
+.destination-tabs button {
+  border-radius: 9px;
+}
+.destination-tabs button.active {
+  border-color: var(--orange);
+  background: #28233a;
+}
+.destination-tabs button.active > span {
+  color: var(--orange);
+}
+.mission-banner {
+  border: 1px solid var(--line);
+  border-left: 2px solid var(--green);
+  background: var(--surface);
+  border-radius: 9px;
+}
+.mission-planet {
+  display: none;
+}
+.priority-grid button.active {
+  border-color: var(--orange);
+  background: #28233a;
+}
+.investigation-rank {
+  font: 20px var(--mono);
+  color: var(--orange);
+}
+.reason-chips span {
+  background: var(--well);
+  border: 1px solid var(--line);
+}
+.compare-pick.selected {
+  color: #a0c8b6;
+  border-color: #557363;
+  background: #1c2923;
+}
+.guide-start,
+.lab-tour {
+  background: var(--surface);
+  border-color: var(--line);
+  border-left: 2px solid var(--orange);
+}
+.guide-start .tag {
+  border: 0;
+  padding: 0;
+  color: var(--orange);
+  background: none;
+}
+.guide-start h2 {
+  font-size: 28px;
+}
+.howto-grid {
+  border-radius: 9px;
+}
+.howto-grid > button {
+  background: var(--surface);
+}
+.howto-grid > button:hover {
+  background: var(--surface-raised);
+}
+.howto-grid small {
+  font-family: var(--mono);
+  color: var(--orange);
+}
+.howto-grid svg {
+  color: var(--muted);
+}
+.concept-art {
+  background: var(--well);
+}
+.concept-body h2 {
+  font: 500 21px var(--display);
+}
+.quiz-options button.correct {
+  border-color: #628d77;
+  background: #1c2e24;
+  color: #b8dfc7;
+}
+.quiz-options button.retry {
+  border-color: #b2764d;
+  background: #35271e;
+  color: #f5be8b;
+}
+.quiz-score {
+  background: #1c2e24;
+  color: #b8dfc7;
+}
+.tour-navigation > div button.active {
+  background: var(--orange);
+  color: #18120e;
+  border-color: var(--orange);
+}
+.question-bubble {
+  background: var(--surface-raised);
+  color: var(--ink);
+  border-left: 2px solid var(--orange);
+  border-radius: 9px;
+}
+.answer-text {
+  color: #c9cfd2;
+  line-height: 1.85;
+}
+.assistant-orbit {
+  border-radius: 14px;
+  background: var(--well);
+  border: 1px solid var(--line);
+  color: var(--orange);
+}
+.assistant-principles {
+  background: var(--surface);
+  border-color: var(--line);
+}
+.answer-citations a {
+  color: var(--orange);
+}
+.prompt-grid button:hover {
+  background: var(--surface-raised);
+  border-color: #626b70;
+}
+.ask-form:focus-within,
+.search-bar:focus-within {
+  border-color: var(--orange);
+}
+.ask-form input,
+.search-bar input {
+  color: var(--ink);
+}
+.ask-form input::placeholder,
+.search-bar input::placeholder {
+  color: #899298;
+}
+.error {
+  color: #ffb39f;
+  background: #36201c;
+  border-color: #8a5144;
+}
+.toast {
+  background: var(--surface-raised);
+  color: var(--ink);
+  border: 1px solid var(--line);
+}
+.main-footer {
+  border-color: var(--line);
+}
+.view-enter {
+  animation: none;
+}
+@media (max-width: 900px) {
+  .overview-hero {
+    align-items: flex-start;
+  }
+  .hero-link {
+    min-width: 175px;
+    font-size: 12px;
+  }
+  .lab-controls {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+  .lab-content {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 650px) {
+  .sidebar nav button {
+    min-height: 43px;
+    font-size: 12px;
+  }
+  .overview-hero h1 {
+    font-size: 38px;
+    letter-spacing: -1.8px;
+  }
+  .overview-hero {
+    padding-bottom: 19px;
+  }
+  .overview-hero p,
+  .section-intro p {
+    font-size: 12px;
+  }
+  .section-intro h1,
+  .lab-page .section-intro h1,
+  .guided-page .section-intro h1 {
+    font-size: 32px;
+  }
+  .stats-grid article {
+    padding: 15px;
+    border-bottom: 1px solid var(--line);
+  }
+  .stats-grid article:nth-child(2) {
+    border-right: 0;
+  }
+  .stats-grid article:nth-child(n + 3) {
+    border-bottom: 0;
+  }
+  .stats-grid article > span {
+    font-size: 8px;
+    letter-spacing: 0.3px;
+  }
+  .stats-grid p {
+    font-size: 9px;
+  }
+  .stats-grid strong {
+    font-size: 28px;
+  }
+  .quick-launch {
+    flex-wrap: wrap;
+  }
+  .quick-launch > span {
+    width: 100%;
+  }
+  .lab-title h2 {
+    font-size: 14px;
+  }
+  .lab-mode button {
+    font-size: 8px;
+  }
+  .viewer-top > span {
+    font-size: 6px;
+  }
+  .guide-start h2 {
+    font-size: 24px;
+  }
+}
+
+/* Native dropdown lists: the browser draws the open list itself. Selects
+   with a transparent background otherwise fall back to a white list with
+   the page's light text, which is unreadable. */
+select {
+  color-scheme: dark;
+  color: var(--ink);
+}
+select option,
+select optgroup {
+  background-color: var(--surface-raised);
+  color: var(--ink);
+}
+select option:checked {
+  background-color: var(--orange);
+  color: #18120e;
+}
+select option:disabled {
+  color: var(--muted);
+}
+
+/* Owner preference: no decorative italic headlines. */
+.section-intro h1 em,
+.insight-lead,
+.assistant-welcome h2,
+.method-pipeline h2,
+.controls-heading h3 {
+  font-style: normal;
+  font-family: inherit;
+}
+.assistant-welcome h2 { font-weight: 500; }
+
+/* Measured-data chart: legible legend and detail text. */
+.chart-legends button,
+.expanded .chart-legends button { font-size: 12px; gap: 6px; }
+.chart-legends i { width: 8px; height: 8px; }
+.chart-detail,
+.expanded .chart-detail { font-size: 12px; }
+.chart-source p { font-size: 11px; }
+@media (max-width: 760px) {
+  .chart-legends button { font-size: 11px; }
+  .chart-detail { font-size: 11px; flex-wrap: wrap; }
+  .chart-source p { font-size: 10px; }
+}
+.skip-link { transform: translate(-50%, -200%); }
+.skip-link:focus { transform: translate(-50%, 0); }
+.build-stamp { opacity: 0.7; font-variant-numeric: tabular-nums; }

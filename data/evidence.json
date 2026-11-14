@@ -1,0 +1,931 @@
+{
+  "schemaVersion": "1.0.0",
+  "retrievedAt": "2026-11-13",
+  "publisher": "EMBER Atlas curated demo",
+  "scope": "Curated NASA evidence, not an exhaustive literature review or a spacecraft safety certification.",
+  "challenge": {
+    "title": "Flame in Freefall: SI-Powered Fire Safety Insights from Microgravity Combustion Data",
+    "url": "https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/",
+    "verification": "Details tab reviewed November 9, 2026 and rechecked from the owner's browser screenshots on November 13, 2026, when the Resources tab listed background resources (see docs/RESOURCES-2026-11-13.md)."
+  },
+  "sources": [
+    {
+      "id": "flex-discovery",
+      "title": "Cool Flames on the International Space Station — An Anatomy of Discovery",
+      "url": "https://blogs.nasa.gov/ISS_Science_Blog/2013/11/25/cool-flames-on-the-international-space-station-an-anatomy-of-discovery/",
+      "publishedDate": "2013-11-25",
+      "type": "NASA scientist account"
+    },
+    {
+      "id": "flex-2021",
+      "title": "Cool Flames Created During a First for International Space Station Research",
+      "url": "https://www.nasa.gov/missions/station/cool-flames-created-during-a-first-for-international-space-station-research/",
+      "publishedDate": "2021-07-16",
+      "type": "NASA research summary"
+    },
+    {
+      "id": "bass-report",
+      "title": "Burning and Suppression of Solids–II (BASS-II) Summary Report",
+      "url": "https://ntrs.nasa.gov/citations/20210011385",
+      "downloadUrl": "https://ntrs.nasa.gov/api/citations/20210011385/downloads/TM-20210011385.pdf",
+      "publishedDate": "2021-10-01",
+      "type": "NASA technical memorandum",
+      "reportNumber": "NASA/TM-20210011385"
+    },
+    {
+      "id": "acme-results",
+      "title": "Space Station’s Quest for the Secrets of Fire",
+      "url": "https://www.nasa.gov/humans-in-space/space-stations-quest-for-the-secrets-of-fire/",
+      "publishedDate": "2022-04-18",
+      "type": "NASA research summary"
+    },
+    {
+      "id": "sofie-gel",
+      "title": "Solid Fuel Ignition and Extinction – Growth and Extinction Limit (SoFIE-GEL)",
+      "url": "https://science.nasa.gov/biological-physical/investigations/sofie-gel/",
+      "publishedDate": null,
+      "type": "NASA investigation description"
+    },
+    {
+      "id": "sofie-imagery",
+      "title": "NASA Studies Fire in Microgravity",
+      "url": "https://svs.gsfc.nasa.gov/31394/",
+      "publishedDate": "2026-05-06",
+      "type": "NASA Scientific Visualization Studio experiment imagery"
+    },
+    {
+      "id": "saffire-overview",
+      "title": "Flame Burns Out on NASA’s Long-Running Spacecraft Fire Experiment",
+      "url": "https://www.nasa.gov/humans-in-space/flame-burns-out-on-nasas-long-running-spacecraft-fire-experiment/",
+      "publishedDate": "2024-02-14",
+      "type": "NASA research summary"
+    },
+    {
+      "id": "saffire-results",
+      "title": "Preliminary Results from the Saffire VI Experiment",
+      "url": "https://ntrs.nasa.gov/citations/20240007488",
+      "downloadUrl": "https://ntrs.nasa.gov/api/citations/20240007488/downloads/Saffire%20ICES%202024%20Saffire%20presentation072124small.pdf?attachment=true",
+      "publishedDate": null,
+      "dateLabel": "ICES 2024, July 21–25",
+      "type": "NASA conference presentation",
+      "reportNumber": "NTRS 20240007488"
+    },
+    {
+      "id": "psi-flex",
+      "title": "NASA PSI-69: Flame Extinguishment Experiment (FLEX)",
+      "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-69",
+      "publishedDate": "2016-07-31",
+      "type": "NASA data repository",
+      "doi": "10.60555/mbq8-0451",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "psi-bass",
+      "title": "NASA PSI-25: Burning and Suppression of Solids - II (BASS-II)",
+      "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+      "publishedDate": "2022-12-31",
+      "type": "NASA data repository",
+      "doi": "10.60555/4qc4-de67",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "psi-tomography",
+      "title": "NASA PSI-62: Concurrent Flame Spread Modeling using Flamelet Generated Manifolds in Microgravity with Comparison to BASS Experiments using Two-Color Tomography",
+      "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-62",
+      "publishedDate": "2025-11-14",
+      "type": "NASA data repository",
+      "doi": "10.60555/e9xp-ex83",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "saffire-v",
+      "title": "Saffire Ignites New Discoveries in Space",
+      "url": "https://www.nasa.gov/humans-in-space/saffire-ignites-new-discoveries-in-space/",
+      "publishedDate": "2021-01-19",
+      "type": "NASA research summary"
+    },
+    {
+      "id": "psi-same",
+      "title": "NASA PSI-102: Smoke and Aerosol Measurement Experiment (SAME)",
+      "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-102",
+      "publishedDate": null,
+      "type": "NASA data repository"
+    },
+    {
+      "id": "same-overview",
+      "title": "Smoke Aerosol Measurement Experiment: objectives and diagnostics",
+      "url": "https://www1.grc.nasa.gov/wp-content/uploads/SAME_Quad.pdf",
+      "publishedDate": "2008-09-17",
+      "type": "NASA experiment overview"
+    },
+    {
+      "id": "flex-operations",
+      "title": "FLEX — Combustion Integrated Rack Operations",
+      "url": "https://gipoc.grc.nasa.gov/wp/fcf-cir/flex/",
+      "publishedDate": null,
+      "type": "NASA investigation description"
+    },
+    {
+      "id": "challenge-2026",
+      "title": "Flame in Freefall: SI-Powered Fire Safety Insights from Microgravity Combustion Data (challenge statement)",
+      "url": "https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/",
+      "publishedDate": null,
+      "dateLabel": "Checked November 13, 2026",
+      "type": "NASA Space Apps challenge statement"
+    },
+    {
+      "id": "bre-page",
+      "title": "Burning Rate Emulator (BRE)",
+      "url": "https://science.nasa.gov/biological-physical/investigations/bre/",
+      "publishedDate": null,
+      "type": "NASA investigation description"
+    },
+    {
+      "id": "efield-page",
+      "title": "Electric-Field Effects on Laminar Diffusion Flames (E-FIELD Flames)",
+      "url": "https://science.nasa.gov/biological-physical/investigations/e-field-flames/",
+      "publishedDate": null,
+      "type": "NASA investigation description"
+    },
+    {
+      "id": "acme-facility",
+      "title": "Advanced Combustion Microgravity Experiment (ACME) Facility",
+      "url": "https://science.nasa.gov/biological-physical/investigations/acme/",
+      "publishedDate": null,
+      "type": "NASA investigation description"
+    },
+    {
+      "id": "researchers-guide",
+      "title": "A Researcher's Guide to: International Space Station Combustion Science (NP-2015-10-034-JSC)",
+      "url": "https://www.nasa.gov/sites/default/files/atoms/files/np-2015-10-034-jsc_combustion_in_reduced_gravity-iss-mini-book-011116-508.pdf",
+      "publishedDate": null,
+      "dateLabel": "2015",
+      "type": "NASA ISS researcher's guide",
+      "reportNumber": "NP-2015-10-034-JSC",
+      "sha256": "5fe046efe4e35e506023e27a9784d041e893026f19c9987591483614aea5d6b6"
+    }
+  ],
+  "findings": [
+    {
+      "id": "flex-spherical",
+      "title": "A flame without an upward direction",
+      "experiment": "FLEX",
+      "date": "2013-11-25",
+      "sourceIds": [
+        "flex-discovery"
+      ],
+      "claim": "In quiescent microgravity, ignited liquid fuel droplets can develop nearly spherical flames around the droplet.",
+      "safetyImplication": "Treat geometry and ventilation as inputs when translating laboratory observations into spacecraft scenarios.",
+      "implicationType": "inference",
+      "limitations": "Droplet geometry does not represent every solid-material fire or forced-flow condition.",
+      "tags": [
+        "microgravity",
+        "flame shape",
+        "liquid fuel"
+      ],
+      "strength": "observed",
+      "quantities": [
+        {
+          "name": "Studied droplet diameter range",
+          "minimum": 1.0,
+          "maximum": 6.0,
+          "unit": "mm",
+          "sourceId": "flex-discovery"
+        }
+      ]
+    },
+    {
+      "id": "flex-cool",
+      "title": "Combustion can outlast the visible flame",
+      "experiment": "FLEX",
+      "date": "2021-07-16",
+      "sourceIds": [
+        "flex-2021"
+      ],
+      "claim": "FLEX experiments discovered non-premixed cool flames aboard the space station in 2012, opening a path to study low-temperature combustion.",
+      "safetyImplication": "Visible-light appearance alone is an incomplete indicator of combustion state.",
+      "implicationType": "inference",
+      "limitations": "This finding is specific to tested fuels and environments; it does not establish a universal detection threshold.",
+      "tags": [
+        "cool flames",
+        "detection",
+        "extinction"
+      ],
+      "strength": "observed",
+      "quantities": []
+    },
+    {
+      "id": "flex-reignition",
+      "title": "An apparent extinction can be temporary",
+      "experiment": "FLEX",
+      "date": "2013-11-25",
+      "sourceIds": [
+        "flex-discovery"
+      ],
+      "claim": "In some FLEX tests, droplets kept shrinking after visible flames disappeared; modest pressure increases sometimes produced brief flame reappearance.",
+      "safetyImplication": "Post-extinction monitoring should distinguish visual disappearance from demonstrated combustion termination.",
+      "implicationType": "inference",
+      "limitations": "A qualitative experimental observation, not a probability of reignition in a crew vehicle.",
+      "tags": [
+        "reignition",
+        "pressure",
+        "detection"
+      ],
+      "strength": "observed",
+      "quantities": []
+    },
+    {
+      "id": "bass-flow",
+      "title": "Airflow changes the measured spread rate",
+      "experiment": "BASS-II",
+      "date": "2021-10-01",
+      "sourceIds": [
+        "bass-report"
+      ],
+      "claim": "Published BASS-II PMMA tests report different flame-spread rates across successive ventilation settings.",
+      "safetyImplication": "Compare conditions within each run before interpreting spread-rate differences.",
+      "implicationType": "inference",
+      "limitations": "Oxygen changed during runs; the measurements do not isolate airflow as the sole cause.",
+      "tags": [
+        "ventilation",
+        "flame spread",
+        "solid fuel",
+        "PMMA"
+      ],
+      "strength": "observed",
+      "quantities": []
+    },
+    {
+      "id": "bass-calorimetry",
+      "title": "Small flames still need multiple diagnostics",
+      "experiment": "BASS-II",
+      "date": "2021-10-01",
+      "sourceIds": [
+        "bass-report"
+      ],
+      "claim": "Most BASS-II tests had calculated heat-release rates below 100 W, using oxygen consumption and burn duration.",
+      "safetyImplication": "Include gas measurements alongside heat release when reviewing experimental hazards.",
+      "implicationType": "inference",
+      "limitations": "Small glovebox tests do not represent full-cabin fire consequences.",
+      "tags": [
+        "heat release",
+        "oxygen consumption",
+        "measurement"
+      ],
+      "strength": "observed",
+      "quantities": [
+        {
+          "name": "Reported heat-release characterization",
+          "value": 100,
+          "relation": "most tests below",
+          "unit": "W",
+          "sourceId": "bass-report"
+        }
+      ]
+    },
+    {
+      "id": "acme-zero-flow",
+      "title": "Stopping airflow is not a universal off switch",
+      "experiment": "ACME / BRE",
+      "date": "2022-04-18",
+      "sourceIds": [
+        "acme-results"
+      ],
+      "claim": "The Burning Rate Emulator demonstrated combustion lasting minutes without airflow in atmospheres considered for future crew vehicles.",
+      "safetyImplication": "Do not interpret a zero-ventilation setting as proof of extinction.",
+      "implicationType": "inference",
+      "limitations": "Results concern the tested burner and atmospheres, not every material or cabin.",
+      "tags": [
+        "ventilation",
+        "extinction",
+        "exploration atmospheres"
+      ],
+      "strength": "observed",
+      "quantities": []
+    },
+    {
+      "id": "acme-radiation",
+      "title": "Bigger flames can lose the heat they need",
+      "experiment": "ACME / Flame Design",
+      "date": "2022-04-18",
+      "sourceIds": [
+        "acme-results"
+      ],
+      "claim": "Flame Design produced quasi-steady spherical non-premixed flames and observed radiative heat loss extinguishing larger flames.",
+      "safetyImplication": "A visualization should allow extinction; flame size cannot imply monotonically increasing hazard.",
+      "implicationType": "inference",
+      "limitations": "A gaseous-fuel experiment, not a calibrated spacecraft fire model.",
+      "tags": [
+        "radiation",
+        "extinction",
+        "flame shape"
+      ],
+      "strength": "observed",
+      "quantities": []
+    },
+    {
+      "id": "acme-benchmarks",
+      "title": "A substantial combustion benchmark collection",
+      "experiment": "ACME",
+      "date": "2022-04-18",
+      "sourceIds": [
+        "acme-results"
+      ],
+      "claim": "NASA reports more than 1,500 ignited flames across six ACME investigations, including flame growth, extinction, soot, and cool-flame studies.",
+      "safetyImplication": "Use experiment identity and diagnostic method to select comparable evidence.",
+      "implicationType": "inference",
+      "limitations": "A program-wide count is not a count of interchangeable or independently replicated measurements.",
+      "tags": [
+        "benchmark data",
+        "provenance",
+        "comparability"
+      ],
+      "strength": "review",
+      "quantities": [
+        {
+          "name": "Flames ignited",
+          "value": 1500,
+          "relation": "greater than",
+          "unit": "flames",
+          "sourceId": "acme-results"
+        }
+      ]
+    },
+    {
+      "id": "sofie-gel-variables",
+      "title": "Material history belongs in the experiment",
+      "experiment": "SoFIE-GEL",
+      "date": null,
+      "sourceIds": [
+        "sofie-gel"
+      ],
+      "claim": "SoFIE-GEL investigates PMMA-sphere flame growth and extinction as functions of airflow, oxygen percentage, pressure, and internal heating.",
+      "safetyImplication": "Retain pressure and sample-temperature context when comparing material flammability.",
+      "implicationType": "inference",
+      "limitations": "This record describes investigation objectives, not a reported quantitative outcome.",
+      "tags": [
+        "preheating",
+        "pressure",
+        "oxygen",
+        "solid fuel"
+      ],
+      "strength": "program-goal",
+      "quantities": []
+    },
+    {
+      "id": "sofie-self-flow",
+      "title": "Quiescent does not mean motionless",
+      "experiment": "SoFIE",
+      "date": "2026-05-06",
+      "sourceIds": [
+        "sofie-imagery"
+      ],
+      "claim": "NASA imagery shows a thin fabric flame brightening periodically in a quiescent microgravity chamber as vaporization-driven flow draws in oxygen.",
+      "safetyImplication": "A no-fan scenario can still contain fuel-driven transport and changing flame brightness.",
+      "implicationType": "inference",
+      "limitations": "The image sequence does not provide a calibrated temperature or heat-release time series.",
+      "tags": [
+        "ventilation",
+        "oscillation",
+        "solid fuel",
+        "oxygen"
+      ],
+      "strength": "observed",
+      "quantities": [
+        {
+          "name": "Image spacing",
+          "value": 0.2,
+          "unit": "s",
+          "sourceId": "sofie-imagery"
+        }
+      ]
+    },
+    {
+      "id": "saffire-atmospheres",
+      "title": "Exploration atmospheres change the test context",
+      "experiment": "Saffire-VI",
+      "date": "2024-02-14",
+      "sourceIds": [
+        "saffire-overview"
+      ],
+      "claim": "Saffire-VI tested fires in an uncrewed Cygnus spacecraft with elevated oxygen and reduced pressure, using 19 experiment runs.",
+      "safetyImplication": "Compare oxygen fraction together with pressure when reviewing exploration-cabin evidence.",
+      "implicationType": "inference",
+      "limitations": "The campaign is not a qualification of a particular future cabin or material.",
+      "tags": [
+        "oxygen",
+        "pressure",
+        "large-scale fire"
+      ],
+      "strength": "observed",
+      "quantities": [
+        {
+          "name": "Saffire-VI experiment runs",
+          "value": 19,
+          "unit": "runs",
+          "sourceId": "saffire-overview"
+        }
+      ]
+    },
+    {
+      "id": "saffire-gas-hazard",
+      "title": "The hazard extends beyond the hot zone",
+      "experiment": "Saffire-IV–VI",
+      "date": null,
+      "sourceIds": [
+        "saffire-results"
+      ],
+      "claim": "Preliminary Saffire results describe substantial combustion-gas hazards despite limited temperature increases away from the fire.",
+      "safetyImplication": "Present gas exposure and detection timing separately from flame intensity.",
+      "implicationType": "inference",
+      "limitations": "Preliminary test-specific findings; published exposure comparisons are not a universal cabin risk threshold.",
+      "tags": [
+        "carbon monoxide",
+        "carbon dioxide",
+        "detection",
+        "heat release"
+      ],
+      "strength": "observed",
+      "quantities": [
+        {
+          "name": "Tested practical fire power range",
+          "minimum": 1.5,
+          "maximum": 3.2,
+          "unit": "kW",
+          "sourceId": "saffire-results",
+          "locator": "Slide 21"
+        }
+      ]
+    },
+    {
+      "id": "saffire-oxygen",
+      "title": "An enriched atmosphere changes the flame",
+      "experiment": "Saffire-V",
+      "date": "2021-01-19",
+      "sourceIds": [
+        "saffire-v"
+      ],
+      "claim": "Saffire-V lowered spacecraft pressure and increased oxygen concentration. NASA reported more energetic flames at elevated oxygen levels and faster burning on thinner PMMA ribs.",
+      "safetyImplication": "Evaluate atmospheric composition and material geometry together when selecting relevant fire tests.",
+      "implicationType": "inference",
+      "limitations": "Qualitative results from specific Saffire-V conditions do not supply a universal hazard threshold or calibrated intensity function.",
+      "tags": [
+        "oxygen",
+        "pressure",
+        "PMMA",
+        "exploration atmospheres",
+        "geometry"
+      ],
+      "strength": "observed",
+      "quantities": []
+    },
+    {
+      "id": "same-particles",
+      "title": "A detector needs the right smoke signature",
+      "experiment": "SAME",
+      "date": null,
+      "sourceIds": [
+        "same-overview"
+      ],
+      "claim": "SAME was designed to measure smoke particle-size distribution from overheated spacecraft materials in microgravity.",
+      "safetyImplication": "Detector research should consider the particles produced by relevant materials, as well as flame visibility.",
+      "implicationType": "inference",
+      "limitations": "An investigation objective is not a detector sensitivity result or an alarm threshold.",
+      "tags": [
+        "smoke",
+        "detection",
+        "aerosol",
+        "particles",
+        "materials"
+      ],
+      "strength": "program-goal",
+      "quantities": []
+    },
+    {
+      "id": "same-detectors",
+      "title": "Test the sensor in the environment it will serve",
+      "experiment": "SAME",
+      "date": null,
+      "sourceIds": [
+        "same-overview"
+      ],
+      "claim": "SAME objectives included evaluating existing spacecraft smoke detectors and advanced detection sensors in microgravity.",
+      "safetyImplication": "Use detector-specific evidence when comparing detection concepts for crew habitats.",
+      "implicationType": "inference",
+      "limitations": "This overview does not establish a winning sensor design, response time, or operational alarm setting.",
+      "tags": [
+        "sensor",
+        "detection",
+        "smoke",
+        "equipment",
+        "prevention"
+      ],
+      "strength": "program-goal",
+      "quantities": []
+    },
+    {
+      "id": "flex-suppression",
+      "title": "Suppression can be studied as a boundary",
+      "experiment": "FLEX",
+      "date": null,
+      "sourceIds": [
+        "flex-operations"
+      ],
+      "claim": "FLEX was designed to quantify inert-gas suppressant performance and examine the oxygen limit for sustained droplet combustion.",
+      "safetyImplication": "Extinction evidence needs the fuel, atmosphere, and suppressant context; one limit is not universal.",
+      "implicationType": "inference",
+      "limitations": "A research objective, not an instruction for dosing a suppressant or certifying a crew atmosphere.",
+      "tags": [
+        "suppression",
+        "extinction",
+        "oxygen",
+        "liquid fuel",
+        "suppressant"
+      ],
+      "strength": "program-goal",
+      "quantities": []
+    },
+    {
+      "id": "partial-gravity-gap",
+      "title": "No partial-gravity combustion data in PSI yet",
+      "experiment": "LUCI / FM2",
+      "date": null,
+      "sourceIds": [
+        "challenge-2026"
+      ],
+      "claim": "The challenge statement says PSI currently holds no partial-gravity combustion data. It expects future data from the Lunar-g Combustion Investigation (LUCI) and the Flammability of Materials on the Moon (FM2) experiment, and notes that microgravity and normal-gravity results could bound intermediate gravity levels.",
+      "safetyImplication": "Moon and Mars fire questions currently rest on microgravity and Earth-gravity results; treat any lunar or Martian estimate as bounded, not measured.",
+      "implicationType": "inference",
+      "limitations": "Bounding is a research approach named in the statement, not a validated method for a particular material or habitat.",
+      "tags": [
+        "partial gravity",
+        "moon",
+        "mars",
+        "lunar",
+        "exploration",
+        "data gap"
+      ],
+      "strength": "review",
+      "quantities": []
+    },
+    {
+      "id": "lunar-atmosphere",
+      "title": "A Moon base atmosphere is likely oxygen-enriched",
+      "experiment": "Exploration atmospheres",
+      "date": null,
+      "sourceIds": [
+        "challenge-2026"
+      ],
+      "claim": "The challenge statement expects a Moon base and pressurized rovers to use 30% oxygen or more at 10.2 psi or less, between spacesuit conditions (100% oxygen at 4.3 psi) and Earth's atmosphere. It describes this as a more than 40% increase in oxygen concentration that makes materials much more flammable.",
+      "safetyImplication": "Material flammability evidence gathered near 21% oxygen may not carry over to an exploration habitat; look for tests at elevated oxygen and reduced pressure.",
+      "implicationType": "inference",
+      "limitations": "These are expected design figures quoted in the statement, not a mission specification.",
+      "tags": [
+        "oxygen",
+        "atmosphere",
+        "pressure",
+        "moon",
+        "rover",
+        "flammability",
+        "prevention"
+      ],
+      "strength": "review",
+      "quantities": [
+        {
+          "name": "Expected lunar habitat oxygen",
+          "minimum": 30,
+          "maximum": null,
+          "unit": "vol%",
+          "sourceId": "challenge-2026"
+        },
+        {
+          "name": "Expected lunar habitat pressure",
+          "minimum": null,
+          "maximum": 10.2,
+          "unit": "psi",
+          "sourceId": "challenge-2026"
+        }
+      ]
+    },
+    {
+      "id": "bre-emulation",
+      "title": "Gas burners can stand in for solid and liquid materials",
+      "experiment": "BRE",
+      "date": null,
+      "sourceIds": [
+        "bre-page"
+      ],
+      "claim": "ACME's Burning Rate Emulator burns gaseous fuel on a flat porous burner under conditions matched to solid and liquid materials, and measures heat feedback to the burner. NASA describes it as a fire-prevention study that also assesses existing flammability test methods for low and partial gravity.",
+      "safetyImplication": "Emulation could make screening spacecraft materials faster, if emulated and real materials are shown to behave alike.",
+      "implicationType": "inference",
+      "limitations": "An emulator is a stand-in; this demo has not compared BRE results with tests on real materials.",
+      "tags": [
+        "prevention",
+        "flammability",
+        "materials",
+        "extinction",
+        "partial gravity",
+        "solid fuel"
+      ],
+      "strength": "program-goal",
+      "quantities": []
+    },
+    {
+      "id": "efield-gravity",
+      "title": "Electric fields as a stand-in for gravity",
+      "experiment": "E-FIELD Flames",
+      "date": null,
+      "sourceIds": [
+        "efield-page",
+        "challenge-2026"
+      ],
+      "claim": "E-FIELD Flames applied up to 10,000 volts between a burner and a mesh electrode. The ion wind this produces changes flame shape, soot and stability limits. The challenge statement notes that this mimicked partial gravity through the field's effect on ions in the flame.",
+      "safetyImplication": "One of the few ways existing ISS data touches partial-gravity questions; useful for asking how flame shape changes with an imposed body force.",
+      "implicationType": "inference",
+      "limitations": "An ion-driven force is not buoyancy; NASA states the experiment does not serve space applications directly.",
+      "tags": [
+        "partial gravity",
+        "flame shape",
+        "soot",
+        "stability",
+        "gaseous fuel"
+      ],
+      "strength": "program-goal",
+      "quantities": []
+    },
+    {
+      "id": "cfig-oxygen",
+      "title": "The highest-oxygen microgravity flames",
+      "experiment": "CFI-G",
+      "date": null,
+      "sourceIds": [
+        "challenge-2026"
+      ],
+      "claim": "According to the challenge statement, ACME's Cool Flames Investigation with Gases (CFI-G) ran the highest-oxygen microgravity tests: oxygen-nitrogen mixtures with up to 85% oxygen flowed from a spherical burner into a chamber of nitrogen and fuel gas such as propane, making an inside-out flame.",
+      "safetyImplication": "Data near spacesuit and pre-breathe oxygen levels exist only for specific gaseous-flame setups.",
+      "implicationType": "inference",
+      "limitations": "Inside-out gaseous flames do not represent fabrics or plastics burning in a cabin.",
+      "tags": [
+        "oxygen",
+        "cool flames",
+        "gaseous fuel",
+        "atmosphere"
+      ],
+      "strength": "review",
+      "quantities": []
+    },
+    {
+      "id": "daft-instrument",
+      "title": "A smoke instrument reused to measure dust",
+      "experiment": "SAME / DAFT",
+      "date": null,
+      "sourceIds": [
+        "challenge-2026"
+      ],
+      "claim": "The challenge statement notes that one instrument used for smoke detection in SAME and SAME-R was used again to detect dust in the Dust and Aerosol Measurement Feasibility Tests (DAFT and DAFT-2).",
+      "safetyImplication": "Telling smoke from dust is central to avoiding false alarms, especially on dusty lunar surfaces.",
+      "implicationType": "inference",
+      "limitations": "This records instrument reuse; it gives no detector thresholds or false-alarm rates.",
+      "tags": [
+        "detection",
+        "smoke",
+        "dust",
+        "sensor",
+        "false alarm",
+        "moon"
+      ],
+      "strength": "review",
+      "quantities": []
+    },
+    {
+      "id": "flex-inert-margin",
+      "title": "Inert-gas standards give less margin in low gravity",
+      "experiment": "FLEX",
+      "date": null,
+      "sourceIds": [
+        "researchers-guide"
+      ],
+      "claim": "NASA's 2015 guide reports that FLEX research found the flammability limit with inert-gas suppressants (nitrogen, carbon dioxide, helium or xenon) is lower in reduced gravity, so terrestrial standards for inert-gas suppressants do not offer the same margin of safety (p. 12).",
+      "safetyImplication": "Suppressant concentrations proven on Earth should not be assumed sufficient in a spacecraft.",
+      "implicationType": "inference",
+      "limitations": "Based on heptane and methanol droplets; other fuels and fire geometries need their own tests.",
+      "tags": [
+        "suppression",
+        "suppressant",
+        "extinction",
+        "flammability",
+        "oxygen",
+        "liquid fuel"
+      ],
+      "strength": "review",
+      "quantities": []
+    },
+    {
+      "id": "bass-nitrogen-jet",
+      "title": "A misdirected suppressant jet can feed a flame",
+      "experiment": "BASS",
+      "date": null,
+      "sourceIds": [
+        "researchers-guide"
+      ],
+      "claim": "The guide reports early BASS results in which nitrogen applied to a microgravity flame actually strengthened it, because the suppressant stream entrained oxygen. The best point to aim an extinguisher may not be obvious for partly obstructed or wake-stabilized flames (p. 22).",
+      "safetyImplication": "Extinguisher placement and spray characteristics matter more in microgravity than Earth practice suggests.",
+      "implicationType": "inference",
+      "limitations": "Early, qualitative results from specific BASS tests; no extinguisher design rule follows directly.",
+      "tags": [
+        "suppression",
+        "suppressant",
+        "nitrogen",
+        "extinguisher",
+        "airflow",
+        "solid fuel"
+      ],
+      "strength": "review",
+      "quantities": []
+    },
+    {
+      "id": "fire-misconceptions",
+      "title": "Three assumptions about spacecraft fire that research overturned",
+      "experiment": "Spacecraft fire safety",
+      "date": null,
+      "sourceIds": [
+        "researchers-guide"
+      ],
+      "claim": "The guide lists three former misconceptions that NASA Glenn research disproved: that a steady fire cannot exist in quiescent microgravity, that a fire will self-extinguish if ventilation is shut off, and that terrestrial fire standards are very conservative because microgravity is inherently safer (p. 35).",
+      "safetyImplication": "Turning off ventilation is not a guaranteed way to put out a spacecraft fire, and Earth-based flammability tests are not automatically conservative.",
+      "implicationType": "inference",
+      "limitations": "A summary of a research program; specific conditions and materials are in the cited studies.",
+      "tags": [
+        "prevention",
+        "ventilation",
+        "extinction",
+        "flammability",
+        "quiescent",
+        "standards"
+      ],
+      "strength": "review",
+      "quantities": []
+    },
+    {
+      "id": "detection-particle-size",
+      "title": "Smoke in microgravity looks different to detectors",
+      "experiment": "Fire detection",
+      "date": null,
+      "sourceIds": [
+        "researchers-guide"
+      ],
+      "claim": "The guide reports that microgravity research found very different particle sizes in smoke from microgravity flames, so detectors tuned for Earth smoke may look for the wrong signature. A NASA Glenn device that monitors both particles and chemical species outperformed current aircraft smoke detectors in false-alarm rejection and real-event detection in joint FAA testing (p. 35).",
+      "safetyImplication": "Spacecraft detectors need to be designed for microgravity smoke and should combine particle and gas sensing.",
+      "implicationType": "inference",
+      "limitations": "Test results are summarized, not reported in detail; no thresholds are given here.",
+      "tags": [
+        "detection",
+        "smoke",
+        "sensor",
+        "particles",
+        "false alarm",
+        "alarm"
+      ],
+      "strength": "review",
+      "quantities": []
+    },
+    {
+      "id": "bass-hypothesis",
+      "title": "Ventilated materials may burn as well in orbit as on Earth",
+      "experiment": "BASS",
+      "date": null,
+      "sourceIds": [
+        "researchers-guide"
+      ],
+      "claim": "BASS tested the hypothesis that materials in microgravity, with adequate ventilation, burn as well as, if not better than, the same material in normal gravity under otherwise identical conditions. The guide also notes spacecraft ventilation airflows of 0 to 30 cm/s (p. 21).",
+      "safetyImplication": "Normal-gravity flammability ratings may not bound microgravity behavior when air is moving.",
+      "implicationType": "inference",
+      "limitations": "Stated as a hypothesis; results depend on material, thickness, oxygen and flow.",
+      "tags": [
+        "prevention",
+        "ventilation",
+        "flammability",
+        "solid fuel",
+        "airflow",
+        "PMMA"
+      ],
+      "strength": "review",
+      "quantities": []
+    },
+    {
+      "id": "flex2-scope",
+      "title": "FLEX-2 widened droplet tests toward real fuels",
+      "experiment": "FLEX-2",
+      "date": null,
+      "sourceIds": [
+        "researchers-guide"
+      ],
+      "claim": "NASA's 2015 guide describes FLEX-2 as the follow-on to FLEX, studying mixtures of pure fuels, real-fuel surrogates, soot formation, slow sub-buoyant convective flow and droplet-droplet interactions, with international work on flame spread through droplet arrays and biologically derived fuels (p. 13).",
+      "safetyImplication": "Moves droplet results closer to practical liquid fuels and to fires involving many droplets, such as sprays or leaks.",
+      "implicationType": "inference",
+      "limitations": "Describes research scope; this demo has not imported FLEX-2 results.",
+      "tags": [
+        "liquid fuel",
+        "droplet",
+        "soot",
+        "flow",
+        "flame spread",
+        "FLEX-2"
+      ],
+      "strength": "program-goal",
+      "quantities": []
+    },
+    {
+      "id": "spice-smoke-point",
+      "title": "Smoke point: when a flame starts to emit soot",
+      "experiment": "SPICE",
+      "date": null,
+      "sourceIds": [
+        "researchers-guide"
+      ],
+      "claim": "The guide reports that SPICE, run in 2009 in the ISS Microgravity Science Glovebox, studied the transition from non-sooting to sooting gas-jet flames in co-flowing air, aiming at simple predictions of soot emission. The smoke point indicates a fuel's tendency to emit light and soot (p. 13–14).",
+      "safetyImplication": "Soot and smoke production drive what fire detectors can sense; microgravity soot behavior matters for detection design.",
+      "implicationType": "inference",
+      "limitations": "Gas-jet flames, not burning cabin materials; no SPICE values are imported here.",
+      "tags": [
+        "smoke",
+        "soot",
+        "detection",
+        "gaseous fuel",
+        "SPICE",
+        "smoke point"
+      ],
+      "strength": "review",
+      "quantities": []
+    },
+    {
+      "id": "slice-liftoff",
+      "title": "Flames that lift off and restabilize downstream",
+      "experiment": "SLICE",
+      "date": null,
+      "sourceIds": [
+        "researchers-guide"
+      ],
+      "claim": "The guide describes SLICE as studying lifted and lifting flames, where flow and chemistry make a flame detach from the burner and stabilize downstream. It used the SPICE hardware in the glovebox, completed operations in 2012 and preceded ACME's CLD Flame experiment (p. 14–15).",
+      "safetyImplication": "Shows how airflow changes where and whether a flame anchors, which matters for leaks and ventilated compartments.",
+      "implicationType": "inference",
+      "limitations": "Aimed mainly at cleaner, more efficient burners; fire-safety relevance is indirect.",
+      "tags": [
+        "flame stability",
+        "liftoff",
+        "flow",
+        "gaseous fuel",
+        "SLICE",
+        "ventilation"
+      ],
+      "strength": "review",
+      "quantities": []
+    },
+    {
+      "id": "near-limit-oscillation",
+      "title": "Flames near extinction can pulse for over a minute",
+      "experiment": "Flame stability",
+      "date": null,
+      "sourceIds": [
+        "researchers-guide"
+      ],
+      "claim": "The guide reports that near-limit microgravity flames behave very differently from Earth flames, which buoyant flow tends to blow off. A microgravity candle flame oscillated as it depleted nearby oxygen, with growing oscillations that could last over a minute in extreme cases before the flame went out (p. 33).",
+      "safetyImplication": "A weakening flame in a spacecraft may persist and fluctuate rather than go out at once; detection and post-fire monitoring should allow for this.",
+      "implicationType": "inference",
+      "limitations": "Candle and droplet observations; durations depend strongly on fuel and conditions.",
+      "tags": [
+        "extinction",
+        "flame stability",
+        "oscillation",
+        "detection",
+        "oxygen",
+        "quiescent"
+      ],
+      "strength": "review",
+      "quantities": []
+    },
+    {
+      "id": "cool-flame-persistence",
+      "title": "A cool flame can keep burning after the visible flame dies",
+      "experiment": "FLEX",
+      "date": null,
+      "sourceIds": [
+        "researchers-guide"
+      ],
+      "claim": "The guide explains that after a large alkane droplet's hot flame went out, the droplet kept vaporizing at the same rate for an extended period, supported by a lower-temperature cool flame that formed after visible extinction. FLEX tests showed the cool flame can burn for a prolonged time (p. 33–34).",
+      "safetyImplication": "Absence of a visible flame does not mean combustion has stopped; detectors and crews should not rely on sight alone.",
+      "implicationType": "inference",
+      "limitations": "Observed for specific alkane droplets in quiescent microgravity.",
+      "tags": [
+        "cool flames",
+        "extinction",
+        "detection",
+        "liquid fuel",
+        "droplet",
+        "invisible"
+      ],
+      "strength": "review",
+      "quantities": []
+    }
+  ]
+}

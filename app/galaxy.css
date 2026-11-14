@@ -1,0 +1,416 @@
+/* Decorative space layer. Scientific colors and flame rendering stay independent. */
+body {
+  background-image:
+    radial-gradient(ellipse at 86% 8%, #34236555, transparent 42%),
+    radial-gradient(ellipse at 15% 64%, #123b5840, transparent 45%);
+  background-attachment: fixed;
+}
+.app-shell {
+  isolation: isolate;
+}
+.app-shell::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: url("/galaxy-stars.svg") repeat;
+  background-size: 1440px 1000px;
+  opacity: 0.55;
+  pointer-events: none;
+}
+.sidebar {
+  background: linear-gradient(170deg, #101329f5, #080d1afc 65%);
+  border-right-color: #818fcf24;
+}
+.brand-icon {
+  background: linear-gradient(145deg, #ffd1a0, #fb935d);
+  box-shadow: 0 0 28px #ff99531c;
+  border-radius: 12px;
+}
+.sidebar nav button.active {
+  background: linear-gradient(100deg, #b6a7ff1c, #8c8cff08);
+  box-shadow: inset 0 0 0 1px #c2b5ff1a;
+}
+.sidebar nav button.active:before {
+  background: var(--stellar);
+  border-radius: 4px;
+}
+.sidebar nav button.active svg {
+  color: var(--stellar);
+}
+.sidebar-guide {
+  border-radius: 12px;
+  background: #a99bff07;
+}
+.topbar {
+  background: #080d1bd9;
+  border-color: #7a8eb521;
+}
+.snapshot i {
+  background: var(--green);
+}
+.page-actions {
+  margin-bottom: 22px;
+}
+.galaxy-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(0, 1.18fr) minmax(0, 1fr);
+  min-height: 370px;
+  padding: 38px 38px 30px;
+  margin-bottom: 18px;
+  border: 1px solid #9eaee031;
+  border-radius: 20px;
+  background:
+    radial-gradient(ellipse at 88% 25%, #4d387750, transparent 51%),
+    radial-gradient(ellipse at 61% 95%, #15426870, transparent 60%), #0c1221;
+  box-shadow:
+    0 22px 65px #00000024,
+    inset 0 1px 0 #ffffff08;
+}
+.galaxy-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: url("/galaxy-stars.svg") center / 1100px;
+  opacity: 0.9;
+  pointer-events: none;
+}
+.galaxy-hero-copy {
+  position: relative;
+  z-index: 1;
+}
+.galaxy-hero .eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  color: #c2c9e4;
+}
+.galaxy-hero h1 {
+  font-size: clamp(44px, 4.4vw, 70px);
+  font-weight: 500;
+  line-height: 1.03;
+  letter-spacing: -3px;
+  margin: 24px 0 20px;
+}
+.galaxy-hero h1 > span {
+  color: #c8c0ff;
+}
+.galaxy-hero p {
+  max-width: 400px;
+  color: #b5c0dc;
+  font-size: 13px;
+  line-height: 1.8;
+}
+.galaxy-hero-actions {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 25px;
+}
+.galaxy-hero-actions .primary {
+  padding: 13px 17px;
+  font-size: 11px;
+  border-radius: 9px;
+  box-shadow: 0 5px 24px #fa9e6d18;
+}
+.galaxy-tour {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  padding: 9px 0;
+  color: #dce4ff;
+}
+.galaxy-tour svg {
+  color: var(--stellar);
+}
+.galaxy-tour:hover {
+  color: var(--orange);
+}
+.galaxy-byline {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 28px;
+  font: 7px var(--mono);
+  letter-spacing: 0.8px;
+  color: #929fc0;
+}
+.galaxy-byline span {
+  color: #d3d9ed;
+}
+.galaxy-byline i {
+  width: 3px;
+  height: 3px;
+  background: #697b9d;
+  border-radius: 50%;
+}
+.orbital-scene {
+  position: absolute;
+  pointer-events: none;
+  width: 53%;
+  top: 50%;
+  right: -1%;
+  transform: translateY(-50%);
+}
+.orbital-scene svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.orbital-caption {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font: 6px var(--mono);
+  letter-spacing: 1px;
+  color: #8999bd;
+  margin-top: -22px;
+}
+.orbital-caption i {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #9ea9c3;
+}
+.galaxy-paths {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0 0 23px;
+}
+.galaxy-paths button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 17px;
+  text-align: left;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #11192bc9;
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+}
+.galaxy-paths button:hover {
+  border-color: #8b7abb;
+  background: #1c2340;
+}
+.galaxy-paths button > svg:first-child {
+  color: var(--stellar);
+}
+.galaxy-paths button > svg:last-child {
+  margin-left: auto;
+  color: #7d8caf;
+}
+.galaxy-paths span {
+  display: block;
+  font-size: 11px;
+  line-height: 1.5;
+}
+.galaxy-paths small {
+  display: block;
+  color: #98a5c7;
+  font: 7px var(--mono);
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+.stats-grid {
+  background: var(--surface);
+  border-radius: 12px;
+  margin-bottom: 27px;
+}
+.stats-grid article {
+  background: transparent;
+  padding: 18px 21px;
+}
+.stats-grid strong {
+  font-family: var(--display);
+  color: #dee3ff;
+}
+.lab-shell,
+.panel,
+.evidence-card,
+.method-cards > article,
+.assistant-workspace,
+.concept-grid article,
+.investigation-card {
+  border-color: #91a6d333;
+  box-shadow: 0 10px 35px #02051022;
+}
+.lab-title {
+  background: linear-gradient(110deg, #17223a, #131b2d);
+}
+.lab-controls {
+  background: #10192b;
+}
+.lab-footer {
+  background: #10192b;
+}
+.lab-title h2 {
+  color: #e5eaff;
+}
+.button.secondary {
+  background: #141c30;
+}
+.filter-pills button.active {
+  border-color: #8875af;
+  color: #d4c8ff;
+  background: #28213a;
+}
+.section-intro .eyebrow {
+  color: var(--stellar);
+}
+.guide-start,
+.lab-tour {
+  background: linear-gradient(115deg, #1d2544, #111b2e);
+  border-left-color: var(--stellar);
+}
+.assistant-orbit {
+  border-radius: 50%;
+  color: var(--stellar);
+  background: #1e2544;
+  box-shadow: 0 0 50px #9081ff16;
+}
+.insight-panel {
+  border-top-color: var(--stellar);
+}
+.main-footer > span {
+  color: #bac5e0;
+}
+.main-footer p {
+  color: #91a0c1;
+}
+@media (min-width: 1500px) {
+  .galaxy-hero {
+    min-height: 420px;
+    padding: 48px;
+  }
+}
+@media (max-width: 1100px) {
+  .galaxy-hero {
+    padding: 30px;
+    min-height: 360px;
+  }
+  .galaxy-hero h1 {
+    font-size: 48px;
+  }
+  .galaxy-hero p {
+    max-width: 340px;
+    font-size: 12px;
+  }
+  .galaxy-hero-actions {
+    gap: 12px;
+  }
+  .galaxy-paths button {
+    padding: 13px;
+    gap: 8px;
+  }
+  .galaxy-paths span {
+    font-size: 10px;
+  }
+}
+@media (max-width: 760px) {
+  .galaxy-hero {
+    display: block;
+    padding: 28px;
+    min-height: auto;
+  }
+  .orbital-scene {
+    width: 54%;
+    right: -12%;
+    top: 39%;
+    opacity: 0.46;
+    z-index: -1;
+  }
+  .orbital-caption {
+    display: none;
+  }
+  .galaxy-hero-copy {
+    max-width: 470px;
+  }
+  .galaxy-hero p {
+    max-width: 330px;
+  }
+  .galaxy-paths {
+    gap: 8px;
+  }
+  .galaxy-paths button > svg:first-child {
+    display: none;
+  }
+}
+@media (max-width: 650px) {
+  body {
+    background-attachment: scroll;
+  }
+  .galaxy-hero {
+    border-radius: 16px;
+    padding: 25px 23px;
+    min-height: 390px;
+  }
+  .galaxy-hero .eyebrow {
+    font-size: 7px;
+    letter-spacing: 0.8px;
+  }
+  .galaxy-hero h1 {
+    font-size: clamp(38px, 10.8vw, 60px);
+    letter-spacing: -2px;
+    margin: 28px 0 20px;
+  }
+  .galaxy-hero p {
+    max-width: 265px;
+    font-size: 12px;
+  }
+  .orbital-scene {
+    width: 92%;
+    right: -28%;
+    top: 37%;
+    opacity: 0.3;
+  }
+  .galaxy-hero-actions {
+    align-items: flex-start;
+    gap: 7px;
+    flex-direction: column;
+  }
+  .galaxy-hero-actions .primary {
+    font-size: 11px;
+    padding: 13px 15px;
+  }
+  .galaxy-byline {
+    font-size: 6px;
+    gap: 7px;
+    letter-spacing: 0.4px;
+    margin-top: 22px;
+  }
+  .galaxy-paths {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .galaxy-paths button {
+    padding: 13px 17px;
+    gap: 12px;
+  }
+  .galaxy-paths button > svg:first-child {
+    display: block;
+  }
+  .galaxy-paths span {
+    font-size: 12px;
+  }
+  .galaxy-paths small {
+    font-size: 7px;
+    margin-bottom: 3px;
+  }
+  .stats-grid article {
+    padding: 16px;
+  }
+}

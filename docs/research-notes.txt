@@ -1,0 +1,35 @@
+EMBER Atlas early research notes — accessed 2026-11-09
+Current continuation instructions: docs/HANDOFF.md and CLAUDE.md. Some proposals below were implemented in v1.1; consult current source code.
+
+Use evidence.json for source-grounded finding cards and retrieval. Every claim is <=45 words. Safety implications are explicitly inference, and each item includes a limitation. A source date of null is intentional: display “Undated source” or the source dateLabel; do not fabricate publication dates.
+
+Use measurements.json for a real-data chart: two BASS-II runs, seven reported PMMA flame-spread observations. Preserve test identities and units, and show oxygen endpoints in tooltips. Do not describe them as seven separate experiments or a live NASA feed. Do not fit a universal airflow law to these points. The primary indexed NASA PDF text was checked, but a full PDF download timed out, so visual table-page verification is not complete. The incomplete PDF is an intermediate artifact only.
+
+Recommended 3D behavior
+- Keep a permanent label: “Illustrative model — not a CFD prediction.”
+- A spherical flame is a useful quiescent droplet illustration; forced flow should deform it.
+- Label visual scale as relative response, without invented kelvin, kilowatts, danger percentages, or astronaut safety thresholds.
+- Let users inspect the exact supporting findings for model behaviors.
+- If animating observed BASS-II spread values, label the mapping as a visual encoding of spread rate. Spread speed is not measured flame intensity, heat release, or temperature.
+- Separate scenario exploration from observed measurements. A larger/brightening display does not prove higher heat release or greater hazard.
+
+Data ingestion path
+1. NASA PSI-69 (FLEX), DOI 10.60555/mbq8-0451: verified repository record and CC0 metadata. Detailed file access was not exercised.
+2. NASA PSI-25 (BASS-II), DOI 10.60555/4qc4-de67: verified repository record, version 4 dated 2025-11-24, CC0 metadata; indexed listing includes raw MP4s and a metadata ZIP. No full archive downloaded.
+3. NASA PSI-62, DOI 10.60555/e9xp-ex83: a potential future path to 3D soot/temperature reconstructions from BASS imagery using two-color tomography. The demo does not implement that reconstruction.
+4. Import manifests should preserve DOI, version, source URL, original filename, checksum, experiment/run ID, calibration metadata, units, timestamps, fuel geometry, oxygen fraction, absolute pressure, airflow direction/speed, and missing-value flags.
+5. Validate units and duplicate run IDs server-side. Never silently merge incompatible conditions. Keep derived columns distinguishable from measured ones.
+6. Parse report tables into immutable reviewed records. Treat chart-digitized values as estimates with explicit uncertainty; do not present guessed image readings as experimental telemetry.
+
+Retrieval/ranking proposal
+Use transparent relevance ranking over experiment, tags and source text, followed by evidence-type weighting. Label the result as a relevance or evidence ranking, not a probability of danger. Support citation IDs in every interpreted answer. Refuse unsupported numerical predictions with an explanation of missing measurements. A deterministic offline retrieval engine is a useful baseline; optional model-generated prose should not alter the evidence records.
+
+Challenge verification
+Later on November 9, the complete official Details and Resources tabs were inspected in a browser at https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/. Resources were scheduled for November 13. See docs/CHALLENGE-ALIGNMENT.md for the current mapping. No official resource pack has been ingested, and undisclosed judging rules are not claimed as satisfied.
+
+Verified NASA repository links
+https://psi.nasa.gov/physci/repo/data/investigations/PSI-69
+https://psi.nasa.gov/physci/repo/data/investigations/PSI-25
+https://psi.nasa.gov/physci/repo/data/investigations/PSI-62
+
+No content from third-party mirrors is used in the curated records. The large NASA report should be linked, not committed as a 49 MB repository asset.

@@ -1,0 +1,428 @@
+{
+  "schemaVersion": "1.0.0",
+  "dataset": "BASS-II published PMMA spread-rate table (all tracked runs)",
+  "sourceId": "bass-report",
+  "sourceUrl": "https://ntrs.nasa.gov/citations/20210011385",
+  "downloadUrl": "https://ntrs.nasa.gov/api/citations/20210011385/downloads/TM-20210011385.pdf",
+  "table": "5.1",
+  "printedPage": 57,
+  "contextPage": 55,
+  "publicationDate": "2021-10-01",
+  "retrievedAt": "2026-11-09",
+  "verifiedAt": "2026-11-13",
+  "measurementType": "Published experimental summary; manually transcribed, not raw telemetry",
+  "verification": "All values were checked by eye against the original NASA PDF, Table 5.1 (printed page 57, PDF page 65), on November 13, 2026. Values were transcribed by hand; no per-point uncertainty is published.",
+  "sourceFile": {
+    "filename": "TM-20210011385.pdf",
+    "sha256": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+    "bytes": 48972416,
+    "pages": 144,
+    "pdfModified": "2021-10-25",
+    "tablePdfPage": 65
+  },
+  "units": {
+    "airflowCms": "cm/s",
+    "spreadRateMms": "mm/s",
+    "thicknessMm": "mm",
+    "widthCm": "cm",
+    "initialOxygenVolPct": "vol%",
+    "finalOxygenVolPct": "vol%",
+    "burnTimeMin": "min"
+  },
+  "conditions": {
+    "gravity": "microgravity",
+    "platform": "International Space Station",
+    "material": "clear cast PMMA, 1–5 mm thick, 1.2 or 2.2 cm wide, one or two sides burning",
+    "flowConfiguration": "opposed flow",
+    "oxygen": "Uncontrolled and changing during each run"
+  },
+  "limitations": [
+    "Successive points within a run are not independent experiments; airflow was changed during each run.",
+    "Oxygen percentages are run endpoints, not per-point values. Oxygen fell during every run, by 0.3 to 3.2 percentage points.",
+    "Runs differ in thickness, width and one- versus two-sided burning at once; comparisons across runs are confounded.",
+    "No measurement uncertainty is tabulated for these points.",
+    "The report text says samples were 1 or 2 cm wide; Table 5.1 lists 1.2 and 2.2 cm. This fixture uses the table.",
+    "Do not extrapolate outside the listed conditions or convert spread rate into heat release.",
+    "Figure 5.2 of the same report gives a fitted M8 slope of 0.0637 mm/s at 10 cm/s, compared with 0.057 mm/s in Table 5.1. The 6 and 5 cm/s slopes (0.0557, 0.0391) agree with the table. This fixture uses the table values."
+  ],
+  "series": [
+    {
+      "testId": "M1",
+      "thicknessMm": 1,
+      "widthCm": 2.2,
+      "sidesBurning": 1,
+      "initialOxygenVolPct": 22.2,
+      "finalOxygenVolPct": 21.9,
+      "burnTimeMin": 6.4,
+      "points": [
+        {
+          "airflowCms": 9,
+          "spreadRateMms": 0.071
+        }
+      ]
+    },
+    {
+      "testId": "M2",
+      "thicknessMm": 3,
+      "widthCm": 2.2,
+      "sidesBurning": 1,
+      "initialOxygenVolPct": 22.2,
+      "finalOxygenVolPct": 21.2,
+      "burnTimeMin": 22.9,
+      "points": [
+        {
+          "airflowCms": 20,
+          "spreadRateMms": 0.052
+        },
+        {
+          "airflowCms": 15,
+          "spreadRateMms": 0.033
+        }
+      ]
+    },
+    {
+      "testId": "M3",
+      "thicknessMm": 5,
+      "widthCm": 2.2,
+      "sidesBurning": 1,
+      "initialOxygenVolPct": 20.8,
+      "finalOxygenVolPct": 19.7,
+      "burnTimeMin": 20.1,
+      "points": [
+        {
+          "airflowCms": 10,
+          "spreadRateMms": 0.029
+        },
+        {
+          "airflowCms": 20,
+          "spreadRateMms": 0.024
+        }
+      ]
+    },
+    {
+      "testId": "M4",
+      "thicknessMm": 5,
+      "widthCm": 2.2,
+      "sidesBurning": 2,
+      "initialOxygenVolPct": 21.8,
+      "finalOxygenVolPct": 19.8,
+      "burnTimeMin": 19.8,
+      "points": [
+        {
+          "airflowCms": 5,
+          "spreadRateMms": 0.045
+        },
+        {
+          "airflowCms": 3,
+          "spreadRateMms": 0.033
+        }
+      ]
+    },
+    {
+      "testId": "M5",
+      "thicknessMm": 3,
+      "widthCm": 2.2,
+      "sidesBurning": 2,
+      "initialOxygenVolPct": 22.2,
+      "finalOxygenVolPct": 19,
+      "burnTimeMin": 27.2,
+      "points": [
+        {
+          "airflowCms": 10,
+          "spreadRateMms": 0.071
+        }
+      ]
+    },
+    {
+      "testId": "M7",
+      "thicknessMm": 1,
+      "widthCm": 1.2,
+      "sidesBurning": 2,
+      "initialOxygenVolPct": 18.9,
+      "finalOxygenVolPct": 18.4,
+      "burnTimeMin": 18.4,
+      "points": [
+        {
+          "airflowCms": 10,
+          "spreadRateMms": 0.106
+        },
+        {
+          "airflowCms": 6,
+          "spreadRateMms": 0.099
+        },
+        {
+          "airflowCms": 5,
+          "spreadRateMms": 0.083
+        },
+        {
+          "airflowCms": 3,
+          "spreadRateMms": 0.07
+        }
+      ]
+    },
+    {
+      "testId": "M8",
+      "thicknessMm": 2,
+      "widthCm": 1.2,
+      "sidesBurning": 2,
+      "initialOxygenVolPct": 19.1,
+      "finalOxygenVolPct": 18.2,
+      "burnTimeMin": 25.2,
+      "points": [
+        {
+          "airflowCms": 10,
+          "spreadRateMms": 0.057
+        },
+        {
+          "airflowCms": 6,
+          "spreadRateMms": 0.056
+        },
+        {
+          "airflowCms": 5,
+          "spreadRateMms": 0.04
+        }
+      ]
+    },
+    {
+      "testId": "M9",
+      "thicknessMm": 3,
+      "widthCm": 1.2,
+      "sidesBurning": 2,
+      "initialOxygenVolPct": 18,
+      "finalOxygenVolPct": 17.6,
+      "burnTimeMin": 16.8,
+      "points": [
+        {
+          "airflowCms": 14,
+          "spreadRateMms": 0.025
+        }
+      ]
+    },
+    {
+      "testId": "M10",
+      "thicknessMm": 4,
+      "widthCm": 1.2,
+      "sidesBurning": 2,
+      "initialOxygenVolPct": 20.1,
+      "finalOxygenVolPct": 18.6,
+      "burnTimeMin": 30.5,
+      "points": [
+        {
+          "airflowCms": 15,
+          "spreadRateMms": 0.0373
+        },
+        {
+          "airflowCms": 10,
+          "spreadRateMms": 0.03
+        }
+      ]
+    },
+    {
+      "testId": "M11",
+      "thicknessMm": 5,
+      "widthCm": 1.2,
+      "sidesBurning": 2,
+      "initialOxygenVolPct": 20,
+      "finalOxygenVolPct": 18.5,
+      "burnTimeMin": 28.5,
+      "points": [
+        {
+          "airflowCms": 21,
+          "spreadRateMms": 0.048
+        },
+        {
+          "airflowCms": 15,
+          "spreadRateMms": 0.028
+        },
+        {
+          "airflowCms": 13,
+          "spreadRateMms": 0.022
+        }
+      ]
+    },
+    {
+      "testId": "M13",
+      "thicknessMm": 4,
+      "widthCm": 2.2,
+      "sidesBurning": 2,
+      "initialOxygenVolPct": 20.8,
+      "finalOxygenVolPct": 19,
+      "burnTimeMin": 20.5,
+      "points": [
+        {
+          "airflowCms": 6,
+          "spreadRateMms": 0.047
+        },
+        {
+          "airflowCms": 5,
+          "spreadRateMms": 0.035
+        },
+        {
+          "airflowCms": 4,
+          "spreadRateMms": 0.033
+        }
+      ]
+    },
+    {
+      "testId": "M14",
+      "thicknessMm": 2,
+      "widthCm": 2.2,
+      "sidesBurning": 1,
+      "initialOxygenVolPct": 22.2,
+      "finalOxygenVolPct": 21.6,
+      "burnTimeMin": 15.4,
+      "points": [
+        {
+          "airflowCms": 15,
+          "spreadRateMms": 0.0624
+        },
+        {
+          "airflowCms": 14,
+          "spreadRateMms": 0.055
+        },
+        {
+          "airflowCms": 10,
+          "spreadRateMms": 0.0353
+        }
+      ]
+    },
+    {
+      "testId": "M15",
+      "thicknessMm": 4,
+      "widthCm": 2.2,
+      "sidesBurning": 1,
+      "initialOxygenVolPct": 21,
+      "finalOxygenVolPct": 20,
+      "burnTimeMin": 22.0,
+      "points": [
+        {
+          "airflowCms": 20,
+          "spreadRateMms": 0.045
+        }
+      ]
+    },
+    {
+      "testId": "M16",
+      "thicknessMm": 1,
+      "widthCm": 2.2,
+      "sidesBurning": 2,
+      "initialOxygenVolPct": 19.2,
+      "finalOxygenVolPct": 18.7,
+      "burnTimeMin": 8.4,
+      "points": [
+        {
+          "airflowCms": 5,
+          "spreadRateMms": 0.144
+        },
+        {
+          "airflowCms": 3,
+          "spreadRateMms": 0.1309
+        },
+        {
+          "airflowCms": 2,
+          "spreadRateMms": 0.1062
+        }
+      ]
+    },
+    {
+      "testId": "M17",
+      "thicknessMm": 2,
+      "widthCm": 2.2,
+      "sidesBurning": 2,
+      "initialOxygenVolPct": 18.8,
+      "finalOxygenVolPct": 17.1,
+      "burnTimeMin": 30.7,
+      "points": [
+        {
+          "airflowCms": 5,
+          "spreadRateMms": 0.053
+        },
+        {
+          "airflowCms": 4,
+          "spreadRateMms": 0.042
+        },
+        {
+          "airflowCms": 3,
+          "spreadRateMms": 0.026
+        }
+      ]
+    },
+    {
+      "testId": "M18",
+      "thicknessMm": 3,
+      "widthCm": 2.2,
+      "sidesBurning": 2,
+      "initialOxygenVolPct": 17.9,
+      "finalOxygenVolPct": 16.8,
+      "burnTimeMin": 25.5,
+      "points": [
+        {
+          "airflowCms": 10,
+          "spreadRateMms": 0.026
+        },
+        {
+          "airflowCms": 8,
+          "spreadRateMms": 0.013
+        }
+      ]
+    },
+    {
+      "testId": "M19",
+      "thicknessMm": 4,
+      "widthCm": 2.2,
+      "sidesBurning": 2,
+      "initialOxygenVolPct": 19,
+      "finalOxygenVolPct": 17.4,
+      "burnTimeMin": 25.7,
+      "points": [
+        {
+          "airflowCms": 10,
+          "spreadRateMms": 0.027
+        },
+        {
+          "airflowCms": 6,
+          "spreadRateMms": 0.0159
+        }
+      ]
+    },
+    {
+      "testId": "M20",
+      "thicknessMm": 5,
+      "widthCm": 2.2,
+      "sidesBurning": 2,
+      "initialOxygenVolPct": 18,
+      "finalOxygenVolPct": 17.4,
+      "burnTimeMin": 16.5,
+      "points": [
+        {
+          "airflowCms": 10,
+          "spreadRateMms": 0.012
+        }
+      ]
+    }
+  ],
+  "notTracked": [
+    {
+      "testId": "M6",
+      "thicknessMm": 1,
+      "widthCm": 2.2,
+      "sidesBurning": 2,
+      "airflowCms": [
+        10,
+        8
+      ],
+      "note": "Spread rate not tracked in Table 5.1"
+    },
+    {
+      "testId": "M12",
+      "thicknessMm": 2,
+      "widthCm": 2.2,
+      "sidesBurning": 2,
+      "airflowCms": [
+        12,
+        10
+      ],
+      "note": "Spread rate not tracked in Table 5.1"
+    }
+  ]
+}
