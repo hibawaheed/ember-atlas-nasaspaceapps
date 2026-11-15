@@ -1,106 +1,103 @@
 # EMBER Atlas
 
-**Fire, beyond Earth.** A research dashboard that summarizes, ranks and interprets NASA’s microgravity combustion investigations for fire safety in spacecraft, space stations, Moon and Mars bases, and pressurized rovers.
+**Fire, beyond Earth.** Every NASA microgravity combustion test we could find, in one searchable atlas, so a habitat designer can ask "has NASA burned anything like my cabin?" and get a cited answer in one click.
 
 [**Live site: emberatlas.tech**](https://emberatlas.tech) · [Slides (PDF)](submission/EMBER-Atlas-Space-Apps-2026.pdf) · [Submission text](submission/SUBMISSION.md)
 
 Built by **ISL Team A** (Hiba Waheed Ch, Zaafir Abbas Haidrie, Muhammad Ashar Hassan, Amin Adnan Mahmood) for the NASA Space Apps Challenge 2026 challenge **[Flame in Freefall: SI-Powered Fire Safety Insights from Microgravity Combustion Data](https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/)**.
 
+![EMBER Atlas homepage](docs/screenshots/home.png)
+
 ---
 
-## The problem
+## What we found
 
-NASA publishes the results of its ISS combustion experiments through the Physical Sciences Informatics (PSI) system, but, as the challenge puts it, the data is hard to find, harder to compare and harder yet to interpret. Meanwhile, future habitats will burn differently from Earth: a Moon base or pressurized rover is expected to run at **30% oxygen or more and 10.2 psi or less**, and, per the challenge statement, **NASA's PSI archive holds no partial-gravity combustion data yet** (short drop-tower and parabolic-flight studies exist outside PSI). The closest measured fires to a Moon base atmosphere are NASA's Saffire VI tests at 28.8–31% oxygen, but at lower pressure, with forced airflow and in microgravity.
+The challenge expects a Moon base to run at **30% oxygen or more and 10.2 psi (70.3 kPa) or less**. We imported 2,008 NASA test records and asked: has NASA burned anything there?
 
-EMBER Atlas brings that evidence into one place, keeps every number traceable to its NASA source, and uses AI only where it can be grounded in that evidence.
+1. **Liquid droplets: yes.** NASA's FLEX experiment burned methanol and heptane droplets at 30% oxygen and 71.2–72.1 kPa eight times on the ISS in 2009–2010 (PSI-69, tests 25–28 and 40–43).
+2. **Solid materials: close, not exact.** The nearest is Saffire VI-3, acrylic at 30.3% oxygen, but at 54.6 kPa with 20 cm/s forced flow (NASA ICES-2024-365, Table 1).
+3. **Lunar gravity: measured, briefly.** In NASA drop-tower tests, Mylar kept burning down to 15.6% oxygen at lunar gravity, against 17.0% in microgravity and 21.2% on Earth, at 10.2 psia. All three materials tested burned at lower oxygen at lunar and Martian gravity than at either end, so microgravity and Earth results did not bracket the middle (Olson & Ferkul, NASA, Table I; about 5-second tests, outside PSI).
 
-## What you can do
-
-| Area | What it does |
-| --- | --- |
-| **Homepage** | Opens on the challenge's Moon base question (30% oxygen at 70.3 kPa) and its closest measured NASA test, Saffire VI-3, with links to the source table, a one-page brief and a shareable link. |
-| **Combustion lab** | An animated 3D flame that responds to gravity (orbit, Moon, Mars, Earth), oxygen, airflow, cabin pressure and fuel. Compare side by side with Earth, replay the 18 real BASS-II runs (also readable as a table), compare the scenario condition by condition with the closest Saffire test, and ask Claude to interpret the setup. Panels compare Earth air, a Moon base and a spacesuit, and explain the partial-gravity data gap. |
-| **Mission desk** | Pick a habitat and a safety question (prevention, detection, suppression). Ten investigation profiles are ranked with a visible score, compared side by side, grouped by shared hardware, and explained by Claude on request. Each ranked experiment has a one-sentence reason. Measured examples for each question: the closest NASA test to a Moon base (Saffire VI-3), a smoke-alarm timing result and a cool-flame extinction result. Includes an oxygen-coverage chart and a “Back on Earth” applications panel. |
-| **Evidence library** | 36 curated findings from 23 NASA sources, searchable and filterable (search understands everyday names such as *acrylic* for PMMA), each with its source, what it means and its limits, labeled Observed, Review or Research aim. |
-| **Measured data** | 39 flame-spread measurements from 18 BASS-II runs, with run conditions, a “what varied / what stayed the same” summary, and CSV export. All investigation profiles can be exported too. |
-| **Research companion** | Ask a question in plain language. Claude answers from the retrieved NASA findings and investigation profiles, cites every source, handles follow-ups, and declines what the evidence cannot support. |
-| **Field guide** | A guided tour, key concepts, the history of spaceflight fires (Apollo 1, Apollo 13, Mir, Artemis II), a glossary and a short quiz. |
-
-## How it works
-
-```text
-Browser (Next.js + React)
-  ├─ Combustion lab ── Three.js volumetric flame (CPU particle fallback)
-  ├─ Charts ────────── SVG, drawn from data/measurements.json
-  └─ Questions, lab interpretation, comparisons
-        │
-        ▼
-Next.js route handlers (app/api/*)
-  ├─ Validate input (Zod, byte limits)
-  ├─ Search findings (BM25 + synonyms, relevance cutoff)
-  ├─ Build context: top findings + named investigation profiles + previous turn
-  ├─ Rate limit per visitor
-  └─ Claude Haiku 5.5 via Vercel AI SDK → Vercel AI Gateway
-        │  structured output with the IDs it relied on
-        ▼
-  Check citations → label as AI → or fall back to the search results
-```
-
-### Frontend
-
-- **Next.js 16 (App Router) and React 19.** One client dashboard (`components/dashboard.tsx`) holds the views; the URL keeps the current view and scenario (`?view=lab&scenario=…`) so any state can be shared.
-- **3D flame.** `components/flame-scene.tsx` renders a ray-marched volumetric flame with Three.js when WebGL2 is available; `components/canvas-flame.tsx` is a CPU 3D particle fallback. Motion comes from `lib/flame-motion.ts`. Gravity changes the flame from a sphere (microgravity) to a rising teardrop (Earth). The flame is an authored illustration, not a simulation.
-- **Design.** A dark galaxy theme with a starfield and an original orbital illustration (`app/globals.css`, `expedition.css`, `instrument.css`, `galaxy.css`). Fonts are bundled from npm; no external font or image services are needed.
-- **Charts and panels.** SVG charts for measurements and oxygen coverage, accessible tables, and CSV/JSON/HTML exports (`lib/export.ts`). Layouts are checked on desktop and on a 390 px phone screen.
-
-### Backend and API
-
-All server code runs as Next.js route handlers on Vercel. There is no database and no login; data lives in versioned JSON files, so every change is reviewable in Git.
-
-| Endpoint | Purpose |
-| --- | --- |
-| `GET /api/health` | Version, deployed build, counts and AI mode |
-| `GET /api/evidence?q=airflow` | Curated findings, optionally ranked by search |
-| `POST /api/ask` | `{ question, history? }` → AI answer with citations, or search results |
-| `POST /api/analyze` | Lab scenario (+ optional replay point) → notes, related findings, AI interpretation |
-| `POST /api/investigations` | `{ destination, priority }` → ranked profiles with the scoring rubric |
-| `POST /api/compare` | `{ destination, priority, ids }` → AI explanation of 2–3 selected profiles |
-| `POST /api/import` | Validated CSV/JSON upload, returned to the browser and marked unverified |
-
-Key modules: `lib/evidence.ts` (BM25 search and relevance cutoff), `lib/context.ts` (per-question evidence for the AI), `lib/synthesis.ts` (Claude calls, citation checks, fallbacks), `lib/rate-limit.ts`, `lib/investigations.ts` (profiles and ranking rubric), `lib/scenario.ts` (lab controls and oxygen arithmetic).
-
-### The AI: Claude, kept honest
-
-- **Model:** Anthropic **Claude Haiku 5.5** (`anthropic/claude-haiku-5.5`), called with the Vercel AI SDK through Vercel AI Gateway. The deployment authenticates with Vercel OIDC, so no API key is stored anywhere.
-- **Where it runs:** research-companion answers, lab interpretations, and Mission-desk comparison explanations.
-- **Grounding:** search runs first and decides what the model may see: a few NASA findings and investigation profiles, never the open web. Off-topic questions fall below the relevance cutoff and are declined without calling the model.
-- **Checking:** the model returns structured output listing the IDs it used; any answer citing an item it was not given is rejected. It is instructed never to give risk scores or certifications and never to read the flame animation as data.
-- **Cost controls:** 10 AI calls per visitor per 10 minutes, a $5/month AI Gateway budget, and a search-only fallback when the model is slow, down or over budget. Measured cost is about $0.0005 per answer.
-- **Evaluation:** `scripts/ai-eval.mjs` runs 13 live checks (grounded answers, a Moon-atmosphere question, a risk-score request, a prompt injection, off-topic questions, a comparison, a follow-up, lab and Mission-desk explanations). Current result: **13/13**. Checked citations show the AI stayed within its evidence; they are not a scientific review of every sentence.
+![The Moon base answer](docs/screenshots/moon-answer.png)
 
 ## The data
 
 | Layer | What it is | What it is not |
 | --- | --- | --- |
-| BASS-II measurements | 39 published flame-spread values from 18 runs, NASA/TM-20210011385 Table 5.1, checked by eye against the original PDF (SHA-256 recorded) | Raw telemetry or independent experiments; oxygen fell during every run |
-| Research findings | 36 curated summaries of NASA sources, each with source, meaning and limits | An exhaustive review or a safety certification |
-| Investigation profiles | 10 profiles: objectives, fuels and sample sizes, conditions, variables, sensors, shared hardware | A complete PSI catalog |
-| 3D flame | An authored visual model; only the oxygen partial-pressure arithmetic is physical | CFD, a temperature map or a fire-risk score |
-| Moon/Mars flame shapes | A conceptual interpolation | A partial-gravity prediction (no measured lunar-gravity fire is in the atlas; PSI has no partial-gravity data) |
-| Rankings | Disclosed reading-priority rubric | Hazard, confidence or suitability scores |
+| **NASA test records** | 2,008 rows from the experimental tables of 21 NASA PSI combustion investigations (FLEX, CFI, ACME CFI-G, Flame Design, BRE, s-Flame, CLD, E-FIELD, SLICE, SPICE, BASS, BASS-II, Saffire I–III, SAME, SAME-R, DAFT) plus Saffire IV–VI from ICES-2024-365. Downloaded through PSI's public API, checksummed, units converted in code, original cells kept | Raw telemetry or video; PSI's own files run to terabytes |
+| **Data quality** | 28 problems found in NASA's tables, affecting 122 cells, each flagged with our reading: lost subscripts and units, spreadsheet autofill ("40% CH4, CH5 … CH14"), percent formatting ("3400%"), unreadable characters, implausible values | Silent fixes; every record keeps the cell as written |
+| **Partial-gravity limits** | Limiting oxygen at 0g, lunar, Martian and Earth gravity for Mylar, Ultem and Nomex, checked against the NASA PDF | Long-duration tests or more than three materials |
+| **BASS-II spread rates** | 39 flame-spread values from 18 runs, Table 5.1 of NASA/TM-20210011385, checked by eye against the PDF; they agree with PSI's BASS-II table for every run | Independent experiments; oxygen fell during every run |
+| **Findings** | 36 curated summaries of 23 NASA sources, each with meaning and limits | A complete literature review |
+| **3D flame** | An authored illustration; only the oxygen partial-pressure arithmetic is physical | CFD, a temperature map or a risk score |
 
-While verifying the BASS-II table we found that the report’s Figure 5.2 gives a different M8 slope at 10 cm/s (0.0637 mm/s) than Table 5.1 (0.057 mm/s). The app uses the table and records the difference. Full source list: [submission/SUBMISSION.md](submission/SUBMISSION.md#nasa-data-and-resources-used) and `data/evidence.json`.
+![Oxygen × pressure map of 754 NASA tests](docs/screenshots/atlas-map.png)
+
+![Data-quality problems found in NASA's tables](docs/screenshots/data-quality.png)
+
+## What you can do
+
+| Area | What it does |
+| --- | --- |
+| **Homepage** | The Moon base question answered three ways (droplets, solids, gravity), the oxygen × pressure map of 754 tests, and a one-page brief or share link. |
+| **Combustion lab** | Set oxygen, pressure, airflow, gravity and fuel; the nearest measured NASA tests (from all 2,008) appear condition by condition with what matches and what differs. Measured lunar and Martian gravity limits are charted below. A 3D flame illustrates the setting and replays BASS-II measurements. |
+| **Mission desk** | Pick a habitat and a safety question; investigations are ranked with a reason for each, compared side by side, and grouped by shared hardware. Measured detection and extinction examples. |
+| **Measured data** | Every imported NASA table with counts and ranges, the data-quality list, CSV downloads of any investigation, and the BASS-II chart. |
+| **Evidence library** | 36 findings, searchable in plain words (*acrylic* finds PMMA), each with its source and limits. |
+| **Research companion** | Claude Haiku 5.5 answers from the retrieved findings **and the matching NASA test rows**, citing each row; it declines what the evidence cannot support. |
+
+![Closest measured test, condition by condition](docs/screenshots/comparison.png)
+
+![Measured flammability limits at lunar and Martian gravity](docs/screenshots/gravity-limits.png)
+
+## How it works
+
+```text
+NASA PSI API ──fetch-psi.mjs──► data/psi/raw/*.csv (21 tables, SHA-256 in manifest.json)
+                                      │
+                         build-tests.mjs: parse, convert units, flag quirks
+                                      ▼
+                   data/tests.json (2,008 records) · tests-compact.json (browser)
+                                      │
+Browser (Next.js + React) ◄───────────┤──► /api/tests (filter, CSV)
+  ├─ Atlas map, nearest-test engine, gravity chart (SVG)
+  ├─ Three.js volumetric flame (CPU particle fallback)
+  └─ Questions ──► /api/ask
+                     ├─ BM25 search over findings + investigation profiles
+                     ├─ Matching NASA test rows (conditions, superlatives, named investigations)
+                     ├─ Claude Haiku 5.5 via Vercel AI Gateway, structured output with cited IDs
+                     ├─ Citation check (unknown IDs rejected), answer cache, per-device rate limit
+                     └─ Fallback: the matching findings, shown directly
+```
+
+| Endpoint | Purpose |
+| --- | --- |
+| `GET /api/tests?investigation=FLEX&o2Min=29&o2Max=31&format=csv` | Filter the 2,008 NASA test records; JSON or CSV with PSI record links |
+| `GET /api/health` | Version, deployed build, record counts and AI mode |
+| `GET /api/evidence?q=airflow` | Curated findings, optionally ranked by search |
+| `POST /api/ask` | `{ question, history? }` → AI answer citing findings and test rows, or search results |
+| `POST /api/analyze` | Lab scenario → notes, findings, nearest tests and an AI interpretation |
+| `POST /api/investigations` | `{ destination, priority }` → ranked profiles with reasons |
+| `POST /api/compare` | AI explanation of 2–3 selected profiles |
+| `POST /api/import` | Validated CSV/JSON upload, marked unverified |
+
+### The AI: Claude, kept honest
+
+- **Model:** Anthropic Claude Haiku 5.5 through the Vercel AI SDK and Vercel AI Gateway, authenticated with Vercel OIDC (no stored API key).
+- **Grounding:** the server chooses what the model sees: retrieved findings, investigation profiles and NASA test rows picked deterministically (conditions named in the question, "fastest/highest" sorts over a whole table, per-investigation condition grids). Never the open web.
+- **Checking:** structured output lists the IDs used; an answer citing anything it was not given is rejected. Numbers in answers come from the rows supplied.
+- **Cost and demo safety:** repeat questions, lab interpretations and comparisons are cached; 30 calls per device per 10 minutes; a $5/month AI Gateway budget; a search-only fallback.
+- **Evaluation:** `scripts/ai-eval.mjs` runs 22 live checks, including data questions (fastest BASS-II run, FLEX conditions, tests at the Moon base atmosphere, an unsupported atmosphere). Results and reviewer notes: `docs/ANSWER-CHECK.md`. Checked citations are not a scientific review of every sentence.
 
 ## Development process
 
-1. **Foundation (November 9).** Built the dashboard, the animated 3D lab with a CPU fallback, the evidence library with provenance fields, the Mission desk ranking, the field guide, and the dark galaxy design. Deployed on Vercel from GitHub.
-2. **Challenge resources (November 13).** Reviewed the official Details and Resources tabs, recorded a dated inventory (`docs/RESOURCES-2026-11-13.md`), downloaded the 49 MB BASS-II report, verified Table 5.1 page by page and expanded the data from 2 runs to all 18 tracked runs.
-3. **Challenge coverage (November 13–14).** Added the investigations the challenge names (BRE, E-FIELD Flames, CFI-G, SPICE & SLICE, SAME-R/DAFT), shared-hardware groupings, crew atmospheres including spacesuits, the oxygen-coverage chart, the partial-gravity panel, Earth applications, fire history, and findings from NASA’s 2015 ISS combustion guide.
-4. **AI (November 14).** Connected Claude Haiku 5.5 through Vercel AI Gateway, added the context builder, citation checks, rate limits, follow-up support and a live evaluation script, and iterated until all 13 checks passed (18 since the review's scope questions were added).
-5. **Launch.** Custom domain emberatlas.tech, a build stamp in the footer, and this repository as a clean snapshot of the project.
-6. **External review (November 14).** Acted on a written review of the site: added the verified Saffire IV–VI test records (ICES-2024-365, checksummed) and a condition-by-condition comparison with a Moon base, led the homepage and guided tour with that measured result, corrected the airflow headline, scoped the partial-gravity claim to the PSI archive, gave every ranked experiment a reason, added detection and extinction examples, qualifiers on every finding, material synonyms, scoped downloads, a one-page brief, and a published answer check.
+1. **Foundation (November 9).** Dashboard, animated 3D lab, evidence library with provenance, Mission desk ranking, field guide, dark galaxy design.
+2. **Challenge resources (November 13).** Resource inventory; BASS-II Table 5.1 verified against the 49 MB report and expanded to all 18 tracked runs.
+3. **Challenge coverage and AI (November 13–14).** The investigations the challenge names, crew atmospheres, Earth applications, Claude Haiku 5.5 with citation checks and a live evaluation.
+4. **External review (November 14).** Saffire IV–VI records, condition-by-condition comparison, scoped partial-gravity claims, ranking reasons, detection and extinction examples, a one-page brief, an answer check.
+5. **The data layer (November 15).** Found PSI's public API, imported 2,008 test records from 21 tables with checksums and 28 flagged data problems, rebuilt the nearest-test search on them, added the measured lunar- and Mars-gravity limits, the oxygen × pressure map, and AI answers from test rows; raised every font to 12 px or more and reworked the flame colours.
 
-Every change was tested with strict TypeScript and 29 automated tests (`npm run check`), a production build, browser checks on desktop and phone, and a review of Vercel runtime logs after each release. The verification log is in `docs/VALIDATION.md`; the requirement mapping is in `docs/CHALLENGE-ALIGNMENT.md`. Development was assisted by AI coding tools (Claude Code); NASA values were checked by hand against the original sources.
+Every change is tested with strict TypeScript and 36 automated tests, a production build, browser checks on desktop and phone, and live AI checks. See `docs/VALIDATION.md`.
 
 ## Run it locally
 
@@ -109,7 +106,7 @@ Requires Node.js 20.9+ and npm. Everything except AI answers works offline, with
 ```sh
 npm ci
 npm run dev          # http://localhost:3000
-npm run check        # strict TypeScript + 29 tests
+npm run check        # strict TypeScript + 36 tests
 npm run build && npm start
 ```
 
@@ -121,13 +118,20 @@ Run the live AI checks against any deployment:
 node scripts/ai-eval.mjs https://emberatlas.tech
 ```
 
+Refresh NASA's tables and rebuild the dataset:
+
+```sh
+NODE_USE_ENV_PROXY=1 node scripts/fetch-psi.mjs   # re-download and compare checksums
+node scripts/build-tests.mjs                      # verify checksums, rebuild data/tests.json
+```
+
 ## Deployment
 
 Vercel project `ember-atlas`, connected to this repository; every push to `main` deploys to [emberatlas.tech](https://emberatlas.tech) (also [ember-atlas-sigma.vercel.app](https://ember-atlas-sigma.vercel.app)). Framework preset Next.js, install `npm ci`, build `npm run build`. Other Node hosts can run `npm ci && npm run build && npm start`.
 
 ## Limits and next steps
 
-EMBER Atlas is a research and teaching tool, not a fire-safety certification. Next steps: add partial-gravity data from LUCI and FM2 when NASA releases it, ingest more PSI datasets (starting with FLEX droplet series) with the same verification, and have a combustion scientist review the findings and rankings.
+EMBER Atlas is a research and teaching tool, not a fire-safety certification. Every NASA test in the tables ran in microgravity; the partial-gravity limits come from about 5-second drop-tower tests on three materials. Next steps: add LUCI and FM2 lunar-gravity results when NASA releases them, ingest the files behind the PSI tables (video, time series), and have a combustion scientist review the findings, rankings and our reading of each data quirk.
 
 ## Project docs
 

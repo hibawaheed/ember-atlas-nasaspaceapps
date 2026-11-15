@@ -114,7 +114,7 @@ const usDate = (s, acc, file, id) => {
   let y = Number(m[3]);
   if (m[3].length === 2) {
     y += 2000;
-    quirk(acc, file, id, "Test Date", s, "Two-digit year in a column that mostly uses four digits", `read as ${y}`);
+    quirk(acc, file, id, "Test Date", s, "Two-digit year in a column that mostly uses four digits", "read as 20YY");
   }
   return `${y}-${m[1].padStart(2, "0")}-${m[2].padStart(2, "0")}`;
 };
@@ -481,7 +481,7 @@ for (const [suffix, role] of [["Normal_Flame", "ambient"], ["Inverse_Flame", "ox
     for (const r of rows) {
       const id = r["Sample Number"];
       if (!/^S?\d|^\d-\d/.test(id)) {
-        quirk(acc, file, id.slice(0, 30), "Sample Number", id.slice(0, 80), "Note or flow-visualisation row inside the test table", "not a test; skipped");
+        quirk(acc, file, /^F\d/.test(id) ? id : "note row", "Sample Number", id.slice(0, 60), "Note or flow-visualisation row inside the test table", "not a test; skipped");
         continue;
       }
       const flags = [];

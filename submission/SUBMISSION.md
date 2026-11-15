@@ -26,32 +26,41 @@ ISL Team A: Hiba Waheed Ch, Zaafir Abbas Haidrie, Muhammad Ashar Hassan, Amin Ad
 
 ## High-level project summary
 
-EMBER Atlas is a web dashboard that helps researchers, engineers and students find, compare and interpret NASA’s microgravity combustion research for fire safety in spacecraft, space stations, Moon and Mars bases, and pressurized rovers. It ranks 10 NASA investigations for each habitat and safety question (prevention, detection, suppression), compares their fuels, conditions, sensors and shared hardware, and charts 39 real BASS-II flame-spread measurements checked against NASA’s original report. An AI research companion powered by Anthropic’s Claude answers questions in plain language from 36 curated NASA findings, citing every source and declining what the evidence cannot support. An animated 3D combustion lab shows how flames change with gravity, oxygen, airflow and pressure, and makes clear what is measured and what is illustrative.
+EMBER Atlas puts every NASA microgravity combustion test we could find into one cited, searchable atlas for crew-habitat fire safety. Using NASA's Physical Sciences Informatics (PSI) API, we imported 2,008 test records from 21 investigations, checksummed each table, converted units in code and flagged 28 data-entry problems openly. The atlas answers the challenge's Moon base question directly: NASA burned fuel droplets at exactly 30% oxygen and 71 kPa (eight FLEX tests); the closest solid-material fire is Saffire VI-3; and drop-tower tests show three materials burning at lower oxygen at lunar gravity than in orbit or on Earth. An oxygen × pressure map, a nearest-test engine, an animated 3D lab and an AI research companion powered by Anthropic's Claude, citing NASA findings and test rows, make that evidence easy to use and check.
 
-*(About 130 words. Shorter version, about 50 words:)* EMBER Atlas turns NASA’s microgravity combustion research into cited, comparable answers for crew-habitat fire safety. It ranks and compares 10 investigations, charts 39 verified BASS-II measurements, and uses Anthropic’s Claude to answer questions and interpret lab scenarios strictly from 36 curated NASA findings, and compares a Moon base atmosphere with the closest measured NASA fire test.
+*(About 140 words. Shorter version, about 50 words:)* EMBER Atlas turns 2,008 NASA combustion test records from 21 PSI investigations into a cited atlas for crew-habitat fire safety. It finds the NASA tests nearest any cabin atmosphere, maps them by oxygen and pressure, charts measured lunar-gravity limits, and uses Anthropic's Claude to answer questions from the tests themselves.
 
 ---
 
 ## Detailed project description
 
-**What it does.** NASA’s Physical Sciences Informatics (PSI) system makes ISS combustion results public, but the challenge statement points out that they are hard to find, harder to compare and harder yet to interpret. EMBER Atlas brings that evidence into one place and keeps every number traceable to its NASA source.
+**The question.** NASA expects Moon bases and rovers to run at 30% oxygen or more and 10.2 psi (70.3 kPa) or less. The challenge says PSI's combustion data is hard to find, compare and interpret. So we asked one concrete question and built the tool that answers it: has NASA burned anything at that atmosphere, and what does the evidence say about lunar gravity?
 
-- **Mission desk (find and rank).** Choose a destination (orbital habitat, lunar base, Mars habitat or pressurized rover) and a safety question (prevention, detection or suppression). Ten investigation profiles — BASS-II, SAME/SAME-R, FLEX, Saffire, ACME, SoFIE-GEL, BRE, E-FIELD Flames, CFI-G and SPICE & SLICE — are ranked with a visible, disclosed score, so users can see why each appears where it does. Rankings are reading priorities, never hazard scores.
-- **Compare.** Up to three investigations side by side: objectives, fuels and sample sizes, test conditions, variables, sensors and limits, plus a shared-hardware view (ACME experiments in the Combustion Integrated Rack; FLEX, FLEX-2 and CFI in the Multi-user Droplet Combustion Apparatus; BASS, BASS-II, SPICE and SLICE in the Microgravity Science Glovebox flow duct). An oxygen-coverage chart separates measured test conditions from apparatus limits: BASS-II solid tests ran at 16.8–22.2% oxygen, and Saffire IV–VI spacecraft fires at 22.0–31.0%. The closest to a Moon base (30% oxygen at 70.3 kPa) is Saffire VI-3, acrylic at 30.3% oxygen, but at 54.6 kPa, 20 cm/s forced airflow and in microgravity; the site shows that comparison condition by condition with links to the source tables.
-- **Interpret with AI.** The research companion answers questions such as “Will a fire go out if ventilation is shut off?” or “Compare FLEX and BASS-II” with short, cited answers and follow-up support. The same model interprets lab setups and explains Mission-desk comparisons.
-- **Combustion lab.** An animated 3D flame (Three.js volumetric shader with a CPU fallback) responds to gravity (orbit, Moon, Mars, Earth), oxygen, airflow, cabin pressure and fuel. A measured-replay mode steps through all 18 BASS-II runs. Crew-atmosphere and partial-gravity panels compare Earth air, a Moon base (≥30% O₂, ≤10.2 psi) and a spacesuit (100% O₂, 4.3 psi), and explain the partial-gravity gap at its correct scope: the challenge statement says PSI has no partial-gravity combustion data, short drop-tower and parabolic-flight studies exist outside PSI, and LUCI and FM2 are expected to add longer lunar-gravity tests.
-- **Measured data.** 39 flame-spread observations from 18 BASS-II runs, with run conditions, a “what varied / what stayed the same” summary and CSV export. All 10 investigation profiles can also be downloaded as CSV for modeling.
-- **Earth applications and history.** A “Back on Earth” panel covers water-mist extinguishers, smoke detection and firefighter gear; a field guide covers the Apollo 1, Apollo 13, Mir and Artemis II fire events, key concepts, a glossary and a quiz.
+**What we found.**
+
+- **Liquid droplets: yes.** NASA's Flame Extinguishment Experiment (FLEX, PSI-69) burned methanol and heptane droplets at 30% oxygen and 71.2–72.1 kPa eight times on the ISS in 2009–2010, and nine more at 34% oxygen.
+- **Solid materials: close, not exact.** The nearest is Saffire VI-3, acrylic at 30.3% oxygen, but at 54.6 kPa with 20 cm/s forced flow.
+- **Lunar gravity: measured, briefly.** In NASA drop-tower tests, Mylar kept burning down to 15.6% oxygen at lunar gravity, against 17.0% in microgravity and 21.2% on Earth, at 10.2 psia. All three materials tested burned at lower oxygen at lunar and Martian gravity than at either end, so microgravity and Earth results did not bracket the middle. These were about 5-second tests published outside PSI.
+
+**What it does.**
+
+- **The atlas map.** 754 tests that record both oxygen and pressure, plotted by fuel type with crew atmospheres marked; click any point for its tests and NASA record.
+- **Nearest measured test.** Set any atmosphere, airflow, gravity and fuel in the lab; the site searches all 2,008 records and shows the nearest NASA tests condition by condition, naming every match, difference and missing value, with links to the source table.
+- **Data quality, in the open.** 28 problems found in NASA's tables, affecting 122 cells: column subscripts and units lost ("CO" for CO₂, "mm" for mm²/s), spreadsheet autofill that turned "40% CH4" into "CH5 … CH14", percent formatting that wrote 34% as "3400%", unreadable characters and implausible values. Each is listed with our reading, and every record keeps the cell as NASA wrote it.
+- **Mission desk.** Choose a habitat and a safety question (prevention, detection, suppression); investigations are ranked with a reason for each, compared side by side and grouped by shared hardware, with measured detection (Saffire VI-3 smoke-alarm timing) and extinction (FLEX cool flames) examples.
+- **AI research companion.** Claude answers questions such as "Which BASS-II run had the fastest flame spread?" (run M16, 0.144 mm/s at 5 cm/s) or "Has NASA burned anything at a Moon base atmosphere?" from the matching NASA test rows and curated findings, citing each one.
+- **Combustion lab.** An animated 3D flame (Three.js volumetric shader with a CPU fallback) illustrates gravity, oxygen, airflow and pressure, and replays BASS-II measurements; the oxygen partial-pressure arithmetic is shown, and the flame is labelled as an illustration.
+- **Downloads.** CSV of any investigation or all 2,008 records with PSI links, a one-page scenario brief, and shareable links that rebuild any scenario.
 
 **How we built it.**
 
-- **Data and verification.** We transcribed every tracked run from Table 5.1 of the BASS-II summary report (NASA/TM-20210011385), then rendered the original PDF page and checked each value by eye, recording the file’s SHA-256. In doing so we found that the report’s Figure 5.2 gives a different M8 slope at 10 cm/s than Table 5.1; we kept the table value and documented the difference. Findings come from NTRS reports, PSI records, NASA investigation pages, NASA’s 2015 ISS combustion researcher’s guide and the challenge statement. Each finding stores its source, its meaning and its limitations, and is labeled Observed, Review or Research aim.
-- **Software.** Next.js 16 and React 19, Three.js for the flame, and Zod for input validation, deployed on Vercel at emberatlas.tech. Data lives in versioned JSON files; there is no database or login. 29 automated tests cover data integrity, API routes, retrieval, rate limiting and AI guardrails.
-- **AI pipeline.** BM25 search over the findings decides what the model may see; off-topic questions fall below a relevance cutoff and are declined without calling the model. A context builder adds the profiles of any investigation the question names, plus the previous question for follow-ups. Anthropic’s Claude Haiku 5.5, called through the Vercel AI SDK and Vercel AI Gateway, returns structured output listing the IDs it relied on, and the server rejects any answer citing an item it was not given. Calls are limited to 10 per visitor per 10 minutes, with a $5 monthly budget cap, and any failure falls back to showing the matching NASA findings directly.
+- **Data.** We found PSI's public repository API, downloaded the experimental tables for every combustion investigation that has one (21 of 24), recorded each file's SHA-256 and DOI, and wrote a converter that keeps every raw cell, converts mmHg, atm and bar to kPa and mole fractions to percent, and flags problems instead of fixing them silently. A fetch script re-downloads the tables and confirms they still match. We cross-checked the 18 BASS-II runs we had transcribed from NASA/TM-20210011385 against PSI's table: every run agrees. The partial-gravity limits and Saffire IV–VI values were typed from NASA PDFs and checked against rendered pages.
+- **Software.** Next.js 16 and React 19, Three.js, Zod, SVG charts; deployed on Vercel at emberatlas.tech; no database or login. 36 automated tests cover checksums, unit conversions, the Moon-atmosphere tests, the nearest-test engine, the partial-gravity table (it reproduces the paper's own oxygen margins), the API routes, rate limits and AI guardrails.
+- **AI pipeline.** The server decides what Claude Haiku 5.5 sees: BM25-retrieved findings, investigation profiles and NASA test rows chosen deterministically from the question (named conditions, whole-table sorts for "fastest" or "highest", condition grids per investigation). The model returns structured output listing the IDs it used; an answer citing anything it was not given is rejected. Repeat questions are cached; calls are limited to 30 per device per 10 minutes, under a $5 monthly budget; any failure falls back to the matching findings.
 
-**Why it matters.** The evidence already points to concrete lessons for habitat designers: measured fires near lunar oxygen levels exist only at different pressure, airflow and gravity; inert-gas suppressants leave less safety margin in reduced gravity than Earth standards assume; shutting off ventilation does not reliably put out a spacecraft fire; and cool flames can keep burning after the visible flame disappears. EMBER Atlas makes these findings, and their limits, easy to reach and check.
+**Why it matters.** A habitat designer can now find, in one click and with the source table attached, which NASA tests are nearest their cabin and how they differ. The evidence already says three useful things: droplet fires have been run at a Moon base atmosphere; no solid-material fire has; and Earth-gravity flammability screening may not be conservative at lunar gravity.
 
-**Limits.** EMBER Atlas is a research and teaching tool, not a safety certification. The 3D flame and its Moon and Mars shapes are illustrative, not simulations. AI answers passed a small live test set (18 of 18 checks, including questions about what the evidence does and does not cover) but have not been reviewed by a combustion scientist; checked citations mean the cited finding was supplied, not that every sentence is proven.
+**Limits.** A research and teaching tool, not a safety certification. Every test in the PSI tables ran in microgravity; the partial-gravity limits come from short drop-tower tests on three materials. The 3D flame is an illustration. AI answers passed a live test set of 22 checks but have not been reviewed by a combustion scientist; checked citations mean each cited item was supplied, not that every sentence is proven.
 
 ---
 
@@ -59,11 +68,15 @@ EMBER Atlas is a web dashboard that helps researchers, engineers and students fi
 
 **Primary data**
 
-- BASS-II Summary Report, NASA/TM-20210011385 (Table 5.1, 39 flame-spread observations): https://ntrs.nasa.gov/citations/20210011385
-- NASA PSI-25, Burning and Suppression of Solids II (BASS-II), DOI 10.60555/4qc4-de67: https://psi.nasa.gov/physci/repo/data/investigations/PSI-25
-- NASA PSI-69, Flame Extinguishment Experiment (FLEX), DOI 10.60555/mbq8-0451: https://psi.nasa.gov/physci/repo/data/investigations/PSI-69
-- NASA PSI-102, Smoke and Aerosol Measurement Experiment (SAME): https://psi.nasa.gov/physci/repo/data/investigations/PSI-102
-- NASA PSI-62, Concurrent Flame Spread Modeling with Comparison to BASS Experiments using Two-Color Tomography, DOI 10.60555/e9xp-ex83: https://psi.nasa.gov/physci/repo/data/investigations/PSI-62
+- NASA PSI repository, experimental tables for 21 combustion investigations (CC0), retrieved through the PSI API on November 14, 2026; files, DOIs and SHA-256 checksums in `data/psi/manifest.json`. Search: https://psi.nasa.gov/physci/repo/search?q=combustion
+  - PSI-69 FLEX, DOI 10.60555/mbq8-0451 (274 tests) · PSI-39 CFI (87) · PSI-68 FLEX-2 (test matrix)
+  - PSI-159 ACME CFI-G (333) · PSI-10 ACME Flame Design (327) · PSI-20 ACME BRE · PSI-23 ACME s-Flame · PSI-21 ACME CLD Flame · PSI-22 ACME E-FIELD Flames
+  - PSI-25 BASS-II, DOI 10.60555/4qc4-de67 (129) · PSI-26 BASS (122) · PSI-106 SLICE · PSI-107 SPICE (469)
+  - PSI-98, PSI-99, PSI-100 Saffire-I to -III · PSI-102 SAME · PSI-101 SAME-R (109) · PSI-47 DAFT
+- BASS-II Summary Report, NASA/TM-20210011385 (Table 5.1, 39 flame-spread values): https://ntrs.nasa.gov/citations/20210011385
+- Preliminary Results from the Saffire VI Experiment, ICES-2024-365 (Tables 1–2 and Figure 7): https://ntrs.nasa.gov/citations/20240002981
+- Olson & Ferkul, Evaluating Material Flammability in Microgravity and Martian Gravity Compared to the NASA Standard Normal Gravity Test (Table I, limiting oxygen at 0g, lunar, Martian and Earth gravity): https://ntrs.nasa.gov/citations/20130010991
+- NASA PSI-62, two-color tomography of BASS flames (data reuse example), DOI 10.60555/e9xp-ex83: https://psi.nasa.gov/physci/repo/data/investigations/PSI-62
 
 **Challenge resources**
 
@@ -87,9 +100,7 @@ EMBER Atlas is a web dashboard that helps researchers, engineers and students fi
 - Solid Fuel Ignition and Extinction – Growth and Extinction Limit (SoFIE-GEL): https://science.nasa.gov/biological-physical/investigations/sofie-gel/
 - FLEX — Combustion Integrated Rack Operations: https://gipoc.grc.nasa.gov/wp/fcf-cir/flex/
 - Smoke Aerosol Measurement Experiment: objectives and diagnostics: https://www1.grc.nasa.gov/wp-content/uploads/SAME_Quad.pdf
-- Preliminary Results from the Saffire VI Experiment, ICES-2024-365 conference paper (Tables 1–2 and Figure 7: test conditions, heat release, gases and detector timing used in the lunar comparison): https://ntrs.nasa.gov/citations/20240002981
 - Preliminary Results from the Saffire VI Experiment, ICES 2024 presentation slides: https://ntrs.nasa.gov/citations/20240007488
-- Evaluating Material Flammability in Microgravity and Martian Gravity Compared to the NASA Standard Normal Gravity Test (Olson & Ferkul): https://ntrs.nasa.gov/citations/20130010991
 - Characterizing the Flammability of Nomex Fabric for the Preparation of FM2 (2025 poster): https://ntrs.nasa.gov/citations/20250010975
 - Saffire Ignites New Discoveries in Space: https://www.nasa.gov/humans-in-space/saffire-ignites-new-discoveries-in-space/
 - Flame Burns Out on NASA’s Long-Running Spacecraft Fire Experiment: https://www.nasa.gov/humans-in-space/flame-burns-out-on-nasas-long-running-spacecraft-fire-experiment/
@@ -108,9 +119,9 @@ No partner-agency data is used. All data comes from NASA sources listed above an
 
 ## Use of artificial intelligence
 
-- **In the product:** EMBER Atlas uses Anthropic’s Claude Haiku 5.5, through the Vercel AI SDK and Vercel AI Gateway, to write research-companion answers, lab interpretations and Mission-desk comparison explanations. The model sees only NASA findings and investigation profiles selected by our search step, must cite the items it used, and is labeled on screen as AI. Answers fall back to plain search results if the model is unavailable.
+- **In the product:** EMBER Atlas uses Anthropic’s Claude Haiku 5.5, through the Vercel AI SDK and Vercel AI Gateway, to write research-companion answers, lab interpretations and Mission-desk comparison explanations. The model sees only NASA findings, investigation profiles and NASA test rows selected by our server, must cite the items it used, and is labeled on screen as AI. Answers fall back to plain search results if the model is unavailable.
 - **In development:** the team used Claude Code (Anthropic) and earlier AI coding assistants to help write code, documentation and tests. NASA values were checked by hand against the original sources.
-- **Not AI-generated:** the BASS-II measurements are NASA published values, transcribed and visually verified. The 3D flame is an authored illustration, not AI-generated imagery.
+- **Not AI-generated:** the 2,008 test records are NASA's own table values, converted by our script with every original cell kept; the BASS-II, Saffire and partial-gravity values were transcribed from NASA PDFs and visually verified. The 3D flame is an authored illustration, not AI-generated imagery.
 
 ---
 
@@ -120,4 +131,4 @@ Next.js 16, React 19, Three.js, Vercel AI SDK, Vercel AI Gateway, Anthropic Clau
 
 ## Suggested tags
 
-microgravity, combustion, fire safety, ISS, Moon, Mars, PSI, NASA data, AI, Claude, data visualization, 3D, spacecraft habitats
+microgravity, combustion, fire safety, ISS, Moon, Mars, PSI, NASA data, open data, data quality, AI, Claude, data visualization, 3D, spacecraft habitats

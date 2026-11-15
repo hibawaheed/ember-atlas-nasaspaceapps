@@ -6,16 +6,18 @@ The demo starts on the question the challenge raises for the Moon and answers it
 
 ## Script
 
-1. **The question (20 s).** On the homepage, read the result strip: *"Has NASA measured a fire in 30% oxygen at 70.3 kPa?"* Say: the challenge expects Moon bases at 30% oxygen or more and 10.2 psi or less. That's a scenario. We wanted to know what NASA has actually burned near it.
-2. **Open VI-3 and compare (45 s).** Click **Compare a lunar habitat with a NASA test**. The lab opens on the comparison table: Saffire VI-3, acrylic (PMMA) at 30.3% oxygen. Walk down the rows: material matches, oxygen within 0.3 points, but pressure (54.6 kPa), airflow (20 cm/s forced) and gravity (microgravity) differ.
-3. **Follow the NASA table (20 s).** Click **Open Table 1 (PDF p. 3)**. The NASA paper opens on the page with the VI-3 row.
-4. **What the flame picture is (20 s).** Scroll up to the flame. *O₂ partial pressure 0.30 × 70.3 kPa = 21.09 kPa* is arithmetic; *Animation intensity: Moderate* is authored for the picture, not measured.
-5. **Detection (25 s).** On the **Mission desk**, choose **Moon** and **Detect a developing fire**. The measured example: in VI-3 the authors' 1 mg/m³ particle threshold was reached at 981 s, by which point much of the gas release had occurred. The threshold is the authors' chosen level, not the detector's signal.
-6. **Share the brief (20 s).** Back on the homepage, click **Save brief (HTML)** and open it: one page with the inputs, the comparison, the source tables, the limitation, the build and a link that reopens the scenario in any browser.
-7. **End on the open question (15 s).** The brief's last line is the unanswered one: no measured fire at lunar gravity is in the atlas, and NASA's PSI archive has none (per the challenge statement). Short drop-tower tests exist outside PSI; LUCI and FM2 are meant to fill the gap.
+1. **The question (20 s).** On the homepage, read the result: *"Has NASA measured a fire in 30% oxygen at 70.3 kPa?"* The challenge expects Moon bases there. We imported 2,008 NASA test records to answer it.
+2. **Three answers (40 s).** Droplets: yes, eight FLEX tests at 30% oxygen and 71–72 kPa (click "NASA PSI-69 table" to show the source). Solids: the closest is Saffire VI-3, at lower pressure. Lunar gravity: in drop-tower tests Mylar burned down to 15.6% oxygen, lower than in orbit or on Earth.
+3. **The map (25 s).** Scroll to the atlas map: 754 tests by oxygen and pressure, crew atmospheres marked. Click the FLEX circle at the Moon base marker to show the test list and NASA link.
+4. **Condition by condition (30 s).** Click **Compare condition by condition**. Switch between *Solid materials* (Saffire VI-3) and *Liquid droplets* (FLEX). Every row says what matches, what differs and what NASA's table does not list.
+5. **Gravity (20 s).** Scroll to the gravity chart: limits at 0g, lunar, Martian and Earth gravity. The two ends do not bracket the middle for these three materials; about 5-second tests.
+6. **Data quality (20 s).** Open **Measured data**: the 21 NASA tables, and 28 problems we found in them, such as spreadsheet autofill turning "CH4" into "CH5 … CH14". We flag, never silently fix.
+7. **Ask (20 s).** In the **Research companion**, ask *"Which BASS-II run had the fastest flame spread?"* Claude answers M16, 0.144 mm/s at 5 cm/s, citing the NASA test row.
+8. **Take it away (10 s).** **Save brief (HTML)** or **Copy link**: one page with the answer, sources and limits, or a link that reopens the scenario.
 
 ## Ready for questions
 
+- **"How did you get the data?"** PSI has a public API. `scripts/fetch-psi.mjs` re-downloads all 21 tables and checks their SHA-256 against our manifest; `scripts/build-tests.mjs` rebuilds the dataset.
 - **"How do you handle changing conditions?"** Switch the lab to **Measured replay**, run M7 and open **Read run M7 as a table**: each step is a published BASS-II spread rate with units, and oxygen fell during the run, so airflow and oxygen changed together.
 - **"Can I ask it things?"** In the **Research companion**, ask *"Has anyone studied flame spread in simulated lunar gravity?"* The answer separates the short tests outside PSI from the atlas's holdings and cites both.
 

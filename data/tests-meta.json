@@ -466,7 +466,7 @@
    "accession": "PSI-69",
    "field": "Test Date",
    "note": "Two-digit year in a column that mostly uses four digits",
-   "action": "read as 2009",
+   "action": "read as 20YY",
    "tests": [
     "20",
     "21",
@@ -781,15 +781,15 @@
    "tests": [
     "F1C1/F1C2",
     "F2C1/F2C2",
-    "Note 1 Derived from measured C",
-    "Note 2 The PMMA portion was co",
-    "Note 3 This is the length of f",
-    "Note 4 The flames remain ancho"
+    "note row",
+    "note row",
+    "note row",
+    "note row"
    ],
    "examples": [
     "F1C1/F1C2",
     "F2C1/F2C2",
-    "Note 1 Derived from measured CO2 production and referenced to initial O2 concent"
+    "Note 1 Derived from measured CO2 production and referenced t"
    ],
    "testCount": 6
   },

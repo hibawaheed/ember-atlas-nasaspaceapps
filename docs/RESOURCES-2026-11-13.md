@@ -2,7 +2,7 @@
 
 Source: the [Flame in Freefall challenge page](https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/), Details and Resources tabs. The owner captured them in a browser on November 13, 2026, because this cloud session could not load the site (the network proxy failed to connect to it). The page says: "More resources may be added before the hackathon begins." Check again before submission.
 
-**Status: partial.** The screenshot starts partway down the Resources list. Any items above "NASA ScienceCasts" (likely including PSI repository links) are not yet recorded. Link targets were not visible, except for the video URL the owner provided.
+**Status (updated November 15): link targets for the visible items were supplied later and are listed in `submission/SUBMISSION.md`; the data itself now comes from the PSI API (21 experimental tables, see `data/psi/manifest.json`). Original note:** The screenshot starts partway down the Resources list. Any items above "NASA ScienceCasts" (likely including PSI repository links) are not yet recorded. Link targets were not visible, except for the video URL the owner provided.
 
 ## Resources tab (visible portion)
 
