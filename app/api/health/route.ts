@@ -1,5 +1,6 @@
 import { findings, sources } from "@/lib/evidence";
 import { investigations } from "@/lib/investigations";
+import { testCounts } from "@/lib/tests";
 export async function GET() {
   return Response.json({
     status: "ok",
@@ -12,6 +13,9 @@ export async function GET() {
         ? "generative-with-retrieval-fallback"
         : "retrieval",
     investigations: investigations.length,
+    nasaTests: testCounts.records,
+    nasaTestsWithOxygenAndPressure: testCounts.plottable,
+    dataQuirksFlagged: testCounts.quirks,
     renderer: "animated-volumetric-and-3d-particles-v2",
     challengeReviewedAt: "2026-11-13",
     simulation: "illustrative-v1",

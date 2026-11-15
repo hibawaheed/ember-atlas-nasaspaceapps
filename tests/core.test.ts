@@ -29,7 +29,11 @@ import { bassVariation } from "../lib/variation";
 import { allowAiCall, aiLimits } from "../lib/rate-limit";
 import { lookupReplay } from "../lib/replay";
 import { nasaLinks } from "../lib/links";
-import { saffireTests, closestTests, tableLink } from "../lib/saffire";
+import { saffireTests, tableLink } from "../lib/saffire";
+import { nearestTests, testsAtAtmosphere } from "../lib/nearest";
+import { allTests, queryTests, testCounts, psiManifest, dataQuirks } from "../lib/tests";
+import fs from "node:fs";
+import crypto from "node:crypto";
 import { stripIds } from "../lib/synthesis";
 import { buildAskContext } from "../lib/context";
 const request = (path: string, body: unknown) =>
@@ -403,10 +407,46 @@ test("Saffire VI records match the verified tables and VI-3 is closest to the lu
   assert.deepEqual([vi3.oxygenPct, vi3.pressureKpa, vi3.airflowCms, vi3.peakHeatReleaseW], [30.3, 54.6, 20, 3080]);
   const vi2 = saffireTests.find((t) => t.id === "VI-2")!;
   assert.deepEqual([vi2.material, vi2.oxygenPct, vi2.pressureKpa], ["SIBAL cloth", 31.0, 54.1]);
-  const best = closestTests(presets.lunar.scenario)[0];
-  assert.equal(best.test.id, "VI-3");
-  assert.equal(best.reason, "Same material and an oxygen fraction within 0.3 percentage points. Pressure, airflow and gravity differ.");
+  const best = nearestTests(presets.lunar.scenario, "solid")[0];
+  assert.equal(best.test.t, "VI-3");
+  assert.equal(best.reason, "Same material and oxygen within 0.3 points match. Pressure, airflow and gravity differ.");
   assert.match(tableLink(3), /ntrs\.nasa\.gov.*#page=3$/);
+});
+test("NASA PSI tables: checksums, counts and unit conversions", () => {
+  assert.equal(psiManifest.files.length, 21);
+  for (const m of psiManifest.files) {
+    const got = crypto.createHash("sha256").update(fs.readFileSync("data/psi/raw/" + m.file)).digest("hex");
+    assert.equal(got, m.sha256, m.file);
+  }
+  assert.equal(testCounts.records, 2008);
+  assert.equal(allTests.filter((t) => t.accession === "PSI-69").length, 274);
+  assert.equal(allTests.filter((t) => t.accession === "PSI-25").length, 129);
+  const flex25 = allTests.find((t) => t.id === "PSI-69:25")!;
+  assert.deepEqual([flex25.fuel, flex25.o2Pct, flex25.pressureKpa, flex25.date], ["Methanol", 30, 71.6, "2009-11-09"]);
+  const cfig = allTests.find((t) => t.accession === "PSI-159" && t.o2Role === "ambient" && t.raw && (t.raw as Record<string, string>)["approx p (bar)"] === "2.0266")!;
+  assert.equal(cfig.pressureKpa, 202.7);
+  assert.ok(dataQuirks.some((q) => /autofill incremented/.test(q.note)), "CLD autofill quirk recorded");
+  assert.ok(dataQuirks.some((q) => q.field === "Ambient pressure; mmHg"), "FLEX zero pressure recorded");
+});
+test("the eight FLEX tests at the Moon base atmosphere are found", () => {
+  const at = testsAtAtmosphere({ oxygen: 30, pressure: 70.3 });
+  assert.equal(at.length, 8);
+  assert.ok(at.every((t) => t.inv === "FLEX" && t.c === "droplet"));
+  assert.deepEqual([...new Set(at.map((t) => t.f))].sort(), ["Heptane", "Methanol"]);
+});
+test("BASS-II report runs agree with NASA's PSI table", () => {
+  for (const s of measurements.series) {
+    const row = allTests.find((t) => t.id === `PSI-25:${s.testId}`)!;
+    assert.equal(row.o2Pct, s.initialOxygenVolPct, s.testId);
+    assert.ok((row.measured as Record<string, unknown>).spreadRates, `${s.testId} carries Table 5.1 spread rates`);
+  }
+});
+test("nearest tests use every record, by fuel class", () => {
+  assert.equal(nearestTests(baseline)[0].test.inv, "BASS-II");
+  assert.equal(nearestTests(presets.still.scenario)[0].test.c, "droplet");
+  assert.equal(nearestTests(presets.lunar.scenario, "droplet")[0].test.inv, "FLEX");
+  const fastest = queryTests({ investigation: "BASS-II", sortBy: "spreadRate", limit: 1 }).rows[0];
+  assert.equal(fastest.testId, "M16");
 });
 test("ranking explains each result, labels ties and keeps ACME as background", () => {
   for (const priority of ["prevention", "detection", "suppression"] as const) {
