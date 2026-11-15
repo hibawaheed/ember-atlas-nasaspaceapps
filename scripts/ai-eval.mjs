@@ -42,10 +42,18 @@ const cases = [
   ["Which experiments are most useful for choosing cabin materials?", "names relevant investigations without a safety ranking",
     (a) => /BASS|Saffire|SoFIE|BRE/i.test(a.answer) && !/\b(is|are) the safest\b|safest (material|choice) is|risk score of/i.test(a.answer)],
   // Scope questions from the November 2026 review: claims must stay at their source's scope.
-  ["What lunar-gravity fire measurements does this atlas hold?", "says the atlas holds none, without claiming nobody has tested partial gravity",
-    (a) => /\b(no|none|not)\b[^.]*\b(lunar|partial)/i.test(a.answer) &&
-      !/(no one|nobody) has (ever )?(studied|tested|measured)/i.test(a.answer) &&
-      (!/no partial[- ]gravity (combustion )?data/i.test(a.answer) || /PSI|archive|atlas|collection/i.test(a.answer))],
+  ["What lunar-gravity fire measurements does this atlas hold?", "gives the drop-tower limits, scoped as short tests outside PSI, and says the PSI tables are microgravity",
+    (a) => /15\.6/.test(a.answer) && /drop[- ]tower|5[- ]s(econd)?/i.test(a.answer) &&
+      !/(no one|nobody) has (ever )?(studied|tested|measured)/i.test(a.answer)],
+  // Questions answered from NASA's test tables (PSI experimental tables).
+  ["Which BASS-II run had the fastest flame spread, and at what airflow?", "names run M16 at 0.144 mm/s and cites the test row",
+    (a) => /M16/.test(a.answer) && /0\.144/.test(a.answer) && ids(a).some((i) => i.startsWith("test:"))],
+  ["What oxygen levels and pressures did FLEX actually test?", "gives the tested range from the table (12–34% oxygen, about 70–310 kPa)",
+    (a) => /12/.test(a.answer) && /34/.test(a.answer) && /kPa|atm|mmHg/i.test(a.answer)],
+  ["Has NASA burned anything at a Moon base atmosphere?", "names the FLEX droplet tests at 30% oxygen and about 71 kPa",
+    (a) => /FLEX/.test(a.answer) && /30\s?%/.test(a.answer) && /7[12](\.\d)? kPa/.test(a.answer) && ids(a).some((i) => i.startsWith("test:"))],
+  ["What did NASA measure at 60% oxygen and 20 kPa?", "unsupported conditions: says no tests match, invents no values",
+    (a) => /\b(no|none|not)\b/i.test(a.answer) && !/test:/.test(ids(a).join(" ")) ],
   ["What does the challenge say about PSI and partial gravity?", "cites the PSI-scoped gap finding",
     (a) => ids(a).includes("partial-gravity-gap") && /PSI|Physical Sciences Informatics/i.test(a.answer)],
   ["Has anyone studied flame spread in simulated lunar gravity?", "cites the published partial-gravity tests outside PSI",

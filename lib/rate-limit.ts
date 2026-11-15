@@ -1,8 +1,10 @@
 // Best-effort limits on paid AI calls. State lives in each server instance's
 // memory, so limits are per instance, not global. The AI Gateway budget set in
 // the Vercel dashboard is the hard spending cap.
-const PER_VISITOR = { max: 10, windowMs: 10 * 60 * 1000 };
-const PER_INSTANCE = { max: 200, windowMs: 60 * 60 * 1000 };
+// A visitor is an IP address plus browser, so people sharing one network (a
+// judging room, a classroom) each get their own allowance.
+const PER_VISITOR = { max: 30, windowMs: 10 * 60 * 1000 };
+const PER_INSTANCE = { max: 400, windowMs: 60 * 60 * 1000 };
 const visitors = new Map<string, number[]>();
 let instance: number[] = [];
 
@@ -12,7 +14,11 @@ function prune(times: number[], windowMs: number, now: number) {
 
 export function visitorKey(request: Request) {
   const fwd = request.headers.get("x-forwarded-for") ?? "";
-  return (fwd.split(",")[0] || request.headers.get("x-real-ip") || "unknown").trim();
+  const ip = (fwd.split(",")[0] || request.headers.get("x-real-ip") || "unknown").trim();
+  const ua = request.headers.get("user-agent") ?? "";
+  let h = 0;
+  for (let i = 0; i < ua.length; i++) h = (h * 31 + ua.charCodeAt(i)) | 0;
+  return `${ip}|${(h >>> 0).toString(36)}`;
 }
 
 /** Returns true and records the call when an AI call is allowed. */

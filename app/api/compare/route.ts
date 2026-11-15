@@ -4,6 +4,7 @@ import { investigations, rankInvestigations, missionQuerySchema } from "@/lib/in
 import { findings } from "@/lib/evidence";
 import { explainComparison, aiEnabled } from "@/lib/synthesis";
 import { allowAiCall, visitorKey } from "@/lib/rate-limit";
+import { cacheGet, cacheSet } from "@/lib/answer-cache";
 export const maxDuration = 30;
 const ids = new Set(investigations.map((i) => i.id));
 const schema = missionQuerySchema.extend({
@@ -33,8 +34,13 @@ export async function POST(request: Request) {
           .map((f) => ({ id: f.id, claim: f.claim, limitations: f.limitations })),
       };
     });
+    const key = `compare:${destination}:${priority}:${[...picked].sort().join(",")}`;
+    const cached = cacheGet<Record<string, unknown>>(key);
+    if (cached) return Response.json({ ...cached, cached: true });
     const allowed = aiEnabled() ? allowAiCall(visitorKey(request)) : true;
-    return Response.json(await explainComparison({ destination, priority, profiles }, allowed));
+    const result = await explainComparison({ destination, priority, profiles }, allowed);
+    if (result.mode === "generative") cacheSet(key, result);
+    return Response.json(result);
   } catch (e) {
     return badRequest(e);
   }

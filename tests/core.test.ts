@@ -31,6 +31,9 @@ import { nasaLinks } from "../lib/links";
 import { saffireTests, tableLink } from "../lib/saffire";
 import { nearestTests, testsAtAtmosphere } from "../lib/nearest";
 import { partialGravity, meanLimit, worseThanBothEnds } from "../lib/partial-gravity";
+import { buildDataContext, conditionsIn } from "../lib/data-context";
+import { cacheGet, cacheSet, normalizeQuestion } from "../lib/answer-cache";
+import { visitorKey } from "../lib/rate-limit";
 import { allTests, queryTests, testCounts, psiManifest, dataQuirks } from "../lib/tests";
 import fs from "node:fs";
 import crypto from "node:crypto";
@@ -441,6 +444,24 @@ test("BASS-II report runs agree with NASA's PSI table", () => {
     assert.equal(row.o2Pct, s.initialOxygenVolPct, s.testId);
     assert.ok((row.measured as Record<string, unknown>).spreadRates, `${s.testId} carries Table 5.1 spread rates`);
   }
+});
+test("repeat questions are cached and visitors are told apart by browser", () => {
+  assert.equal(normalizeQuestion("  Why can a flame survive without AIRFLOW?? "), "why can a flame survive without airflow");
+  cacheSet("ask:test", { mode: "generative", answer: "x" }, 0);
+  assert.deepEqual(cacheGet("ask:test", 1000), { mode: "generative", answer: "x" });
+  assert.equal(cacheGet("ask:test", 7 * 60 * 60 * 1000), undefined);
+  const req = (ua: string) => new Request("http://x", { headers: { "x-forwarded-for": "1.2.3.4", "user-agent": ua } });
+  assert.notEqual(visitorKey(req("Safari")), visitorKey(req("Chrome")));
+});
+test("the AI is given the matching NASA test rows", () => {
+  const fastest = buildDataContext("Which BASS-II run had the fastest flame spread?");
+  assert.equal(fastest.rows[0].test.testId, "M16");
+  assert.match(fastest.rows[0].line, /0\.144/);
+  const moon = buildDataContext("Has NASA burned anything at a Moon base atmosphere?");
+  assert.ok(moon.rows.length >= 8 && moon.rows.slice(0, 8).every((r) => r.test.investigation === "FLEX"));
+  assert.deepEqual(conditionsIn("tests at 34% oxygen and 0.7 atm"), { oxygen: 34, pressure: 0.7 * 101.325 });
+  assert.equal(buildDataContext("Why can a flame survive without airflow?").rows.length, 0);
+  assert.equal(buildDataContext("What did NASA measure at 60% oxygen and 20 kPa?").rows.length, 0);
 });
 test("nearest tests use every record, by fuel class", () => {
   assert.equal(nearestTests(baseline)[0].test.inv, "BASS-II");
