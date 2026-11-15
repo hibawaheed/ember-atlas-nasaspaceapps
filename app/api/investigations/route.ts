@@ -7,11 +7,11 @@ export async function POST(request: Request) {
       query,
       investigations: rankInvestigations(query),
       rubric:
-        "1 context + 4 priority match + 2 surface-atmosphere relevance. Authored relevance rubric, not AI, confidence, or hazard.",
+        "See each result's reasons. Authored relevance rubric for reading priority, not AI, confidence or hazard.",
       evidenceGap:
         query.destination === "orbit"
           ? "Vehicle-specific validation required."
-          : "The challenge statement (checked November 13, 2026) reports no partial-gravity combustion data in NASA's Physical Sciences Informatics (PSI) archive. Published partial-gravity experiments exist outside that archive.",
+          : "The challenge statement (checked November 13, 2026) reports no partial-gravity combustion data in NASA's Physical Sciences Informatics (PSI) archive. NASA drop-tower tests published outside PSI measured flammability limits at lunar and Martian gravity for three materials (see /api/partial-gravity).",
       checkedAt: "2026-11-14",
     });
   } catch (error) {

@@ -1,0 +1,71 @@
+{
+  "source": {
+    "title": "Evaluating Material Flammability in Microgravity and Martian Gravity Compared to the NASA Standard Normal Gravity Test",
+    "authors": "Olson, S. L. and Ferkul, P. V. (NASA Glenn Research Center)",
+    "venue": "42nd International Conference on Environmental Systems (ICES), 2012",
+    "ntrsId": "20130010991",
+    "citationUrl": "https://ntrs.nasa.gov/citations/20130010991",
+    "pdfUrl": "https://ntrs.nasa.gov/api/citations/20130010991/downloads/20130010991.pdf",
+    "table": "Table I, PDF page 6",
+    "sha256": "2b0cabdfe7942f56bad38967e9c870dd1c73f3cb52f614a1873a93f8cc51436e",
+    "verifiedAt": "2026-11-14",
+    "verification": "Values typed from the text layer and checked by eye against a render of PDF page 6.",
+    "lunarAndZeroGOrigin": "The lunar-gravity and 0g rows come from the paper's reference 8: Ferkul, P. V. and Olson, S. L., 'Zero-Gravity Centrifuge Used for the Evaluation of Material Flammability in Lunar Gravity', Journal of Thermophysics and Heat Transfer 25(3), 2011."
+  },
+  "definitions": {
+    "ULOI": "Upward limiting oxygen index: oxygen at which a material passes the NASA-STD-6001 Test 1 burn-length criterion about half the time (1 g).",
+    "MOC": "Maximum oxygen concentration that consistently results in self-extinguishment (1 g).",
+    "ULOI*": "Reduced gravity: lowest oxygen at which the flame survived the full drop time.",
+    "MOC*": "Reduced gravity: highest oxygen at which the flame self-extinguished during the drop."
+  },
+  "limits": [
+    "Drop-tower tests in NASA Glenn's Zero Gravity Facility with a centrifuge; about 5 s of reduced gravity per test (5.18 s drop).",
+    "Reduced-gravity limits (ULOI*, MOC*) are defined differently from the 1-g limits because of the short test time.",
+    "The 0g* tests used a 30 cm/s concurrent flow; Martian- and lunar-gravity tests used buoyant flow from the centrifuge.",
+    "Three thin materials only. Published outside NASA's PSI archive."
+  ],
+  "gravityLevels": [
+    { "key": "zero", "label": "0g* (30 cm/s flow)", "g": 0 },
+    { "key": "lunar", "label": "Lunar", "g": 0.166 },
+    { "key": "martian", "label": "Martian", "g": 0.38 },
+    { "key": "earth", "label": "Earth (1 g)", "g": 1 }
+  ],
+  "materials": [
+    {
+      "material": "Mylar G",
+      "pressurePsia": 10.2,
+      "pressureKpa": 70.3,
+      "limits": {
+        "earth": { "ULOI": 21.2, "MOC": 20.0 },
+        "martian": { "ULOI": 18.0, "MOC": 17.0 },
+        "lunar": { "ULOI": 15.6, "MOC": 14.1 },
+        "zero": { "ULOI": 17.0, "MOC": 16.0 }
+      },
+      "deltaO2": { "martian": -3.1, "lunar": -5.75, "zero": -4.1 }
+    },
+    {
+      "material": "Ultem 1000",
+      "pressurePsia": 10.2,
+      "pressureKpa": 70.3,
+      "limits": {
+        "earth": { "ULOI": 23.5, "MOC": 23.0 },
+        "martian": { "ULOI": 22.0, "MOC": 21.1 },
+        "lunar": { "ULOI": 21.0, "MOC": 19.9 },
+        "zero": { "ULOI": 24.0, "MOC": 23.0 }
+      },
+      "deltaO2": { "martian": -1.7, "lunar": -2.8, "zero": 0.25 }
+    },
+    {
+      "material": "Nomex HT90-40",
+      "pressurePsia": 14.7,
+      "pressureKpa": 101.3,
+      "limits": {
+        "earth": { "ULOI": 23.5, "MOC": 22.1 },
+        "martian": { "ULOI": 19.9, "MOC": 19.0 },
+        "lunar": { "ULOI": 21.0, "MOC": 19.9 },
+        "zero": { "ULOI": 23.0, "MOC": 22.0 }
+      },
+      "deltaO2": { "martian": -3.35, "lunar": -2.35, "zero": -0.3 }
+    }
+  ]
+}

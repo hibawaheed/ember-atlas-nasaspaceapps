@@ -445,3 +445,16 @@ body {
 .hr-actions .hr-main { border-color: #ffb48a80; color: #ffd8b8; }
 .galaxy-hero h1 { margin: 18px 0 16px; }
 .galaxy-byline { margin-top: 22px; }
+.home-result { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.5fr) auto; }
+.hr-answers { list-style: none; margin: 0; padding: 0 0 0 24px; border-left: 1px solid #ffffff1a; display: grid; gap: 12px; }
+.hr-answers li { display: grid; gap: 3px; }
+.hr-answers p { font-size: 14px; line-height: 1.5; color: #dfe5f6; }
+.hr-answers b { color: #fff; }
+.hr-answers .text-link { font-size: 12.5px; justify-self: start; }
+.hr-tag { justify-self: start; font-size: 12px; font-weight: 600; letter-spacing: 0.3px; padding: 2px 9px; border-radius: 999px; }
+.hr-tag.yes { background: rgba(127, 224, 196, 0.16); color: #8ff0d2; }
+.hr-tag.partial { background: rgba(255, 196, 120, 0.16); color: #ffcf8f; }
+.hr-tag.gap { background: rgba(200, 182, 255, 0.16); color: #d6cbff; }
+.home-result p { font-size: 14px; }
+@media (max-width: 1100px) { .hr-answers { padding-left: 0; border-left: 0; } }
+@media (max-width: 650px) { .hr-answers { border-top: 1px solid #ffffff1a; padding-top: 14px; } }

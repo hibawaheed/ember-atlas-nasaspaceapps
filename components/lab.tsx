@@ -26,6 +26,7 @@ import {
 import measurements from "@/data/measurements.json";
 import { atmospheres } from "@/lib/atmospheres";
 import TestComparison from "./test-comparison";
+import GravityLimits from "./gravity-limits";
 import { sourceFor } from "@/lib/evidence";
 import { EvidenceCard } from "./evidence-view";
 import { rankForScenario } from "@/lib/evidence";
@@ -863,59 +864,28 @@ export default function Lab({
           <div className="panel-heading">
             <div>
               <span className="eyebrow">PARTIAL GRAVITY</span>
-              <h2>What we know between orbit and Earth</h2>
+              <h2>Flammability limits measured at lunar and Martian gravity</h2>
             </div>
           </div>
-          <div className="gravity-scale" role="img" aria-label="Gravity scale: this atlas holds measured combustion data at microgravity (ISS) and Earth gravity, but no measured records at Moon (0.166 g) or Mars (0.38 g) gravity. NASA's PSI archive has none either, per the challenge statement; published partial-gravity studies exist outside it.">
-            <div className="gravity-track">
-              <span className="gravity-gap-band" />
-            </div>
-            {[
-              { g: 0, label: "Microgravity", sub: "ISS data", measured: true },
-              { g: 0.166, label: "Moon", sub: "0.166 g · none in PSI", measured: false },
-              { g: 0.38, label: "Mars", sub: "0.38 g · none in PSI", measured: false },
-              { g: 1, label: "Earth", sub: "ground data", measured: true },
-            ].map((m) => (
-              <div
-                key={m.label}
-                className={
-                  "gravity-mark " +
-                  (m.measured ? "measured" : "missing") +
-                  (m.g === 0 ? " start" : m.g === 1 ? " end" : "") +
-                  (m.label === "Moon" ? " above" : "")
-                }
-                style={{ left: `${m.g * 100}%` }}
-              >
-                <i />
-                <b>{m.label}</b>
-                <small>{m.sub}</small>
-              </div>
-            ))}
-          </div>
+          <GravityLimits />
           <ul className="atmosphere-notes">
             <li>
-              <b>A gap in NASA&apos;s archive.</b> The challenge statement
-              (checked November 13, 2026) reports that NASA&apos;s Physical
-              Sciences Informatics (PSI) archive holds no partial-gravity
-              combustion data. This atlas has no measured lunar or Martian
-              record either. The lab&apos;s Moon and Mars settings only
-              interpolate the flame&apos;s shape for illustration.
+              <b>What PSI holds.</b> The challenge statement (checked November
+              13, 2026) reports that NASA&apos;s Physical Sciences Informatics
+              (PSI) archive holds no partial-gravity combustion data. Every one
+              of the 2,008 PSI and Saffire tests in this atlas ran in
+              microgravity.
             </li>
             <li>
-              <b>Published work outside PSI.</b> Partial-gravity flame tests
-              exist in the wider literature: NASA researchers have burned
-              materials at lunar and Martian gravity in drop towers and on
-              parabolic flights, and report that some burned at lower oxygen
-              levels than on Earth.{" "}
-              <a className="text-link" href={sourceFor("olson-ferkul-2012")!.url} target="_blank" rel="noreferrer">
-                Olson &amp; Ferkul, NASA, 2012
-              </a>
+              <b>What NASA measured outside PSI.</b> The chart above: drop-tower
+              flammability limits at lunar and Martian gravity for three
+              materials. All three burned at lower oxygen at partial gravity
+              than at either end, so microgravity and Earth results did not
+              bound the middle for these materials.
             </li>
             <li>
-              <b>Bracketing.</b> Microgravity and normal-gravity results could
-              bound what happens at intermediate gravity levels, according to
-              the challenge statement. That gives a range to investigate, not
-              a prediction.
+              <b>The lab&apos;s Moon and Mars flames</b> only interpolate shape
+              for illustration. They are not predictions.
             </li>
             <li>
               <b>A stand-in experiment.</b> ACME&apos;s E-FIELD Flames used an

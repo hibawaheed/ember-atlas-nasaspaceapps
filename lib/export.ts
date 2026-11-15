@@ -1,6 +1,8 @@
 import type { Scenario } from "./scenario";
 import { modelScenario, presets } from "./scenario";
-import { closestTests, saffireSource, tableLink } from "./saffire";
+import { saffireTests, tableLink } from "./saffire";
+import { nearestTests, fuelClassOf, testsAtAtmosphere, sourceLink, testName } from "./nearest";
+import { partialGravity, meanLimit } from "./partial-gravity";
 import { rankForScenario, sourceFor } from "./evidence";
 export function download(
   name: string,
@@ -40,18 +42,24 @@ export function briefHtml(s: Scenario, build = { commit: "local", date: "" }, no
   const question = lunar
     ? `Has NASA measured a fire in ${s.oxygen}% oxygen at ${s.pressure} kPa (the challenge's Moon base atmosphere)?`
     : "Which measured NASA fire test is closest to this scenario, and how does it differ?";
-  const [best] = closestTests(s);
+  const cls = fuelClassOf(s);
+  const [best] = nearestTests(s, cls);
+  const other = nearestTests(s, cls === "solid" ? "droplet" : "solid")[0];
   const t = best.test;
+  const exact = testsAtAtmosphere(s);
+  const sf = !t.a ? saffireTests.find((x) => x.id === t.t) : null;
+  const link = sourceLink(t);
   const evidence = rankForScenario(s).slice(0, 3);
   const psi = (s.pressure / 6.894757).toFixed(1);
-  const pressureDiff = best.rows.find((r) => r.condition === "Total pressure");
+  const pressureDiff = best.rows.find((r) => r.condition === "Pressure");
+  const gk = s.gravity === "moon" ? "lunar" : "martian";
   const next = s.gravity === "moon" || s.gravity === "mars"
-    ? `Would Saffire ${t.id}'s result hold at ${s.gravity === "moon" ? "lunar" : "Martian"} gravity? No measured fire at that gravity is in this atlas, and NASA's PSI archive has none (per the challenge statement); short drop-tower tests exist outside PSI, and LUCI and FM2 are planned to test it.`
+    ? `Would ${testName(t)}'s result hold at ${gk === "lunar" ? "lunar" : "Martian"} gravity? Every test here ran in microgravity. NASA drop-tower tests outside PSI found three materials burning at lower oxygen at ${gk === "lunar" ? "lunar" : "Martian"} gravity than at either end, and LUCI and FM2 are planned to test longer burns.`
     : pressureDiff && pressureDiff.status === "differs"
-    ? `What changes if total pressure matched Saffire ${t.id} (${t.pressureKpa} kPa)?`
+    ? `What changes if total pressure matched ${testName(t)} (${t.p} kPa)?`
     : "Which test conditions would a lunar-gravity experiment need to repeat?";
   const row = (r: (typeof best.rows)[number]) =>
-    `<tr><th>${esc(r.condition)}</th><td>${esc(r.scenario)}</td><td>${esc(r.test)}</td><td>${esc({ same: "Matches", close: "Close", differs: "Differs" }[r.status])}${r.note ? ` · ${esc(r.note)}` : ""}</td></tr>`;
+    `<tr><th>${esc(r.condition)}</th><td>${esc(r.scenario)}</td><td>${esc(r.test)}</td><td>${esc({ same: "Matches", close: "Close", differs: "Differs", unknown: "Not listed" }[r.status])}${r.note ? ` · ${esc(r.note)}` : ""}</td></tr>`;
   return `<!doctype html><html lang="en"><meta charset="utf-8"><title>EMBER Atlas scenario brief</title><style>
 body{font:14px/1.5 system-ui,sans-serif;max-width:780px;margin:32px auto;padding:0 20px;color:#1d2230}
 h1{font-size:22px;margin:4px 0 2px}h2{font-size:15px;margin:18px 0 6px;border-bottom:1px solid #ddd;padding-bottom:3px}
@@ -73,13 +81,15 @@ a{color:#a4371f}ul{padding-left:18px;margin:4px 0}li{margin:3px 0}.q{font-size:1
 <tr><th>Fuel</th><td>${esc(fuelLabel[s.fuel])}</td></tr>
 </tbody></table>
 ${lunar ? "<p class=meta>These are the challenge statement's Moon base conditions (30% O₂ or more at 10.2 psi or less), a scenario rather than a measured test.</p>" : ""}
-<h2>Closest measured test: Saffire ${esc(t.id)} (${esc(t.flight)})</h2>
+${exact.length ? `<h2>Tests at this exact atmosphere</h2><p>NASA ran ${exact.length} test${exact.length === 1 ? "" : "s"} within 1 point of ${s.oxygen}% oxygen and 3 kPa of ${s.pressure} kPa: ${[...new Set(exact.map((x) => `${x.inv} (${x.f.toLowerCase()})`))].map(esc).join(", ")}; tests ${exact.map((x) => esc(x.t)).join(", ")}. All in microgravity. <a href="${esc(sourceLink(exact[0]).href)}">${esc(sourceLink(exact[0]).label)}</a></p>` : ""}
+<h2>Closest measured ${cls === "solid" ? "solid-material" : "droplet"} test: ${esc(testName(t))}</h2>
 <p>${esc(best.reason)}</p>
-<table><thead><tr><th>Condition</th><th>Scenario</th><th>Saffire ${esc(t.id)}</th><th>Comparison</th></tr></thead><tbody>${best.rows.map(row).join("")}</tbody></table>
-<p>Measured in ${esc(t.id)} (Table 2): burn ${t.burnDurationS} s${t.peakHeatReleaseW ? `, peak heat release ${t.peakHeatReleaseW} W` : ""}${t.averageHeatReleaseW ? `, average ${t.averageHeatReleaseW} W` : ""}; CO₂ +${t.co2IncreasePpm} ppm and CO +${t.coIncreasePpm} ppm at the far-field unit.</p>
-<p class="meta">Source: ${esc(saffireSource.authors)} ${esc(saffireSource.title)}. <a href="${esc(tableLink(3))}">Table 1, PDF p. 3</a> · <a href="${esc(tableLink(6))}">Table 2, p. 6</a> · <a href="${esc(saffireSource.citationUrl)}">NTRS ${esc(saffireSource.ntrsId)}</a> · SHA-256 ${esc(saffireSource.sha256.slice(0, 16))}…</p>
+<table><thead><tr><th>Condition</th><th>Scenario</th><th>${esc(testName(t))}</th><th>Comparison</th></tr></thead><tbody>${best.rows.map(row).join("")}</tbody></table>
+${sf ? `<p>Measured in ${esc(sf.id)} (Table 2): burn ${sf.burnDurationS} s${sf.peakHeatReleaseW ? `, peak heat release ${sf.peakHeatReleaseW} W` : ""}; CO₂ +${sf.co2IncreasePpm} ppm and CO +${sf.coIncreasePpm} ppm at the far-field unit. <a href="${esc(tableLink(3))}">Table 1, PDF p. 3</a> · <a href="${esc(tableLink(6))}">Table 2, p. 6</a></p>` : `<p>Outcome as NASA lists it: ${esc(t.o ?? "not listed")}. <a href="${esc(link.href)}">${esc(link.label)}</a></p>`}
+${other ? `<p class="meta">Closest ${cls === "solid" ? "droplet" : "solid-material"} test for comparison: ${esc(testName(other.test))}, ${esc(other.test.f)}, ${other.test.o2}% oxygen${other.test.p != null ? ` at ${other.test.p} kPa` : ""}. ${esc(other.reason)}</p>` : ""}
+${s.gravity === "moon" || s.gravity === "mars" ? `<h2>Measured at ${gk === "lunar" ? "lunar" : "Martian"} gravity</h2><table><thead><tr><th>Material</th><th>Earth</th><th>Microgravity*</th><th>${gk === "lunar" ? "Lunar" : "Martian"}</th></tr></thead><tbody>${partialGravity.materials.map((m) => `<tr><th>${esc(m.material)} (${m.pressurePsia} psia)</th><td>${meanLimit(m, "earth").toFixed(1)}%</td><td>${meanLimit(m, "zero").toFixed(1)}%</td><td>${meanLimit(m, gk).toFixed(2)}%</td></tr>`).join("")}</tbody></table><p class="meta">Mean limiting oxygen (ULOI + MOC) / 2, Olson &amp; Ferkul, NASA, <a href="${esc(partialGravity.source.pdfUrl)}#page=6">Table I</a>. About 5-second drop-tower tests; *0g with 30 cm/s flow; reduced-gravity limits defined differently from 1 g.</p>` : ""}
 <h2>Limitation</h2>
-<p>Saffire tests were microgravity fires with forced airflow inside an uncrewed Cygnus spacecraft. No measured lunar-gravity fire test is in this atlas, and NASA's PSI archive holds no partial-gravity combustion data (per the challenge statement). The lab's flame picture is an authored illustration. ${esc(model.limitations)}</p>
+<p>Every NASA test in this atlas ran in microgravity; NASA's PSI archive holds no partial-gravity combustion data (per the challenge statement). The partial-gravity limits above come from short drop-tower tests on three materials. The lab's flame picture is an authored illustration. ${esc(model.limitations)}</p>
 <h2>Supporting findings</h2>
 <ul>${evidence
     .map(

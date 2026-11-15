@@ -1,11 +1,14 @@
 "use client";
 import { ArrowUpRight, Download, Share2, SlidersHorizontal } from "lucide-react";
 import { presets } from "@/lib/scenario";
-import { closestTests, tableLink } from "@/lib/saffire";
+import { tableLink } from "@/lib/saffire";
+import { nearestTests, testsAtAtmosphere } from "@/lib/nearest";
+import { lunarGravityHeadline } from "@/lib/partial-gravity";
 
 /**
- * The homepage's first result: the challenge's Moon base atmosphere compared
- * with the closest measured NASA test, with the next actions beside it.
+ * The homepage's first result: the challenge's Moon base atmosphere answered
+ * from NASA's measured tests, one answer per fuel type, plus what is known at
+ * lunar gravity. Next actions sit beside it.
  */
 export default function HomeResult({
   onCompare,
@@ -17,10 +20,11 @@ export default function HomeResult({
   onShare: () => void;
 }) {
   const lunar = presets.lunar.scenario;
-  const { test: t, rows } = closestTests(lunar)[0];
-  const differs = rows
-    .filter((r) => r.status === "differs" && r.condition !== "Material")
-    .map((r) => r.condition.replace("Total pressure", "pressure").toLowerCase());
+  const exact = testsAtAtmosphere(lunar);
+  const fuels = [...new Set(exact.map((t) => t.f.toLowerCase()))].join(" and ");
+  const pRange = exact.length ? `${Math.min(...exact.map((t) => t.p!))}–${Math.max(...exact.map((t) => t.p!))} kPa` : "";
+  const solid = nearestTests(lunar, "solid")[0].test;
+  const g = lunarGravityHeadline();
   return (
     <section className="home-result" aria-labelledby="home-result-q">
       <div className="hr-question">
@@ -29,33 +33,41 @@ export default function HomeResult({
           Has NASA measured a fire in {lunar.oxygen}% oxygen at {lunar.pressure} kPa?
         </h2>
         <p>
-          The challenge statement expects lunar habitats at 30% oxygen or more and
-          10.2 psi (70.3 kPa) or less. This is a scenario, not a measured test.
+          The challenge expects lunar habitats at 30% oxygen or more and 10.2 psi (70.3 kPa) or less. We searched{" "}
+          2,008 NASA test records for it.
         </p>
       </div>
-      <div className="hr-answer">
-        <span className="eyebrow">CLOSEST MEASURED TEST</span>
-        <h3>
-          Saffire {t.id} · {t.material}
-        </h3>
-        <p className="hr-values">
-          {t.oxygenPct}% O₂ · {t.pressureKpa} kPa · {t.airflowCms} cm/s · microgravity
-          {t.peakHeatReleaseW ? ` · peak ${t.peakHeatReleaseW} W` : ""}
-        </p>
-        <p className="hr-limit">
-          Same material, oxygen within{" "}
-          {Math.abs(t.oxygenPct - lunar.oxygen).toFixed(1)} points. Its{" "}
-          {differs.length > 1 ? differs.slice(0, -1).join(", ") + " and " + differs.at(-1) : differs[0]}{" "}
-          differ, and no lunar-gravity test is in the atlas.
-        </p>
-      </div>
+      <ol className="hr-answers">
+        <li>
+          <span className="hr-tag yes">Liquid droplets · yes</span>
+          <p>
+            <b>{exact.length} FLEX tests</b> burned {fuels} droplets at {lunar.oxygen}% oxygen and {pRange} on the ISS (2009–2010).
+          </p>
+          <a className="text-link" href="https://psi.nasa.gov/physci/repo/data/investigations/PSI-69" target="_blank" rel="noreferrer">
+            NASA PSI-69 table <ArrowUpRight size={13} />
+          </a>
+        </li>
+        <li>
+          <span className="hr-tag partial">Solid materials · close</span>
+          <p>
+            <b>Saffire {solid.t}</b> burned acrylic at {solid.o2}% oxygen, but at {solid.p} kPa and 20 cm/s forced flow.
+          </p>
+          <a className="text-link" href={tableLink(3)} target="_blank" rel="noreferrer">
+            ICES-2024-365, Table 1 <ArrowUpRight size={13} />
+          </a>
+        </li>
+        <li>
+          <span className="hr-tag gap">Lunar gravity · short tests only</span>
+          <p>{g.text}</p>
+          <a className="text-link" href={g.href} target="_blank" rel="noreferrer">
+            {g.label} <ArrowUpRight size={13} />
+          </a>
+        </li>
+      </ol>
       <div className="hr-actions" aria-label="Next steps">
         <button className="button secondary hr-main" onClick={onCompare}>
           <SlidersHorizontal size={15} /> Compare condition by condition
         </button>
-        <a className="button secondary" href={tableLink(3)} target="_blank" rel="noreferrer">
-          Source table (NASA PDF) <ArrowUpRight size={14} />
-        </a>
         <button className="button secondary" onClick={onBrief}>
           <Download size={14} /> Save brief (HTML)
         </button>

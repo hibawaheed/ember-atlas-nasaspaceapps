@@ -1405,3 +1405,31 @@ summary {
 .mx-facts dd { margin: 0; font-size: 0.9rem; line-height: 1.55; }
 @media (max-width: 900px) { .mx-facts { grid-template-columns: 1fr; } }
 .why-shown { font-size: 0.78rem; color: var(--muted); margin: 0 0 6px; font-family: var(--mono); }
+/* Comparison: grid rows on desktop, one card per condition on phones */
+.tc-classes { display: flex; gap: 6px; flex-wrap: wrap; }
+.tc-classes button { padding: 7px 12px; border-radius: 999px; border: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+.tc-classes button.active { color: var(--ink); border-color: #ffb48a80; background: #ffb48a1a; }
+.test-compare .tc-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin: 10px 0 4px; }
+.test-compare .tc-tabs button { font-size: 13px; padding: 6px 10px; }
+.tc-exact { margin: 10px 0; padding: 10px 14px; border-left: 3px solid var(--orange); background: #ffb48a12; font-size: 14px; line-height: 1.55; color: var(--ink); }
+.tc-rows { display: grid; margin: 12px 0; border-top: 1px solid var(--line); }
+.tc-row { display: grid; grid-template-columns: 1fr 1.2fr 1.6fr 1.8fr; gap: 12px; padding: 11px 10px; border-bottom: 1px solid var(--line); font-size: 14px; align-items: baseline; }
+.tc-head { font-size: 12.5px; color: var(--muted); letter-spacing: 0.3px; }
+.tc-cond { font-weight: 600; color: var(--ink); }
+.tc-row small { font-size: 12.5px; color: var(--muted); }
+.tc-status.unknown { background: #8a93a81f; color: #c3c9d6; }
+@media (max-width: 720px) {
+  .tc-head { display: none; }
+  .tc-row { grid-template-columns: 1fr; gap: 4px; padding: 12px 4px; }
+  .tc-row [data-label]::before { content: attr(data-label) ": "; color: var(--muted); font-size: 12.5px; }
+  .tc-cond { font-size: 15px; }
+}
+.gravity-limits { margin: 8px 0 16px; }
+.gravity-limits figcaption { font-size: 15px; line-height: 1.55; color: var(--ink); margin-bottom: 10px; max-width: 70ch; }
+.gravity-limits > svg { width: 100%; height: auto; display: block; }
+.gl-axis { font-size: 12px; fill: var(--muted); }
+.gl-level { font-size: 13px; fill: var(--ink); font-weight: 600; }
+.gl-legend { display: flex; flex-wrap: wrap; gap: 8px 18px; list-style: none; padding: 0; margin: 6px 0 10px; font-size: 13.5px; }
+.gl-legend i { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 6px; vertical-align: -1px; }
+.gl-table { font-size: 13.5px; }
+.gl-table caption { text-align: left; font-size: 13px; color: var(--muted); padding-bottom: 6px; }

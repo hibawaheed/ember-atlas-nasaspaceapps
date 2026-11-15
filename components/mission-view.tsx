@@ -26,6 +26,7 @@ import { sourceFor, findings } from "@/lib/evidence";
 const findingTitle = (id: string) => findings.find((f) => f.id === id)?.title ?? id;
 import OxygenCoverage from "./oxygen-coverage";
 import TestComparison from "./test-comparison";
+import GravityLimits from "./gravity-limits";
 import MeasuredExample from "./measured-example";
 import { baseline, presets, type Scenario } from "@/lib/scenario";
 import { nasaLinks } from "@/lib/links";
@@ -498,6 +499,8 @@ export default function MissionView({
         </div>
       </section>
       <TestComparison
+        key={query.destination}
+        title={query.destination === "orbit" ? "Orbital habitat (ISS-like air)" : `${destination.name} (challenge Moon base atmosphere)`}
         scenario={query.destination === "orbit" ? baseline : presets.lunar.scenario}
         onOpenLab={() =>
           onOpenScenario
@@ -505,6 +508,13 @@ export default function MissionView({
             : onExplore()
         }
       />
+      {query.destination !== "orbit" && (
+        <section className="panel" aria-labelledby="gl-title">
+          <span className="eyebrow">MEASURED AT PARTIAL GRAVITY</span>
+          <h2 id="gl-title">Flammability limits at lunar and Martian gravity</h2>
+          <GravityLimits compact />
+        </section>
+      )}
       <OxygenCoverage />
       <section className="panel controls-groups">
         <div className="panel-heading">

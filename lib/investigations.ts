@@ -18,7 +18,7 @@ export const destinations = {
     gravity: "~0.166 g",
     symbol: "☾",
     question: "Which evidence can inform a new atmosphere?",
-    note: "The challenge statement expects 30% oxygen or more at 10.2 psi or less in a Moon base and rovers. It also reports that NASA's PSI archive has no partial-gravity combustion data yet (published studies exist outside it); LUCI and FM2 are expected to add some.",
+    note: "The challenge statement expects 30% oxygen or more at 10.2 psi or less in a Moon base and rovers. NASA ran droplet fires at exactly that atmosphere (FLEX) and drop-tower flammability tests at lunar gravity (outside PSI, which holds no partial-gravity data); no solid-material fire has been run at both.",
   },
   mars: {
     name: "Mars habitat",
@@ -331,7 +331,7 @@ export function rankInvestigations(query: MissionQuery) {
         meta.measured ? `${meta.measured[0].toUpperCase()}${meta.measured.slice(1)}.` : `${item.findings.length} cited finding${item.findings.length === 1 ? "" : "s"}; no measured values in this atlas.`,
         surface && meta.nearLunarO2 && matches ? "Includes tests within about 1 percentage point of the 30% Moon base scenario." : "",
         meta.oxygen ? `Oxygen: ${meta.oxygen}.` : "Tested oxygen and pressure not recorded here.",
-        surface ? "Microgravity only; lunar gravity untested." : "",
+        surface ? "Its tests are microgravity only." : "",
       ]
         .filter(Boolean)
         .join(" ");

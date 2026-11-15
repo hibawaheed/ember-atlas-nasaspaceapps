@@ -31,6 +31,7 @@ import { lookupReplay } from "../lib/replay";
 import { nasaLinks } from "../lib/links";
 import { saffireTests, tableLink } from "../lib/saffire";
 import { nearestTests, testsAtAtmosphere } from "../lib/nearest";
+import { partialGravity, meanLimit, worseThanBothEnds } from "../lib/partial-gravity";
 import { allTests, queryTests, testCounts, psiManifest, dataQuirks } from "../lib/tests";
 import fs from "node:fs";
 import crypto from "node:crypto";
@@ -412,6 +413,12 @@ test("Saffire VI records match the verified tables and VI-3 is closest to the lu
   assert.equal(best.reason, "Same material and oxygen within 0.3 points match. Pressure, airflow and gravity differ.");
   assert.match(tableLink(3), /ntrs\.nasa\.gov.*#page=3$/);
 });
+test("partial-gravity table reproduces the paper's own oxygen margins", () => {
+  for (const m of partialGravity.materials)
+    for (const k of ["lunar", "martian", "zero"] as const)
+      assert.ok(Math.abs(meanLimit(m, k) - meanLimit(m, "earth") - m.deltaO2[k]) < 0.01, `${m.material} ${k}`);
+  assert.deepEqual(worseThanBothEnds("lunar"), ["Mylar G", "Ultem 1000", "Nomex HT90-40"]);
+});
 test("NASA PSI tables: checksums, counts and unit conversions", () => {
   assert.equal(psiManifest.files.length, 21);
   for (const m of psiManifest.files) {
@@ -466,9 +473,11 @@ test("scenario brief is one page with inputs, closest test, source, limitation a
   const html = briefHtml(presets.lunar.scenario, { commit: "abc1234", date: "2026-11-14" }, new Date("2026-11-14T10:00:00Z"));
   assert.match(html, /Moon base atmosphere/);
   assert.match(html, /0\.30 × 70\.3 kPa = 21\.09 kPa/);
-  assert.match(html, /Closest measured test: Saffire VI-3/);
+  assert.match(html, /Closest measured solid-material test: Saffire VI-3/);
+  assert.match(html, /NASA ran 8 tests within 1 point of 30% oxygen/);
+  assert.match(html, /Measured at lunar gravity/);
   assert.match(html, /Table 1, PDF p\. 3/);
-  assert.match(html, /No measured lunar-gravity fire test/);
+  assert.match(html, /Every NASA test in this atlas ran in microgravity/);
   assert.match(html, /build abc1234/);
   assert.match(html, /hold at lunar gravity/);
   const link = new URL(scenarioUrl(presets.lunar.scenario, "https://emberatlas.tech"));

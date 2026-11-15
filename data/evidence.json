@@ -597,8 +597,8 @@
       "sourceIds": [
         "challenge-2026"
       ],
-      "claim": "The challenge statement (checked November 13, 2026) reports that NASA’s Physical Sciences Informatics (PSI) archive currently holds no partial-gravity combustion data. It expects future data from the Lunar-g Combustion Investigation (LUCI) and the Flammability of Materials on the Moon (FM2) experiment, and notes that microgravity and normal-gravity results could bound intermediate gravity levels.",
-      "safetyImplication": "Within PSI, Moon and Mars questions rest on microgravity and Earth-gravity results. Published partial-gravity experiments exist outside that archive and should be consulted alongside it.",
+      "claim": "The challenge statement (checked November 13, 2026) reports that NASA’s Physical Sciences Informatics (PSI) archive currently holds no partial-gravity combustion data. It expects future data from the Lunar-g Combustion Investigation (LUCI) and the Flammability of Materials on the Moon (FM2) experiment. It also suggests that microgravity and normal-gravity results could bound intermediate gravity levels.",
+      "safetyImplication": "Within PSI, Moon and Mars questions rest on microgravity and Earth-gravity results. NASA drop-tower tests published outside PSI found partial-gravity limits below both ends for three materials, so the suggested bounds should be checked against them.",
       "implicationType": "inference",
       "limitations": "This describes one archive’s holdings as reported in the challenge statement, not the whole research literature.",
       "qualifier": "PSI archive only, per the challenge statement",
@@ -991,32 +991,46 @@
     },
     {
       "id": "partial-gravity-tests",
-      "title": "Partial-gravity flame tests exist outside PSI",
+      "title": "Measured flammability limits at lunar and Martian gravity",
       "experiment": "Drop tower and parabolic flight",
       "date": "2012-07-15",
       "sourceIds": [
         "olson-ferkul-2012",
         "fm2-poster-2025"
       ],
-      "claim": "NASA researchers have run material flammability tests at Martian gravity in a drop tower and, earlier, at lunar gravity; they report that some materials burned to lower oxygen concentrations in reduced gravity than in normal gravity, suggesting a gravity level below Earth’s at which materials burn more readily. NASA’s FM2 team notes that drop towers, parabolic flights and space facilities show gravity level significantly affects burning, but cannot fully reproduce lunar conditions.",
-      "safetyImplication": "Earth-gravity flammability screening may not be conservative for the Moon or Mars; partial-gravity evidence exists but is limited in test time and conditions.",
+      "claim": "In NASA drop-tower tests (Olson & Ferkul, Table I), three materials burned at lower oxygen at lunar and Martian gravity than in microgravity or on Earth. Mylar at 10.2 psia kept burning down to 15.6% oxygen at lunar gravity, against 17.0% in microgravity with 30 cm/s flow and 21.2% at 1 g. Ultem's lunar limit was 21.0% (23.5% at 1 g) and Nomex's 21.0% at 14.7 psia (23.5% at 1 g). NASA's FM2 team notes that such facilities cannot fully reproduce lunar conditions.",
+      "safetyImplication": "Earth-gravity flammability screening may not be conservative for the Moon or Mars, and microgravity and Earth results did not bound the partial-gravity limits for these materials.",
       "implicationType": "inference",
-      "limitations": "Short-duration drop-tower and aircraft tests; extinction criteria differ from 1-g tests, and these records are not in the atlas’s measured dataset.",
-      "qualifier": "Short drop-tower and aircraft tests",
+      "limitations": "About 5-second drop-tower tests; reduced-gravity limits are defined differently from 1-g limits; three thin materials; published outside PSI. Lunar and 0g rows come from Ferkul & Olson (2011).",
+      "qualifier": "Three materials · ~5 s drop-tower tests",
       "tags": [
-        "partial gravity",
-        "lunar",
-        "martian",
-        "moon",
-        "mars",
-        "flammability",
+        "Mylar",
+        "Nomex",
+        "ULOI",
+        "Ultem",
         "drop tower",
+        "flammability",
+        "limiting oxygen",
+        "lunar",
+        "mars",
+        "martian",
+        "measured",
+        "moon",
         "parabolic flight",
-        "simulated lunar gravity",
-        "prevention"
+        "partial gravity",
+        "prevention",
+        "simulated lunar gravity"
       ],
       "strength": "observed",
-      "quantities": []
+      "quantities": [
+        {
+          "name": "Mylar limiting oxygen at lunar gravity (ULOI*)",
+          "minimum": 15.6,
+          "maximum": 15.6,
+          "unit": "mol % O2",
+          "sourceId": "olson-ferkul-2012"
+        }
+      ]
     },
     {
       "id": "saffire-vi-conditions",
