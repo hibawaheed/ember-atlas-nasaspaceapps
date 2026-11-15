@@ -75,10 +75,22 @@ export function buildDataContext(question: string, previousQuestion?: string) {
   // 3. Named investigations with no other rows: a few representative tests.
   for (const inv of named) if (!rows.some((r) => r.test.investigation === inv)) add(allTests.filter((t) => t.investigation === inv && t.o2Pct != null).slice(0, 2));
 
+  // "What conditions did X test?": a grid of oxygen × pressure with counts.
+  const grids: string[] = [];
+  if (named.length && /\b(conditions|tested|test|oxygen|pressure|atmospheres?|levels?)\b/i.test(question)) {
+    for (const inv of named) {
+      const m = new Map<string, number>();
+      allTests.filter((t) => t.investigation === inv && t.o2Role === "ambient" && t.o2Pct != null).forEach((t) => {
+        const k = `${Math.round(t.o2Pct!)}% O2 at ${t.pressureKpa != null ? Math.round(t.pressureKpa / 5) * 5 + " kPa" : "pressure not listed"}`;
+        m.set(k, (m.get(k) ?? 0) + 1);
+      });
+      if (m.size) grids.push(`${inv} tested conditions (chamber oxygen at rounded pressure, number of tests): ${[...m.entries()].sort((a, b) => b[1] - a[1]).slice(0, 24).map(([k, n]) => `${k} (${n})`).join("; ")}`);
+    }
+  }
   const wantsSummary = named.length > 0 || /\b(tests?|tested|conditions|data|measured|measurements|runs?|table|atmospheres?)\b/i.test(question) || oxygen != null;
   const summaries = (named.length ? testSummaries.filter((s) => named.includes(s.investigation)) : wantsSummary ? testSummaries : [])
     .map((s) => `${s.investigation} (${s.accession ?? "NASA paper"}): ${s.records} records, ${s.fuelClass}; chamber oxygen ${s.ambientO2Pct ? s.ambientO2Pct.join("–") + "%" : "not listed"}; pressure ${s.pressureKpa ? s.pressureKpa.join("–") + " kPa" : "not listed"}; fuels: ${s.fuels.slice(0, 6).join(", ")}`);
-  return { rows, summaries, notes };
+  return { rows, summaries: [...grids, ...summaries], notes };
 }
 
 export const dataCitation = (r: DataRow, number: number) => ({
