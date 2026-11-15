@@ -91,10 +91,10 @@ Browser (Next.js + React) ◄───────────┤──► /api/
 
 ## Development process
 
-1. **Foundation (November 9).** Dashboard, animated 3D lab, evidence library with provenance, Mission desk ranking, field guide, dark galaxy design.
-2. **Challenge resources (November 13).** Resource inventory; BASS-II Table 5.1 verified against the 49 MB report and expanded to all 18 tracked runs.
-3. **Challenge coverage and AI (November 13–14).** The investigations the challenge names, crew atmospheres, Earth applications, Claude Haiku 5.5 with citation checks and a live evaluation.
-4. **External review (November 14).** Saffire IV–VI records, condition-by-condition comparison, scoped partial-gravity claims, ranking reasons, detection and extinction examples, a one-page brief, an answer check.
+1. **Foundation (November 14).** Dashboard, animated 3D lab, evidence library with provenance, Mission desk ranking, field guide, dark galaxy design.
+2. **Challenge resources (November 14).** Resource inventory; BASS-II Table 5.1 verified against the 49 MB report and expanded to all 18 tracked runs.
+3. **Challenge coverage and AI (November 14–15).** The investigations the challenge names, crew atmospheres, Earth applications, Claude Haiku 5.5 with citation checks and a live evaluation.
+4. **External review (November 15).** Saffire IV–VI records, condition-by-condition comparison, scoped partial-gravity claims, ranking reasons, detection and extinction examples, a one-page brief, an answer check.
 5. **The data layer (November 15).** Found PSI's public API, imported 2,008 test records from 21 tables with checksums and 28 flagged data problems, rebuilt the nearest-test search on them, added the measured lunar- and Mars-gravity limits, the oxygen × pressure map, and AI answers from test rows; raised every font to 12 px or more and reworked the flame colours.
 
 Every change is tested with strict TypeScript and 36 automated tests, a production build, browser checks on desktop and phone, and live AI checks. See `docs/VALIDATION.md`.
