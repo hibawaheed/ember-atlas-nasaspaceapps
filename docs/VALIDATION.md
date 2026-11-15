@@ -1,6 +1,16 @@
 # Verification record
 
-Latest verification: November 14, 2026, build 26304df (v1.5.0).
+Latest verification: November 15, 2026 (v1.6.0).
+
+## November 15, 2026 — the data layer (v1.6.0)
+
+- **NASA PSI tables.** PSI's public repository API lists 24 combustion investigations; 21 publish an experimental table. All 21 were downloaded (`data/psi/raw/`), checksummed (`data/psi/manifest.json`) and converted by `scripts/build-tests.mjs` into 2,008 records (`data/tests.json`), 754 with both chamber oxygen and pressure. `scripts/fetch-psi.mjs` re-downloaded every table: 21 of 21 byte-identical. 28 data problems affecting 122 cells are recorded with our reading; every record keeps its raw cells.
+- **Cross-check.** The 18 BASS-II runs transcribed from NASA/TM-20210011385 match PSI's BASS-II table (initial oxygen) for every run; a test pins this.
+- **Moon base atmosphere.** Eight FLEX tests (PSI-69 #25–28, #40–43) at 30% oxygen and 71.2–72.1 kPa; a test pins them.
+- **Partial gravity.** Olson & Ferkul Table I (PDF p. 6, SHA-256 `2b0cabdf…436e`) entered and checked against a render; the mean limits reproduce the paper's own ΔO₂ values for all nine cells (test).
+- **Tests.** `npm run check`: 36 pass. `npm run build` passes.
+- **Text size.** Every font size raised to at least 12 px; measured share of visible text under 11 px: 0% on every page at 1280 px and 390 px (was 36% on the homepage).
+- **Live AI check** (`scripts/ai-eval.mjs`, build `764106c`, paced): **20/22**. The two misses: the BASS-II sensors answer named the Nikon camera twice (the check flags repetition); the Moon-atmosphere answer named the eight FLEX tests but led with "not at lunar gravity" and wrote "about 70 kPa" where the check expects 71–72 kPa. Facts in both answers were correct. Earlier in the day three data questions failed because each test row's text began with its ID without the `test:` prefix, so the model cited an unprefixed ID and the guardrail rejected the answer; and long answers exceeded the structured-output limits. Both were fixed (row text now carries the citable ID; budgets and field limits raised).
 
 ## November 14, 2026 — full recheck
 

@@ -1,5 +1,10 @@
 # Answer check: research companion
 
+**Latest run (November 15, 2026, build `764106c`): 20 of 22 checks pass**, including four new questions answered from NASA's test tables: the fastest BASS-II run (M16, 0.144 mm/s at 5 cm/s, citing the PSI-25 row), the oxygen and pressure FLEX tested (12–34%, 70–309 kPa, with the most common conditions), tests at the Moon base atmosphere (eight FLEX rows cited), and an unsupported atmosphere (60% oxygen at 20 kPa: no rows, no invented values). Misses: a repeated camera name in the BASS-II sensors answer, and the Moon-atmosphere answer leading with gravity before naming the FLEX tests. The record below is the November 14 review of the scope questions.
+
+---
+
+
 Checked November 14, 2026 against `https://emberatlas.tech`, build `8f1f975`, model `anthropic/claude-haiku-5.5` through Vercel AI Gateway. Script: `scripts/ai-eval.mjs` (run with `NODE_USE_ENV_PROXY=1` behind a proxy; add `PACE_MS=61000` for a run that stays under the 10-calls-per-10-minutes visitor limit).
 
 For each answer, the reviewer reads the finding the search step retrieved, the source passage that finding summarizes, and the scope the answer must keep, then notes whether the answer stays inside it. The keyword checks in the script are a first pass. A person still reads the answers.
