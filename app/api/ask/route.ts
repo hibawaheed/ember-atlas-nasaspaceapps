@@ -20,7 +20,7 @@ export async function POST(request: Request) {
     const { question, history = [], stream = false } = schema.parse(await readBody(request));
     const base = buildAskContext(question, history.at(-1)?.question);
     const data = buildDataContext(question, base.followUp ? history.at(-1)?.question : undefined);
-    const ctx = { ...base, dataRows: data.rows, dataSummaries: data.summaries };
+    const ctx = { ...base, dataRows: data.rows, dataSummaries: data.summaries, dataNotes: data.notes };
     const answer = answerFromEvidence(ctx.query);
     const hasEvidence = answer.findings.length > 0 || ctx.profiles.length > 0 || data.rows.length > 0;
     if (!hasEvidence) return Response.json(answer);

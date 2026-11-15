@@ -27,7 +27,7 @@ const metricWords: [RegExp, NonNullable<TestQuery["sortBy"]>][] = [
 
 export type DataRow = { id: string; line: string; test: FullTest };
 
-const toRow = (t: FullTest): DataRow => ({ id: `test:${t.id}`, line: testLine(t), test: t });
+const toRow = (t: FullTest): DataRow => ({ id: `test:${t.id}`, line: `test:${testLine(t)}`, test: t });
 
 /** Oxygen and pressure named in the question, if any. */
 export function conditionsIn(q: string) {
@@ -45,6 +45,7 @@ export function buildDataContext(question: string, previousQuestion?: string) {
   const q = previousQuestion ? `${question} ${previousQuestion}` : question;
   const named = namedInvestigations(q).flatMap((id) => invByProfile[id] ?? []);
   const rows: DataRow[] = [];
+  const notes: string[] = [];
   const add = (ts: FullTest[]) => ts.forEach((t) => rows.length < 12 && !rows.some((r) => r.test.id === t.id) && rows.push(toRow(t)));
 
   // 1. Superlatives: "fastest spread", "highest oxygen", "longest burn".
@@ -54,7 +55,11 @@ export function buildDataContext(question: string, previousQuestion?: string) {
     if (metric) {
       const asc = /slowest|lowest|shortest|least|minimum|min|smallest/i.test(superlative[1]);
       const invs = named.length ? named : [undefined];
-      for (const inv of invs) add(queryTests({ investigation: inv, sortBy: metric, order: asc ? "asc" : "desc", limit: 4 }).rows);
+      for (const inv of invs) {
+        const r = queryTests({ investigation: inv, sortBy: metric, order: asc ? "asc" : "desc", limit: 4 });
+        add(r.rows);
+        notes.push(`Rows sorted by ${metric} (${asc ? "lowest" : "highest"} first) across all ${r.total} ${inv ?? ""} records with that value; the first row is the ${asc ? "lowest" : "highest"} in the whole table.`);
+      }
     }
   }
   // 2. Conditions named in the question (or the Moon base scenario).
@@ -65,6 +70,7 @@ export function buildDataContext(question: string, previousQuestion?: string) {
       .filter((t) => !named.length || named.includes(t.investigation))
       .sort((a, b) => Math.abs(a.o2Pct! - oxygen) - Math.abs(b.o2Pct! - oxygen) || (pressure != null ? Math.abs(a.pressureKpa! - pressure) - Math.abs(b.pressureKpa! - pressure) : 0));
     add(near.slice(0, 8));
+    notes.push(`${near.length} records within 1.5 points of ${oxygen}% chamber oxygen${pressure != null ? ` and about ${Math.round(pressure)} kPa` : ""}${near.length > 8 ? "; 8 are shown" : ""}.`);
   }
   // 3. Named investigations with no other rows: a few representative tests.
   for (const inv of named) if (!rows.some((r) => r.test.investigation === inv)) add(allTests.filter((t) => t.investigation === inv && t.o2Pct != null).slice(0, 2));
@@ -72,7 +78,7 @@ export function buildDataContext(question: string, previousQuestion?: string) {
   const wantsSummary = named.length > 0 || /\b(tests?|tested|conditions|data|measured|measurements|runs?|table|atmospheres?)\b/i.test(question) || oxygen != null;
   const summaries = (named.length ? testSummaries.filter((s) => named.includes(s.investigation)) : wantsSummary ? testSummaries : [])
     .map((s) => `${s.investigation} (${s.accession ?? "NASA paper"}): ${s.records} records, ${s.fuelClass}; chamber oxygen ${s.ambientO2Pct ? s.ambientO2Pct.join("–") + "%" : "not listed"}; pressure ${s.pressureKpa ? s.pressureKpa.join("–") + " kPa" : "not listed"}; fuels: ${s.fuels.slice(0, 6).join(", ")}`);
-  return { rows, summaries };
+  return { rows, summaries, notes };
 }
 
 export const dataCitation = (r: DataRow, number: number) => ({

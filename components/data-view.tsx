@@ -8,6 +8,7 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import MeasurementChart from "./measurement-chart";
+import NasaTables from "./nasa-tables";
 import { bassVariation } from "@/lib/variation";
 import { nasaLinks } from "@/lib/links";
 import { download } from "@/lib/export";
@@ -49,9 +50,9 @@ export default function DataView() {
     <div className="view-enter">
       <div className="section-intro">
         <div>
-          <span className="eyebrow">BASS-II / PUBLISHED DATA</span>
-          <h1>Published measurements</h1>
-          <p>A carefully scoped window into NASA’s BASS-II results.</p>
+          <span className="eyebrow">NASA PSI TABLES / PUBLISHED DATA</span>
+          <h1>Measured data</h1>
+          <p>Every NASA combustion test table we imported, the problems we found in them, and the BASS-II flame-spread rates.</p>
         </div>
         <button
           className="button secondary"
@@ -70,6 +71,7 @@ export default function DataView() {
           onChange={(e) => load(e.target.files?.[0])}
         />
       </div>
+      <NasaTables />
       <MeasurementChart expanded />
       <section className="panel bass-variation">
         <div className="panel-heading">

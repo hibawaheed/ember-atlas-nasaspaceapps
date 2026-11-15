@@ -1448,3 +1448,9 @@ summary {
 .map-card { position: relative; margin: 10px 0; padding: 12px 40px 12px 14px; border: 1px solid #ffffff26; border-radius: 10px; background: #0d1424; font-size: 14px; line-height: 1.5; }
 .map-card ul { margin: 6px 0; padding-left: 18px; }
 .map-close { position: absolute; top: 8px; right: 8px; color: var(--muted); }
+.nasa-tables, .nasa-quirks { margin-bottom: 18px; }
+.nasa-tables table { font-size: 13.5px; }
+.quirk-list { display: grid; gap: 8px; padding-left: 18px; margin: 10px 0 0; font-size: 14px; line-height: 1.55; }
+.quirk-list code, .nasa-tables code { font-size: 12.5px; background: #ffffff10; padding: 1px 5px; border-radius: 4px; }
+.quirk-action { color: #c9d3ea; }
+.quirk-tests { color: var(--muted); font-size: 13px; }

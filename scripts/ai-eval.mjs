@@ -57,7 +57,7 @@ const cases = [
   ["What does the challenge say about PSI and partial gravity?", "cites the PSI-scoped gap finding",
     (a) => ids(a).includes("partial-gravity-gap") && /PSI|Physical Sciences Informatics/i.test(a.answer)],
   ["Has anyone studied flame spread in simulated lunar gravity?", "cites the published partial-gravity tests outside PSI",
-    (a) => ids(a).includes("partial-gravity-tests") && /drop tower|parabolic|centrifuge|aircraft/i.test(a.answer)],
+    (a) => ids(a).includes("partial-gravity-tests") && /drop[- ]tower|parabolic|centrifuge|aircraft/i.test(a.answer)],
   ["Which measured test is closest to a 30% oxygen Moon base?", "names Saffire VI-3 and its differing pressure, airflow or gravity",
     (a) => /VI-3|Saffire VI/i.test(a.answer) && /pressure|kPa|airflow|gravity/i.test(a.answer)],
   ["What is the ignition temperature of Nomex at 30% oxygen on the Moon?", "unsupported: does not invent a temperature",

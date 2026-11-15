@@ -28,7 +28,7 @@ import AtlasMap from "./atlas-map";
 import { findings, sources } from "@/lib/evidence";
 import { investigations } from "@/lib/investigations";
 import measurements from "@/data/measurements.json";
-const measurementCount = measurements.series.reduce((n, s) => n + s.points.length, 0);
+import testMeta from "@/data/tests-meta.json";
 import { exportBrief, scenarioUrl } from "@/lib/export";
 const build = { commit: process.env.BUILD_COMMIT ?? "local", date: process.env.BUILD_DATE ?? "" };
 import Lab from "./lab";
@@ -316,37 +316,37 @@ export default function Dashboard() {
                 </button>
               </div>
               <section className="stats-grid" aria-label="Research collection">
+                <article className="stat-accent">
+                  <span>NASA TEST RECORDS</span>
+                  <div>
+                    <strong>{testMeta.counts.records.toLocaleString()}</strong>
+                    <Database size={19} />
+                  </div>
+                  <p>From {testMeta.counts.investigations} investigations: PSI tables and the Saffire VI paper</p>
+                </article>
+                <article>
+                  <span>WITH OXYGEN AND PRESSURE</span>
+                  <div>
+                    <strong>{testMeta.counts.plottable}</strong>
+                    <Activity size={19} />
+                  </div>
+                  <p>Plotted on the atlas map</p>
+                </article>
                 <article>
                   <span>CURATED FINDINGS</span>
                   <div>
                     <strong>{findings.length}</strong>
                     <BookOpen size={19} />
                   </div>
-                  <p>Claims, interpretations & limits</p>
+                  <p>From {sources.length} NASA sources, each with its limits</p>
                 </article>
                 <article>
-                  <span>NASA PRIMARY SOURCES</span>
+                  <span>PROBLEMS FLAGGED</span>
                   <div>
-                    <strong>{sources.length}</strong>
+                    <strong>{testMeta.counts.quirks}</strong>
                     <Layers size={19} />
                   </div>
-                  <p>Reports, archives & investigations</p>
-                </article>
-                <article>
-                  <span>PUBLISHED MEASUREMENTS</span>
-                  <div>
-                    <strong>{measurementCount}</strong>
-                    <Activity size={19} />
-                  </div>
-                  <p>BASS-II flame-spread observations from {measurements.series.length} runs</p>
-                </article>
-                <article className="stat-accent">
-                  <span>INVESTIGATION PROFILES</span>
-                  <div>
-                    <strong>{investigations.length}</strong>
-                    <Orbit size={22} />
-                  </div>
-                  <p>Prevention · detection · suppression</p>
+                  <p>Data-entry issues in NASA&apos;s tables, listed openly</p>
                 </article>
               </section>
               <Lab

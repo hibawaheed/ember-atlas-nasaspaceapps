@@ -359,7 +359,7 @@ export function rankInvestigations(query: MissionQuery) {
   for (const r of ranked) {
     const tied = ranked.filter((o) => o !== r && o.score === r.score).map((o) => o.name);
     if (tied.length)
-      r.tieNote = `Tied at ${r.score} points with ${tied.join(", ")}; ordered by primary focus, then measured data, then number of cited findings.`;
+      r.tieNote = `Tied at ${r.score} point${r.score === 1 ? "" : "s"} with ${tied.join(", ")}; ordered by primary focus, then measured data, then number of cited findings.`;
   }
   return ranked;
 }

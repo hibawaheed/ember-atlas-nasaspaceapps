@@ -4,7 +4,7 @@ import { testCounts } from "@/lib/tests";
 export async function GET() {
   return Response.json({
     status: "ok",
-    version: "1.5.0",
+    version: "1.6.0",
     build: process.env.BUILD_COMMIT,
     evidence: findings.length,
     sources: sources.length,

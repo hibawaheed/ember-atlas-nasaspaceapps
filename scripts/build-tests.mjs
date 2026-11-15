@@ -619,5 +619,7 @@ const compact = tests
     o: t.outcome, d: t.date,
   }));
 fs.writeFileSync(path.join(root, "data/tests-compact.json"), JSON.stringify({ built: RETRIEVED, records: compact }));
+// Small file for the browser: counts, per-investigation summaries and quirks.
+fs.writeFileSync(path.join(root, "data/tests-meta.json"), JSON.stringify({ built: RETRIEVED, counts: out.counts, summaries, quirks: grouped.map(({ file: _f, ...q }) => ({ ...q, tests: q.tests.slice(0, 12), testCount: q.tests.length })), matrices: matrices.map(({ raw: _r, ...m }) => m) }, null, 1));
 console.log(JSON.stringify(out.counts));
 for (const s of summaries) console.log(`${(s.accession ?? "paper").padEnd(8)} ${s.investigation.padEnd(20)} ${String(s.records).padStart(4)}  O2 ${JSON.stringify(s.ambientO2Pct)}  P ${JSON.stringify(s.pressureKpa)}`);

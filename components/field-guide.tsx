@@ -134,9 +134,9 @@ export default function FieldGuide({
           <span className="tag">3-MINUTE WALKTHROUGH</span>
           <h2>Your first three minutes</h2>
           <p>
-            The guided lab sets up each scene for you: change gravity, stop the
-            flow, explore an atmosphere, replay real measurements, and interpret
-            the evidence.
+            The guided lab sets up each scene for you: start with a real BASS-II
+            measurement, compare a Moon base with NASA&apos;s closest tests, then
+            change gravity, stop the flow and interpret the evidence.
           </p>
         </div>
         <button className="button primary" onClick={startTour}>
@@ -172,7 +172,7 @@ export default function FieldGuide({
           {
             icon: Download,
             title: "Keep the trail",
-            text: "Export a brief, download the measured CSV, or share your scenario link. Every claim keeps its source and limits.",
+            text: "Save a brief, download any NASA test table as CSV, or share your scenario link. Every claim keeps its source and limits.",
             page: "methodology",
           },
         ].map((s, i) => (

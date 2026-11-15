@@ -1,0 +1,1026 @@
+{
+ "built": "2026-11-14",
+ "counts": {
+  "records": 2008,
+  "investigations": 21,
+  "plottable": 754,
+  "quirks": 28,
+  "quirkCells": 122
+ },
+ "summaries": [
+  {
+   "investigation": "FLEX",
+   "accession": "PSI-69",
+   "source": "PSI",
+   "fuelClass": "droplet",
+   "records": 274,
+   "withAmbientOxygen": 274,
+   "withPressure": 273,
+   "ambientO2Pct": [
+    12,
+    34
+   ],
+   "pressureKpa": [
+    70.2,
+    309.3
+   ],
+   "fuels": [
+    "Methanol",
+    "Heptane"
+   ]
+  },
+  {
+   "investigation": "CFI",
+   "accession": "PSI-39",
+   "source": "PSI",
+   "fuelClass": "droplet",
+   "records": 87,
+   "withAmbientOxygen": 87,
+   "withPressure": 87,
+   "ambientO2Pct": [
+    17,
+    21
+   ],
+   "pressureKpa": [
+    50.7,
+    506.6
+   ],
+   "fuels": [
+    "C12H26",
+    "[.75]/[.25] C12H26/iso-dodecane",
+    "[.60]/[.40] C12H26/iso-dodecane"
+   ]
+  },
+  {
+   "investigation": "ACME CFI-G",
+   "accession": "PSI-159",
+   "source": "PSI",
+   "fuelClass": "gas",
+   "records": 333,
+   "withAmbientOxygen": 179,
+   "withPressure": 333,
+   "ambientO2Pct": [
+    18,
+    40
+   ],
+   "pressureKpa": [
+    49.5,
+    331
+   ],
+   "fuels": [
+    "ethane",
+    "50% butane",
+    "propane",
+    "30% butane",
+    "30% propane",
+    "30% ethane",
+    "butane"
+   ]
+  },
+  {
+   "investigation": "ACME Flame Design",
+   "accession": "PSI-10",
+   "source": "PSI",
+   "fuelClass": "gas",
+   "records": 327,
+   "withAmbientOxygen": 207,
+   "withPressure": 307,
+   "ambientO2Pct": [
+    19.8,
+    40
+   ],
+   "pressureKpa": [
+    43.2,
+    305.8
+   ],
+   "fuels": [
+    "C2H4",
+    "C3H8"
+   ]
+  },
+  {
+   "investigation": "ACME BRE",
+   "accession": "PSI-20",
+   "source": "PSI",
+   "fuelClass": "gas",
+   "records": 43,
+   "withAmbientOxygen": 43,
+   "withPressure": 0,
+   "ambientO2Pct": [
+    21,
+    40
+   ],
+   "pressureKpa": null,
+   "fuels": [
+    "100% C2H4",
+    "50% C2H4",
+    "100%C2H4",
+    "100% CH4"
+   ]
+  },
+  {
+   "investigation": "ACME s-Flame",
+   "accession": "PSI-23",
+   "source": "PSI",
+   "fuelClass": "gas",
+   "records": 23,
+   "withAmbientOxygen": 23,
+   "withPressure": 23,
+   "ambientO2Pct": [
+    21,
+    30
+   ],
+   "pressureKpa": [
+    101.3,
+    101.3
+   ],
+   "fuels": [
+    "50% C2H4 with N2",
+    "45% CH4 with N2",
+    "100% H2",
+    "44.4% H2 with CH4",
+    "66.7% H2 with CH4",
+    "25% H2, 20% CH4, with He",
+    "20% H2, 25% CH4, with He",
+    "30% H2, 15% CH4, with He",
+    "45% H2 with He",
+    "45% CH4 with He",
+    "20% C2H4 with He",
+    "25% C2H4 with He"
+   ]
+  },
+  {
+   "investigation": "ACME CLD Flame",
+   "accession": "PSI-21",
+   "source": "PSI",
+   "fuelClass": "gas",
+   "records": 32,
+   "withAmbientOxygen": 0,
+   "withPressure": 0,
+   "ambientO2Pct": null,
+   "pressureKpa": null,
+   "fuels": [
+    "40% CH4",
+    "100% CH4",
+    "100% C2H4",
+    "50% C2H4",
+    "30% C2H4"
+   ]
+  },
+  {
+   "investigation": "ACME E-FIELD Flames",
+   "accession": "PSI-22",
+   "source": "PSI",
+   "fuelClass": "gas",
+   "records": 20,
+   "withAmbientOxygen": 0,
+   "withPressure": 0,
+   "ambientO2Pct": null,
+   "pressureKpa": null,
+   "fuels": [
+    "100% CH4",
+    "40% CH4",
+    "100% C2H4",
+    "30% C2H4"
+   ]
+  },
+  {
+   "investigation": "SLICE",
+   "accession": "PSI-106",
+   "source": "PSI",
+   "fuelClass": "gas",
+   "records": 12,
+   "withAmbientOxygen": 0,
+   "withPressure": 0,
+   "ambientO2Pct": null,
+   "pressureKpa": null,
+   "fuels": [
+    "100% CH4",
+    "40% CH4 (balance N2)",
+    "70% CH4 (balance N2)",
+    "20% C2H4 (balance N2)",
+    "100% C2H6",
+    "100% C2H4"
+   ]
+  },
+  {
+   "investigation": "SPICE",
+   "accession": "PSI-107",
+   "source": "PSI",
+   "fuelClass": "gas",
+   "records": 469,
+   "withAmbientOxygen": 0,
+   "withPressure": 0,
+   "ambientO2Pct": null,
+   "pressureKpa": null,
+   "fuels": [
+    "Ethylene",
+    "Propane",
+    "75% Propylene",
+    "50% Propylene",
+    "Propylene",
+    "Methane"
+   ]
+  },
+  {
+   "investigation": "BASS-II",
+   "accession": "PSI-25",
+   "source": "PSI",
+   "fuelClass": "solid",
+   "records": 129,
+   "withAmbientOxygen": 129,
+   "withPressure": 0,
+   "ambientO2Pct": [
+    13.6,
+    22.2
+   ],
+   "pressureKpa": null,
+   "fuels": [
+    "100 micron PMMA film 2 cm wide",
+    "200 micron PMMA film 2 cm wide",
+    "100 micron film 2 cm wide",
+    "300 micron PMMA film 2 cm wide",
+    "200 micron 2 cm wide",
+    "2 cm 0.1 mm PMMA film",
+    "400 micron film 2 cm wide",
+    "2 cm 0.2 mm PMMA film",
+    "1 cm 0.2 mm PMMA film",
+    "300 micron film 2 cm wide",
+    "2 cm 0.4 mm thick film",
+    "1 cm wide 200 micron thick PMMA"
+   ]
+  },
+  {
+   "investigation": "BASS",
+   "accession": "PSI-26",
+   "source": "PSI",
+   "fuelClass": "solid",
+   "records": 122,
+   "withAmbientOxygen": 0,
+   "withPressure": 0,
+   "ambientO2Pct": null,
+   "pressureKpa": null,
+   "fuels": [
+    "SIBAL 2 cm",
+    "PMMA sphere 2 cm",
+    "PMMA sphere 1 cm",
+    "SIBAL 1 cm",
+    "Nomex blend 2 cm",
+    "PMMA 2 cm",
+    "PMMA 1 cm",
+    "2 cm sphere",
+    "1 cm sphere",
+    "Nomex III Natural",
+    "PMMA slab",
+    "ultem sheet"
+   ]
+  },
+  {
+   "investigation": "Saffire-I",
+   "accession": "PSI-98",
+   "source": "PSI",
+   "fuelClass": "solid",
+   "records": 2,
+   "withAmbientOxygen": 2,
+   "withPressure": 0,
+   "ambientO2Pct": [
+    21.5,
+    21.6
+   ],
+   "pressureKpa": null,
+   "fuels": [
+    "SIBAL Fabric"
+   ]
+  },
+  {
+   "investigation": "Saffire-II",
+   "accession": "PSI-99",
+   "source": "PSI",
+   "fuelClass": "solid",
+   "records": 9,
+   "withAmbientOxygen": 9,
+   "withPressure": 0,
+   "ambientO2Pct": [
+    21.5,
+    22.1
+   ],
+   "pressureKpa": null,
+   "fuels": [
+    "Silicone",
+    "Cotton-Fiberglass (SIBAL)",
+    "not recorded",
+    "PMMA & Nomex",
+    "PMMA"
+   ]
+  },
+  {
+   "investigation": "Saffire-III",
+   "accession": "PSI-100",
+   "source": "PSI",
+   "fuelClass": "solid",
+   "records": 2,
+   "withAmbientOxygen": 0,
+   "withPressure": 0,
+   "ambientO2Pct": null,
+   "pressureKpa": null,
+   "fuels": [
+    "SIBAL Fabric"
+   ]
+  },
+  {
+   "investigation": "Saffire IV",
+   "accession": null,
+   "source": "NASA paper",
+   "fuelClass": "solid",
+   "records": 1,
+   "withAmbientOxygen": 1,
+   "withPressure": 1,
+   "ambientO2Pct": [
+    22,
+    22
+   ],
+   "pressureKpa": [
+    100,
+    100
+   ],
+   "fuels": [
+    "SIBAL cloth"
+   ]
+  },
+  {
+   "investigation": "Saffire V",
+   "accession": null,
+   "source": "NASA paper",
+   "fuelClass": "solid",
+   "records": 1,
+   "withAmbientOxygen": 1,
+   "withPressure": 1,
+   "ambientO2Pct": [
+    26.2,
+    26.2
+   ],
+   "pressureKpa": [
+    70.7,
+    70.7
+   ],
+   "fuels": [
+    "Cotton jersey"
+   ]
+  },
+  {
+   "investigation": "Saffire VI",
+   "accession": null,
+   "source": "NASA paper",
+   "fuelClass": "solid",
+   "records": 3,
+   "withAmbientOxygen": 3,
+   "withPressure": 3,
+   "ambientO2Pct": [
+    28.8,
+    31
+   ],
+   "pressureKpa": [
+    54.1,
+    55.2
+   ],
+   "fuels": [
+    "SIBAL cloth",
+    "PMMA (acrylic)"
+   ]
+  },
+  {
+   "investigation": "SAME",
+   "accession": "PSI-102",
+   "source": "PSI",
+   "fuelClass": "smoke",
+   "records": 8,
+   "withAmbientOxygen": 0,
+   "withPressure": 0,
+   "ambientO2Pct": null,
+   "pressureKpa": null,
+   "fuels": [
+    "Teflon",
+    "Kapton",
+    "Silicone Rubber",
+    "Lampwick",
+    "Dibutyl Phthalate"
+   ]
+  },
+  {
+   "investigation": "SAME-R",
+   "accession": "PSI-101",
+   "source": "PSI",
+   "fuelClass": "smoke",
+   "records": 109,
+   "withAmbientOxygen": 0,
+   "withPressure": 0,
+   "ambientO2Pct": null,
+   "pressureKpa": null,
+   "fuels": [
+    "Kapton",
+    "Silicone",
+    "Lampwick",
+    "Teflon",
+    "Pyrell"
+   ]
+  },
+  {
+   "investigation": "DAFT / DAFT-2",
+   "accession": "PSI-47",
+   "source": "PSI",
+   "fuelClass": "smoke",
+   "records": 2,
+   "withAmbientOxygen": 0,
+   "withPressure": 0,
+   "ambientO2Pct": null,
+   "pressureKpa": null,
+   "fuels": [
+    "Arizona Road Dust (ARD Fine)"
+   ]
+  }
+ ],
+ "quirks": [
+  {
+   "accession": "PSI-69",
+   "field": "headers",
+   "note": "Subscripts were lost in the column names; 'O', 'N' and 'CO' are O₂, N₂ and CO₂",
+   "action": "read as O₂, N₂, CO₂",
+   "tests": [],
+   "examples": [
+    "O / N / CO / He initial ambient composition"
+   ],
+   "testCount": 0
+  },
+  {
+   "accession": "PSI-69",
+   "field": "Burning rate; mm",
+   "note": "Values (0.05–1.06) are droplet burning-rate constants, normally in mm²/s; the unit's superscript appears lost",
+   "action": "unit stated as mm²/s (header reads 'mm')",
+   "tests": [],
+   "examples": [
+    "unit 'mm'"
+   ],
+   "testCount": 0
+  },
+  {
+   "accession": "PSI-69",
+   "field": "Test Date",
+   "note": "Two-digit year in a column that mostly uses four digits",
+   "action": "read as 2009",
+   "tests": [
+    "20",
+    "21",
+    "22",
+    "23",
+    "24",
+    "29",
+    "30",
+    "31",
+    "32",
+    "33",
+    "34",
+    "35"
+   ],
+   "examples": [
+    "10/24/09",
+    "11/13/09",
+    "11/27/09"
+   ],
+   "testCount": 50
+  },
+  {
+   "accession": "PSI-69",
+   "field": "Droplet initial diameter; mm",
+   "note": "Unreadable character in the cell",
+   "action": "left empty",
+   "tests": [
+    "24",
+    "80",
+    "81",
+    "83",
+    "96",
+    "138"
+   ],
+   "examples": [
+    "�"
+   ],
+   "testCount": 6
+  },
+  {
+   "accession": "PSI-69",
+   "field": "Visible flame extinction diameter; mm",
+   "note": "Unreadable character in the cell",
+   "action": "left empty",
+   "tests": [
+    "40",
+    "41",
+    "42",
+    "44",
+    "47",
+    "48",
+    "88",
+    "89",
+    "90",
+    "91",
+    "92",
+    "96"
+   ],
+   "examples": [
+    "�"
+   ],
+   "testCount": 28
+  },
+  {
+   "accession": "PSI-69",
+   "field": "Ambient pressure; mmHg",
+   "note": "Pressure of 0 mmHg is not physical for a burning test",
+   "action": "left empty",
+   "tests": [
+    "114"
+   ],
+   "examples": [
+    "0"
+   ],
+   "testCount": 1
+  },
+  {
+   "accession": "PSI-68",
+   "field": "table",
+   "note": "The table lists the planned range for each fuel, not individual tests",
+   "action": "kept as a test matrix, not plotted as tests",
+   "tests": [],
+   "examples": [
+    "8 rows"
+   ],
+   "testCount": 0
+  },
+  {
+   "accession": "PSI-159",
+   "field": "Hot ignition",
+   "note": "Inconsistent spelling of yes/no values",
+   "action": "normalised case; 'flash' kept as its own outcome",
+   "tests": [],
+   "examples": [
+    "No / Yes / flash / no / yes"
+   ],
+   "testCount": 0
+  },
+  {
+   "accession": "PSI-10",
+   "field": "flow columns",
+   "note": "3 tests list 'RAMPED' instead of a number",
+   "action": "kept as text; derived values left empty",
+   "tests": [],
+   "examples": [
+    "RAMPED"
+   ],
+   "testCount": 0
+  },
+  {
+   "accession": "PSI-20",
+   "field": "Oxygen Conc (percent)",
+   "note": "Oxygen levels are listed per test day, not per flame, and only for flames that ignited",
+   "action": "one record per day and oxygen level; flame count is per day",
+   "tests": [],
+   "examples": [
+    "per test day"
+   ],
+   "testCount": 0
+  },
+  {
+   "accession": "PSI-20",
+   "field": "Oxygen Conc (percent)",
+   "note": "Spreadsheet percent formatting multiplied the value by 100",
+   "action": "read as 34%",
+   "tests": [
+    "2019-March-7",
+    "2019-April-1"
+   ],
+   "examples": [
+    "3400%",
+    "2100%"
+   ],
+   "testCount": 2
+  },
+  {
+   "accession": "PSI-23",
+   "field": "Atmosphere*",
+   "note": "Spreadsheet autofill turned 'N2' into an incrementing label",
+   "action": "read as N₂",
+   "tests": [
+    "19256",
+    "19304",
+    "20006",
+    "20013",
+    "20024",
+    "20029"
+   ],
+   "examples": [
+    "~21% O2 with N3",
+    "~21% O2 with N4",
+    "~21% O2 with N5"
+   ],
+   "testCount": 6
+  },
+  {
+   "accession": "PSI-23",
+   "field": "Fuel Bottle",
+   "note": "Spreadsheet autofill turned 'N2' into an incrementing label",
+   "action": "read as N₂",
+   "tests": [
+    "19256",
+    "19308"
+   ],
+   "examples": [
+    "50% C2H4 with N3",
+    "45% CH4 with N3"
+   ],
+   "testCount": 2
+  },
+  {
+   "accession": "PSI-21",
+   "field": "Fuel Bottle",
+   "note": "Spreadsheet autofill incremented the chemical formula down the column (26 rows)",
+   "action": "read as CH₄ or C₂H₄, matching each row's test type; original kept in raw",
+   "tests": [],
+   "examples": [
+    "40% CH4, 40% CH5, 40% CH6 … 40% CH14; 100% C2H4 … C2H11"
+   ],
+   "testCount": 0
+  },
+  {
+   "accession": "PSI-22",
+   "field": "row",
+   "note": "The same test day appears twice with identical values",
+   "action": "second copy dropped",
+   "tests": [
+    "18319"
+   ],
+   "examples": [
+    "18319|100% C2H4|positive"
+   ],
+   "testCount": 1
+  },
+  {
+   "accession": "PSI-106",
+   "field": "Test Date",
+   "note": "Notes typed into the date column",
+   "action": "date kept; note kept in raw",
+   "tests": [
+    "2012-FEB-13",
+    "2012-MAR-05",
+    "2012-MAR-19",
+    "2012-MAR-23"
+   ],
+   "examples": [
+    "2012-FEB-13 SLICE testing with",
+    "2012-MAR-05 SLICE testing with",
+    "2012-MAR-19 SLICE testing with"
+   ],
+   "testCount": 4
+  },
+  {
+   "accession": "PSI-107",
+   "field": "rows",
+   "note": "Rows repeat exactly (same ignition, fuel and flow)",
+   "action": "kept; each row may be a separate condition within one ignition",
+   "tests": [],
+   "examples": [
+    "34 rows"
+   ],
+   "testCount": 0
+  },
+  {
+   "accession": "PSI-25",
+   "field": "Calibrated final O2 % by vol",
+   "note": "Implausible final oxygen for a cabin-scale test (outside 10–25%)",
+   "action": "not used",
+   "tests": [
+    "B2",
+    "P22a",
+    "P22b",
+    "T28a",
+    "T28b"
+   ],
+   "examples": [
+    "1.6",
+    "0.6",
+    "39.1"
+   ],
+   "testCount": 5
+  },
+  {
+   "accession": "PSI-25",
+   "field": "CO / CO2 columns",
+   "note": "Text and negative values in numeric gas columns",
+   "action": "left empty; text kept as a flag",
+   "tests": [],
+   "examples": [
+    "none, OR, over, -1"
+   ],
+   "testCount": 0
+  },
+  {
+   "accession": "PSI-25",
+   "field": "Fan display / Air display",
+   "note": "Several flow settings written in one cell",
+   "action": "parsed in order as flow settings; first used as the test's flow",
+   "tests": [],
+   "examples": [
+    "e.g. '10  20  18'"
+   ],
+   "testCount": 0
+  },
+  {
+   "accession": "PSI-98",
+   "field": "Sample Number",
+   "note": "Note or flow-visualisation row inside the test table",
+   "action": "not a test; skipped",
+   "tests": [
+    "F1C1/F1C2",
+    "F2C1/F2C2"
+   ],
+   "examples": [
+    "F1C1/F1C2",
+    "F2C1/F2C2"
+   ],
+   "testCount": 2
+  },
+  {
+   "accession": "PSI-99",
+   "field": "thickness",
+   "note": "Decimal point missing ('037 mm')",
+   "action": "not interpreted",
+   "tests": [
+    "2-4",
+    "2-5",
+    "2-6"
+   ],
+   "examples": [
+    "037 mm"
+   ],
+   "testCount": 3
+  },
+  {
+   "accession": "PSI-99",
+   "field": "Material",
+   "note": "Material cell left blank",
+   "action": "left empty",
+   "tests": [
+    "2-6",
+    "2-9"
+   ],
+   "examples": [],
+   "testCount": 2
+  },
+  {
+   "accession": "PSI-99",
+   "field": "Sample Number",
+   "note": "Note or flow-visualisation row inside the test table",
+   "action": "not a test; skipped",
+   "tests": [
+    "F1C1/F1C2",
+    "F2C1/F2C2",
+    "Note 1 Derived from measured C",
+    "Note 2 The PMMA portion was co",
+    "Note 3 This is the length of f",
+    "Note 4 The flames remain ancho"
+   ],
+   "examples": [
+    "F1C1/F1C2",
+    "F2C1/F2C2",
+    "Note 1 Derived from measured CO2 production and referenced to initial O2 concent"
+   ],
+   "testCount": 6
+  },
+  {
+   "accession": "PSI-99",
+   "field": "?-g columns",
+   "note": "The µ in 'µg' was lost and shows as '?'",
+   "action": "read as microgravity",
+   "tests": [],
+   "examples": [
+    "?-g Burn Length"
+   ],
+   "testCount": 0
+  },
+  {
+   "accession": "PSI-98",
+   "field": "Flight Platform (catalogue)",
+   "note": "Saffire-I and -III are listed under the ISS platform; their hardware field and NASA reports place them in the Cygnus spacecraft",
+   "action": "platform recorded as Cygnus",
+   "tests": [],
+   "examples": [
+    "International Space Station (ISS)"
+   ],
+   "testCount": 0
+  },
+  {
+   "accession": "PSI-102",
+   "field": "Sample Material",
+   "note": "Conditions given as 'same as 1–4' instead of values",
+   "action": "values left empty, not copied",
+   "tests": [
+    "5",
+    "6",
+    "7",
+    "8"
+   ],
+   "examples": [
+    "Kapton: same conditions as 1-4",
+    "Silicone Rubber: same conditions as 1-4",
+    "Lampwick: same conditions as 1-4"
+   ],
+   "testCount": 4
+  },
+  {
+   "accession": "PSI-101",
+   "field": "Date",
+   "note": "Dates have no year",
+   "action": "year 2010 taken from the investigation dates (Jul–Sep 2010), noted in each record",
+   "tests": [],
+   "examples": [
+    "21-Jul"
+   ],
+   "testCount": 0
+  }
+ ],
+ "matrices": [
+  {
+   "accession": "PSI-68",
+   "investigation": "FLEX-2",
+   "fuel": "IsoOctane (pure)",
+   "fuelClass": "droplet",
+   "o2Pct": [
+    17,
+    21,
+    25,
+    30
+   ],
+   "pressureKpa": [
+    50.7,
+    101.3,
+    152,
+    202.7,
+    304
+   ],
+   "diluent": "O2/N2 or O2/He",
+   "initialDiameterMm": "1.5 - 5",
+   "flowCms": "0.1 - 5"
+  },
+  {
+   "accession": "PSI-68",
+   "investigation": "FLEX-2",
+   "fuel": "n-Octane (pure)",
+   "fuelClass": "droplet",
+   "o2Pct": [
+    17,
+    21,
+    25,
+    30
+   ],
+   "pressureKpa": [
+    50.7,
+    101.3,
+    152,
+    202.7,
+    304
+   ],
+   "diluent": "O2/N2 or O2/He",
+   "initialDiameterMm": "1.5 - 5",
+   "flowCms": "0.1 - 5"
+  },
+  {
+   "accession": "PSI-68",
+   "investigation": "FLEX-2",
+   "fuel": "Heptane (pure)",
+   "fuelClass": "droplet",
+   "o2Pct": [
+    17,
+    21,
+    25,
+    30
+   ],
+   "pressureKpa": [
+    50.7,
+    101.3,
+    152,
+    202.7,
+    304
+   ],
+   "diluent": "O2/N2 or O2/He",
+   "initialDiameterMm": "1.5 - 5",
+   "flowCms": "0.1 - 5"
+  },
+  {
+   "accession": "PSI-68",
+   "investigation": "FLEX-2",
+   "fuel": "Decane (pure)",
+   "fuelClass": "droplet",
+   "o2Pct": [
+    17,
+    21,
+    25,
+    30
+   ],
+   "pressureKpa": [
+    50.7,
+    101.3,
+    152,
+    202.7,
+    304
+   ],
+   "diluent": "O2/N2 or O2/He",
+   "initialDiameterMm": "1.5 - 5",
+   "flowCms": "0.1 - 5"
+  },
+  {
+   "accession": "PSI-68",
+   "investigation": "FLEX-2",
+   "fuel": "Ethanol (pure)",
+   "fuelClass": "droplet",
+   "o2Pct": [
+    17,
+    21,
+    25,
+    30
+   ],
+   "pressureKpa": [
+    50.7,
+    101.3,
+    152,
+    202.7,
+    304
+   ],
+   "diluent": "O2/N2 or O2/He",
+   "initialDiameterMm": "1.5 - 5",
+   "flowCms": "0.1 - 5"
+  },
+  {
+   "accession": "PSI-68",
+   "investigation": "FLEX-2",
+   "fuel": "Propanol (95%) Glycerol (5%) (mixture)",
+   "fuelClass": "droplet",
+   "o2Pct": [
+    17,
+    21,
+    25,
+    30
+   ],
+   "pressureKpa": [
+    50.7,
+    101.3,
+    152,
+    202.7,
+    304
+   ],
+   "diluent": "O2/N2 or O2/He",
+   "initialDiameterMm": "1.5 - 5",
+   "flowCms": "0.1 - 5"
+  },
+  {
+   "accession": "PSI-68",
+   "investigation": "FLEX-2",
+   "fuel": "Heptane (50%) IsoOctane (50%) (mixture)",
+   "fuelClass": "droplet",
+   "o2Pct": [
+    17,
+    21,
+    25,
+    30
+   ],
+   "pressureKpa": [
+    50.7,
+    101.3,
+    152,
+    202.7,
+    304
+   ],
+   "diluent": "O2/N2 or O2/He",
+   "initialDiameterMm": "1.5 - 5",
+   "flowCms": "0.1 - 5"
+  },
+  {
+   "accession": "PSI-68",
+   "investigation": "FLEX-2",
+   "fuel": "Propanol (80%) Glycerol (20%) (mixture)",
+   "fuelClass": "droplet",
+   "o2Pct": [
+    17,
+    21,
+    25,
+    30
+   ],
+   "pressureKpa": [
+    50.7,
+    101.3,
+    152,
+    202.7,
+    304
+   ],
+   "diluent": "O2/N2 or O2/He",
+   "initialDiameterMm": "1.5 - 5",
+   "flowCms": "0.1 - 5"
+  }
+ ]
+}

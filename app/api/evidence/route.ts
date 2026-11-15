@@ -11,7 +11,7 @@ export async function GET(request: Request) {
       findings: q ? retrieve(q, 50) : findings,
       sources,
       provenance: "curated NASA primary sources",
-      retrievedAt: "2026-11-09",
+      retrievedAt: "2026-11-14",
     },
     { headers: { "Cache-Control": "public, max-age=3600" } },
   );

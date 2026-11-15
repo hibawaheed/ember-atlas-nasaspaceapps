@@ -22,7 +22,7 @@ export default function MethodologyView() {
       </div>
       <section className="panel challenge-audit">
         <span className="eyebrow">
-          OFFICIAL CHALLENGE / CHECKED NOVEMBER 9, 2026
+          OFFICIAL CHALLENGE / DETAILS AND RESOURCES CHECKED NOVEMBER 13, 2026
         </span>
         <h2>Challenge coverage</h2>
         <p>
@@ -43,8 +43,9 @@ export default function MethodologyView() {
               <tr>
                 <td>Summarize and rank investigations</td>
                 <td>
-                  Mission desk: ten investigation profiles grouped by shared hardware, disclosed relevance
-                  weights, and a comparison table.
+                  Mission desk: ranked investigation profiles with a reason
+                  for each, shared-hardware groups, a comparison table and the
+                  oxygen × pressure map of every NASA test that records both.
                 </td>
               </tr>
               <tr>
@@ -64,11 +65,11 @@ export default function MethodologyView() {
               <tr>
                 <td>Extract useful data</td>
                 <td>
-                  {pointCount} published BASS-II observations from{" "}
-                  {measurements.series.length} runs with units and run
-                  conditions, checked against the original NASA PDF; CSV
-                  export of measurements and all investigation profiles; and
-                  validated user imports.
+                  2,008 test records imported from 21 NASA PSI experimental
+                  tables and the Saffire VI paper, with checksums, unit
+                  conversions in code and 28 flagged data-entry problems;
+                  filtered CSV downloads; plus {pointCount} BASS-II flame-spread
+                  rates checked against the original NASA PDF.
                 </td>
               </tr>
               <tr>
@@ -77,7 +78,8 @@ export default function MethodologyView() {
                   Claude Haiku 5.5 writes research-companion answers, lab
                   interpretations and Mission-desk comparisons from retrieved
                   NASA findings and investigation profiles, citing only those
-                  items, with a search-only fallback. Checked on a small live
+                  items and the matching NASA test rows, with a search-only
+                  fallback. Checked on a small live
                   test set; not scientifically validated. No claim of
                   superintelligence.
                 </td>
@@ -85,22 +87,22 @@ export default function MethodologyView() {
               <tr>
                 <td>Inform Moon and Mars research</td>
                 <td>
-                  The Mission desk identifies transfer gaps. The challenge
-                  statement reports that NASA&apos;s Physical Sciences
-                  Informatics (PSI) archive has no partial-gravity combustion
-                  data; published partial-gravity studies outside PSI are
-                  cited in the evidence library.
+                  The Moon base atmosphere is answered from every test: eight
+                  FLEX droplet tests ran at it, Saffire VI-3 is the closest
+                  solid test. PSI holds no partial-gravity data (per the
+                  challenge statement); NASA drop-tower limits measured at
+                  lunar and Martian gravity are charted from the published
+                  paper.
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
         <p>
-          <b>Resource status:</b> the official Resources tab was published by
-          November 13, 2026. Its list is being reconciled with this demo&apos;s
-          sources. The numeric data shown here comes from a NASA technical
-          report checked against the original PDF; no new official dataset has
-          been added yet.
+          <b>Data sources:</b> NASA&apos;s PSI repository (experimental tables
+          for 21 combustion investigations, downloaded November 14, 2026 and
+          checksummed), NASA technical reports and papers on NTRS checked page
+          by page, and the official challenge resources.
         </p>
         <a
           className="text-link"
@@ -114,12 +116,12 @@ export default function MethodologyView() {
       <div className="method-cards">
         <article>
           <span className="tag green">Observed</span>
-          <h3>Published measurements</h3>
+          <h3>NASA test records</h3>
           <p>
-            {pointCount} BASS-II flame-spread observations from{" "}
-            {measurements.series.length} runs, transcribed from
-            NASA/TM-20210011385, Table 5.1, and checked by eye against the
-            original PDF. Original units and run conditions are preserved.
+            2,008 rows from NASA&apos;s PSI experimental tables and the Saffire
+            VI paper, plus {pointCount} BASS-II flame-spread rates from
+            NASA/TM-20210011385, Table 5.1, checked by eye against the PDF.
+            Original cells are kept with every record.
           </p>
         </article>
         <article>
@@ -151,13 +153,13 @@ export default function MethodologyView() {
               Database,
               "01",
               "Discover",
-              "NASA PSI, NTRS, and investigation pages.",
+              "NASA PSI API, NTRS, and investigation pages.",
             ],
             [
               FileCheck,
               "02",
               "Verify",
-              "Retain publication, table, units, and scope.",
+              "Checksums, units converted in code, quirks flagged.",
             ],
             [
               Search,
@@ -169,9 +171,9 @@ export default function MethodologyView() {
               Layers,
               "04",
               "Interpret",
-              "AI answers from cited findings, with limits stated.",
+              "AI answers from cited findings and test rows.",
             ],
-            [Box, "05", "Explore", "Measured charts and a separate 3D model."],
+            [Box, "05", "Explore", "Atlas map, comparisons and a separate 3D model."],
           ].map(([Icon, n, title, desc]) => {
             const Component = Icon as typeof Database;
             return (
@@ -209,9 +211,11 @@ export default function MethodologyView() {
           <span className="eyebrow">WHAT COMES NEXT</span>
           <h3>A path to real reconstruction</h3>
           <p>
-            NASA PSI-25 contains BASS-II experiment files. PSI-69 contains FLEX
-            data. PSI-62 provides a research path toward soot and temperature
-            reconstruction using two-color tomography.
+            The experimental tables are in. Next are the files behind them:
+            BASS-II alone holds 275 GB of video and data on PSI, and four PSI
+            ground investigations (PSI-60, -62, -115, -117) already reuse
+            flight data for modelling, including two-color tomography of BASS
+            flames.
           </p>
           <p>
             Future ingestion should retain instrument calibration, frame timing,
