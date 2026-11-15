@@ -1,6 +1,6 @@
 # Review checklist (November 14, 2026)
 
-The team's written review, *EMBER Atlas website review and fixes* (based on public build `8628fe8`), item by item. Each entry says what changed and where to check it. Release verification for the final build is in `docs/VALIDATION.md`.
+The team's written review, *Ember Atlas website review and fixes* (based on public build `8628fe8`), item by item. Each entry says what changed and where to check it. Release verification for the final build is in `docs/VALIDATION.md`.
 
 ## Science and data
 

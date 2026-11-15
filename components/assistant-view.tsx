@@ -132,7 +132,7 @@ export default function AssistantView() {
               <div className="question-bubble">{item.question}</div>
               <div className="answer-label">
                 <Orbit size={19} />
-                <b>EMBER</b>
+                <b>Ember</b>
                 <span>
                   {item.mode === "generative"
                     ? "AI synthesis · source grounded"
@@ -165,7 +165,7 @@ export default function AssistantView() {
               <div className="question-bubble">{draft.question}</div>
               <div className="answer-label">
                 <Orbit size={19} />
-                <b>EMBER</b>
+                <b>Ember</b>
                 <span>Claude is writing from NASA findings…</span>
               </div>
               {draft.text ? (

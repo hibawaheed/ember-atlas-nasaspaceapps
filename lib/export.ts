@@ -60,7 +60,7 @@ export function briefHtml(s: Scenario, build = { commit: "local", date: "" }, no
     : "Which test conditions would a lunar-gravity experiment need to repeat?";
   const row = (r: (typeof best.rows)[number]) =>
     `<tr><th>${esc(r.condition)}</th><td>${esc(r.scenario)}</td><td>${esc(r.test)}</td><td>${esc({ same: "Matches", close: "Close", differs: "Differs", unknown: "Not listed" }[r.status])}${r.note ? ` · ${esc(r.note)}` : ""}</td></tr>`;
-  return `<!doctype html><html lang="en"><meta charset="utf-8"><title>EMBER Atlas scenario brief</title><style>
+  return `<!doctype html><html lang="en"><meta charset="utf-8"><title>Ember Atlas scenario brief</title><style>
 body{font:14px/1.5 system-ui,sans-serif;max-width:780px;margin:32px auto;padding:0 20px;color:#1d2230}
 h1{font-size:22px;margin:4px 0 2px}h2{font-size:15px;margin:18px 0 6px;border-bottom:1px solid #ddd;padding-bottom:3px}
 small,.meta{color:#5d6475;font-size:12px}table{border-collapse:collapse;width:100%;font-size:12.5px}
@@ -68,7 +68,7 @@ th,td{text-align:left;padding:4px 6px;border-bottom:1px solid #e5e5e5;vertical-a
 a{color:#a4371f}ul{padding-left:18px;margin:4px 0}li{margin:3px 0}.q{font-size:16px;font-weight:600}
 @media print{body{margin:0;max-width:none}a{color:#1d2230}}
 </style>
-<small>EMBER ATLAS · SCENARIO BRIEF · ISL TEAM A</small>
+<small>Ember Atlas · SCENARIO BRIEF · ISL TEAM A</small>
 <p class="q">${esc(question)}</p>
 <p class="meta">Exported ${esc(now.toISOString().slice(0, 16).replace("T", " "))} UTC · build ${esc(build.commit)}${build.date ? ` (${esc(build.date)})` : ""} · <a href="${esc(scenarioUrl(s))}">reopen this scenario</a></p>
 <h2>Inputs</h2>

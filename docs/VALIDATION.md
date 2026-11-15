@@ -22,7 +22,7 @@ Latest verification: November 15, 2026 (v1.6.0).
 
 ## November 14, 2026 — external review fixes, release verification (v1.5.0)
 
-Acted on the team's written review (*EMBER Atlas website review and fixes*); item-by-item status in `docs/REVIEW-CHECKLIST.md`.
+Acted on the team's written review (*Ember Atlas website review and fixes*); item-by-item status in `docs/REVIEW-CHECKLIST.md`.
 
 - **Data.** Saffire IV–VI test conditions and results entered from ICES-2024-365 Tables 1 and 2 (PDF SHA-256 `7f875da1d6abeeeeac64aeba67d3f160074cf98430e714fe7606b34b37e0aa59`), checked by rendering the PDF pages. Detection values from Figure 7 and its text (p. 5). FLEX cool-flame and inert-suppressant wording checked against the 2015 guide, pp. 12 and 33–34. Now 36 findings from 23 sources.
 - **Tests.** `npm run check`: 28 pass (new: Saffire records and closest test, coverage evidence types, ranking reasons and parent grouping, one-page brief and rebuild link). `npm run build` passes.

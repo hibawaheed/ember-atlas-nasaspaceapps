@@ -1,4 +1,4 @@
-# EMBER Atlas
+# Ember Atlas
 
 **Fire, beyond Earth.** Every NASA microgravity combustion test we could find, in one searchable atlas, so a habitat designer can ask "has NASA burned anything like my cabin?" and get a cited answer in one click.
 
@@ -6,7 +6,7 @@
 
 Built by **ISL Team A** (Hiba Waheed Ch, Zaafir Abbas Haidrie, Muhammad Ashar Hassan, Amin Adnan Mahmood) for the NASA Space Apps Challenge 2026 challenge **[Flame in Freefall: SI-Powered Fire Safety Insights from Microgravity Combustion Data](https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/)**.
 
-![EMBER Atlas homepage](docs/screenshots/home.png)
+![Ember Atlas homepage](docs/screenshots/home.png)
 
 ---
 
@@ -131,7 +131,7 @@ Vercel project `ember-atlas`, connected to this repository; every push to `main`
 
 ## Limits and next steps
 
-EMBER Atlas is a research and teaching tool, not a fire-safety certification. Every NASA test in the tables ran in microgravity; the partial-gravity limits come from about 5-second drop-tower tests on three materials. Next steps: add LUCI and FM2 lunar-gravity results when NASA releases them, ingest the files behind the PSI tables (video, time series), and have a combustion scientist review the findings, rankings and our reading of each data quirk.
+Ember Atlas is a research and teaching tool, not a fire-safety certification. Every NASA test in the tables ran in microgravity; the partial-gravity limits come from about 5-second drop-tower tests on three materials. Next steps: add LUCI and FM2 lunar-gravity results when NASA releases them, ingest the files behind the PSI tables (video, time series), and have a combustion scientist review the findings, rankings and our reading of each data quirk.
 
 ## Project docs
 

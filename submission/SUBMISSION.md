@@ -1,4 +1,4 @@
-# EMBER Atlas — NASA Space Apps 2026 submission text
+# Ember Atlas — NASA Space Apps 2026 submission text
 
 Ready to paste into the Space Apps project page. Check each field's character limit on the submission form before pasting; the official form was not visible from the environment this was written in.
 
@@ -6,7 +6,7 @@ Ready to paste into the Space Apps project page. Check each field's character li
 
 ## Project name
 
-EMBER Atlas
+Ember Atlas
 
 ## Challenge
 
@@ -26,9 +26,9 @@ ISL Team A: Hiba Waheed Ch, Zaafir Abbas Haidrie, Muhammad Ashar Hassan, Amin Ad
 
 ## High-level project summary
 
-EMBER Atlas puts every NASA microgravity combustion test we could find into one cited, searchable atlas for crew-habitat fire safety. Using NASA's Physical Sciences Informatics (PSI) API, we imported 2,008 test records from 21 investigations, checksummed each table, converted units in code and flagged 28 data-entry problems openly. The atlas answers the challenge's Moon base question directly: NASA burned fuel droplets at exactly 30% oxygen and 71 kPa (eight FLEX tests); the closest solid-material fire is Saffire VI-3; and drop-tower tests show three materials burning at lower oxygen at lunar gravity than in orbit or on Earth. An oxygen × pressure map, a nearest-test engine, an animated 3D lab and an AI research companion powered by Anthropic's Claude, citing NASA findings and test rows, make that evidence easy to use and check.
+Ember Atlas puts every NASA microgravity combustion test we could find into one cited, searchable atlas for crew-habitat fire safety. Using NASA's Physical Sciences Informatics (PSI) API, we imported 2,008 test records from 21 investigations, checksummed each table, converted units in code and flagged 28 data-entry problems openly. The atlas answers the challenge's Moon base question directly: NASA burned fuel droplets at exactly 30% oxygen and 71 kPa (eight FLEX tests); the closest solid-material fire is Saffire VI-3; and drop-tower tests show three materials burning at lower oxygen at lunar gravity than in orbit or on Earth. An oxygen × pressure map, a nearest-test engine, an animated 3D lab and an AI research companion powered by Anthropic's Claude, citing NASA findings and test rows, make that evidence easy to use and check.
 
-*(About 140 words. Shorter version, about 50 words:)* EMBER Atlas turns 2,008 NASA combustion test records from 21 PSI investigations into a cited atlas for crew-habitat fire safety. It finds the NASA tests nearest any cabin atmosphere, maps them by oxygen and pressure, charts measured lunar-gravity limits, and uses Anthropic's Claude to answer questions from the tests themselves.
+*(About 140 words. Shorter version, about 50 words:)* Ember Atlas turns 2,008 NASA combustion test records from 21 PSI investigations into a cited atlas for crew-habitat fire safety. It finds the NASA tests nearest any cabin atmosphere, maps them by oxygen and pressure, charts measured lunar-gravity limits, and uses Anthropic's Claude to answer questions from the tests themselves.
 
 ---
 
@@ -109,7 +109,7 @@ EMBER Atlas puts every NASA microgravity combustion test we could find into one 
 - “Cool Flames” in Space, a Hot Prospect on Earth! (V. Nayagam, NASA Glenn, ISS R&D Conference 2013): https://www.nasa.gov/wp-content/uploads/2013/10/issrdc_2013-07-16-0945_nayagam2013.pdf
 - NASA Studies Fire in Microgravity (Scientific Visualization Studio): https://svs.gsfc.nasa.gov/31394/
 
-NASA PSI records used here identify CC0 dataset licenses. No NASA insignia is used; EMBER Atlas is an independent project with no NASA endorsement.
+NASA PSI records used here identify CC0 dataset licenses. No NASA insignia is used; Ember Atlas is an independent project with no NASA endorsement.
 
 ## Space agency partner and other data
 
@@ -119,7 +119,7 @@ No partner-agency data is used. All data comes from NASA sources listed above an
 
 ## Use of artificial intelligence
 
-- **In the product:** EMBER Atlas uses Anthropic’s Claude Haiku 5.5, through the Vercel AI SDK and Vercel AI Gateway, to write research-companion answers, lab interpretations and Mission-desk comparison explanations. The model sees only NASA findings, investigation profiles and NASA test rows selected by our server, must cite the items it used, and is labeled on screen as AI. Answers fall back to plain search results if the model is unavailable.
+- **In the product:** Ember Atlas uses Anthropic’s Claude Haiku 5.5, through the Vercel AI SDK and Vercel AI Gateway, to write research-companion answers, lab interpretations and Mission-desk comparison explanations. The model sees only NASA findings, investigation profiles and NASA test rows selected by our server, must cite the items it used, and is labeled on screen as AI. Answers fall back to plain search results if the model is unavailable.
 - **In development:** the team used Claude Code (Anthropic) and earlier AI coding assistants to help write code, documentation and tests. NASA values were checked by hand against the original sources.
 - **Not AI-generated:** the 2,008 test records are NASA's own table values, converted by our script with every original cell kept; the BASS-II, Saffire and partial-gravity values were transcribed from NASA PDFs and visually verified. The 3D flame is an authored illustration, not AI-generated imagery.
 

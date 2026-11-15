@@ -36,7 +36,7 @@ export default function MethodologyView() {
             <thead>
               <tr>
                 <th>Challenge direction</th>
-                <th>In EMBER Atlas</th>
+                <th>In Ember Atlas</th>
               </tr>
             </thead>
             <tbody>

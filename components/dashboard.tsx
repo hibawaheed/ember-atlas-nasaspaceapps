@@ -139,13 +139,13 @@ export default function Dashboard() {
         <button
           className="brand"
           onClick={() => navigate("overview")}
-          aria-label="EMBER Atlas home"
+          aria-label="Ember Atlas home"
         >
           <span className="brand-icon">
             <Flame size={27} strokeWidth={1.5} />
           </span>
           <span>
-            EMBER<small>ATLAS</small>
+            Ember<small>Atlas</small>
           </span>
         </button>
         <div className="workspace-label">
@@ -454,7 +454,7 @@ export default function Dashboard() {
           {page === "methodology" && <MethodologyView />}
           <footer className="main-footer">
             <span>
-              EMBER ATLAS <i /> ISL Team A
+              Ember Atlas <i /> ISL Team A
             </span>
             <p>
               Independent educational demo. NASA sources; no NASA endorsement.

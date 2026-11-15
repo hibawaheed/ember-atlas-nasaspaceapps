@@ -143,7 +143,7 @@ export default function FieldGuide({
           Start the guided lab <ArrowRight size={17} />
         </button>
       </section>
-      <section className="howto-grid" aria-label="How to use EMBER Atlas">
+      <section className="howto-grid" aria-label="How to use Ember Atlas">
         {[
           {
             icon: MousePointer2,
