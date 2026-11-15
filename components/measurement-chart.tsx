@@ -165,11 +165,11 @@ export default function MeasurementChart({
       </div>
       <svg
         className="measurement-svg"
-        viewBox="0 0 580 236"
+        viewBox="0 -22 580 258"
         role="img"
         aria-label={`BASS-II observed flame-spread rates versus airflow for ${runs.length} of ${data.series.length} runs, 0.012 to 0.144 millimeters per second. Oxygen changed during each run.`}
       >
-        <text x="14" y="14" className="axis-label">
+        <text x="14" y="-6" className="axis-label">
           Spread rate · mm/s
         </text>
         {[0, 0.04, 0.08, 0.12, 0.16].map((t) => (
