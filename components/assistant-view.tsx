@@ -17,10 +17,10 @@ type Answer = {
 };
 import { findings } from "@/lib/evidence";
 const prompts = [
+  "Has NASA burned anything at a Moon base atmosphere?",
+  "Which BASS-II run had the fastest flame spread?",
   "Why can a flame survive without airflow?",
-  "What does a Moon base atmosphere mean for fire?",
   "Do suppressants that work on Earth work as well in space?",
-  "Why must spacecraft smoke detectors differ from Earth ones?",
   "What did FLEX discover about cool flames?",
   "Has anyone studied flame spread in simulated lunar gravity?",
 ];
@@ -238,13 +238,13 @@ export default function AssistantView() {
           out, the answer should stop too.
         </p>
         <div>
-          <span>01</span> Search {findings.length} curated NASA findings
+          <span>01</span> Search {findings.length} curated findings and 2,008 NASA test records
         </div>
         <div>
           <span>02</span> Decline questions outside the evidence
         </div>
         <div>
-          <span>03</span> AI writes from the top 5, citing only them
+          <span>03</span> AI writes from the matching findings and test rows, citing each
         </div>
         <div>
           <span>04</span> Unsupported citations are rejected

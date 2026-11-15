@@ -4,7 +4,7 @@ import { answerFromEvidence, sourceFor, type Finding } from "./evidence";
 import type { ProfileContext } from "./context";
 import { dataCitation, type DataRow } from "./data-context";
 import measurements from "@/data/measurements.json";
-import saffire from "@/data/saffire.json";
+import { testCounts } from "./tests";
 import { partialGravityInventory } from "./partial-gravity";
 // A deterministic, key-free retrieval path remains the source of truth.
 // Removes finding IDs the model wrote into prose, e.g. "(flex-cool)".
@@ -35,7 +35,7 @@ const ANSWER_STYLE =
 type AskCtx = { findings: Finding[]; profiles: ProfileContext[]; dataRows?: DataRow[]; dataSummaries?: string[]; dataNotes?: string[] };
 // What measured records the atlas itself holds, so questions about its own
 // contents ("what lunar-gravity measurements are here?") are answered exactly.
-const ATLAS_INVENTORY = `Measured records in this atlas: ${measurements.series.reduce((n, s) => n + s.points.length, 0)} BASS-II flame-spread values from ${measurements.series.length} runs (PMMA, ISS microgravity, Table 5.1 of NASA/TM-20210011385) and ${saffire.tests.length} Saffire IV–VI tests (fabric and PMMA, spacecraft microgravity, Tables 1–2 of NASA ICES-2024-365). Every test in those tables ran in microgravity; none at lunar or Martian gravity. ${partialGravityInventory}`;
+const ATLAS_INVENTORY = `Measured records in this atlas: ${testCounts.records} NASA test records from ${testCounts.investigations} investigations, taken from NASA PSI experimental tables (FLEX, CFI, ACME CFI-G, Flame Design, BRE, s-Flame, CLD Flame, E-FIELD Flames, SLICE, SPICE, BASS, BASS-II, Saffire-I to -III, SAME, SAME-R, DAFT) and Saffire IV–VI from NASA ICES-2024-365; ${testCounts.plottable} record both chamber oxygen and pressure. Also ${measurements.series.reduce((n, s) => n + s.points.length, 0)} BASS-II flame-spread values from ${measurements.series.length} runs (Table 5.1 of NASA/TM-20210011385). Every test in those tables ran in microgravity; none at lunar or Martian gravity. Eight FLEX droplet tests (PSI-69 tests 25–28 and 40–43) ran at 30% oxygen and 71.2–72.1 kPa, the challenge's Moon base atmosphere. ${partialGravityInventory}`;
 const askSchema = z.object({
   answer: z.string().max(2500),
   points: z

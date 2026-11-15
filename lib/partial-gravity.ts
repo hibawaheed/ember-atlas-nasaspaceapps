@@ -14,7 +14,7 @@ export function worseThanBothEnds(k: "lunar" | "martian") {
 export function lunarGravityHeadline() {
   const mylar = pg.materials[0];
   return {
-    text: `In NASA drop-tower tests, Mylar kept burning down to ${mylar.limits.lunar.ULOI}% oxygen at lunar gravity, against ${mylar.limits.zero.ULOI}% in microgravity and ${mylar.limits.earth.ULOI}% on Earth, at 10.2 psi. The tests lasted about 5 seconds.`,
+    text: `In NASA drop-tower tests, Mylar kept burning down to ${mylar.limits.lunar.ULOI}% oxygen at lunar gravity, against ${mylar.limits.zero.ULOI.toFixed(1)}% in microgravity and ${mylar.limits.earth.ULOI}% on Earth, at 10.2 psi. The tests lasted about 5 seconds.`,
     href: pg.source.pdfUrl + "#page=6",
     label: "NASA NTRS 20130010991, Table I",
   };

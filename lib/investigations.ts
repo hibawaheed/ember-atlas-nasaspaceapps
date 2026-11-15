@@ -1,4 +1,6 @@
 import { z } from "zod";
+import testMeta from "@/data/tests-meta.json";
+import { testRecords, testsAtAtmosphere } from "./nearest";
 export const missionQuerySchema = z.object({
   destination: z.enum(["orbit", "moon", "mars", "rover"]),
   priority: z.enum(["prevention", "detection", "suppression"]),
@@ -54,7 +56,7 @@ export const investigations = [
     measurements:
       "Flame-spread rate from imaging: a Nikon digital camera viewing the sample from above and an HD video camera viewing its edge through a mirror (images tracked with NASA's Spotlight-16). A radiometer measured flame intensity, an anemometer measured inlet air velocity, and a fan set the airflow. Oxygen and burn time were logged (report p. 56).",
     output:
-      "39 published spread-rate observations from 18 runs (Table 5.1); broader files at PSI.",
+      "251 test records from PSI-25 and PSI-26 (materials, oxygen, flow settings, CO and CO₂), plus 39 flame-spread rates from 18 runs (Table 5.1).",
     priorities: ["prevention", "suppression"] as Priority[],
     atmosphere: true,
     sources: ["bass-report", "psi-bass", "researchers-guide"],
@@ -80,7 +82,7 @@ export const investigations = [
     measurements:
       "Moments of the particle-size distribution and smoke detector response.",
     output:
-      "Curated experiment objectives; linked PSI record. No detector time series imported.",
+      "119 test records from PSI-102, PSI-101 and PSI-47 (materials, airflow, heating and aging times). No detector time series imported.",
     priorities: ["detection"] as Priority[],
     atmosphere: false,
     sources: ["same-overview", "psi-same", "challenge-2026"],
@@ -106,7 +108,7 @@ export const investigations = [
     measurements:
       "Droplet and flame imaging; observations of extinction and cool-flame behavior.",
     output:
-      "Source-backed findings and PSI archive link. No raw droplet time series imported.",
+      "361 droplet test records from PSI-69 and PSI-39 (fuel, pressure, oxygen, diluents, burning rate, how each test ended). No droplet time series imported.",
     priorities: ["suppression", "detection"] as Priority[],
     atmosphere: true,
     sources: ["flex-operations", "psi-flex", "researchers-guide"],
@@ -132,7 +134,7 @@ export const investigations = [
     measurements:
       "Flame imaging and combustion-product measurements, including gases.",
     output:
-      "Research summaries and Saffire-VI presentation; no raw cabin data imported.",
+      "18 test records: Saffire-I to -III from PSI-98, -99, -100 and Saffire IV–VI from NASA ICES-2024-365 (materials, oxygen, pressure, flow, heat release). No raw cabin data imported.",
     priorities: ["prevention", "detection"] as Priority[],
     atmosphere: true,
     sources: ["saffire-overview", "saffire-results", "saffire-v"],
@@ -158,7 +160,7 @@ export const investigations = [
     measurements:
       "Flame observations across more than 1,500 flames reported by NASA.",
     output:
-      "Curated research overview; the full experimental collection is not ingested.",
+      "Program overview; its experiments' test tables (BRE, CFI-G, Flame Design, s-Flame, CLD Flame, E-FIELD) are imported individually.",
     priorities: ["prevention", "suppression"] as Priority[],
     atmosphere: true,
     sources: ["acme-results"],
@@ -206,7 +208,7 @@ export const investigations = [
     variables:
       "Fuel gas and flow chosen to emulate a material; atmosphere and flow conditions.",
     measurements: "Heat feedback to the burner, flame behavior and extinction.",
-    output: "NASA investigation description only; no BRE data imported.",
+    output: "43 test-day records from PSI-20 (burner size, fuel, oxygen 21–40%, flames ignited).",
     priorities: ["prevention"] as Priority[],
     atmosphere: true,
     sources: ["bre-page", "acme-facility", "researchers-guide"],
@@ -228,7 +230,7 @@ export const investigations = [
       "Understand flame ion production and how an electric field can control flames.",
     variables: "Applied voltage, fuel and flow conditions.",
     measurements: "Flame shape, soot and stability limits under an ion wind.",
-    output: "NASA investigation description only; no E-FIELD data imported.",
+    output: "20 test-day records from PSI-22 (mesh polarity, fuel, flames ignited).",
     priorities: [] as Priority[],
     atmosphere: false,
     sources: ["efield-page", "challenge-2026"],
@@ -251,7 +253,7 @@ export const investigations = [
       "Study cool and inside-out flames, including the highest-oxygen microgravity tests.",
     variables: "Oxygen fraction (up to 85%), fuel gas such as propane, chamber mix.",
     measurements: "Flame observations; detailed diagnostics are in the source files.",
-    output: "Described from the challenge statement; no CFI-G data imported.",
+    output: "333 test records from PSI-159 (fuel, oxygen, pressure, hot ignition, burn time, self-extinction).",
     priorities: [] as Priority[],
     atmosphere: true,
     sources: ["challenge-2026"],
@@ -274,7 +276,7 @@ export const investigations = [
       "SPICE (2009) studied the transition from non-sooting to sooting flames (smoke point). SLICE (completed 2012) studied lifted flames.",
     variables: "Fuel flow, co-flow velocity and fuel type.",
     measurements: "Flame imaging of soot emission and flame liftoff.",
-    output: "Described from NASA's 2015 researcher's guide; no data imported.",
+    output: "481 test records from PSI-107 and PSI-106 (fuel, nozzle, fuel and air flow).",
     priorities: [] as Priority[],
     atmosphere: false,
     sources: ["challenge-2026", "researchers-guide"],
@@ -284,18 +286,55 @@ export const investigations = [
   },
 ];
 
-// Ranking metadata: what measured data the atlas holds, which oxygen levels are
-// known, and parent programs (shown as background, not ranked against their
-// own experiments).
-const rankMeta: Record<string, { measured?: string; oxygen?: string; nearLunarO2?: boolean; parent?: string; program?: boolean }> = {
-  bass: { measured: "39 measured flame-spread values in this atlas", oxygen: "16.8–22.2% O₂ (run start and end values)" },
-  saffire: { measured: "5 measured Saffire IV–VI tests in this atlas", oxygen: "22.0–31.0% O₂ at 54–100 kPa", nearLunarO2: true },
-  flex: { oxygen: "apparatus allows up to 40% O₂; tested values not yet extracted" },
-  cfig: { oxygen: "burner supply up to 85% O₂", parent: "acme" },
-  bre: { parent: "acme" },
-  efield: { parent: "acme" },
-  acme: { program: true },
+// Ranking metadata, derived from the imported NASA test tables
+// (data/tests-meta.json): how many test records each profile has, the chamber
+// oxygen and pressure they cover, and how many sit near the Moon base
+// atmosphere. Parent programs are shown as background, not ranked.
+const tablesFor: Record<string, string[]> = {
+  bass: ["BASS-II", "BASS"],
+  same: ["SAME", "SAME-R", "DAFT / DAFT-2"],
+  flex: ["FLEX", "CFI"],
+  saffire: ["Saffire-I", "Saffire-II", "Saffire-III", "Saffire IV", "Saffire V", "Saffire VI"],
+  bre: ["ACME BRE"],
+  efield: ["ACME E-FIELD Flames"],
+  cfig: ["ACME CFI-G"],
+  spice: ["SPICE", "SLICE"],
+  sofie: [],
 };
+const parents: Record<string, string> = { cfig: "acme", bre: "acme", efield: "acme" };
+const programs = new Set(["acme"]);
+const MOON = { oxygen: 30, pressure: 70.3 };
+// Experiments with a measured result on exactly this question (shown as the
+// worked example above the ranking).
+const measuredExample: Record<string, string> = { detection: "saffire", suppression: "flex" };
+const measuredExampleLabel: Record<string, string> = {
+  detection: "Recorded smoke-detector and particle response during a fire (Saffire VI-3)",
+  suppression: "Measured extinction with CO₂ and helium dilution (FLEX)",
+};
+const span = (xs: number[], unit: string) => (xs.length ? (Math.min(...xs) === Math.max(...xs) ? `${xs[0]}${unit}` : `${Math.min(...xs)}–${Math.max(...xs)}${unit}`) : null);
+
+export function dataFor(id: string) {
+  const names = tablesFor[id] ?? [];
+  const sums = testMeta.summaries.filter((x) => names.includes(x.investigation));
+  const records = sums.reduce((n, x) => n + x.records, 0);
+  const o2 = sums.flatMap((x) => x.ambientO2Pct ?? []);
+  const p = sums.flatMap((x) => x.pressureKpa ?? []);
+  const mine = testRecords.filter((t) => names.includes(t.inv) && t.r === 1);
+  const nearMoonO2 = mine.filter((t) => Math.abs(t.o2 - MOON.oxygen) <= 2).length;
+  const atMoon = testsAtAtmosphere(MOON).filter((t) => names.includes(t.inv)).length;
+  return {
+    records,
+    accessions: [...new Set(sums.map((x) => x.accession ?? "NASA paper"))],
+    oxygen: span(o2, "%"),
+    pressure: span(p, " kPa"),
+    nearMoonO2,
+    atMoon,
+    summary: records
+      ? `${records.toLocaleString("en-US")} NASA test records (${[...new Set(sums.map((x) => x.accession ?? "ICES-2024-365"))].join(", ")}); chamber oxygen ${span(o2, "%") ?? "not listed"}, pressure ${span(p, " kPa") ?? "not listed"}.`
+      : "No NASA test table imported (not in PSI yet); findings only.",
+  };
+}
+
 const priorityPhrase = {
   prevention: "material flammability and fire growth",
   detection: "smoke and fire detection",
@@ -306,39 +345,43 @@ const priorityPhrase = {
 export function rankInvestigations(query: MissionQuery) {
   const surface = query.destination !== "orbit";
   const ranked = investigations
-    .filter((item) => !rankMeta[item.id]?.program)
+    .filter((item) => !programs.has(item.id))
     .map((item) => {
-      const meta = rankMeta[item.id] ?? {};
+      const data = dataFor(item.id);
       const matches = item.priorities.includes(query.priority);
       const reasons = [{ label: "Microgravity research context", points: 1 }];
       if (matches) reasons.push({ label: `Addresses ${query.priority}`, points: 4 });
-      if (meta.measured)
+      if (data.records)
         reasons.push(
           matches
-            ? { label: "Measured data in this atlas", points: 3 }
-            : { label: "Measured data in this atlas (background for this question)", points: 1 },
+            ? { label: `${data.records} NASA test records in this atlas`, points: 3 }
+            : { label: `${data.records} NASA test records (background for this question)`, points: 1 },
         );
-      if (surface && meta.nearLunarO2 && matches)
-        reasons.push({ label: "Measured near the Moon base oxygen scenario", points: 2 });
+      if (surface && data.nearMoonO2)
+        reasons.push({ label: `${data.nearMoonO2} tests within 2 points of 30% oxygen`, points: matches ? 2 : 1 });
+      if (surface && data.atMoon && query.priority !== "detection")
+        reasons.push({ label: `${data.atMoon} tests at the Moon base atmosphere`, points: 1 });
       if (surface && item.atmosphere && query.priority !== "detection")
         reasons.push({ label: "Atmosphere variables for exploration questions", points: 2 });
       if (surface && item.gravityProbe)
         reasons.push({ label: "Probes gravity dependence", points: 1 });
+      if (measuredExample[query.priority] === item.id)
+        reasons.push({ label: measuredExampleLabel[query.priority], points: 1 });
       const reason = [
         matches
           ? `Addresses ${priorityPhrase[query.priority]}.`
           : `Background only: does not directly address ${priorityPhrase[query.priority]}.`,
-        meta.measured ? `${meta.measured[0].toUpperCase()}${meta.measured.slice(1)}.` : `${item.findings.length} cited finding${item.findings.length === 1 ? "" : "s"}; no measured values in this atlas.`,
-        surface && meta.nearLunarO2 && matches ? "Includes tests within about 1 percentage point of the 30% Moon base scenario." : "",
-        meta.oxygen ? `Oxygen: ${meta.oxygen}.` : "Tested oxygen and pressure not recorded here.",
-        surface ? "Its tests are microgravity only." : "",
+        data.summary,
+        surface && data.atMoon ? `${data.atMoon} of its tests ran at the Moon base atmosphere (30% oxygen, about 70 kPa).` : surface && data.nearMoonO2 ? `${data.nearMoonO2} of its tests ran within 2 points of 30% oxygen.` : "",
+        surface && data.records ? "All in microgravity." : "",
       ]
         .filter(Boolean)
         .join(" ");
       return {
         ...item,
-        parent: meta.parent ?? null,
-        measuredInAtlas: !!meta.measured,
+        parent: parents[item.id] ?? null,
+        measuredInAtlas: data.records > 0,
+        testRecords: data.records,
         score: reasons.reduce((s, r) => s + r.points, 0),
         reasons,
         reason,
@@ -367,13 +410,13 @@ export function rankInvestigations(query: MissionQuery) {
 /** Parent programs shown as background navigation beside the ranked experiments. */
 export function programBackground() {
   return investigations
-    .filter((i) => rankMeta[i.id]?.program)
+    .filter((i) => programs.has(i.id))
     .map((p) => ({
       id: p.id,
       name: p.name,
       subtitle: p.subtitle,
       objective: p.objective,
-      children: investigations.filter((c) => rankMeta[c.id]?.parent === p.id).map((c) => c.name),
+      children: investigations.filter((c) => parents[c.id] === p.id).map((c) => c.name),
       sources: p.sources,
     }));
 }

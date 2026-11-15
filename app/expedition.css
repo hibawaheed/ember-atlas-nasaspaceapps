@@ -1426,7 +1426,7 @@ summary {
 }
 .gravity-limits { margin: 8px 0 16px; }
 .gravity-limits figcaption { font-size: 15px; line-height: 1.55; color: var(--ink); margin-bottom: 10px; max-width: 70ch; }
-.gravity-limits > svg { width: 100%; height: auto; display: block; }
+
 .gl-axis { font-size: 12px; fill: var(--muted); }
 .gl-level { font-size: 13px; fill: var(--ink); font-weight: 600; }
 .gl-legend { display: flex; flex-wrap: wrap; gap: 8px 18px; list-style: none; padding: 0; margin: 6px 0 10px; font-size: 13.5px; }
@@ -1454,3 +1454,10 @@ summary {
 .quirk-list code, .nasa-tables code { font-size: 12.5px; background: #ffffff10; padding: 1px 5px; border-radius: 4px; }
 .quirk-action { color: #c9d3ea; }
 .quirk-tests { color: var(--muted); font-size: 13px; }
+.gl-box { width: 100%; overflow: hidden; }
+.gravity-limits .gl-box > svg { display: block; }
+.gl-note { font-size: 12.5px; color: var(--muted); margin: 2px 0 6px; }
+@media (max-width: 650px) {
+  .atlas-map .panel-heading, .nasa-tables .panel-heading, .test-compare .panel-heading { flex-wrap: wrap; gap: 10px; }
+  .atlas-map .panel-heading > div, .nasa-tables .panel-heading > div, .test-compare .panel-heading > div:first-child { flex: 1 1 100%; }
+}

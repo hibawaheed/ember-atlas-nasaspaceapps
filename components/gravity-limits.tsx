@@ -1,4 +1,5 @@
 "use client";
+import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { partialGravity as pg, meanLimit, worseThanBothEnds, type GravityKey } from "@/lib/partial-gravity";
 
@@ -11,7 +12,18 @@ const colors = ["#ffb27d", "#8fd3ff", "#c8b6ff"];
  */
 export default function GravityLimits({ compact = false }: { compact?: boolean }) {
   const levels = pg.gravityLevels as { key: GravityKey; label: string; g: number }[];
-  const W = 640, H = compact ? 250 : 290, L = 54, R = 20, T = 18, B = 46;
+  const box = useRef<HTMLDivElement>(null);
+  const [W, setW] = useState(640);
+  useEffect(() => {
+    const el = box.current;
+    if (!el) return;
+    const ro = new ResizeObserver(() => setW(Math.max(280, Math.round(el.clientWidth))));
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+  const phone = W < 520;
+  const short: Record<string, string> = { zero: "0g*", lunar: "Lunar", martian: "Mars", earth: "Earth" };
+  const H = compact ? 250 : 290, L = phone ? 44 : 54, R = 12, T = 18, B = 46;
   const x = (i: number) => L + (i + 0.5) * ((W - L - R) / levels.length);
   const yMin = 13, yMax = 25;
   const y = (v: number) => T + ((yMax - v) / (yMax - yMin)) * (H - T - B);
@@ -21,22 +33,23 @@ export default function GravityLimits({ compact = false }: { compact?: boolean }
       <figcaption>
         <b>Measured, not interpolated.</b> At lunar gravity all {lunarWorse.length} materials burned at lower oxygen than in either microgravity or Earth gravity, so for these materials the two ends do not bracket the middle.
       </figcaption>
-      <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={`Limiting oxygen by gravity level. ${pg.materials.map((m) => `${m.material} (${m.pressurePsia} psia): ${levels.map((l) => `${l.label} ${meanLimit(m, l.key).toFixed(1)}%`).join(", ")}`).join(". ")}.`}>
+      <div ref={box} className="gl-box">
+      <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={`Limiting oxygen by gravity level. ${pg.materials.map((m) => `${m.material} (${m.pressurePsia} psia): ${levels.map((l) => `${l.label} ${meanLimit(m, l.key).toFixed(1)}%`).join(", ")}`).join(". ")}.`}>
         {[14, 16, 18, 20, 22, 24].map((v) => (
           <g key={v}>
             <line x1={L} x2={W - R} y1={y(v)} y2={y(v)} stroke="var(--line)" strokeDasharray="3 4" />
             <text x={L - 8} y={y(v) + 4} textAnchor="end" className="gl-axis">{v}%</text>
           </g>
         ))}
-        <text x={14} y={T + (H - T - B) / 2} transform={`rotate(-90 14 ${T + (H - T - B) / 2})`} textAnchor="middle" className="gl-axis">Limiting oxygen (mol %)</text>
+        {!phone && <text x={14} y={T + (H - T - B) / 2} transform={`rotate(-90 14 ${T + (H - T - B) / 2})`} textAnchor="middle" className="gl-axis">Limiting oxygen (mol %)</text>}
         {levels.map((l, i) => (
-          <text key={l.key} x={x(i)} y={H - 22} textAnchor="middle" className="gl-level">{l.label}</text>
+          <text key={l.key} x={x(i)} y={H - 22} textAnchor="middle" className="gl-level">{phone ? short[l.key] : l.label}</text>
         ))}
         {levels.map((l, i) => (
           <text key={l.key + "g"} x={x(i)} y={H - 7} textAnchor="middle" className="gl-axis">{l.g} g</text>
         ))}
         {pg.materials.map((m, mi) => {
-          const off = (mi - 1) * 14;
+          const off = (mi - 1) * (phone ? 9 : 14);
           const pts = levels.map((l, i) => `${x(i) + off},${y(meanLimit(m, l.key))}`).join(" ");
           return (
             <g key={m.material}>
@@ -53,6 +66,8 @@ export default function GravityLimits({ compact = false }: { compact?: boolean }
           );
         })}
       </svg>
+      </div>
+      {phone && <p className="gl-note">Vertical axis: limiting oxygen (mol %). 0g* had 30 cm/s forced flow.</p>}
       <ul className="gl-legend">
         {pg.materials.map((m, i) => (
           <li key={m.material}>

@@ -167,7 +167,7 @@ export default function MissionView({
           <span className="eyebrow">THE MISSION DESK</span>
           <h1>Mission research</h1>
           <p>
-            Nine experiments ranked, one program for context. Three safety questions. A traceable path through
+            Nine experiments ranked from 2,008 NASA test records, one program for context. Three safety questions. A traceable path through
             the research.
           </p>
         </div>
@@ -261,14 +261,17 @@ export default function MissionView({
         <summary>How is this ranked?</summary>
         <p>
           Each experiment receives 1 point for microgravity context, 4 for
-          addressing the selected safety question, 3 when this atlas holds its
-          measured data (1 if the data are only background for the question), 2
-          for measured tests near the 30% Moon base oxygen scenario on a
-          surface habitat, 2 for atmosphere variables on a surface habitat
-          (prevention and suppression), and 1 for probing gravity dependence
-          (BRE, E-FIELD Flames). Ties are ordered by whether the question is the
-          experiment&apos;s primary focus, then measured data, then the number of
-          cited findings, and are labeled. Parent programs such as
+          addressing the selected safety question, and 3 when this atlas holds
+          NASA test records for it (1 if they are only background for the
+          question). For a surface habitat it also receives 2 when some of its
+          tests ran within 2 points of 30% oxygen (1 if background), 1 when
+          tests ran at the Moon base atmosphere itself, 2 for atmosphere
+          variables (prevention and suppression only), and 1 for probing
+          gravity dependence (BRE, E-FIELD Flames), plus 1 for the experiment
+          whose measured result is the worked example for the question. Counts come from the
+          imported NASA tables. Ties are ordered by whether the question is
+          the experiment&apos;s primary focus, then test records, then the
+          number of cited findings, and are labeled. Parent programs such as
           ACME are shown as background instead of competing with their own
           experiments; individual measured tests are compared in the panel
           below. These authored weights organize reading; they are not AI

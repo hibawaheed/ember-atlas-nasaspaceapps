@@ -13,7 +13,7 @@ export const tourSteps = [
   {
     title: "Compare a Moon base with a real test.",
     instruction:
-      "The lab now holds the challenge’s lunar habitat: 30% oxygen at 70.3 kPa. Scroll to the comparison below the lab to see the closest measured fire, Saffire VI-3.",
+      "The lab now holds the challenge’s lunar habitat: 30% oxygen at 70.3 kPa. Scroll to the comparison below the lab: Saffire VI-3 is the closest solid-material fire, and eight FLEX droplet tests ran at this exact atmosphere.",
     science:
       "VI-3 burned acrylic (PMMA) at 30.3% oxygen in a Cygnus spacecraft. Limitation: its pressure (54.6 kPa), forced airflow and microgravity differ from a lunar habitat.",
     source: "https://ntrs.nasa.gov/citations/20240002981",
