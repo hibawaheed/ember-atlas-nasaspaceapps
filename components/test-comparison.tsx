@@ -75,7 +75,11 @@ export default function TestComparison({
       {exact.length > 0 && (
         <p className="tc-exact">
           NASA ran {exact.length} test{exact.length === 1 ? "" : "s"} within 1 point of {scenario.oxygen}% oxygen and 3 kPa of {scenario.pressure} kPa:{" "}
-          {[...new Set(exact.map((x) => x.inv))].join(", ")} ({[...new Set(exact.map((x) => x.f.toLowerCase()))].join(" and ")}), all in microgravity.
+          {(() => {
+            const invs = [...new Set(exact.map((x) => x.inv))];
+            const fuels = [...new Set(exact.map((x) => x.f.toLowerCase()))];
+            return `${invs.slice(0, 4).join(", ")}${invs.length > 4 ? ` and ${invs.length - 4} more` : ""} (${fuels.length <= 3 ? fuels.join(", ") : [...new Set(exact.map((x) => fuelClassName[x.c].toLowerCase()))].join(", ")}), all in microgravity.`;
+          })()}
         </p>
       )}
       <div className="tc-tabs" role="tablist" aria-label="Nearest tests">

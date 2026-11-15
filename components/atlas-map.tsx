@@ -53,7 +53,7 @@ export default function AtlasMap() {
   const xMin = 10, xMax = 42, pMin = 40, pMax = 520;
   const x = (o2: number) => L + ((o2 - xMin) / (xMax - xMin)) * (W - L - R);
   const y = (p: number) => T + (1 - (Math.log(p) - Math.log(pMin)) / (Math.log(pMax) - Math.log(pMin))) * (H - T - B);
-  const fs = phone ? 11.5 : 12.5;
+  const fs = phone ? 12 : 13;
   const shown = clusters.filter((c) => classes[c.c]);
   const counts = { droplet: 0, gas: 0, solid: 0 } as Record<string, number>;
   plotted.forEach((t) => (counts[t.c] = (counts[t.c] ?? 0) + 1));

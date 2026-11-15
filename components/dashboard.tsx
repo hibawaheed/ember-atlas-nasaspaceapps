@@ -149,7 +149,7 @@ export default function Dashboard() {
           </span>
         </button>
         <div className="workspace-label">
-          <span className="status-dot" /> SPACE APPS / RESEARCH DEMO
+          <span className="status-dot" /> SPACE APPS 2026
         </div>
         <span className="nav-caption">WORKSPACE</span>
         <nav aria-label="Main navigation">
