@@ -24,7 +24,7 @@ export const testQuerySchema = z.object({
   pressureMax: z.number().min(0).max(1000).optional(),
   sortBy: z.enum(["o2", "pressure", "burningRate", "spreadRate", "burnTime", "date"]).optional(),
   order: z.enum(["asc", "desc"]).optional(),
-  limit: z.number().int().min(1).max(500).optional(),
+  limit: z.number().int().min(1).max(3000).optional(),
 });
 export type TestQuery = z.infer<typeof testQuerySchema>;
 

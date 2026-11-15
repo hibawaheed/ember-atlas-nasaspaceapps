@@ -24,7 +24,7 @@ import {
 } from "@/lib/investigations";
 import { sourceFor, findings } from "@/lib/evidence";
 const findingTitle = (id: string) => findings.find((f) => f.id === id)?.title ?? id;
-import OxygenCoverage from "./oxygen-coverage";
+import AtlasMap from "./atlas-map";
 import TestComparison from "./test-comparison";
 import GravityLimits from "./gravity-limits";
 import MeasuredExample from "./measured-example";
@@ -515,7 +515,7 @@ export default function MissionView({
           <GravityLimits compact />
         </section>
       )}
-      <OxygenCoverage />
+      <AtlasMap />
       <section className="panel controls-groups">
         <div className="panel-heading">
           <div>

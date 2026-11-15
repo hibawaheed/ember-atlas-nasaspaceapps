@@ -24,6 +24,7 @@ import {
 } from "lucide-react";
 import { baseline, presets, scenarioSchema, type Scenario } from "@/lib/scenario";
 import HomeResult from "./home-result";
+import AtlasMap from "./atlas-map";
 import { findings, sources } from "@/lib/evidence";
 import { investigations } from "@/lib/investigations";
 import measurements from "@/data/measurements.json";
@@ -290,6 +291,7 @@ export default function Dashboard() {
                 onBrief={() => exportBrief(presets.lunar.scenario, build)}
                 onShare={() => share(presets.lunar.scenario)}
               />
+              <AtlasMap />
               <div className="galaxy-paths" aria-label="Explore the research">
                 <button onClick={() => navigate("missions")}>
                   <Telescope size={18} />

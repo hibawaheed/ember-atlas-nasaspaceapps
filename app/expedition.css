@@ -1433,3 +1433,18 @@ summary {
 .gl-legend i { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 6px; vertical-align: -1px; }
 .gl-table { font-size: 13.5px; }
 .gl-table caption { text-align: left; font-size: 13px; color: var(--muted); padding-bottom: 6px; }
+.atlas-map { margin: 0 0 18px; }
+.map-lead { font-size: 14.5px; color: var(--muted); margin: 6px 0 0; max-width: 70ch; }
+.map-filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+.map-filters button { display: inline-flex; align-items: center; gap: 7px; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+.map-filters button.active { color: var(--ink); border-color: #ffffff40; }
+.map-filters i { width: 10px; height: 10px; border-radius: 50%; }
+.map-box { width: 100%; overflow: hidden; }
+.map-box svg { display: block; }
+.map-axis { fill: var(--muted); }
+.map-crew { fill: #fff; font-weight: 600; }
+.map-curve { fill: #9fe9d2; }
+.atlas-map circle:focus-visible { outline: none; stroke: #fff; stroke-width: 3; }
+.map-card { position: relative; margin: 10px 0; padding: 12px 40px 12px 14px; border: 1px solid #ffffff26; border-radius: 10px; background: #0d1424; font-size: 14px; line-height: 1.5; }
+.map-card ul { margin: 6px 0; padding-left: 18px; }
+.map-close { position: absolute; top: 8px; right: 8px; color: var(--muted); }

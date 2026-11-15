@@ -24,7 +24,6 @@ import { POST as compare } from "../app/api/compare/route";
 import { investigations, rankInvestigations, hardwareGroups, earthApplications, programBackground } from "../lib/investigations";
 import { flameParticle } from "../lib/flame-motion";
 import { atmospheres } from "../lib/atmospheres";
-import { oxygenCoverage } from "../lib/coverage";
 import { bassVariation } from "../lib/variation";
 import { allowAiCall, aiLimits } from "../lib/rate-limit";
 import { lookupReplay } from "../lib/replay";
@@ -311,17 +310,12 @@ test("crew atmosphere table follows the challenge figures and arithmetic", () =>
   // "More than a 40% increase in the oxygen concentration" over Earth's air.
   assert.ok(by.lunar.oxygenPct / by.earth.oxygenPct > 1.4);
 });
-test("coverage and variation summaries are derived from sourced data", () => {
-  const bass = oxygenCoverage.find((c) => c.name.startsWith("BASS-II"))!;
-  assert.equal(bass.kind, "measured");
-  assert.equal(bass.min, 16.8);
-  assert.equal(bass.max, 22.2);
-  const saffire = oxygenCoverage.find((c) => c.name.startsWith("Saffire"))!;
-  assert.deepEqual(saffire.points!.map((p) => p.pct).sort(), [22, 26.2, 28.8, 30.3, 31]);
-  // Apparatus limits are never presented as measured tests.
-  for (const c of oxygenCoverage.filter((c) => c.name.includes("apparatus") || c.name.includes("burner")))
-    assert.equal(c.kind, "limit");
-  for (const c of oxygenCoverage) assert.ok(sources.some((s) => s.id === c.source));
+test("map data and variation summaries are derived from sourced data", () => {
+  const plotted = allTests.filter((t) => t.o2Role === "ambient" && t.o2Pct != null && t.pressureKpa != null);
+  assert.equal(plotted.length, testCounts.plottable);
+  // Inverse flames (burner oxidizer stream) are never plotted as chamber oxygen.
+  assert.ok(!plotted.some((t) => t.flags.some((f: string) => f.startsWith("inverse flame"))));
+  assert.ok(plotted.every((t) => t.o2Pct! >= 10 && t.o2Pct! <= 42 && t.pressureKpa! >= 40 && t.pressureKpa! <= 520));
   const v = Object.fromEntries(bassVariation.varied.map((x) => [x.label, x.value]));
   assert.equal(v["Sample thickness"], "1, 2, 3, 4, 5 mm");
   assert.equal(v["Airflow (changed within runs)"], "2–21 cm/s");
