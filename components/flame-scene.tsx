@@ -14,26 +14,37 @@ float noise(vec3 x){vec3 i=floor(x),f=fract(x);f=f*f*(3.-2.*f);return mix(mix(mi
 float fbm(vec3 p){return noise(p)*.55+noise(p*2.03)*.27+noise(p*4.01)*.13+noise(p*8.1)*.05;}
 vec2 intersectBox(vec3 o,vec3 d){vec3 t0=(-vec3(1.65,1.85,1.65)-o)/d,t1=(vec3(1.65,1.85,1.65)-o)/d;vec3 tmin=min(t0,t1),tmax=max(t0,t1);return vec2(max(max(tmin.x,tmin.y),tmin.z),min(min(tmax.x,tmax.y),tmax.z));}
 void main(){vec3 ray=normalize(vPosition-uCamera);vec2 bounds=intersectBox(uCamera,ray);float t=max(0.,bounds.x);float dt=(bounds.y-t)/72.;vec4 sum=vec4(0.);
-for(int i=0;i<72;i++){vec3 p=uCamera+ray*(t+dt*(float(i)+.5));float g=sqrt(uGravity);float r=.62+uActivity*.4;
-vec3 advect=p*3.8+vec3(sin(uTime*.7)*.4,-uTime*(.65+g*1.2),cos(uTime*.6)*.4);
-float turbulent=fbm(advect+vec3(noise(p*2.+uTime*.35))*.8);
+float g=sqrt(uGravity);
+// Microgravity flames are smooth and steady; turbulence grows with buoyancy.
+float calm=mix(.22,1.,smoothstep(0.,.75,g));
+float r=(.62+uActivity*.4)*mix(.78,1.,uFuel);
+for(int i=0;i<72;i++){vec3 p=uCamera+ray*(t+dt*(float(i)+.5));
+vec3 advect=p*3.8+vec3(sin(uTime*.7)*.4*calm,-uTime*(.18+g*1.6),cos(uTime*.6)*.4*calm);
+float turbulent=fbm(advect+vec3(noise(p*2.+uTime*.35*calm))*.8*calm);
 vec3 q=p;q.x-=uFlow*.008*p.y;q.y+=.08;
-float sphere=length(q)-(r+(turbulent-.5)*.42);
-float h=clamp((p.y+.9)/2.6,0.,1.);float curl=sin(h*8.-uTime*3.)*.18*h;
+float sphere=length(q)-(r+(turbulent-.5)*.42*calm);
+float h=clamp((p.y+.9)/2.6,0.,1.);float curl=sin(h*8.-uTime*3.)*.18*h*calm;
 float plumeR=(.52+uActivity*.2)*pow(1.-h,.72);
 float plume=length(vec2(p.x-curl-uFlow*.005*h,p.z))-(plumeR+(turbulent-.5)*.35);
 float field=mix(sphere,plume,g);
 float shell=exp(-pow(field*13.,2.));float core=exp(-pow(max(0.,field+.22)*9.,2.))*.16;
 float streak=smoothstep(.25,.75,turbulent);
-float density=(shell*(.12+streak*2.5)+core)*(.42+uActivity*.65);
+float density=(shell*(.12+streak*mix(.9,2.5,calm))+core)*(.42+uActivity*.65);
 density*=mix(1.,smoothstep(-1.,-.8,p.y)*(1.-smoothstep(1.3,1.8,p.y)),g);
 density*=(1.-smoothstep(1.4,1.8,abs(p.y)));
-vec3 blue=mix(vec3(.04,.15,.7),vec3(.22,.75,1.),streak);
-vec3 hot=mix(vec3(1.,.12,.015),vec3(1.,.78,.32),streak*(1.-h*.6));
-float heat=clamp(g*1.4-.15,0.,1.)*smoothstep(-.9,-.5,p.y);
-vec3 col=mix(blue,hot,heat);float alpha=1.-exp(-density*dt*2.5);
-sum.rgb+=(1.-sum.a)*col*alpha*2.3;sum.a+=(1.-sum.a)*alpha;if(sum.a>.98)break;}
-gl_FragColor=vec4(sum.rgb,sum.a);}`;
+vec3 blue=mix(vec3(.03,.13,.62),vec3(.2,.68,1.),streak);
+vec3 warm=mix(vec3(.95,.42,.08),vec3(1.,.8,.38),streak*(1.-h*.6));
+// Heat rises with buoyancy and with height in the flame: blue base, warm tip.
+float heatRaw=clamp(g*1.9,0.,1.)*smoothstep(-.6,.8,p.y)+clamp(g*1.4-.6,0.,1.)*.6;
+// A narrow transition keeps blue and warm regions distinct; blending them
+// evenly produces grey.
+float heat=smoothstep(.38,.62,heatRaw);
+vec3 col=blue*(1.-heat)+warm*heat;
+float alpha=1.-exp(-density*dt*2.5);
+sum.rgb+=(1.-sum.a)*col*alpha;sum.a+=(1.-sum.a)*alpha;if(sum.a>.98)break;}
+// Tone map instead of clipping, so overlapping colour never washes to white.
+vec3 mapped=1.-exp(-sum.rgb*3.4);
+gl_FragColor=vec4(mapped,sum.a);}`;
 export default function FlameScene({
   scenario,
   paused = false,
@@ -150,7 +161,9 @@ export default function FlameScene({
     });
     const flame = new THREE.Mesh(box, material);
     scene.add(flame);
-    const grid = new THREE.GridHelper(8, 32, 0x3c5753, 0x223c38);
+    const grid = new THREE.GridHelper(8, 16, 0x2c4340, 0x1a2c2a);
+    (grid.material as THREE.Material).transparent = true;
+    (grid.material as THREE.Material).opacity = 0.55;
     grid.position.y = -1.45;
     scene.add(grid);
     const wire = new THREE.LineSegments(
