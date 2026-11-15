@@ -73,5 +73,5 @@ export function testLine(t: FullTest) {
     .filter(([k]) => k !== "flowSettings")
     .map(([k, v]) => `${k}=${Array.isArray(v.value) ? JSON.stringify(v.value) : v.value}${v.unit && typeof v.value !== "object" ? " " + v.unit : ""}`)
     .join("; ");
-  return `${t.id} | ${t.investigation} test ${t.testId} | ${t.fuelClass}: ${t.fuel} | O2 ${t.o2Pct ?? "not listed"}%${t.o2Role === "oxidizer stream" ? " (burner oxidizer stream)" : ""} | P ${t.pressureKpa ?? "not listed"} kPa | flow ${t.flowCms ?? "not listed"} cm/s | outcome ${t.outcome ?? "not listed"} | ${meas}${t.flags.length ? " | notes: " + t.flags.join("; ") : ""}`;
+  return `${t.id} | ${t.investigation} test ${t.testId} | ${t.fuelClass}: ${t.fuel} | O2 ${t.o2Pct ?? "not listed"}%${t.o2Role === "oxidizer stream" ? " (burner oxidizer stream)" : ""} | P ${t.pressureKpa ?? "not listed"} kPa | flow ${t.flowCms ?? "not listed"} cm/s | gravity: microgravity (${t.platform ?? "ISS"}) | outcome ${t.outcome ?? "not listed"} | ${meas}${t.flags.length ? " | notes: " + t.flags.join("; ") : ""}`;
 }
